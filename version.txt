@@ -1,0 +1,63 @@
+=========RELEALSE NOTE=================
+
+Version: v1.0.0
+
+========================================
+
+Git commit:
+commit 634974913eddbb33bdb2e8ca083a01e7f46fffa7
+Author: Jian Wang <jian.wang@amlogic.com>
+Date:   Sun Mar 1 17:18:37 2020 +0800
+
+    mediahal: modify mk in can build system and vendor [1/1]
+    
+    PD#SWPL-20992
+    
+    Problem:
+    mk can not build system and vendor at sametime
+    
+    Solution:
+    1. modify mk in can build system and vendor at sametime
+    2. modify new api onUserdataReady order to let omx
+       can use older lib
+    
+    Verify:
+    U212
+    
+    Change-Id: I48e40c612405867f4ca8534621e6a0aab705b843
+    Signed-off-by: Jian Wang <jian.wang@amlogic.com>
+
+========================================
+
+Release time: 2020-03-01-18-11
+
+========================================
+
+Builder: jian.wang
+
+========================================
+Release file:
+
+Header file:
+AmTsPlayer.h
+AmVideoDecBase.h
+
+Library file:
+libmediahal_tsplayer.so
+libmediahal_videodec.so
+
+Test file:
+AmTsplayer
+Android.mk
+Android.mk.in
+out
+release_tool.sh
+test
+VERSION
+videodec
+
+Binary  file:
+AmTsPlayerTest
+videodecplayer
+
+========================================
