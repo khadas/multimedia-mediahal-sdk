@@ -5,7 +5,7 @@ Version: v1.0.0
 ========================================
 
 Git commit:
-commit 634974913eddbb33bdb2e8ca083a01e7f46fffa7
+commit 642f8e86fa9caf8c8dd46e94f91bf16460debcb7
 Author: Jian Wang <jian.wang@amlogic.com>
 Date:   Sun Mar 1 17:18:37 2020 +0800
 
@@ -29,7 +29,7 @@ Date:   Sun Mar 1 17:18:37 2020 +0800
 
 ========================================
 
-Release time: 2020-03-01-18-11
+Release time: 2020-03-01-20-50
 
 ========================================
 
@@ -47,14 +47,13 @@ libmediahal_tsplayer.so
 libmediahal_videodec.so
 
 Test file:
-AmTsplayer
 Android.mk
-Android.mk.in
-out
-release_tool.sh
-test
-VERSION
-videodec
+VideoDecTest.cpp
+AmTsPlayerSession.cpp
+AmTsPlayerTest.cpp
+Android.mk
+h264string.cpp
+include
 
 Binary  file:
 AmTsPlayerTest
