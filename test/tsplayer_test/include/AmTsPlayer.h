@@ -140,36 +140,36 @@ typedef enum {
 //    AV_AUDIO_CODEC_HEAACV2 = 10          // HEAAC VERSION2
 } am_tsplayer_audio_codec;
 
-/*AmTsplayer handle*/
+/*AmTsPlayer handle*/
 typedef size_t am_tsplayer_handle;
 
-/*AmTsplayer init parameters*/
+/*AmTsPlayer init parameters*/
 typedef struct {
     am_tsplayer_input_source_type source;  // Input source type
     int32_t dmx_dev_id;                    // Demux device id
     int32_t event_mask;                    // Mask the event type need by caller
 } am_tsplayer_init_params;
 
-/*AmTsplayer input buffer type*/
+/*AmTsPlayer input buffer type*/
 typedef struct {
     am_tsplayer_input_buffer_type buf_type;// Input buffer type (secure/no secure)
     void *buf_data;                        // Input buffer addr
     int32_t buf_size;                      // Input buffer size
 } am_tsplayer_input_buffer;
 
-/*AmTsplayer video init parameters*/
+/*AmTsPlayer video init parameters*/
 typedef struct {
     am_tsplayer_video_codec codectype;     // Video codec type
     int32_t pid;                           // Video pid in ts
 } am_tsplayer_video_params;
 
-/*AmTsplayer audio init parameters*/
+/*AmTsPlayer audio init parameters*/
 typedef struct { 
     am_tsplayer_audio_codec codectype;     // Audio codec type
     int32_t pid;                           // Audio pid in ts
 } am_tsplayer_audio_params;
 
-/*AmTsplayer stream buffer status*/
+/*AmTsPlayer stream buffer status*/
 typedef struct {
     int32_t size;                          // Buffer size
     int32_t data_len;                      // The len of data in buffer
@@ -241,36 +241,46 @@ typedef struct {
     uint32_t drop_frame_count;
 } am_tsplayer_adec_stat;
 
-/*AmTsplayer call back event*/
+typedef struct {
+    uint32_t frame_width;
+    uint32_t frame_height;
+    uint32_t frame_rate;
+} video_format_t;
+
+typedef struct {
+    uint32_t sample_rate;
+    uint32_t channels;
+} audio_format_t;
+
+typedef struct {
+    am_tsplayer_stream_type stream_type;
+    uint64_t  pts;
+} pts_t;
+
+typedef struct {
+    uint8_t  *data;
+    size_t   len;
+} mpeg_user_data_t;
+
+typedef struct {
+    am_tsplayer_stream_type stream_type;
+    bool_t  scramling;
+} scamling_t;
+
+/*AmTsPlayer call back event*/
 typedef struct {
     am_tsplayer_event_type type;           // Call back event type
     union {
         /*If type is VIDEO_CHANGED send new video basic info*/
-        struct {            
-          uint32_t frame_width; 
-          uint32_t frame_height;
-          uint32_t frame_rate;
-        } video_format;
+        video_format_t video_format;
         /*If type is AUDIO_CHANGED send new video basic info*/
-        struct {
-          uint32_t sample_rate;
-          uint32_t channels;
-        } audio_format;
+        audio_format_t audio_format;
         /*Audio /Video/Subtitle pts after pes parser*/
-        struct {            
-            am_tsplayer_stream_type stream_type;
-            uint64_t  pts;
-        } pts;
+        pts_t pts;
         /*User data send cc /afd /dvb subtitle to caller*/
-        struct {            
-            uint8_t  *data;                   
-            size_t   len;                  
-        } mpeg_user_data;                      
+        mpeg_user_data_t mpeg_user_data;
         /*Scrambling status changed send scramling info to caller*/
-        struct {            
-            am_tsplayer_stream_type stream_type;
-            bool_t             scramling;
-        } scramling;
+        scamling_t scramling;
     } event;
 }am_tsplayer_event;
 
@@ -279,123 +289,123 @@ typedef void (*event_callback) (void *user_data, am_tsplayer_event *event);
 
 
 /**
- *\brief:        Create AmTsplayer instance.
- *               Set inputmode demux_id and event mask to AmTsplayer.
+ *\brief:        Create AmTsPlayer instance.
+ *               Set inputmode demux_id and event mask to AmTsPlayer.
  *\inparam:      Init params with input mode demux_id and event mask.
- *\outparam:     AmTsplayer handle.
- *\return:       The AmTsplayer result.
+ *\outparam:     AmTsPlayer handle.
+ *\return:       The AmTsPlayer result.
  */
 am_tsplayer_result  AmTsPlayer_create(am_tsplayer_init_params Params, am_tsplayer_handle *pHadl);
 /**
- *\brief:        Get AmTsplayer interface version inforamtion.
- *\outparam:     AmTsplayer interface version.
- *\return:       The AmTsplayer result.
+ *\brief:        Get AmTsPlayer interface version inforamtion.
+ *\outparam:     AmTsPlayer interface version.
+ *\return:       The AmTsPlayer result.
  */
 am_tsplayer_result  AmTsPlayer_getVersion(uint32_t *Version);
 /**
- *\brief:        Get the instance number of specified AmTsplayer .
- *\inparam:      AmTsplayer handle.
- *\outparam:     AmTsplayer instance number.
- *\return:       The AmTsplayer result.
+ *\brief:        Get the instance number of specified AmTsPlayer .
+ *\inparam:      AmTsPlayer handle.
+ *\outparam:     AmTsPlayer instance number.
+ *\return:       The AmTsPlayer result.
  */
 am_tsplayer_result  AmTsPlayer_getInstansNo(am_tsplayer_handle Hadl, uint32_t *Numb);
 /**
- *\brief:        Register event callback to specified AmTsplayer
- *\inparam:      AmTsplayer handle.
+ *\brief:        Register event callback to specified AmTsPlayer
+ *\inparam:      AmTsPlayer handle.
  *\inparam:      Event callback function ptr.
  *\inparam:      Extra data ptr.
- *\return:       The AmTsplayer result.
+ *\return:       The AmTsPlayer result.
  */
 am_tsplayer_result  AmTsPlayer_registerCb(am_tsplayer_handle Hadl, event_callback pfunc, void *param); 
 /**
- *\brief:        Release specified AmTsplayer instance.
- *\inparam:      AmTsplayer handle.
- *\return:       The AmTsplayer result.
+ *\brief:        Release specified AmTsPlayer instance.
+ *\inparam:      AmTsPlayer handle.
+ *\return:       The AmTsPlayer result.
  */
 am_tsplayer_result  AmTsPlayer_release(am_tsplayer_handle Hadl);
 /**
- *\brief:        Write data to specified AmTsplayer instance.
+ *\brief:        Write data to specified AmTsPlayer instance.
  *               It will only work when TS input's source type is TS_MEMORY.
- *\inparam:      AmTsplayer handle.
+ *\inparam:      AmTsPlayer handle.
  *\inparam:      Input buffer struct (1.Buffer type:secrue/no 
  *               2.secure buffer ptr 3.buffer len).
  *\inparam:      Time out limit .
- *\return:       The AmTsplayer result.
+ *\return:       The AmTsPlayer result.
  */
 am_tsplayer_result  AmTsPlayer_writeData(am_tsplayer_handle Hadl, am_tsplayer_input_buffer *buf, uint64_t timeout_ms);
 /**
- *\brief:        Set work mode to specified AmTsplayer instance.
- *\inparam:      AmTsplayer handle.
+ *\brief:        Set work mode to specified AmTsPlayer instance.
+ *\inparam:      AmTsPlayer handle.
  *\inparam:      The enum of work mode.
- *\return:       The AmTsplayer result.
+ *\return:       The AmTsPlayer result.
  */
 am_tsplayer_result  AmTsPlayer_setWorkMode (am_tsplayer_handle Hadl, am_tsplayer_work_mode mode);
 
 /*AV sync*/
 /**
- *\brief:        Get the playing time of specified AmTsplayer instance.
- *\inparam:      AmTsplayer handle.
+ *\brief:        Get the playing time of specified AmTsPlayer instance.
+ *\inparam:      AmTsPlayer handle.
  *\outparam:     Playing time.
- *\return:       The AmTsplayer result.
+ *\return:       The AmTsPlayer result.
  */
 am_tsplayer_result  AmTsPlayer_getCurrentTime(am_tsplayer_handle Hadl, int64_t *time);
 /**
- *\brief:        Set the tsync mode for specified AmTsplayer instance.
- *\inparam:      AmTsplayer handle.
+ *\brief:        Set the tsync mode for specified AmTsPlayer instance.
+ *\inparam:      AmTsPlayer handle.
  *\inparam:      The enum of avsync mode.
- *\return:       The AmTsplayer result.
+ *\return:       The AmTsPlayer result.
  */
 am_tsplayer_result  AmTsPlayer_setSyncMode(am_tsplayer_handle Hadl, am_tsplayer_avsync_mode mode );
 /**
- *\brief:        Get the tsync mode for specified AmTsplayer instance.
- *\inparam:      AmTsplayer handle.
- *\outparam:     The avsync mode of specified AmTsplayer instance.
- *\return:       The AmTsplayer result.
+ *\brief:        Get the tsync mode for specified AmTsPlayer instance.
+ *\inparam:      AmTsPlayer handle.
+ *\outparam:     The avsync mode of specified AmTsPlayer instance.
+ *\return:       The AmTsPlayer result.
  */
 am_tsplayer_result  AmTsPlayer_getSyncMode(am_tsplayer_handle Hadl, am_tsplayer_avsync_mode *mode );
 /**
- *\brief:        Set pcr pid to specified AmTsplayer instance.
- *\inparam:      AmTsplayer handle.
+ *\brief:        Set pcr pid to specified AmTsPlayer instance.
+ *\inparam:      AmTsPlayer handle.
  *\inparam:      The pid of pcr.
- *\return:       The AmTsplayer result.
+ *\return:       The AmTsPlayer result.
  */
 am_tsplayer_result  AmTsPlayer_setPcrPid(am_tsplayer_handle Hadl, uint32_t pid);
 /**
- *\brief:        Get the dealy time for specified AmTsplayer instance.
- *\inparam:      AmTsplayer handle.
- *\outparam:     The AmTsplayer delay time.
- *\return:       The AmTsplayer result.
+ *\brief:        Get the dealy time for specified AmTsPlayer instance.
+ *\inparam:      AmTsPlayer handle.
+ *\outparam:     The AmTsPlayer delay time.
+ *\return:       The AmTsPlayer result.
  */
 am_tsplayer_result  AmTsPlayer_getDelayTime(am_tsplayer_handle Hadl, int64_t *time);
 
 
 /*Player control interface*/
 /**
- *\brief:        Start Fast play for specified AmTsplayer instance.
- *\inparam:      AmTsplayer handle.
+ *\brief:        Start Fast play for specified AmTsPlayer instance.
+ *\inparam:      AmTsPlayer handle.
  *\inparam:      Fast play speed.
- *\return:       The AmTsplayer result.
+ *\return:       The AmTsPlayer result.
  */
 am_tsplayer_result  AmTsPlayer_startFast(am_tsplayer_handle Hadl, float scale);
 /**
- *\brief:        Stop Fast play for specified AmTsplayer instance.
- *\inparam:      AmTsplayer handle.
- *\return:       The AmTsplayer result.
+ *\brief:        Stop Fast play for specified AmTsPlayer instance.
+ *\inparam:      AmTsPlayer handle.
+ *\return:       The AmTsPlayer result.
  */
 am_tsplayer_result  AmTsPlayer_stopFast(am_tsplayer_handle Hadl);
 /**
- *\brief:        Start trick mode for specified AmTsplayer instance.
- *\inparam:      AmTsplayer handle.
+ *\brief:        Start trick mode for specified AmTsPlayer instance.
+ *\inparam:      AmTsPlayer handle.
  *\inparam:      The enum of trick mode type
- *\return:       The AmTsplayer result.
+ *\return:       The AmTsPlayer result.
  */
 am_tsplayer_result  AmTsPlayer_setTrickMode(am_tsplayer_handle Hadl, am_tsplayer_video_trick_mode trickmode);
 /**
- *\brief:        Start trick mode for specified AmTsplayer instance.
- *\inparam:      AmTsplayer handle.
+ *\brief:        Start trick mode for specified AmTsPlayer instance.
+ *\inparam:      AmTsPlayer handle.
  *\inparam:      The stream type we want to check.
  *\outparam:     The struct of buffer status.
- *\return:       The AmTsplayer result.
+ *\return:       The AmTsPlayer result.
  */
 am_tsplayer_result  AmTsPlayer_getBufferStat(am_tsplayer_handle Hadl, am_tsplayer_stream_type StrType, 
                                                             am_tsplayer_buffer_stat *pBufStat);
@@ -403,276 +413,276 @@ am_tsplayer_result  AmTsPlayer_getBufferStat(am_tsplayer_handle Hadl, am_tsplaye
 /*Video interface*/
 /**
  *\brief:        Set the video display rect size for specified 
- *               AmTsplayer instance.
- *\inparam:      AmTsplayer handle.
+ *               AmTsPlayer instance.
+ *\inparam:      AmTsPlayer handle.
  *\inparam:      The display rect x.
  *\inparam:      The display rect y.
  *\inparam:      The display rect width.
  *\inparam:      The display rect height.
- *\return:       The AmTsplayer result.
+ *\return:       The AmTsPlayer result.
  */
 am_tsplayer_result  AmTsPlayer_setVideoWindow(am_tsplayer_handle Hadl, 
                                                             int32_t x,int32_t y,
                                                             int32_t width,int32_t height);
 /**
- *\brief:        Set Surface ptr to specified AmTsplayer instance.
- *\inparam:      AmTsplayer handle.
+ *\brief:        Set Surface ptr to specified AmTsPlayer instance.
+ *\inparam:      AmTsPlayer handle.
  *\inparam:      Surface ptr
- *\return:       The AmTsplayer result.
+ *\return:       The AmTsPlayer result.
  */
 am_tsplayer_result  AmTsPlayer_setSurface(am_tsplayer_handle Hadl, void* pSurface);
 /**
  *\brief:        Show the video frame display for specified
- *               AmTsplayer instance.
- *\inparam:      AmTsplayer handle.
- *\return:       The AmTsplayer result.
+ *               AmTsPlayer instance.
+ *\inparam:      AmTsPlayer handle.
+ *\return:       The AmTsPlayer result.
  */
 am_tsplayer_result  AmTsPlayer_showVideo(am_tsplayer_handle Hadl);
 /**
  *\brief:        Hide the video frame display for specified 
- *               AmTsplayer instance.
- *\inparam:      AmTsplayer handle.
- *\return:       The AmTsplayer result.
+ *               AmTsPlayer instance.
+ *\inparam:      AmTsPlayer handle.
+ *\return:       The AmTsPlayer result.
  */
 am_tsplayer_result  AmTsPlayer_hideVideo(am_tsplayer_handle Hadl);
 /**
  *\brief:        Get video display match mode for specified
-                 AmTsplayer instance.
- *\inparam:      AmTsplayer handle.
+                 AmTsPlayer instance.
+ *\inparam:      AmTsPlayer handle.
  *\inparam:      The enum of video display match mode.
- *\return:       The AmTsplayer result.
+ *\return:       The AmTsPlayer result.
  */
 am_tsplayer_result  AmTsPlayer_setVideoMatchMode(am_tsplayer_handle Hadl, am_tsplayer_video_match_mode MathMod);
 /**
  *\brief:        Set video params need by demuxer and video decoder
- *               for specified AmTsplayer instance.
- *\inparam:      AmTsplayer handle.
+ *               for specified AmTsPlayer instance.
+ *\inparam:      AmTsPlayer handle.
  *\inparam:      Params need by demuxer and video decoder.
- *\return:       The AmTsplayer result.
+ *\return:       The AmTsPlayer result.
  */
 am_tsplayer_result  AmTsPlayer_setVideoParams(am_tsplayer_handle Hadl, am_tsplayer_video_params *pParams);
 /**
  *\brief:        Set if need keep last frame for video display
- *               for specified AmTsplayer instance.
- *\inparam:      AmTsplayer handle.
+ *               for specified AmTsPlayer instance.
+ *\inparam:      AmTsPlayer handle.
  *\inparam:      If blackout for last frame.
- *\return:       The AmTsplayer result.
+ *\return:       The AmTsPlayer result.
  */
 am_tsplayer_result  AmTsPlayer_setVideoBlackOut(am_tsplayer_handle Hadl, bool_t blackout);
 /**
- *\brief:        Get video basic info of specified AmTsplayer instance.
- *\inparam:      AmTsplayer handle.
+ *\brief:        Get video basic info of specified AmTsPlayer instance.
+ *\inparam:      AmTsPlayer handle.
  *\outparam:     The ptr of video basic info struct .
- *\return:       The AmTsplayer result.
+ *\return:       The AmTsPlayer result.
  */
 am_tsplayer_result  AmTsPlayer_getVideoInfo(am_tsplayer_handle Hadl, am_tsplayer_video_info *pInfo);
 /**
  *\brief:        Get video decoder real time info 
- *               of specified AmTsplayer instance.
- *\inparam:      AmTsplayer handle.
+ *               of specified AmTsPlayer instance.
+ *\inparam:      AmTsPlayer handle.
  *\outparam:     The ptr of video decoder real time info struct
- *\return:       The AmTsplayer result.
+ *\return:       The AmTsPlayer result.
  */
 am_tsplayer_result  AmTsPlayer_getVideoStat(am_tsplayer_handle Hadl, am_tsplayer_vdec_stat *pStat);
 /**
- *\brief:        Start video decoding for specified AmTsplayer instance .
- *\inparam:      AmTsplayer handle.
- *\return:       The AmTsplayer result.
+ *\brief:        Start video decoding for specified AmTsPlayer instance .
+ *\inparam:      AmTsPlayer handle.
+ *\return:       The AmTsPlayer result.
  */
 am_tsplayer_result  AmTsPlayer_startVideoDecoding(am_tsplayer_handle Hadl);
 /**
- *\brief:        Pause video decoding for specified AmTsplayer instance .
- *\inparam:      AmTsplayer handle.
- *\return:       The AmTsplayer result.
+ *\brief:        Pause video decoding for specified AmTsPlayer instance .
+ *\inparam:      AmTsPlayer handle.
+ *\return:       The AmTsPlayer result.
  */
 am_tsplayer_result  AmTsPlayer_pauseVideoDecoding(am_tsplayer_handle Hadl);
 /**
- *\brief:        Resume video decoding for specified AmTsplayer instance .
- *\inparam:      AmTsplayer handle.
- *\return:       The AmTsplayer result.
+ *\brief:        Resume video decoding for specified AmTsPlayer instance .
+ *\inparam:      AmTsPlayer handle.
+ *\return:       The AmTsPlayer result.
  */
 am_tsplayer_result  AmTsPlayer_resumeVideoDecoding(am_tsplayer_handle Hadl);
 /**
- *\brief:        Stop video decoding for specified AmTsplayer instance .
- *\inparam:      AmTsplayer handle.
- *\return:       The AmTsplayer result.
+ *\brief:        Stop video decoding for specified AmTsPlayer instance .
+ *\inparam:      AmTsPlayer handle.
+ *\return:       The AmTsPlayer result.
  */
 am_tsplayer_result  AmTsPlayer_stopVideoDecoding(am_tsplayer_handle Hadl);
 
 
 /*Audio interface*/
 /**
- *\brief:        Set audio volume to specified AmTsplayer instance .
- *\inparam:      AmTsplayer handle.
+ *\brief:        Set audio volume to specified AmTsPlayer instance .
+ *\inparam:      AmTsPlayer handle.
  *\inparam:      Volume value.
- *\return:       The AmTsplayer result.
+ *\return:       The AmTsPlayer result.
  */
 am_tsplayer_result  AmTsPlayer_setAudioVolume(am_tsplayer_handle Hadl, int32_t volume);
 /**
- *\brief:        Get audio volume value from specified AmTsplayer instance .
- *\inparam:      AmTsplayer handle.
+ *\brief:        Get audio volume value from specified AmTsPlayer instance .
+ *\inparam:      AmTsPlayer handle.
  *\outparam:     Volume value.
- *\return:       The AmTsplayer result.
+ *\return:       The AmTsPlayer result.
  */
 am_tsplayer_result  AmTsPlayer_getAudioVolume(am_tsplayer_handle Hadl, int32_t *volume);
 /**
- *\brief:        Set audio stereo mode to specified AmTsplayer instance .
- *\inparam:      AmTsplayer handle.
+ *\brief:        Set audio stereo mode to specified AmTsPlayer instance .
+ *\inparam:      AmTsPlayer handle.
  *\inparam:      Stereo mode.
- *\return:       The AmTsplayer result.
+ *\return:       The AmTsPlayer result.
  */
 am_tsplayer_result  AmTsPlayer_setAudioStereoMode(am_tsplayer_handle Hadl, am_tsplayer_audio_stereo_mode Mode);
 /**
- *\brief:        Get audio stereo mode to specified AmTsplayer instance .
- *\inparam:      AmTsplayer handle.
+ *\brief:        Get audio stereo mode to specified AmTsPlayer instance .
+ *\inparam:      AmTsPlayer handle.
  *\outparam:     Stereo mode.
- *\return:       The AmTsplayer result.
+ *\return:       The AmTsPlayer result.
  */
 am_tsplayer_result  AmTsPlayer_getAudioStereoMode(am_tsplayer_handle Hadl, am_tsplayer_audio_stereo_mode *pMode);
 /**
- *\brief:        Set audio output mute to specified AmTsplayer instance .
- *\inparam:      AmTsplayer handle.
+ *\brief:        Set audio output mute to specified AmTsPlayer instance .
+ *\inparam:      AmTsPlayer handle.
  *\inparam:      If analog mute or unmute .
  *\inparam:      If digital mute or unmute .
- *\return:       The AmTsplayer result.
+ *\return:       The AmTsPlayer result.
  */
 am_tsplayer_result  AmTsPlayer_setAudioMute(am_tsplayer_handle Hadl, bool_t analog_mute, bool_t digital_mute);
 /**
  *\brief:        Get audio output mute status from specified 
-                 AmTsplayer instance .
- *\inparam:      AmTsplayer handle.
+                 AmTsPlayer instance .
+ *\inparam:      AmTsPlayer handle.
  *\outparam:     If analog mute or unmute .
  *\outparam:     If digital mute or unmute .
- *\return:       The AmTsplayer result.
+ *\return:       The AmTsPlayer result.
  */
 am_tsplayer_result  AmTsPlayer_getAudioMute(am_tsplayer_handle Hadl, bool_t *analog_unmute, bool_t *digital_unmute);
 /**
  *\brief:        Set audio params need by demuxer and audio decoder 
- *               to specified AmTsplayer instance.
- *\inparam:      AmTsplayer handle.
+ *               to specified AmTsPlayer instance.
+ *\inparam:      AmTsPlayer handle.
  *\inparam:      Params need by demuxer and audio decoder.
- *\return:       The AmTsplayer result.
+ *\return:       The AmTsPlayer result.
  */
 am_tsplayer_result  AmTsPlayer_setAudioParams(am_tsplayer_handle Hadl, am_tsplayer_audio_params *pParams);
 /**
- *\brief:        Set audio output mode to specified AmTsplayer instance.
- *\inparam:      AmTsplayer handle.
+ *\brief:        Set audio output mode to specified AmTsPlayer instance.
+ *\inparam:      AmTsPlayer handle.
  *\inparam:      Enum of audio output mode.
- *\return:       The AmTsplayer result.
+ *\return:       The AmTsPlayer result.
  */
 am_tsplayer_result  AmTsPlayer_setAudioOutMode(am_tsplayer_handle Hadl, am_tsplayer_audio_out_mode Mode);
 /**
- *\brief:        Get audio basic info of specified AmTsplayer instance.
- *\inparam:      AmTsplayer handle.
+ *\brief:        Get audio basic info of specified AmTsPlayer instance.
+ *\inparam:      AmTsPlayer handle.
  *\outparam:     The ptr of audio basic info struct .
- *\return:       The AmTsplayer result.
+ *\return:       The AmTsPlayer result.
  */
 am_tsplayer_result  AmTsPlayer_getAudioInfo(am_tsplayer_handle Hadl,  am_tsplayer_audio_info *pInfo);
 /**
  *\brief:        Get audio decoder real time info 
- *               of specified AmTsplayer instance.
- *\inparam:      AmTsplayer handle.
+ *               of specified AmTsPlayer instance.
+ *\inparam:      AmTsPlayer handle.
  *\outparam:     The ptr of audio decoder real time info struct
- *\return:       The AmTsplayer result.
+ *\return:       The AmTsPlayer result.
  */
 am_tsplayer_result  AmTsPlayer_getAudioStat(am_tsplayer_handle Hadl, am_tsplayer_adec_stat *pStat);
 /**
- *\brief:        Start audio decoding for specified AmTsplayer instance .
- *\inparam:      AmTsplayer handle.
- *\return:       The AmTsplayer result.
+ *\brief:        Start audio decoding for specified AmTsPlayer instance .
+ *\inparam:      AmTsPlayer handle.
+ *\return:       The AmTsPlayer result.
  */
 am_tsplayer_result  AmTsPlayer_startAudioDecoding(am_tsplayer_handle Hadl);
 /**
- *\brief:        Pause audio decoding for specified AmTsplayer instance .
- *\inparam:      AmTsplayer handle.
- *\return:       The AmTsplayer result.
+ *\brief:        Pause audio decoding for specified AmTsPlayer instance .
+ *\inparam:      AmTsPlayer handle.
+ *\return:       The AmTsPlayer result.
  */
 am_tsplayer_result  AmTsPlayer_pauseAudioDecoding(am_tsplayer_handle Hadl);
 /**
- *\brief:        Resume audio decoding for specified AmTsplayer instance .
- *\inparam:      AmTsplayer handle.
- *\return:       The AmTsplayer result.
+ *\brief:        Resume audio decoding for specified AmTsPlayer instance .
+ *\inparam:      AmTsPlayer handle.
+ *\return:       The AmTsPlayer result.
  */
 am_tsplayer_result  AmTsPlayer_resumeAudioDecoding(am_tsplayer_handle Hadl);
 /**
- *\brief:        Stop audio decoding for specified AmTsplayer instance .
- *\inparam:      AmTsplayer handle.
- *\return:       The AmTsplayer result.
+ *\brief:        Stop audio decoding for specified AmTsPlayer instance .
+ *\inparam:      AmTsPlayer handle.
+ *\return:       The AmTsPlayer result.
  */
 am_tsplayer_result  AmTsPlayer_stopAudioDecoding(am_tsplayer_handle Hadl);
 /**
  *\brief:        Set audio description params need by demuxer 
- *               and audio decoder to specified AmTsplayer instance.
- *\inparam:      AmTsplayer handle.
+ *               and audio decoder to specified AmTsPlayer instance.
+ *\inparam:      AmTsPlayer handle.
  *\inparam:      Params need by demuxer and audio decoder.
- *\return:       The AmTsplayer result.
+ *\return:       The AmTsPlayer result.
  */
 am_tsplayer_result  AmTsPlayer_setADParams(am_tsplayer_handle Hadl, am_tsplayer_audio_params *pParams);
 
 /*Audio description interface*/
 /**
  *\brief:        Set audio description mix level (master vol and ad vol)
- *\inparam:      AmTsplayer handle.
+ *\inparam:      AmTsPlayer handle.
  *\inparam:      Master volume value.
  *\inparam:      Slave volume value.
- *\return:       The AmTsplayer result.
+ *\return:       The AmTsPlayer result.
  */
 am_tsplayer_result  AmTsPlayer_setADMixLevel(am_tsplayer_handle Hadl, int32_t master_vol, int32_t slave_vol);
 /**
  *\brief:        Get audio description mix level (master vol and ad vol)
- *\inparam:      AmTsplayer handle.
+ *\inparam:      AmTsPlayer handle.
  *\outparam:     Master volume value.
  *\outparam:     Slave volume value.
- *\return:       The AmTsplayer result.
+ *\return:       The AmTsPlayer result.
  */
 am_tsplayer_result  AmTsPlayer_getADMixLevel(am_tsplayer_handle Hadl, int32_t *master_vol, int32_t *slave_vol);
 /**
  *\brief:        Enable audio description mix with master audio
- *\inparam:      AmTsplayer handle.
- *\return:       The AmTsplayer result.
+ *\inparam:      AmTsPlayer handle.
+ *\return:       The AmTsPlayer result.
  */
 am_tsplayer_result  AmTsPlayer_enableADMix(am_tsplayer_handle Hadl);
 /**
  *\brief:        Disable audio description mix with master audio
- *\inparam:      AmTsplayer handle.
- *\return:       The AmTsplayer result.
+ *\inparam:      AmTsPlayer handle.
+ *\return:       The AmTsPlayer result.
  */
 am_tsplayer_result  AmTsPlayer_disableADMix(am_tsplayer_handle Hadl);
 /**
  *\brief:        Get audio description basic info of specified 
- *               AmTsplayer instance.
- *\inparam:      AmTsplayer handle.
+ *               AmTsPlayer instance.
+ *\inparam:      AmTsPlayer handle.
  *\outparam:     The ptr of audio basic info struct .
- *\return:       The AmTsplayer result.
+ *\return:       The AmTsPlayer result.
  */
 am_tsplayer_result  AmTsPlayer_getADInfo(am_tsplayer_handle Hadl, am_tsplayer_audio_info *pInfo);
 /**
  *\brief:        Get audio description decoder real time info 
- *               of specified AmTsplayer instance.
- *\inparam:      AmTsplayer handle.
+ *               of specified AmTsPlayer instance.
+ *\inparam:      AmTsPlayer handle.
  *\outparam:     The ptr of audio decoder real time info struct
- *\return:       The AmTsplayer result.
+ *\return:       The AmTsPlayer result.
  */
 am_tsplayer_result  AmTsPlayer_getADStat(am_tsplayer_handle Hadl, am_tsplayer_adec_stat *pStat);
 
 /*Subtitle interface*/
 /**
- *\brief:        Set subtitle pid for specified AmTsplayer instance .
- *\inparam:      AmTsplayer handle.
+ *\brief:        Set subtitle pid for specified AmTsPlayer instance .
+ *\inparam:      AmTsPlayer handle.
  *\inparam:      The pid of subtitle.
- *\return:       The AmTsplayer result.
+ *\return:       The AmTsPlayer result.
  */
 am_tsplayer_result  AmTsPlayer_setSubPid(am_tsplayer_handle Hadl, uint32_t pid);
 /**
- *\brief:        Start subtitle for specified AmTsplayer instance .
- *\inparam:      AmTsplayer handle.
- *\return:       The AmTsplayer result.
+ *\brief:        Start subtitle for specified AmTsPlayer instance .
+ *\inparam:      AmTsPlayer handle.
+ *\return:       The AmTsPlayer result.
  */
 am_tsplayer_result  AmTsPlayer_startSub(am_tsplayer_handle Hadl);
 /**
- *\brief:        Stop subtitle for specified AmTsplayer instance .
- *\inparam:      AmTsplayer handle.
- *\return:       The AmTsplayer result.
+ *\brief:        Stop subtitle for specified AmTsPlayer instance .
+ *\inparam:      AmTsPlayer handle.
+ *\return:       The AmTsPlayer result.
  */
 am_tsplayer_result  AmTsPlayer_stopSub(am_tsplayer_handle Hadl);
 

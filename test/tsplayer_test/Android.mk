@@ -6,7 +6,7 @@ LOCAL_SRC_FILES := AmTsPlayerTest.cpp \
                    AmTsPlayerSession.cpp \
 
 
-LOCAL_SHARED_LIBRARIES := libmediahal_tsplayer
+LOCAL_SHARED_LIBRARIES := libmediahal_tsplayer.system
 
 LOCAL_STATIC_LIBRARIES := libgtest
 LOCAL_C_INCLUDES:= system/core/libion/include \

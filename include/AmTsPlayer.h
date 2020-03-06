@@ -241,36 +241,46 @@ typedef struct {
     uint32_t drop_frame_count;
 } am_tsplayer_adec_stat;
 
+typedef struct {
+    uint32_t frame_width;
+    uint32_t frame_height;
+    uint32_t frame_rate;
+} video_format_t;
+
+typedef struct {
+    uint32_t sample_rate;
+    uint32_t channels;
+} audio_format_t;
+
+typedef struct {
+    am_tsplayer_stream_type stream_type;
+    uint64_t  pts;
+} am_tsplayer_pts_t;
+
+typedef struct {
+    uint8_t  *data;
+    size_t   len;
+} mpeg_user_data_t;
+
+typedef struct {
+    am_tsplayer_stream_type stream_type;
+    bool_t  scramling;
+} scamling_t;
+
 /*AmTsPlayer call back event*/
 typedef struct {
     am_tsplayer_event_type type;           // Call back event type
     union {
         /*If type is VIDEO_CHANGED send new video basic info*/
-        struct {            
-          uint32_t frame_width; 
-          uint32_t frame_height;
-          uint32_t frame_rate;
-        } video_format;
+        video_format_t video_format;
         /*If type is AUDIO_CHANGED send new video basic info*/
-        struct {
-          uint32_t sample_rate;
-          uint32_t channels;
-        } audio_format;
+        audio_format_t audio_format;
         /*Audio /Video/Subtitle pts after pes parser*/
-        struct {            
-            am_tsplayer_stream_type stream_type;
-            uint64_t  pts;
-        } pts;
+        am_tsplayer_pts_t pts;
         /*User data send cc /afd /dvb subtitle to caller*/
-        struct {            
-            uint8_t  *data;                   
-            size_t   len;                  
-        } mpeg_user_data;                      
+        mpeg_user_data_t mpeg_user_data;
         /*Scrambling status changed send scramling info to caller*/
-        struct {            
-            am_tsplayer_stream_type stream_type;
-            bool_t             scramling;
-        } scramling;
+        scamling_t scramling;
     } event;
 }am_tsplayer_event;
 

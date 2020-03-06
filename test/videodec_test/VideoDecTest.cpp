@@ -86,9 +86,12 @@ AmVideoDecBase* getAmVideoDec(AmVideoDecCallback* callback) {
     void *libHandle = dlopen("libmediahal_videodec.so", RTLD_NOW);
 
     if (libHandle == NULL) {
-        ALOGE("unable to dlopen libmediahal_videodec.so: %s", dlerror());
-        printf("unable to dlopen libmediahal_videodec.so: %s", dlerror());
-        return nullptr;
+        libHandle = dlopen("libmediahal_videodec.system.so", RTLD_NOW);
+        if (libHandle == NULL) {
+                ALOGE("unable to dlopen libmediahal_videodec.so: %s", dlerror());
+                printf("unable to dlopen libmediahal_videodec.so: %s", dlerror());
+                return nullptr;
+        }
     }
 
     typedef AmVideoDecBase *(*createAmVideoDecFunc)(AmVideoDecCallback* callback);
@@ -163,6 +166,11 @@ public:
             }
             virtual void onError(int32_t error) override {
                 mThis->onError(error);
+            }
+            virtual void onEvent(uint32_t event, void* param, uint32_t paramsize) override {
+                UNUSED(event);
+                UNUSED(param);
+                UNUSED(paramsize);
             }
         private:
             VideoDecSession * const mThis;

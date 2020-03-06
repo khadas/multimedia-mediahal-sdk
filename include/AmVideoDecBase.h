@@ -16,6 +16,7 @@ public:
     virtual void onResetDone();
     virtual void onError(int32_t error);
     virtual void onUserdataReady(const uint8_t* userdata, uint32_t usize);
+    virtual void onEvent(uint32_t event, void* param, uint32_t paramsize);
 };
 
 class AmVideoDecBase {

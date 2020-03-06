@@ -22,6 +22,8 @@
 #include <AmTsPlayerSession.h>
 #include <AmTsPlayerTest.h>
 #include "h264string.cpp"
+#include "h265string.cpp"
+#include "mpeg2string.cpp"
 
 using namespace std;
 
@@ -30,7 +32,45 @@ TestEnv gEnv;
 const int kRwSize = 188*1024;
 const int kRwTimeout = 30000;
 const int kPlayMaxSeconds = 3600;
+
+void video_callback(void *user_data, am_tsplayer_event *event)
+{
+    UNUSED(user_data);
+    printf("video_callback");
+	switch (event->type) {
+        case AM_TSPLAYER_EVENT_TYPE_VIDEO_CHANGED:
+        {
+            TLog("[evt] AM_TSPLAYER_EVENT_TYPE_VIDEO_CHANGED: %d x %d @%d\n",
+                event->event.video_format.frame_width,
+                event->event.video_format.frame_height,
+                event->event.video_format.frame_rate);
+            break;
+        }
+        case AM_TSPLAYER_EVENT_TYPE_MPEG_USERDATA:
+        {
+            uint8_t* pbuf = event->event.mpeg_user_data.data;
+            uint32_t size = event->event.mpeg_user_data.len;
+            printf("[evt] AM_TSPLAYER_EVENT_TYPE_MPEG_USERDATA: %x-%x-%x-%x ,size %d\n",
+                pbuf[0], pbuf[1], pbuf[2], pbuf[3], size);
+            UNUSED(pbuf);
+            UNUSED(size);
+            break;
+        }
+        case AM_TSPLAYER_EVENT_TYPE_FIRST_FRAME:
+        {
+            printf("[evt] AM_TSPLAYER_EVENT_TYPE_FIRST_FRAME\n");
+            break;
+        }
+        default:
+            break;
+	}
+}
+
+#if ANDROID_PLATFORM_SDK_VERSION >= 29
 const int32_t kPlaySleep = 10*1000*1000;
+const int32_t kPlaytime0_2S = 200*1000;
+const int32_t kPlaytime1S = 1*1000*1000;
+const int32_t kPlaytime5S = 5*1000*1000;
 const int32_t kPlaytime10S = 10*1000*1000;
 const int32_t kAlmostRange = 2*1000*1000;
 
@@ -55,23 +95,6 @@ const size_t kNumTsToPlay =
   EXPECT_GE(A + kAlmostRange, B); \
   EXPECT_LE(A - kAlmostRange, B);
 
-
-void video_callback(void *user_data, am_tsplayer_event *event)
-{
-    UNUSED(user_data);
-	switch (event->type) {
-    	case AM_TSPLAYER_EVENT_TYPE_VIDEO_CHANGED:
-    	{
-    		TLog("[evt] AM_TSPLAYER_EVENT_TYPE_VIDEO_CHANGED: %d x %d @%d\n",
-    			event->event.video_format.frame_width,
-    			event->event.video_format.frame_height,
-    			event->event.video_format.frame_rate);
-    		break;
-    	}
-    	default:
-    		break;
-	}
-}
 
 class playbackFromMemory : public testing::Test {
     public:
@@ -120,14 +143,17 @@ class playbackFromMemory : public testing::Test {
 
         av->setSyncMode(mEnv.avsyncMode);
         av->setPcrPid(mEnv.pcrPid);
-        am_tsplayer_audio_params aparm;
-        aparm.codectype = mEnv.aCodec;
-        aparm.pid = mEnv.aPid;
-        a->setParams(&aparm);
         am_tsplayer_video_params vparm;
         vparm.codectype = mEnv.vCodec;
         vparm.pid = mEnv.vPid;
         v->setParams(&vparm);
+        v->startDecoding();
+        am_tsplayer_audio_params aparm;
+        aparm.codectype = mEnv.aCodec;
+        aparm.pid = mEnv.aPid;
+        a->setParams(&aparm);
+        a->startDecoding();
+        ctl->setTrickMode(AV_VIDEO_TRICK_MODE_NONE);
 
         mThread = std::thread([this, fsize]() {
             am_tsplayer_input_buffer ibuf = {TS_INPUT_BUFFER_TYPE_NORMAL, (char*)mBuf, 0};
@@ -145,7 +171,7 @@ class playbackFromMemory : public testing::Test {
                 mFile.read(mBuf, (int)kRwSize);
                 ibuf.buf_size = kRwSize;
                 pos += kRwSize;
-                TLog("size(%ld), pos %ld\n", fsize, pos);
+                //TLog("size(%ld), pos %ld\n", fsize, pos);
                 am_tsplayer_result res = s->writeData(&ibuf, kRwTimeout);
                 if (AM_TSPLAYER_ERROR_RETRY == res) {
                     usleep(100000);
@@ -186,7 +212,6 @@ class playbackFromMemory : public testing::Test {
 
     void Playsleep(uint32_t us)
     {
-        //usleep(us);
         std::this_thread::sleep_for(std::chrono::microseconds(us));
     }
 };
@@ -209,6 +234,56 @@ INSTANTIATE_TEST_SUITE_P(playbackFromMemory, playbackTs,
         testing::Range(0, (int)kNumTsToPlay));
 
 
+uint32_t gExpectEvent;
+bool gGotEvent;
+void callback(void *user_data, am_tsplayer_event *event)
+{
+    UNUSED(user_data);
+    ASSERT_NE((void*)event, nullptr);
+    if ((uint32_t)event->type == gExpectEvent) {
+        gGotEvent = true;
+
+        if (event->type == AM_TSPLAYER_EVENT_TYPE_VIDEO_CHANGED) {
+            video_format_t video_format = event->event.video_format;
+            EXPECT_GT(video_format.frame_width, 0);
+            EXPECT_LE(video_format.frame_width, 4096);
+            EXPECT_GT(video_format.frame_height, 0);
+            EXPECT_LE(video_format.frame_height, 4096);
+            EXPECT_GT(video_format.frame_rate, 0);
+            EXPECT_LE(video_format.frame_rate, 120);
+        }
+    }
+    printf("test callback mExpectEvent %d, current type %d\n",
+        gExpectEvent, event->type);
+}
+
+class playbackEvent : public playbackFromMemory {
+    public:
+
+    virtual void SetUp() override {
+        gGotEvent = false;
+        playbackFromMemory::SetUp();
+        s->register_cb(callback, nullptr);
+    }
+};
+
+TEST_F(playbackEvent, firstFrameToggle)
+{
+    printf("firstFrameToggle\n");
+    gExpectEvent = AM_TSPLAYER_EVENT_TYPE_FIRST_FRAME;
+    Playsleep(kPlaytime1S);
+    EXPECT_EQ(gGotEvent, true);
+}
+
+TEST_F(playbackEvent, videoFormatChange)
+{
+    printf("videoFormatChange\n");
+    gExpectEvent = AM_TSPLAYER_EVENT_TYPE_VIDEO_CHANGED;
+    Playsleep(kPlaytime1S);
+    EXPECT_EQ(gGotEvent, true);
+}
+
+
 TEST_F(playbackFromMemory, DISABLED_playForever)
 {
     while(1)
@@ -225,6 +300,50 @@ TEST_F(playbackFromMemory, playFileMax600S)
 
 TEST_F(playbackFromMemory, play10S)
 {
+    Playsleep(kPlaytime10S);
+}
+
+
+TEST_F(playbackFromMemory, startStopVideo)
+{
+    v->startDecoding();
+    Playsleep(kPlaytime5S);
+    v->stopDecoding();
+    Playsleep(kPlaytime5S);
+}
+
+TEST_F(playbackFromMemory, stopStartVideo)
+{
+    Playsleep(kPlaytime1S);
+    v->stopDecoding();
+    Playsleep(kPlaytime5S);
+    v->startDecoding();
+    Playsleep(kPlaytime5S);
+}
+
+TEST_F(playbackFromMemory, pauseResumeVideo)
+{
+    Playsleep(kPlaytime5S);
+    v->pauseDecoding();
+    Playsleep(kPlaytime5S);
+    v->resumeDecoding();
+    Playsleep(kPlaytime5S);
+}
+
+TEST_F(playbackFromMemory, startStopAudio)
+{
+    a->startDecoding();
+    Playsleep(kPlaytime5S);
+    a->stopDecoding();
+    Playsleep(kPlaytime5S);
+}
+
+TEST_F(playbackFromMemory, pauseResumeAudio)
+{
+    Playsleep(kPlaytime10S);
+    a->pauseDecoding();
+    Playsleep(kPlaytime10S);
+    a->resumeDecoding();
     Playsleep(kPlaytime10S);
 }
 
@@ -288,31 +407,59 @@ TEST_F(playbackFromMemory, bufferStat)
     EXPECT_EQ(stat.size, stat.data_len + stat.free_len);
 }
 
-CLASS_PMEMORY_P(TrickMode, am_tsplayer_video_trick_mode);
-TEST_P(TrickMode, none10s2trick10s)
+TEST_F(playbackFromMemory, TrickNone)
 {
-    Playsleep(kPlaytime10S);
-    EXPECT_EQ(ctl->setTrickMode(parm), 0);
-    Playsleep(kPlaytime10S);
-}
-
-TEST_P(TrickMode, trick10s)
-{
-    EXPECT_EQ(ctl->setTrickMode(parm), 0);
-    Playsleep(kPlaytime10S);
-}
-
-TEST_P(TrickMode, trick10s2none10s)
-{
-    EXPECT_EQ(ctl->setTrickMode(parm), 0);
-    Playsleep(kPlaytime10S);
     EXPECT_EQ(ctl->setTrickMode(AV_VIDEO_TRICK_MODE_NONE), 0);
-    Playsleep(kPlaytime10S);
+    Playsleep(kPlaytime5S);
 }
 
-INSTANTIATE_TEST_SUITE_P(playbackFromMemory, TrickMode,
-        testing::Values(AV_VIDEO_TRICK_MODE_PAUSE, AV_VIDEO_TRICK_MODE_PAUSE_NEXT,
-                AV_VIDEO_TRICK_MODE_IONLY));
+TEST_F(playbackFromMemory, Trickfffb)
+{
+    for (int i = 0; i < 50; i++) {
+        EXPECT_EQ(ctl->setTrickMode(AV_VIDEO_TRICK_MODE_PAUSE_NEXT), 0);
+        Playsleep(kPlaytime0_2S);
+    }
+}
+
+TEST_F(playbackFromMemory, TrickI)
+{
+    EXPECT_EQ(ctl->setTrickMode(AV_VIDEO_TRICK_MODE_IONLY), 0);
+    Playsleep(kPlaytime5S);
+}
+
+TEST_F(playbackFromMemory, TrickItofffb)
+{
+    EXPECT_EQ(ctl->setTrickMode(AV_VIDEO_TRICK_MODE_IONLY), 0);
+    Playsleep(kPlaytime5S);
+    EXPECT_EQ(ctl->setTrickMode(AV_VIDEO_TRICK_MODE_NONE), 0);
+    EXPECT_EQ(ctl->setTrickMode(AV_VIDEO_TRICK_MODE_PAUSE_NEXT), 0);
+    Playsleep(kPlaytime5S);
+}
+
+TEST_F(playbackFromMemory, TrickfffbtoI)
+{
+    EXPECT_EQ(ctl->setTrickMode(AV_VIDEO_TRICK_MODE_PAUSE_NEXT), 0);
+    Playsleep(kPlaytime5S);
+    EXPECT_EQ(ctl->setTrickMode(AV_VIDEO_TRICK_MODE_NONE), 0);
+    EXPECT_EQ(ctl->setTrickMode(AV_VIDEO_TRICK_MODE_IONLY), 0);
+    Playsleep(kPlaytime5S);
+}
+
+TEST_F(playbackFromMemory, TrickItonone)
+{
+    EXPECT_EQ(ctl->setTrickMode(AV_VIDEO_TRICK_MODE_IONLY), 0);
+    Playsleep(kPlaytime5S);
+    EXPECT_EQ(ctl->setTrickMode(AV_VIDEO_TRICK_MODE_NONE), 0);
+    Playsleep(kPlaytime5S);
+}
+
+TEST_F(playbackFromMemory, Trickfffbtonone)
+{
+    EXPECT_EQ(ctl->setTrickMode(AV_VIDEO_TRICK_MODE_PAUSE_NEXT), 0);
+    Playsleep(kPlaytime5S);
+    EXPECT_EQ(ctl->setTrickMode(AV_VIDEO_TRICK_MODE_NONE), 0);
+    Playsleep(kPlaytime5S);
+}
 
 TEST_F(playbackFromMemory, videoShowHide)
 {
@@ -381,6 +528,7 @@ TEST_F(playbackFromMemory, audioDecoding)
     EXPECT_EQ(av->getCurrentTime(&t8), 0);
     EXPECT_NE(t7, t8); //stop decoding, expect time diff
 }
+
 
 TEST_F(playbackFromMemory, adDecoding)
 {
@@ -540,7 +688,7 @@ TEST_F(playbackFromMemory, getCurrentStreamInfoStat)
     TLog("height: %d\n", vinfo.height);
     TLog("framerate: %d\n", vinfo.framerate);
     TLog("bitrate: %d\n", vinfo.bitrate);
-    TLog("ratio64: %I64u\n", vinfo.ratio64);
+    TLog("ratio64: %llud\n", vinfo.ratio64);
 
     TLog("=========VSTAT=========\n");
     TLog("QOS.num: %d\n", vstat.qos.num);
@@ -569,13 +717,13 @@ TEST_F(playbackFromMemory, getCurrentStreamInfoStat)
     TLog("frame_count: %d\n", vstat.frame_count);
     TLog("error_frame_count: %d\n", vstat.error_frame_count);
     TLog("drop_frame_count: %d\n", vstat.drop_frame_count);
-    TLog("total_data: %I64u\n", vstat.total_data);
+    TLog("total_data: %llud\n", vstat.total_data);
     TLog("samp_cnt: %d\n", vstat.samp_cnt);
     TLog("offset: %d\n", vstat.offset);
     TLog("ratio_control: %d\n", vstat.ratio_control);
     TLog("signal_type: %d\n", vstat.signal_type);
     TLog("pts: %d\n", vstat.pts);
-    TLog("pts_us64: %I64u\n", vstat.pts_us64);
+    TLog("pts_us64: %llud\n", vstat.pts_us64);
 
     am_tsplayer_audio_info ainfo;
     am_tsplayer_adec_stat astat;
@@ -937,6 +1085,7 @@ const struct {
 } kStrTsToPlay[] = {
     { h264ts, AV_VIDEO_CODEC_H264, 0x100, AV_AUDIO_CODEC_AAC, 0x101},
     { h265ts, AV_VIDEO_CODEC_H265, 0x100, AV_AUDIO_CODEC_AAC, 0x101},
+    { mpeg2ts, AV_VIDEO_CODEC_MPEG2, 0x100, AV_AUDIO_CODEC_AAC, 0x101},
 };
 
 const size_t kNumStrTsToPlay =
@@ -987,16 +1136,14 @@ protected:
                     gEnv.tsType,
                     TS_PLAYER_MODE_NORMAL);
         std::shared_ptr<AmTsPlayerSession::AVSync>&av = s->mAVSync;
+        std::shared_ptr<AmTsPlayerSession::Control>&ctl = s->mControl;
         std::shared_ptr<AmTsPlayerSession::Video>&v = s->mVideo;
         std::shared_ptr<AmTsPlayerSession::Audio>&a = s->mAudio;
         memcpy(&mEnv, &gEnv, sizeof(gEnv));
 
-        //int fsize = kStrTsToPlay[mSrcIdx].tsname.size();
-        int fsize = h264ts.size();
+        int fsize = kStrTsToPlay[mSrcIdx].tsname.size();
         mBuf = new uint8_t[fsize];
-        //a2b_hex(kStrTsToPlay[mSrcIdx].tsname, mBuf);
-        a2b_hex(h264ts, mBuf);
-        printf("fsize %d, h264 size strlen %d\n", fsize, h264ts.size());
+        a2b_hex(kStrTsToPlay[mSrcIdx].tsname, mBuf);
 
         av->setSyncMode(mEnv.avsyncMode);
         av->setPcrPid(mEnv.pcrPid);
@@ -1004,21 +1151,25 @@ protected:
         aparm.codectype = kStrTsToPlay[mSrcIdx].acodec;
         aparm.pid = kStrTsToPlay[mSrcIdx].apid;
         a->setParams(&aparm);
+        a->startDecoding();
         am_tsplayer_video_params vparm;
         vparm.codectype = kStrTsToPlay[mSrcIdx].vcodec;
         vparm.pid = kStrTsToPlay[mSrcIdx].vpid;
         v->setParams(&vparm);
-        am_tsplayer_input_buffer ibuf = {TS_INPUT_BUFFER_TYPE_NORMAL,
-                        (&mBuf), fsize};
-        am_tsplayer_result res = s->writeData(&ibuf, kRwTimeout);
-        if (AM_TSPLAYER_ERROR_RETRY == res) {
-            printf("writeData res %d \n", res);
-        }
-        usleep(20000);
-        res = s->writeData(&ibuf, kRwTimeout);
-        usleep(20000);
-        res = s->writeData(&ibuf, kRwTimeout);
-        std::this_thread::sleep_for(std::chrono::seconds(5));
+        v->startDecoding();
+        ctl->setTrickMode(AV_VIDEO_TRICK_MODE_NONE);
+
+        am_tsplayer_input_buffer ibuf = {TS_INPUT_BUFFER_TYPE_NORMAL, mBuf, fsize};
+        int retry = 100;
+        am_tsplayer_result res;
+        do {
+            res = s->writeData(&ibuf, kRwTimeout);
+            if (res == AM_TSPLAYER_ERROR_RETRY) {
+                printf("test error retry writeData res %d \n", res);
+                usleep(50000);
+            } else
+                break;
+        } while(res || retry-- > 0);
     }
     virtual void TearDown(){
         delete [](mBuf);
@@ -1045,16 +1196,62 @@ TEST_P(playbackFromShortHexstrParam, fiveSec)
 INSTANTIATE_TEST_SUITE_P(playbackFromShortHexstr, playbackFromShortHexstrParam,
         testing::Range(0, (int32_t)kNumStrTsToPlay));
 
+TEST(TsPlayer, InitSharedptr)
+{
+    std::shared_ptr<AmTsPlayerSession>s;
+    s = std::make_shared<AmTsPlayerSession>(
+                video_callback,
+                gEnv.tsType,
+                TS_PLAYER_MODE_NORMAL);
+}
+
+TEST(TsPlayer, Init)
+{
+    AmTsPlayerSession* s = new AmTsPlayerSession(
+                video_callback,
+                gEnv.tsType,
+                TS_PLAYER_MODE_NORMAL);
+    delete s;
+}
+
 /*--------------------Demod--------------------*/
 
 class playbackFromDemod : public testing::Test {
     public:
     std::shared_ptr<AmTsPlayerSession>s;
+    std::shared_ptr<AmTsPlayerSession::AVSync>av;
+    std::shared_ptr<AmTsPlayerSession::Control>ctl;
+    std::shared_ptr<AmTsPlayerSession::Video>v;
+    std::shared_ptr<AmTsPlayerSession::Audio>a;
+    //std::shared_ptr<AmTsPlayerSession::AD>ad;
+    //std::shared_ptr<AmTsPlayerSession::Subtitle>sub;
+    TestEnv mEnv;
     virtual void SetUp(){
         s = std::make_shared<AmTsPlayerSession>(
                     video_callback,
                     TS_DEMOD,
                     TS_PLAYER_MODE_NORMAL);
+        av = s->mAVSync;
+        ctl = s->mControl;
+        v = s->mVideo;
+        a = s->mAudio;
+        //ad = s->mAD;
+        //sub = s->mSubtitle;
+
+        memcpy(&mEnv, &gEnv, sizeof(gEnv));
+        av->setSyncMode(gEnv.avsyncMode);
+        av->setPcrPid(gEnv.pcrPid);
+        am_tsplayer_audio_params aparm;
+        aparm.codectype = gEnv.aCodec;
+        aparm.pid = gEnv.aPid;
+        a->setParams(&aparm);
+        a->startDecoding();
+        am_tsplayer_video_params vparm;
+        vparm.codectype = gEnv.vCodec;
+        vparm.pid = gEnv.vPid;
+        v->setParams(&vparm);
+        v->startDecoding();
+        ctl->setTrickMode(AV_VIDEO_TRICK_MODE_NONE);
     }
     virtual void TearDown(){
     }
@@ -1062,12 +1259,9 @@ class playbackFromDemod : public testing::Test {
 
 TEST_F(playbackFromDemod, play10S)
 {
-    am_tsplayer_audio_params aparm = {AV_AUDIO_CODEC_AUTO, 257};
-    EXPECT_EQ(s->mAudio->setParams(&aparm), 0);
-    am_tsplayer_video_params vparm = {AV_VIDEO_CODEC_AUTO, 256};
-    EXPECT_EQ(s->mVideo->setParams(&vparm), 0);
     usleep(kPlaytime10S);
 }
+#endif
 ////////////////////////////////////////////////////
 
 
@@ -1310,21 +1504,32 @@ static int set_osd_blank(int blank)
     return 0;
 }
 
+void signHandler(int iSignNo)
+{
+    printf("signHandler %d\n", iSignNo);
+    set_osd_blank(0);
+    signal(SIGINT, SIG_DFL);
+    raise(SIGINT);
+    printf("exit\n");
+}
 
 int main(int argc, char **argv)
 {
+    signal(SIGINT, signHandler);
     gEnv.initFromEnv();
     gEnv.initFromOptions(argc, argv);
 
+    set_osd_blank(1);
     if (gEnv.isGtestMode()) {
         testing::InitGoogleTest(&argc, argv);
-        return RUN_ALL_TESTS();
+        int ret =  RUN_ALL_TESTS();
+        set_osd_blank(0);
+        return ret;
     }
     char* buf = new char[kRwSize];
 	long fsize = 0;
     string ifile = gEnv.inputTsDir + gEnv.inputTsName;
     ifstream file(ifile.c_str(), ifstream::binary);
-    set_osd_blank(1);
 	if (gEnv.tsType)
 	{
         printf("dir = %s, name = %s, ifile = %s, is_open %d\n",
@@ -1356,28 +1561,29 @@ int main(int argc, char **argv)
                 gEnv.tsType,
                 TS_PLAYER_MODE_NORMAL);
 
-    //std::shared_ptr<AmTsPlayerSession::AVSync>&av = s->mAVSync;
-    //std::shared_ptr<AmTsPlayerSession::Control>&ctl = s->mControl;
+    std::shared_ptr<AmTsPlayerSession::AVSync>&av = s->mAVSync;
+    std::shared_ptr<AmTsPlayerSession::Control>&ctl = s->mControl;
     std::shared_ptr<AmTsPlayerSession::Video>&v = s->mVideo;
     std::shared_ptr<AmTsPlayerSession::Audio>&a = s->mAudio;
     //std::shared_ptr<AmTsPlayerSession::AD>&ad = s->mAD;
     //std::shared_ptr<AmTsPlayerSession::Subtitle>&sub = s->mSubtitle;
 
-    //av->setSyncMode(gEnv.avsyncMode);
-    //av->setPcrPid(gEnv.pcrPid);
+    av->setSyncMode(gEnv.avsyncMode);
+    av->setPcrPid(gEnv.pcrPid);
     am_tsplayer_audio_params aparm;
     aparm.codectype = gEnv.aCodec;
     aparm.pid = gEnv.aPid;
     a->setParams(&aparm);
+    a->startDecoding();
     am_tsplayer_video_params vparm;
     vparm.codectype = gEnv.vCodec;
     vparm.pid = gEnv.vPid;
     v->setParams(&vparm);
+    v->startDecoding();
+    v->setShow();
+    ctl->setTrickMode(AV_VIDEO_TRICK_MODE_NONE);
 
-    if (gEnv.tsType == 0)/*TS_DEMOD*/
-        running.store(false);
-	else /*TS_MEMORY*/
-        running.store(true);
+    running.store(static_cast<bool>(gEnv.tsType));
 	printf("tsType %d\n",gEnv.tsType);
     std::thread rwThread([s, buf,/* fsize,*/ &file, &running, &eofLock, &eofCondition]() {
         am_tsplayer_input_buffer ibuf = {TS_INPUT_BUFFER_TYPE_NORMAL, (char*)buf, 0};
@@ -1393,7 +1599,7 @@ int main(int argc, char **argv)
             file.read(buf, (int)kRwSize);
             ibuf.buf_size = kRwSize;
             pos += kRwSize;
-            
+
             int retry = 100;
             am_tsplayer_result res;
             do {

@@ -1,39 +1,26 @@
 =========RELEALSE NOTE=================
 
-Version: v1.0.0
+Version: v2.0
 
 ========================================
 
 Git commit:
-commit 642f8e86fa9caf8c8dd46e94f91bf16460debcb7
+commit 155979751e414137a3eb5780c2ffeef02bbc9e0f
 Author: Jian Wang <jian.wang@amlogic.com>
-Date:   Sun Mar 1 17:18:37 2020 +0800
+Date:   Mon Mar 9 15:58:52 2020 +0800
 
-    mediahal: modify mk in can build system and vendor [1/1]
+    mediahal: modify system so named with .system.so
     
-    PD#SWPL-20992
-    
-    Problem:
-    mk can not build system and vendor at sametime
-    
-    Solution:
-    1. modify mk in can build system and vendor at sametime
-    2. modify new api onUserdataReady order to let omx
-       can use older lib
-    
-    Verify:
-    U212
-    
-    Change-Id: I48e40c612405867f4ca8534621e6a0aab705b843
+    Change-Id: I4a4fc0be7f2d88d49c9e43912f13085407c5ba48
     Signed-off-by: Jian Wang <jian.wang@amlogic.com>
 
 ========================================
 
-Release time: 2020-03-01-20-50
+Release time: 2020-03-10-16-41
 
 ========================================
 
-Builder: jian.wang
+Builder: alex.cao
 
 ========================================
 Release file:
@@ -53,7 +40,9 @@ AmTsPlayerSession.cpp
 AmTsPlayerTest.cpp
 Android.mk
 h264string.cpp
+h265string.cpp
 include
+mpeg2string.cpp
 
 Binary  file:
 AmTsPlayerTest

@@ -18,8 +18,9 @@ AmTsPlayerSession::AmTsPlayerSession(event_callback callback,
     mInstanceNo = instanceno;
 
     setWorkMode(mWorkMode);
-	register_cb(mCallback, NULL);
-    TLog("AmTsPlayerSession version %d, instanceno %d\n", version, mInstanceNo, mWorkMode);
+    register_cb(mCallback, NULL);
+    printf("AmTsPlayerSession mCallback %p, version %d, instanceno %d, workmode %d\n",
+            mCallback, version, mInstanceNo, mWorkMode);
 
 
     mAVSync = std::make_shared<AVSync>(mSession);
@@ -53,7 +54,6 @@ am_tsplayer_result AmTsPlayerSession::register_cb(event_callback pfunc, void *pa
 }
 
 am_tsplayer_result AmTsPlayerSession::writeData(am_tsplayer_input_buffer *buf, uint64_t timeout_ms) {
-    TLog("writeData %d\n", buf->buf_size);
     return AmTsPlayer_writeData(mSession, buf, timeout_ms);
 }
 
@@ -120,6 +120,7 @@ am_tsplayer_result AmTsPlayerSession::Control::stopFast() {
 
 am_tsplayer_result AmTsPlayerSession::Control::setTrickMode(
                 am_tsplayer_video_trick_mode trickmode) {
+    printf("AmTsPlayerSession::Control::setTrickMode trickmode %d\n", (uint32_t)trickmode);
     return AmTsPlayer_setTrickMode(mSession, trickmode);
 }
 

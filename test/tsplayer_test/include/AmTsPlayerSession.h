@@ -6,7 +6,7 @@
 
 #define TLog(f, s...) \
 do { \
-        ;/*printf(f, ##s);*/ \
+        printf(f, ##s);\
 } while(0)
 
 #ifndef UNUSED
