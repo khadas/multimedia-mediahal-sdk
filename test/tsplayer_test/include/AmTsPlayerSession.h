@@ -24,7 +24,7 @@ class AmTsPlayerSession
         virtual ~AmTsPlayerSession();
 
         am_tsplayer_result create(am_tsplayer_init_params Params);
-        am_tsplayer_result getVersion(uint32_t *Version);
+        am_tsplayer_result getVersion(uint32_t *VersionM, uint32_t *VersionL);
         am_tsplayer_result getInstansNo(uint32_t *Numb);
         am_tsplayer_result register_cb(event_callback pfunc, void *param);
         am_tsplayer_result writeData(am_tsplayer_input_buffer *buf, uint64_t timeout_ms);

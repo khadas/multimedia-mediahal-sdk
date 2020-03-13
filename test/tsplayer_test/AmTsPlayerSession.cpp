@@ -7,21 +7,18 @@ AmTsPlayerSession::AmTsPlayerSession(event_callback callback,
             mWorkMode(mode),
             mTsType(type) {
     am_tsplayer_init_params parm = {mTsType, 0, 0};
-    uint32_t version;
+    uint32_t versionM, versionL;
     uint32_t instanceno;
 
     create(parm);
     //CHECK_GE(mSession, 0);
 
-    getVersion(&version);
+    getVersion(&versionM, &versionL);
     getInstansNo(&instanceno);
     mInstanceNo = instanceno;
 
     setWorkMode(mWorkMode);
     register_cb(mCallback, NULL);
-    printf("AmTsPlayerSession mCallback %p, version %d, instanceno %d, workmode %d\n",
-            mCallback, version, mInstanceNo, mWorkMode);
-
 
     mAVSync = std::make_shared<AVSync>(mSession);
     mControl = std::make_shared<Control>(mSession);
@@ -41,8 +38,8 @@ am_tsplayer_result AmTsPlayerSession::create(am_tsplayer_init_params Params) {
     return AmTsPlayer_create(Params, &mSession);
 }
 
-am_tsplayer_result AmTsPlayerSession::getVersion(uint32_t *Version) {
-    return AmTsPlayer_getVersion(Version);
+am_tsplayer_result AmTsPlayerSession::getVersion(uint32_t *VersionM, uint32_t *VersionL) {
+    return AmTsPlayer_getVersion(VersionM, VersionL);
 }
 
 am_tsplayer_result AmTsPlayerSession::getInstansNo(uint32_t *Numb) {
@@ -120,7 +117,6 @@ am_tsplayer_result AmTsPlayerSession::Control::stopFast() {
 
 am_tsplayer_result AmTsPlayerSession::Control::setTrickMode(
                 am_tsplayer_video_trick_mode trickmode) {
-    printf("AmTsPlayerSession::Control::setTrickMode trickmode %d\n", (uint32_t)trickmode);
     return AmTsPlayer_setTrickMode(mSession, trickmode);
 }
 

@@ -36,10 +36,15 @@ typedef enum {
 
 /*Function return type*/
 typedef enum {
-    AM_TSPLAYER_OK  = 0,                   // OK  
-    AM_TSPLAYER_ERROR_INVALID_PARAMS = -1, // Parameters invalid
-    AM_TSPLAYER_ERROR_RETRY = -2,          // Retry
-    AM_TSPLAYER_ERROR_BUSY = -3,           // Device busy
+    AM_TSPLAYER_OK  = 0,                      // OK
+    AM_TSPLAYER_ERROR_INVALID_PARAMS = -1,    // Parameters invalid
+    AM_TSPLAYER_ERROR_INVALID_OPERATION = -2, // Operation invalid
+    AM_TSPLAYER_ERROR_INVALID_OBJECT = -3,    // Object invalid
+    AM_TSPLAYER_ERROR_RETRY = -4,             // Retry
+    AM_TSPLAYER_ERROR_BUSY = -5,              // Device busy
+    AM_TSPLAYER_ERROR_END_OF_STREAM = -6,     // End of stream
+    AM_TSPLAYER_ERROR_IO            = -7,     // Io error
+    AM_TSPLAYER_ERROR_WOULD_BLOCK   = -8,     // Blocking error
     AM_TSPLAYER_ERROR_MAX = -254         
 } am_tsplayer_result;
 
@@ -66,8 +71,8 @@ typedef enum {
 
 /*Avsync mode*/
 typedef enum {
-    TS_SYNC_AMASTER = 0,                   // Audio Master
-    TS_SYNC_VMASTER = 1,                   // Video Master
+    TS_SYNC_VMASTER = 0,                   // Video Master
+    TS_SYNC_AMASTER = 1,                   // Audio Master
     TS_SYNC_PCRMASTER = 2,                 // PCR Master
     TS_SYNC_NOSYNC = 3                     // Free run
 } am_tsplayer_avsync_mode;
@@ -206,21 +211,23 @@ typedef struct {
 /*Video decoder real time information*/
 typedef struct {
     am_tsplayer_video_qos qos;
+    uint32_t  decode_time_cost;/*us*/
     uint32_t frame_width; 
     uint32_t frame_height;
     uint32_t frame_rate;
-    uint32_t bit_rate;
+    uint32_t bit_depth_luma;//original bit_rate;
     uint32_t frame_dur;
-    uint32_t frame_data;
+    uint32_t bit_depth_chroma;//original frame_data;
     uint32_t error_count;
     uint32_t status;
     uint32_t frame_count;
     uint32_t error_frame_count;
     uint32_t drop_frame_count;
     uint64_t total_data;
-    uint32_t samp_cnt;
+    uint32_t double_write_mode;//original samp_cnt;
     uint32_t offset;
     uint32_t ratio_control;
+    uint32_t vf_type;
     uint32_t signal_type;
     uint32_t pts;
     uint64_t pts_us64;
@@ -245,6 +252,7 @@ typedef struct {
     uint32_t frame_width;
     uint32_t frame_height;
     uint32_t frame_rate;
+    uint32_t frame_aspectratio;
 } video_format_t;
 
 typedef struct {
@@ -301,7 +309,8 @@ am_tsplayer_result  AmTsPlayer_create(am_tsplayer_init_params Params, am_tsplaye
  *\outparam:     AmTsPlayer interface version.
  *\return:       The AmTsPlayer result.
  */
-am_tsplayer_result  AmTsPlayer_getVersion(uint32_t *Version);
+am_tsplayer_result  AmTsPlayer_getVersion(uint32_t *versionM,
+                                          uint32_t *VersionL);
 /**
  *\brief:        Get the instance number of specified AmTsPlayer .
  *\inparam:      AmTsPlayer handle.
@@ -316,7 +325,14 @@ am_tsplayer_result  AmTsPlayer_getInstansNo(am_tsplayer_handle Hadl, uint32_t *N
  *\inparam:      Extra data ptr.
  *\return:       The AmTsPlayer result.
  */
-am_tsplayer_result  AmTsPlayer_registerCb(am_tsplayer_handle Hadl, event_callback pfunc, void *param); 
+am_tsplayer_result  AmTsPlayer_registerCb(am_tsplayer_handle Hadl, event_callback pfunc, void *param);
+/**
+ *\brief:        Get event callback to specified AmTsPlayer
+ *\inparam:      AmTsPlayer handle.
+ *\inparam:      ptr of Event callback function ptr.
+ *\return:       The AmTsPlayer result.
+ */
+am_tsplayer_result  AmTsPlayer_getCb(am_tsplayer_handle Hadl, event_callback *pfunc, void* *ppParam);
 /**
  *\brief:        Release specified AmTsPlayer instance.
  *\inparam:      AmTsPlayer handle.

@@ -5,18 +5,29 @@ Version: v2.0
 ========================================
 
 Git commit:
-commit 155979751e414137a3eb5780c2ffeef02bbc9e0f
-Author: Jian Wang <jian.wang@amlogic.com>
-Date:   Mon Mar 9 15:58:52 2020 +0800
+commit 3b81afdae308aea7b0017d9b3687581fb9ef5e39
+Author: Lifeng Cao <lifeng.cao@amlogic.com>
+Date:   Mon Mar 16 10:45:19 2020 +0800
 
-    mediahal: modify system so named with .system.so
+    AmTsplayer: Tsplayer selinux permission for stb device [1/1]
     
-    Change-Id: I4a4fc0be7f2d88d49c9e43912f13085407c5ba48
-    Signed-off-by: Jian Wang <jian.wang@amlogic.com>
+    PD#SWPL-22006
+    
+    Problem:
+    Tsplayer has not permission to set stb device
+    
+    Solution:
+    Tsplayer use system control to set stb device
+    
+    Verify:
+    newton
+    
+    Change-Id: If464205667b0c533913f571fa9c44edf16eed422
+    Signed-off-by: Lifeng Cao <lifeng.cao@amlogic.com>
 
 ========================================
 
-Release time: 2020-03-10-16-41
+Release time: 2020-03-16-10-47
 
 ========================================
 

@@ -330,6 +330,18 @@ TEST_F(playbackFromMemory, pauseResumeVideo)
     Playsleep(kPlaytime5S);
 }
 
+TEST_F(playbackFromMemory, spssVideo)
+{
+    v->startDecoding();
+    Playsleep(kPlaytime5S);
+    v->pauseDecoding();
+    Playsleep(kPlaytime5S);
+    v->stopDecoding();
+    Playsleep(kPlaytime5S);
+    v->startDecoding();
+    Playsleep(kPlaytime5S);
+}
+
 TEST_F(playbackFromMemory, startStopAudio)
 {
     a->startDecoding();
@@ -393,7 +405,7 @@ INSTANTIATE_TEST_SUITE_P(playbackFromMemory, AVSyncTime,
 
 TEST_F(playbackFromMemory, bufferStat)
 {
-    Playsleep(kPlaytime10S);
+    Playsleep(kPlaytime1S);
 
     am_tsplayer_buffer_stat stat;
     EXPECT_EQ(ctl->getBufferStat(TS_STREAM_VIDEO, &stat), 0);
@@ -405,6 +417,14 @@ TEST_F(playbackFromMemory, bufferStat)
     EXPECT_EQ(stat.size, stat.data_len + stat.free_len);
     EXPECT_EQ(ctl->getBufferStat(TS_STREAM_SUB, &stat), 0);
     EXPECT_EQ(stat.size, stat.data_len + stat.free_len);
+}
+
+TEST_F(playbackFromMemory, delayTime)
+{
+    Playsleep(kPlaytime5S);
+    int64_t dtime;
+    EXPECT_EQ(av->getDelayTime(&dtime), 0); // after 10s
+    printf("delayTime DTIME %lld\n", dtime);
 }
 
 TEST_F(playbackFromMemory, TrickNone)
@@ -658,12 +678,6 @@ TEST_F(playbackFromMemory, getDefaultStreamInfoStat)
     EXPECT_EQ(vinfo.bitrate, kDefaultStreamVInfo.bitrate);
     EXPECT_EQ(vinfo.ratio64, kDefaultStreamVInfo.ratio64);
 
-    EXPECT_EQ(vinfo.width, vstat.frame_width);
-    EXPECT_EQ(vinfo.height, vstat.frame_height);
-    EXPECT_EQ(vinfo.framerate, vstat.frame_rate);
-    EXPECT_EQ(vinfo.bitrate, vstat.bit_rate);
-    EXPECT_EQ(vinfo.ratio64, vstat.ratio_control);
-
     am_tsplayer_audio_info ainfo;
     am_tsplayer_adec_stat astat;
     EXPECT_EQ(a->getInfo(&ainfo), 0);
@@ -675,21 +689,22 @@ TEST_F(playbackFromMemory, getDefaultStreamInfoStat)
     EXPECT_EQ(ainfo.bitrate, kDefaultStreamAInfo.bitrate);
 }
 
-TEST_F(playbackFromMemory, getCurrentStreamInfoStat)
+TEST_F(playbackFromMemory, getVideoStat)
 {
     Playsleep(kPlaytime10S);
     am_tsplayer_video_info vinfo;
-    am_tsplayer_vdec_stat vstat;
     EXPECT_EQ(v->getInfo(&vinfo), 0);
-    EXPECT_EQ(v->getStat(&vstat), 0);
 
     TLog("=========VINFO=========\n");
     TLog("width: %d\n", vinfo.width);
     TLog("height: %d\n", vinfo.height);
     TLog("framerate: %d\n", vinfo.framerate);
     TLog("bitrate: %d\n", vinfo.bitrate);
-    TLog("ratio64: %llud\n", vinfo.ratio64);
+    TLog("ratio64: %lld\n", vinfo.ratio64);
+    TLog("=========VINFO=========\n");
 
+    am_tsplayer_vdec_stat vstat;
+    EXPECT_EQ(v->getStat(&vstat), 0);
     TLog("=========VSTAT=========\n");
     TLog("QOS.num: %d\n", vstat.qos.num);
     TLog("QOS.type: %d\n", vstat.qos.type);
@@ -706,25 +721,32 @@ TEST_F(playbackFromMemory, getCurrentStreamInfoStat)
     TLog("QOS.avg_mv: %d\n", vstat.qos.avg_mv);
     TLog("QOS.decode_buffer: %d\n", vstat.qos.decode_buffer);
 
+    TLog("decode_time_cost: %d\n", vstat.decode_time_cost);
     TLog("frame_width: %d\n", vstat.frame_width);
     TLog("frame_height: %d\n", vstat.frame_height);
     TLog("frame_rate: %d\n", vstat.frame_rate);
-    TLog("bit_rate: %d\n", vstat.bit_rate);
+    TLog("bit_depth_luma: %d\n", vstat.bit_depth_luma);
     TLog("frame_dur: %d\n", vstat.frame_dur);
-    TLog("frame_data: %d\n", vstat.frame_data);
+    TLog("bit_depth_chroma: %d\n", vstat.bit_depth_chroma);
     TLog("error_count: %d\n", vstat.error_count);
     TLog("status: %d\n", vstat.status);
     TLog("frame_count: %d\n", vstat.frame_count);
     TLog("error_frame_count: %d\n", vstat.error_frame_count);
     TLog("drop_frame_count: %d\n", vstat.drop_frame_count);
-    TLog("total_data: %llud\n", vstat.total_data);
-    TLog("samp_cnt: %d\n", vstat.samp_cnt);
+    TLog("total_data: %llu\n", vstat.total_data);
+    TLog("double_write_mode: %d\n", vstat.double_write_mode);
     TLog("offset: %d\n", vstat.offset);
     TLog("ratio_control: %d\n", vstat.ratio_control);
+    TLog("vf_type: %d\n", vstat.vf_type);
     TLog("signal_type: %d\n", vstat.signal_type);
     TLog("pts: %d\n", vstat.pts);
-    TLog("pts_us64: %llud\n", vstat.pts_us64);
+    TLog("pts_us64: %llu\n", vstat.pts_us64);
+    TLog("=========VSTAT=========\n");
+}
 
+TEST_F(playbackFromMemory, getAudioStat)
+{
+    Playsleep(kPlaytime10S);
     am_tsplayer_audio_info ainfo;
     am_tsplayer_adec_stat astat;
     if (mEnv.useAD) {
@@ -739,13 +761,13 @@ TEST_F(playbackFromMemory, getCurrentStreamInfoStat)
     TLog("channels: %d\n", ainfo.channels);
     TLog("channel_mask: %d\n", ainfo.channel_mask);
     TLog("bitrate: %d\n", ainfo.bitrate);
+    TLog("=========AINFO=========\n");
     TLog("=========ASTAT=========\n");
     TLog("frame_count: %d\n", astat.frame_count);
     TLog("error_frame_count: %d\n", astat.error_frame_count);
     TLog("drop_frame_count: %d\n", astat.drop_frame_count);
-
+    TLog("=========ASTAT=========\n");
 }
-
 class PlayerTest : public testing::Test {
 protected:
     std::shared_ptr<AmTsPlayerSession>s;
@@ -1126,6 +1148,10 @@ uint32_t a2b_hex(const std::string& byte, uint8_t* out) {
 class playbackFromShortHexstr : public testing::Test {
 protected:
     std::shared_ptr<AmTsPlayerSession>s;
+    std::shared_ptr<AmTsPlayerSession::AVSync>av;
+    std::shared_ptr<AmTsPlayerSession::Control>ctl;
+    std::shared_ptr<AmTsPlayerSession::Video>v;
+    std::shared_ptr<AmTsPlayerSession::Audio>a;
     uint8_t* mBuf;
     TestEnv mEnv;
     int32_t mSrcIdx = -1;
@@ -1135,10 +1161,10 @@ protected:
                     video_callback,
                     gEnv.tsType,
                     TS_PLAYER_MODE_NORMAL);
-        std::shared_ptr<AmTsPlayerSession::AVSync>&av = s->mAVSync;
-        std::shared_ptr<AmTsPlayerSession::Control>&ctl = s->mControl;
-        std::shared_ptr<AmTsPlayerSession::Video>&v = s->mVideo;
-        std::shared_ptr<AmTsPlayerSession::Audio>&a = s->mAudio;
+        av = s->mAVSync;
+        ctl = s->mControl;
+        v = s->mVideo;
+        a = s->mAudio;
         memcpy(&mEnv, &gEnv, sizeof(gEnv));
 
         int fsize = kStrTsToPlay[mSrcIdx].tsname.size();
@@ -1189,8 +1215,7 @@ class playbackFromShortHexstrParam : public playbackFromShortHexstr,
 TEST_P(playbackFromShortHexstrParam, fiveSec)
 {
     std::this_thread::sleep_for(std::chrono::seconds(5));
-    uint32_t ver;
-    EXPECT_EQ(s->getVersion(&ver), 0);
+    v->stopDecoding();
 }
 
 INSTANTIATE_TEST_SUITE_P(playbackFromShortHexstr, playbackFromShortHexstrParam,
@@ -1211,6 +1236,27 @@ TEST(TsPlayer, Init)
                 video_callback,
                 gEnv.tsType,
                 TS_PLAYER_MODE_NORMAL);
+    delete s;
+}
+
+TEST(TsPlayer, InitRelease)
+{
+    AmTsPlayerSession* s;
+    uint32_t instanceNo;
+
+    s = new AmTsPlayerSession(
+                video_callback,
+                gEnv.tsType,
+                TS_PLAYER_MODE_NORMAL);
+    EXPECT_EQ(s->getInstansNo(&instanceNo), 0);
+    EXPECT_EQ(instanceNo, 1);
+    delete s;
+    s = new AmTsPlayerSession(
+                video_callback,
+                gEnv.tsType,
+                TS_PLAYER_MODE_NORMAL);
+    EXPECT_EQ(s->getInstansNo(&instanceNo), 0);
+    EXPECT_EQ(instanceNo, 1);
     delete s;
 }
 
@@ -1600,12 +1646,12 @@ int main(int argc, char **argv)
             ibuf.buf_size = kRwSize;
             pos += kRwSize;
 
+            //printf("pos %ld\n", pos);
             int retry = 100;
             am_tsplayer_result res;
             do {
                 res = s->writeData(&ibuf, kRwTimeout);
                 if (res == AM_TSPLAYER_ERROR_RETRY) {
-                    printf("test error retry\n");
                     usleep(50000);
                 } else
                     break;
