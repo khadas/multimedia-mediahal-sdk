@@ -5,29 +5,30 @@ Version: v2.0
 ========================================
 
 Git commit:
-commit 3b81afdae308aea7b0017d9b3687581fb9ef5e39
-Author: Lifeng Cao <lifeng.cao@amlogic.com>
-Date:   Mon Mar 16 10:45:19 2020 +0800
+commit f2e1e6cf8c59adacd98531935f7a23cfaced9950
+Author: joy.rao <joy.rao@amlogic.com>
+Date:   Thu Mar 19 09:43:56 2020 +0800
 
-    AmTsplayer: Tsplayer selinux permission for stb device [1/1]
+    tsplayer: notify scramble stream [1/1]
     
-    PD#SWPL-22006
+    PD#SWPL-22213
     
     Problem:
-    Tsplayer has not permission to set stb device
+    need notify scramble stream
     
     Solution:
-    Tsplayer use system control to set stb device
+    1. add scramble notify
+    2. dtvvideo need set hasdtvvideo flag
     
     Verify:
     newton
     
-    Change-Id: If464205667b0c533913f571fa9c44edf16eed422
-    Signed-off-by: Lifeng Cao <lifeng.cao@amlogic.com>
+    Change-Id: I4ec6b250966408bb118768a8663a96ac88b88ab0
+    Signed-off-by: joy.rao <joy.rao@amlogic.com>
 
 ========================================
 
-Release time: 2020-03-16-10-47
+Release time: 2020-03-20-10-15
 
 ========================================
 
@@ -39,8 +40,10 @@ Release file:
 Header file:
 AmTsPlayer.h
 AmVideoDecBase.h
+resourcemanage.h
 
 Library file:
+libmediahal_resman.so
 libmediahal_tsplayer.so
 libmediahal_videodec.so
 

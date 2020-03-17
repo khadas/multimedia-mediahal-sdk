@@ -40,18 +40,21 @@ void video_callback(void *user_data, am_tsplayer_event *event)
 	switch (event->type) {
         case AM_TSPLAYER_EVENT_TYPE_VIDEO_CHANGED:
         {
-            TLog("[evt] AM_TSPLAYER_EVENT_TYPE_VIDEO_CHANGED: %d x %d @%d\n",
+            TLog("[evt] AM_TSPLAYER_EVENT_TYPE_VIDEO_CHANGED: %d x %d @%d [%d]\n",
                 event->event.video_format.frame_width,
                 event->event.video_format.frame_height,
-                event->event.video_format.frame_rate);
+                event->event.video_format.frame_rate,
+                event->event.video_format.frame_aspectratio);
             break;
         }
-        case AM_TSPLAYER_EVENT_TYPE_MPEG_USERDATA:
+        case AM_TSPLAYER_EVENT_TYPE_USERDATA_AFD:
+        case AM_TSPLAYER_EVENT_TYPE_USERDATA_CC:
         {
             uint8_t* pbuf = event->event.mpeg_user_data.data;
             uint32_t size = event->event.mpeg_user_data.len;
-            printf("[evt] AM_TSPLAYER_EVENT_TYPE_MPEG_USERDATA: %x-%x-%x-%x ,size %d\n",
-                pbuf[0], pbuf[1], pbuf[2], pbuf[3], size);
+            printf("[evt] USERDATA [%d] : %x-%x-%x-%x %x-%x-%x-%x ,size %d\n",
+                event->type, pbuf[0], pbuf[1], pbuf[2], pbuf[3],
+                pbuf[4], pbuf[5], pbuf[6], pbuf[7], size);
             UNUSED(pbuf);
             UNUSED(size);
             break;
@@ -283,6 +286,13 @@ TEST_F(playbackEvent, videoFormatChange)
     EXPECT_EQ(gGotEvent, true);
 }
 
+TEST_F(playbackEvent, scramble)
+{
+    printf("scramble event\n");
+    gExpectEvent = AM_TSPLAYER_EVENT_TYPE_SCRAMBLING;
+    Playsleep(kPlaytime5S);
+    EXPECT_EQ(gGotEvent, true);
+}
 
 TEST_F(playbackFromMemory, DISABLED_playForever)
 {
@@ -388,16 +398,11 @@ INSTANTIATE_TEST_SUITE_P(playbackFromMemory, AVSyncMode,
 CLASS_PMEMORY_P(AVSyncTime, float);
 TEST_P(AVSyncTime, fastspeed)
 {
-    int64_t ctime, dtime;
-    EXPECT_EQ(av->getCurrentTime(&ctime), 0); //initial 0
-    EXPECT_EQ(av->getDelayTime(&dtime), 0); // after 10s
-    EXPECT_EQ(ctime, 0);
-    EXPECT_EQ(dtime, 0);
+    EXPECT_EQ(ctl->startFast(parm), 0);
     Playsleep(kPlaySleep);
+    int64_t ctime;
     EXPECT_EQ(av->getCurrentTime(&ctime), 0); // after 10s
-    EXPECT_EQ(av->getDelayTime(&dtime), 0); // after 10s
     EXPECT_ALMOST(ctime, kPlaySleep*parm);
-    EXPECT_ALMOST(dtime, kPlaySleep*parm);
 }
 
 INSTANTIATE_TEST_SUITE_P(playbackFromMemory, AVSyncTime,
@@ -744,6 +749,17 @@ TEST_F(playbackFromMemory, getVideoStat)
     TLog("=========VSTAT=========\n");
 }
 
+TEST_F(playbackFromMemory, getVideoPts)
+{
+    am_tsplayer_vdec_stat vstat;
+    for (int i = 0; i < 50; i++) {
+        Playsleep(kPlaytime0_2S);
+        EXPECT_EQ(v->getStat(&vstat), 0);
+        TLog("QOS.pts: %d\n", vstat.qos.pts);
+        TLog("pts: %d\n", vstat.pts);
+        TLog("pts_us64: %llu\n", vstat.pts_us64);
+    }
+}
 TEST_F(playbackFromMemory, getAudioStat)
 {
     Playsleep(kPlaytime10S);
