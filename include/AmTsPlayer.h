@@ -11,7 +11,7 @@ extern "C" {
 
 typedef uint8_t         bool_t;
 /*Call back event type*/
-typedef enum {  
+typedef enum {
     AM_TSPLAYER_EVENT_TYPE_PTS = 0,        // pts in for some stream
     AM_TSPLAYER_EVENT_TYPE_DTV_SUBTITLE,   // external subtitle of dtv
     AM_TSPLAYER_EVENT_TYPE_USERDATA_AFD,   // user data (afd)
@@ -47,7 +47,7 @@ typedef enum {
     AM_TSPLAYER_ERROR_END_OF_STREAM = -6,     // End of stream
     AM_TSPLAYER_ERROR_IO            = -7,     // Io error
     AM_TSPLAYER_ERROR_WOULD_BLOCK   = -8,     // Blocking error
-    AM_TSPLAYER_ERROR_MAX = -254         
+    AM_TSPLAYER_ERROR_MAX = -254
 } am_tsplayer_result;
 
 /*Data input source type*/
@@ -81,7 +81,7 @@ typedef enum {
 
 /*Player working mode*/
 typedef enum {
-    TS_PLAYER_MODE_NORMAL = 0,             // Normal mode 
+    TS_PLAYER_MODE_NORMAL = 0,             // Normal mode
     TS_PLAYER_MODE_CACHING_ONLY = 1,       // Only caching data, do not decode. Used in FCC
     TS_PLAYER_MODE_DECODE_ONLY = 2         // Decode data but do not output
 } am_tsplayer_work_mode;
@@ -92,7 +92,7 @@ typedef enum {
     AV_AUDIO_LEFT = 1,                     // Output left channel
     AV_AUDIO_RIGHT = 2,                    // Output right channel
     AV_AUDIO_MONO = 3,                     // Mixed the left and right channels to one channel
-    AV_AUDIO_MULTICHANNEL = 4              // Mixed multi channels  
+    AV_AUDIO_MULTICHANNEL = 4              // Mixed multi channels
 } am_tsplayer_audio_stereo_mode;
 
 /*Audio Output mode*/
@@ -104,7 +104,7 @@ typedef enum {
 
 /*Video decoder trick mode*/
 typedef enum {
-    AV_VIDEO_TRICK_MODE_NONE = 0,          // Disable trick mode   
+    AV_VIDEO_TRICK_MODE_NONE = 0,          // Disable trick mode
     AV_VIDEO_TRICK_MODE_PAUSE = 1,         // Pause the video decoder
     AV_VIDEO_TRICK_MODE_PAUSE_NEXT = 2,    // Pause the video decoder when a new frame dispalyed
     AV_VIDEO_TRICK_MODE_IONLY = 3          // Decoding and Out I frame only
@@ -112,7 +112,7 @@ typedef enum {
 
 /*Video display match mode*/
 typedef enum {
-    AV_VIDEO_MATCH_MODE_NONE = 0,          // Keep original  
+    AV_VIDEO_MATCH_MODE_NONE = 0,          // Keep original
     AV_VIDEO_MATCH_MODE_FULLSCREEN = 1,    // Strech the video to the full window
     AV_VIDEO_MATCH_MODE_LETTER_BOX = 2,    // Letter box match mode
     AV_VIDEO_MATCH_MODE_PAN_SCAN = 3,      // Pan scan match mode
@@ -171,7 +171,7 @@ typedef struct {
 } am_tsplayer_video_params;
 
 /*AmTsPlayer audio init parameters*/
-typedef struct { 
+typedef struct {
     am_tsplayer_audio_codec codectype;     // Audio codec type
     int32_t pid;                           // Audio pid in ts
 } am_tsplayer_audio_params;
@@ -194,7 +194,7 @@ typedef struct {
 
 /*Video qos information*/
 typedef struct {
-    uint32_t num;                      
+    uint32_t num;
     uint32_t type;
     uint32_t size;
     uint32_t pts;
@@ -214,7 +214,7 @@ typedef struct {
 typedef struct {
     am_tsplayer_video_qos qos;
     uint32_t  decode_time_cost;/*us*/
-    uint32_t frame_width; 
+    uint32_t frame_width;
     uint32_t frame_height;
     uint32_t frame_rate;
     uint32_t bit_depth_luma;//original bit_rate;
@@ -236,15 +236,15 @@ typedef struct {
 } am_tsplayer_vdec_stat;
 
 /*Audio basic information*/
-typedef struct { 
-    uint32_t sample_rate;                  // Audio sample rate                
+typedef struct {
+    uint32_t sample_rate;                  // Audio sample rate
     uint32_t channels;                     // Audio channels
     uint32_t channel_mask;                 // Audio channel mask
     uint32_t bitrate;                      // Audio bit rate
 } am_tsplayer_audio_info;
 
 /*Audio decoder real time information*/
-typedef struct { 
+typedef struct {
     uint32_t frame_count;
     uint32_t error_frame_count;
     uint32_t drop_frame_count;
@@ -345,7 +345,7 @@ am_tsplayer_result  AmTsPlayer_release(am_tsplayer_handle Hadl);
  *\brief:        Write data to specified AmTsPlayer instance.
  *               It will only work when TS input's source type is TS_MEMORY.
  *\inparam:      AmTsPlayer handle.
- *\inparam:      Input buffer struct (1.Buffer type:secrue/no 
+ *\inparam:      Input buffer struct (1.Buffer type:secrue/no
  *               2.secure buffer ptr 3.buffer len).
  *\inparam:      Time out limit .
  *\return:       The AmTsPlayer result.
@@ -425,12 +425,12 @@ am_tsplayer_result  AmTsPlayer_setTrickMode(am_tsplayer_handle Hadl, am_tsplayer
  *\outparam:     The struct of buffer status.
  *\return:       The AmTsPlayer result.
  */
-am_tsplayer_result  AmTsPlayer_getBufferStat(am_tsplayer_handle Hadl, am_tsplayer_stream_type StrType, 
+am_tsplayer_result  AmTsPlayer_getBufferStat(am_tsplayer_handle Hadl, am_tsplayer_stream_type StrType,
                                                             am_tsplayer_buffer_stat *pBufStat);
 
 /*Video interface*/
 /**
- *\brief:        Set the video display rect size for specified 
+ *\brief:        Set the video display rect size for specified
  *               AmTsPlayer instance.
  *\inparam:      AmTsPlayer handle.
  *\inparam:      The display rect x.
@@ -439,7 +439,7 @@ am_tsplayer_result  AmTsPlayer_getBufferStat(am_tsplayer_handle Hadl, am_tsplaye
  *\inparam:      The display rect height.
  *\return:       The AmTsPlayer result.
  */
-am_tsplayer_result  AmTsPlayer_setVideoWindow(am_tsplayer_handle Hadl, 
+am_tsplayer_result  AmTsPlayer_setVideoWindow(am_tsplayer_handle Hadl,
                                                             int32_t x,int32_t y,
                                                             int32_t width,int32_t height);
 /**
@@ -457,7 +457,7 @@ am_tsplayer_result  AmTsPlayer_setSurface(am_tsplayer_handle Hadl, void* pSurfac
  */
 am_tsplayer_result  AmTsPlayer_showVideo(am_tsplayer_handle Hadl);
 /**
- *\brief:        Hide the video frame display for specified 
+ *\brief:        Hide the video frame display for specified
  *               AmTsPlayer instance.
  *\inparam:      AmTsPlayer handle.
  *\return:       The AmTsPlayer result.
@@ -495,7 +495,7 @@ am_tsplayer_result  AmTsPlayer_setVideoBlackOut(am_tsplayer_handle Hadl, bool_t 
  */
 am_tsplayer_result  AmTsPlayer_getVideoInfo(am_tsplayer_handle Hadl, am_tsplayer_video_info *pInfo);
 /**
- *\brief:        Get video decoder real time info 
+ *\brief:        Get video decoder real time info
  *               of specified AmTsPlayer instance.
  *\inparam:      AmTsPlayer handle.
  *\outparam:     The ptr of video decoder real time info struct
@@ -566,7 +566,7 @@ am_tsplayer_result  AmTsPlayer_getAudioStereoMode(am_tsplayer_handle Hadl, am_ts
  */
 am_tsplayer_result  AmTsPlayer_setAudioMute(am_tsplayer_handle Hadl, bool_t analog_mute, bool_t digital_mute);
 /**
- *\brief:        Get audio output mute status from specified 
+ *\brief:        Get audio output mute status from specified
                  AmTsPlayer instance .
  *\inparam:      AmTsPlayer handle.
  *\outparam:     If analog mute or unmute .
@@ -575,7 +575,7 @@ am_tsplayer_result  AmTsPlayer_setAudioMute(am_tsplayer_handle Hadl, bool_t anal
  */
 am_tsplayer_result  AmTsPlayer_getAudioMute(am_tsplayer_handle Hadl, bool_t *analog_unmute, bool_t *digital_unmute);
 /**
- *\brief:        Set audio params need by demuxer and audio decoder 
+ *\brief:        Set audio params need by demuxer and audio decoder
  *               to specified AmTsPlayer instance.
  *\inparam:      AmTsPlayer handle.
  *\inparam:      Params need by demuxer and audio decoder.
@@ -597,7 +597,7 @@ am_tsplayer_result  AmTsPlayer_setAudioOutMode(am_tsplayer_handle Hadl, am_tspla
  */
 am_tsplayer_result  AmTsPlayer_getAudioInfo(am_tsplayer_handle Hadl,  am_tsplayer_audio_info *pInfo);
 /**
- *\brief:        Get audio decoder real time info 
+ *\brief:        Get audio decoder real time info
  *               of specified AmTsPlayer instance.
  *\inparam:      AmTsPlayer handle.
  *\outparam:     The ptr of audio decoder real time info struct
@@ -629,7 +629,7 @@ am_tsplayer_result  AmTsPlayer_resumeAudioDecoding(am_tsplayer_handle Hadl);
  */
 am_tsplayer_result  AmTsPlayer_stopAudioDecoding(am_tsplayer_handle Hadl);
 /**
- *\brief:        Set audio description params need by demuxer 
+ *\brief:        Set audio description params need by demuxer
  *               and audio decoder to specified AmTsPlayer instance.
  *\inparam:      AmTsPlayer handle.
  *\inparam:      Params need by demuxer and audio decoder.
@@ -667,7 +667,7 @@ am_tsplayer_result  AmTsPlayer_enableADMix(am_tsplayer_handle Hadl);
  */
 am_tsplayer_result  AmTsPlayer_disableADMix(am_tsplayer_handle Hadl);
 /**
- *\brief:        Get audio description basic info of specified 
+ *\brief:        Get audio description basic info of specified
  *               AmTsPlayer instance.
  *\inparam:      AmTsPlayer handle.
  *\outparam:     The ptr of audio basic info struct .
@@ -675,7 +675,7 @@ am_tsplayer_result  AmTsPlayer_disableADMix(am_tsplayer_handle Hadl);
  */
 am_tsplayer_result  AmTsPlayer_getADInfo(am_tsplayer_handle Hadl, am_tsplayer_audio_info *pInfo);
 /**
- *\brief:        Get audio description decoder real time info 
+ *\brief:        Get audio description decoder real time info
  *               of specified AmTsPlayer instance.
  *\inparam:      AmTsPlayer handle.
  *\outparam:     The ptr of audio decoder real time info struct
@@ -711,4 +711,4 @@ am_tsplayer_result  AmTsPlayer_stopSub(am_tsplayer_handle Hadl);
 #endif
 
 
-
+\

@@ -5,30 +5,35 @@ Version: v2.0
 ========================================
 
 Git commit:
-commit f2e1e6cf8c59adacd98531935f7a23cfaced9950
-Author: joy.rao <joy.rao@amlogic.com>
-Date:   Thu Mar 19 09:43:56 2020 +0800
+commit 5e6693ee680fc78a0ff71be1d5d0ed80c4d62329
+Author: rongrong zhou <rongrong.zhou@amlogic.com>
+Date:   Thu Mar 19 11:46:58 2020 +0800
 
-    tsplayer: notify scramble stream [1/1]
+    tsplayer: example [1/1]
     
-    PD#SWPL-22213
+    PD#SWPL-22499
     
     Problem:
-    need notify scramble stream
+    need example
     
     Solution:
-    1. add scramble notify
-    2. dtvvideo need set hasdtvvideo flag
+    1. add example
+    2. add get current time
+    3. Tsplayer can not destruct
+    4. do not set subtitle id
+    5. add asan (default disable)
+    6. ./AmTsPlayerTest -T -i /data/1.ts --gtest_output=xml:/data/1.xml
+    7. add user data notify in ALLOCATED status
     
     Verify:
     newton
     
-    Change-Id: I4ec6b250966408bb118768a8663a96ac88b88ab0
-    Signed-off-by: joy.rao <joy.rao@amlogic.com>
+    Change-Id: I041da407988de28d123d7fa353383befcd499c87
+    Signed-off-by: rongrong zhou <rongrong.zhou@amlogic.com>
 
 ========================================
 
-Release time: 2020-03-20-10-15
+Release time: 2020-03-24-14-31
 
 ========================================
 
@@ -47,18 +52,12 @@ libmediahal_resman.so
 libmediahal_tsplayer.so
 libmediahal_videodec.so
 
-Test file:
+Example file:
+AmTsPlayerExample.cpp
 Android.mk
-VideoDecTest.cpp
-AmTsPlayerSession.cpp
-AmTsPlayerTest.cpp
-Android.mk
-h264string.cpp
-h265string.cpp
-include
-mpeg2string.cpp
 
 Binary  file:
+AmTsPlayerExample
 AmTsPlayerTest
 videodecplayer
 
