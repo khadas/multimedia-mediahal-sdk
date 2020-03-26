@@ -5,33 +5,34 @@ Version: v2.0
 ========================================
 
 Git commit:
-commit 46abf80576095e5e48ceff91c3b11b59fc38afba
-Author: Lifeng Cao <lifeng.cao@amlogic.com>
-Date:   Wed Mar 25 18:00:50 2020 +0800
+commit cfd1c906b1e92bd8901af855b1286ab494507180
+Author: joy.rao <joy.rao@amlogic.com>
+Date:   Thu Mar 26 14:31:57 2020 +0800
 
-    VideoDec: Set show_first_frame_nosync in AmCodecVDA [1/1]
+    tsplayer: clear stream playback, hotplug tv display scramble [1/1]
     
-    PD#SWPL-22966
+    PD#SWPL-23046
     
     Problem:
-    Switch program show first frame late
+    clear stream playback, hotplug tv display scramble
     
     Solution:
-    Set show_first_frame_nosync in AmCodecVDA
+    If there is no first frame notify within 5 seconds after starting play,
+    read demux0_scramble ten times
     
     Verify:
-    AC214
+    newton
     
-    Change-Id: I90e3221aff588e53d44bca552ad291d22ce50cfb
-    Signed-off-by: Lifeng Cao <lifeng.cao@amlogic.com>
+    Change-Id: I9ea590557869eeb7b47b3999dc51e883f145b7e1
+    Signed-off-by: joy.rao <joy.rao@amlogic.com>
 
 ========================================
 
-Release time: 2020-03-25-18-06
+Release time: 2020-03-26-21-22
 
 ========================================
 
-Builder: alex.cao
+Builder: joy.rao
 
 ========================================
 Release file:
