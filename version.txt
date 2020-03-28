@@ -5,34 +5,33 @@ Version: v2.0
 ========================================
 
 Git commit:
-commit cfd1c906b1e92bd8901af855b1286ab494507180
-Author: joy.rao <joy.rao@amlogic.com>
-Date:   Thu Mar 26 14:31:57 2020 +0800
+commit b134d8eb8f63a3866e53f32d70f321a7b2fbb629
+Author: Lifeng Cao <lifeng.cao@amlogic.com>
+Date:   Tue Mar 31 22:59:07 2020 +0800
 
-    tsplayer: clear stream playback, hotplug tv display scramble [1/1]
+    tsplayer: set audio pid and istvvideo to onMessage loop [1/1]
     
-    PD#SWPL-23046
+    PD#SWPL-23281
     
     Problem:
-    clear stream playback, hotplug tv display scramble
+    istvvideo is incorrect when start audio first
     
     Solution:
-    If there is no first frame notify within 5 seconds after starting play,
-    read demux0_scramble ten times
+    set audio pid and istvvideo to onMessage loop
     
     Verify:
     newton
     
-    Change-Id: I9ea590557869eeb7b47b3999dc51e883f145b7e1
-    Signed-off-by: joy.rao <joy.rao@amlogic.com>
+    Change-Id: Id3d43a6014627bb1bfcea6f5e4b612036cf5c292
+    Signed-off-by: Lifeng Cao <lifeng.cao@amlogic.com>
 
 ========================================
 
-Release time: 2020-03-26-21-22
+Release time: 2020-04-02-16-15
 
 ========================================
 
-Builder: joy.rao
+Builder: alex.cao
 
 ========================================
 Release file:
