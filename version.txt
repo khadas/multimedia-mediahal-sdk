@@ -5,29 +5,37 @@ Version: v2.0
 ========================================
 
 Git commit:
-commit b134d8eb8f63a3866e53f32d70f321a7b2fbb629
+commit 146bfaaef25426f348758f9afbb28b0cbcfedf65
 Author: Lifeng Cao <lifeng.cao@amlogic.com>
-Date:   Tue Mar 31 22:59:07 2020 +0800
+Date:   Sat Apr 4 15:12:33 2020 +0800
 
-    tsplayer: set audio pid and istvvideo to onMessage loop [1/1]
+    tsplayer: set write data threshold value [1/1]
     
-    PD#SWPL-23281
+    PD#SWPL-23485
     
     Problem:
-    istvvideo is incorrect when start audio first
+    1.amstream audio buffer has more than 4s data
+    The difference between apts and vpts more avsync
+    threshold.
+    2.StopVideoDecoding return error.
+    3.At the beginning delay time is incorrect
+    block write data.
     
     Solution:
-    set audio pid and istvvideo to onMessage loop
+    1.Make data of amstream buffer less than 5s
+    2.Move StopVideoDecoding to message looper
+    3.We need wait first frame show then to check
+    buffer level and delay time to limit write data.
     
     Verify:
     newton
     
-    Change-Id: Id3d43a6014627bb1bfcea6f5e4b612036cf5c292
+    Change-Id: If5a625df09d5ebf4dfcd84c38a8234f605cac6f7
     Signed-off-by: Lifeng Cao <lifeng.cao@amlogic.com>
 
 ========================================
 
-Release time: 2020-04-02-16-15
+Release time: 2020-04-04-17-44
 
 ========================================
 
