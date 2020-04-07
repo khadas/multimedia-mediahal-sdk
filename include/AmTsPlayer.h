@@ -54,13 +54,14 @@ typedef enum {
 typedef enum
 {
     TS_DEMOD = 0,                          // TS Data input from demod
-    TS_MEMORY = 1                          // TS Data input from memory
+    TS_MEMORY = 1,                         // TS Data input from memory
 } am_tsplayer_input_source_type;
 
 /*Input buffer type*/
 typedef enum {
     TS_INPUT_BUFFER_TYPE_NORMAL = 0,       // Input buffer is normal buffer
-    TS_INPUT_BUFFER_TYPE_SECURE = 1        // Input buffer is secure buffer
+    TS_INPUT_BUFFER_TYPE_SECURE = 1,       // Input buffer is secure buffer
+    TS_INPUT_BUFFER_TYPE_TVP = 2           // Input buffer is normal but tvp enable
 } am_tsplayer_input_buffer_type;
 
 /*Ts stream type*/
@@ -153,6 +154,7 @@ typedef size_t am_tsplayer_handle;
 /*AmTsPlayer init parameters*/
 typedef struct {
     am_tsplayer_input_source_type source;  // Input source type
+    am_tsplayer_input_buffer_type drmmode; // Input buffer type (normal, secure, tvp)
     int32_t dmx_dev_id;                    // Demux device id
     int32_t event_mask;                    // Mask the event type need by caller
 } am_tsplayer_init_params;

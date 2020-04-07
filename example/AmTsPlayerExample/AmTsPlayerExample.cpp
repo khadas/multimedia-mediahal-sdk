@@ -142,6 +142,7 @@ int main(int argc, char **argv)
 
     std::string inputTsName("/data/1.ts");
     am_tsplayer_input_source_type tsType = TS_MEMORY;
+    am_tsplayer_input_buffer_type drmmode = TS_INPUT_BUFFER_TYPE_NORMAL;
     am_tsplayer_avsync_mode avsyncMode= TS_SYNC_AMASTER;
     am_tsplayer_video_trick_mode vTrickMode = AV_VIDEO_TRICK_MODE_NONE;
     am_tsplayer_video_codec vCodec = AV_VIDEO_CODEC_H264;
@@ -203,7 +204,7 @@ int main(int argc, char **argv)
                 inputTsName.c_str(), file.is_open(), fsize, tsType);
 
     am_tsplayer_handle session;
-    am_tsplayer_init_params parm = {tsType, 0, 0};
+    am_tsplayer_init_params parm = {tsType, drmmode, 0, 0};
     AmTsPlayer_create(parm, &session);
     uint32_t versionM, versionL;
     AmTsPlayer_getVersion(&versionM, &versionL);
