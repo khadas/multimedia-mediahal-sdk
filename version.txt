@@ -5,34 +5,33 @@ Version: v2.0
 ========================================
 
 Git commit:
-commit 38ec526079c7f0e0ba0304a3ebbc3d3a294fd733
+commit a9d5c1a78c6574554636f438260831f88a907f41
 Author: rongrong zhou <rongrong.zhou@amlogic.com>
-Date:   Fri Apr 3 10:11:59 2020 +0800
+Date:   Thu Apr 9 13:32:25 2020 +0800
 
-    tsplayer: writeData drminfo support [1/1]
+    tsplayer: set 265 double write mode 3 [1/1]
     
-    PD#SWPL-23137
+    PD#SWPL-23871
     
     Problem:
-    do not support writeData drminfo
+    265 blurred
     
     Solution:
-    1. writeData drminfo support(normal/secure/tvp)
-    2. do not add deinterlace in vfm map for secure/tvp mode
+    set 265 double write mode 3
     
     Verify:
-    newton
+    AC214
     
-    Change-Id: I5f58efbb0affec5e891227dc05d83dd5e1f0c2c3
+    Change-Id: I54e34818e5c74a3970282d86743a12abb6675482
     Signed-off-by: rongrong zhou <rongrong.zhou@amlogic.com>
 
 ========================================
 
-Release time: 2020-04-07-18-50
+Release time: 2020-04-09-13-56
 
 ========================================
 
-Builder: rongrong.zhou
+Builder: joy.rao
 
 ========================================
 Release file:
