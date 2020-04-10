@@ -5,33 +5,34 @@ Version: v2.0
 ========================================
 
 Git commit:
-commit a9d5c1a78c6574554636f438260831f88a907f41
-Author: rongrong zhou <rongrong.zhou@amlogic.com>
-Date:   Thu Apr 9 13:32:25 2020 +0800
+commit 03f53d544fb4159d247a3265eceb26d13c237b36
+Author: Lifeng Cao <lifeng.cao@amlogic.com>
+Date:   Fri Apr 10 19:15:27 2020 +0800
 
-    tsplayer: set 265 double write mode 3 [1/1]
+    tsplayer: enable di for drm mode [1/1]
     
-    PD#SWPL-23871
+    PD#SWPL-23144
     
     Problem:
-    265 blurred
+    Di has not add tvp support in last version
+    So we rm di in last version
     
     Solution:
-    set 265 double write mode 3
+    Enable di
     
     Verify:
     AC214
     
-    Change-Id: I54e34818e5c74a3970282d86743a12abb6675482
-    Signed-off-by: rongrong zhou <rongrong.zhou@amlogic.com>
+    Change-Id: I18bedf2d9cfe1d51a0c8406aa75fe63345457075
+    Signed-off-by: Lifeng Cao <lifeng.cao@amlogic.com>
 
 ========================================
 
-Release time: 2020-04-09-13-56
+Release time: 2020-04-10-19-20
 
 ========================================
 
-Builder: joy.rao
+Builder: alex.cao
 
 ========================================
 Release file:
