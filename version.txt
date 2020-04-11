@@ -5,30 +5,29 @@ Version: v2.0
 ========================================
 
 Git commit:
-commit 03f53d544fb4159d247a3265eceb26d13c237b36
+commit b0f9f13f550d7c95aec8a7adcec9aee32ca26415
 Author: Lifeng Cao <lifeng.cao@amlogic.com>
-Date:   Fri Apr 10 19:15:27 2020 +0800
+Date:   Wed Apr 8 15:53:23 2020 +0800
 
-    tsplayer: enable di for drm mode [1/1]
+    tsplayer: Add ad support in tsplayer [1/1]
     
-    PD#SWPL-23144
+    PD#SWPL-23678
     
     Problem:
-    Di has not add tvp support in last version
-    So we rm di in last version
+    TsPlayer not support ad
     
     Solution:
-    Enable di
+    realize ad interface in tsplayer
     
     Verify:
-    AC214
+    newton
     
-    Change-Id: I18bedf2d9cfe1d51a0c8406aa75fe63345457075
+    Change-Id: I9b621ba362ab58b80ea9d05a921dd74422206c6d
     Signed-off-by: Lifeng Cao <lifeng.cao@amlogic.com>
 
 ========================================
 
-Release time: 2020-04-10-19-20
+Release time: 2020-04-13-11-38
 
 ========================================
 
