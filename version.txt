@@ -5,41 +5,41 @@ Version: v2.0
 ========================================
 
 Git commit:
-commit b0f9f13f550d7c95aec8a7adcec9aee32ca26415
-Author: Lifeng Cao <lifeng.cao@amlogic.com>
-Date:   Wed Apr 8 15:53:23 2020 +0800
+commit 87d6ce7ab8a43281be9e052bcea91e80b652edf6
+Author: yunmin.chen <yunmin.chen@amlogic.com>
+Date:   Thu Sep 24 21:45:38 2020 +0800
 
-    tsplayer: Add ad support in tsplayer [1/1]
+    tsplayer: Modify release_tool.sh [1/1]
     
-    PD#SWPL-23678
+    PD#SWPL-33747
     
     Problem:
-    TsPlayer not support ad
+    release_tool.sh is invalid in linux.
     
     Solution:
-    realize ad interface in tsplayer
+    Modify release_tool.sh to adapt to linux.
     
     Verify:
-    newton
+    TM2_AB311
     
-    Change-Id: I9b621ba362ab58b80ea9d05a921dd74422206c6d
-    Signed-off-by: Lifeng Cao <lifeng.cao@amlogic.com>
+    Change-Id: Ic220c9bdf4b5ec5401f2252aa5b23ac0bc731b1b
+    Signed-off-by: yunmin.chen <yunmin.chen@amlogic.com>
 
 ========================================
 
-Release time: 2020-04-13-11-38
+Release time: 2020-10-10-22-16
 
 ========================================
 
-Builder: alex.cao
+Builder: yunmin.chen
 
 ========================================
 Release file:
 
 Header file:
+resourcemanage.h
 AmTsPlayer.h
 AmVideoDecBase.h
-resourcemanage.h
 
 Library file:
 libmediahal_resman.so
@@ -48,11 +48,9 @@ libmediahal_videodec.so
 
 Example file:
 AmTsPlayerExample.cpp
-Android.mk
+Makefile
 
 Binary  file:
 AmTsPlayerExample
-AmTsPlayerTest
-videodecplayer
 
 ========================================
