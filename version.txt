@@ -5,29 +5,30 @@ Version: v2.0
 ========================================
 
 Git commit:
-commit 87d6ce7ab8a43281be9e052bcea91e80b652edf6
+commit 1371c0df92461ecc3be0ed10afa878606525035b
 Author: yunmin.chen <yunmin.chen@amlogic.com>
-Date:   Thu Sep 24 21:45:38 2020 +0800
+Date:   Fri Oct 16 13:28:25 2020 +0800
 
-    tsplayer: Modify release_tool.sh [1/1]
+    tsplayer: Compile tspalyer in the roku environment.  [1/1]
     
     PD#SWPL-33747
     
     Problem:
-    release_tool.sh is invalid in linux.
+    Compile error.
     
     Solution:
-    Modify release_tool.sh to adapt to linux.
+    Modify the code to be compatible with
+    roku environment compilation.
     
     Verify:
-    TM2_AB311
+    T312_T962X3
     
-    Change-Id: Ic220c9bdf4b5ec5401f2252aa5b23ac0bc731b1b
+    Change-Id: I24b06f090be7c1d49aeee49578a516e67121ab0f
     Signed-off-by: yunmin.chen <yunmin.chen@amlogic.com>
 
 ========================================
 
-Release time: 2020-10-10-22-16
+Release time: 2020-10-19-17-00
 
 ========================================
 

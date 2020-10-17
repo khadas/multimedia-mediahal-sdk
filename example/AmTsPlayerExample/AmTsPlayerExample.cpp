@@ -191,6 +191,9 @@ static void usage(char **argv)
     printf("-V | --vpid         video pid, default 0x100\n");
     printf("-A | --apid         audio pid, default 0x101\n");
     printf("-g | --gain         audio volume, default 20\n");
+    printf("-o | --adpid        ad pid, default -1\n");
+    printf("-p | --adtype       ad acodec, default -1\n");
+    printf("-q | --admixlevel   ad mixlevel, default 50\n");
     printf("-h | --help         print this usage\n");
 }
 using namespace std;
@@ -219,7 +222,7 @@ int main(int argc, char **argv)
 {
     int optionChar = 0;
     int optionIndex = 0;
-    const char *shortOptions = "i:t:d:b:y:c:v:a:V:A:g:h";
+    const char *shortOptions = "i:t:d:b:y:c:v:a:V:A:g:o:p:q:h";
     struct option longOptions[] = {
         { "in",             required_argument,  NULL, 'i' },
         { "tstype",         required_argument,  NULL, 't' },
@@ -232,6 +235,9 @@ int main(int argc, char **argv)
         { "vpid",           required_argument,  NULL, 'V' },
         { "apid",           required_argument,  NULL, 'A' },
         { "gain",           required_argument,  NULL, 'g' },
+        { "adpid",          required_argument,  NULL, 'o' },
+        { "adtype",         required_argument,  NULL, 'p' },
+        { "admixlevel",     required_argument,  NULL, 'q' },
         { "help",           no_argument,        NULL, 'h' },
         { NULL,             0,                  NULL,  0  },
     };
@@ -248,6 +254,9 @@ int main(int argc, char **argv)
     int32_t dmxSourceType = 3;
     int32_t dmxDevId = 0;
     int32_t gain = 20;
+    int32_t adtype = -1;
+    int32_t adpid = -1;
+    int32_t admixlevel = 50;
     while ((optionChar = getopt_long(argc, argv, shortOptions,
                                     longOptions, &optionIndex)) != -1) {
         switch (optionChar) {
@@ -280,6 +289,15 @@ int main(int argc, char **argv)
                 break;
             case 'g':
                 gain = atoi(optarg);
+                break;
+            case 'o':
+                adpid = atoi(optarg);
+                break;
+            case 'p':
+                adtype = atoi(optarg);
+                break;
+            case 'q':
+                admixlevel = atoi(optarg);
                 break;
             case 'h':
                 usage(argv);
@@ -331,6 +349,18 @@ int main(int argc, char **argv)
     vparm.pid = vPid;
     AmTsPlayer_setVideoParams(session, &vparm);
     AmTsPlayer_startVideoDecoding(session);
+
+    if (adpid != -1 && adtype != -1 && tsType == TS_DEMOD) {
+        am_tsplayer_audio_params adparm;
+        adparm.codectype = static_cast<am_tsplayer_audio_codec>(adtype);
+        adparm.pid = adpid;
+        AmTsPlayer_setADParams(session,&adparm);
+        AmTsPlayer_enableADMix(session);
+        //master_vol no use,just set slave_vol
+        AmTsPlayer_setADMixLevel(session, 0, admixlevel);
+    } else {
+        AmTsPlayer_disableADMix(session);
+    }
 
     am_tsplayer_audio_params aparm;
     aparm.codectype = aCodec;

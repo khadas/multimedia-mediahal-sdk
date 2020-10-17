@@ -275,12 +275,12 @@ typedef struct {
     uint32_t frame_height;
     uint32_t frame_rate;
     uint32_t frame_aspectratio;
-} video_format_t;
+} am_tsplayer_video_format_t;
 
 typedef struct {
     uint32_t sample_rate;
     uint32_t channels;
-} audio_format_t;
+} am_tsplayer_audio_format_t;
 
 typedef struct {
     am_tsplayer_stream_type stream_type;
@@ -302,9 +302,9 @@ typedef struct {
     am_tsplayer_event_type type;           // Call back event type
     union {
         /*If type is VIDEO_CHANGED send new video basic info*/
-        video_format_t video_format;
+        am_tsplayer_video_format_t video_format;
         /*If type is AUDIO_CHANGED send new video basic info*/
-        audio_format_t audio_format;
+        am_tsplayer_audio_format_t audio_format;
         /*Audio /Video/Subtitle pts after pes parser*/
         am_tsplayer_pts_t pts;
         /*User data send cc /afd /dvb subtitle to caller*/
