@@ -5,34 +5,33 @@ Version: v2.0
 ========================================
 
 Git commit:
-commit 1371c0df92461ecc3be0ed10afa878606525035b
-Author: yunmin.chen <yunmin.chen@amlogic.com>
-Date:   Fri Oct 16 13:28:25 2020 +0800
+commit 7f4ed39320fe9a0372715829d380941286f34de2
+Author: cheng tong <cheng.tong@amlogic.com>
+Date:   Tue Nov 3 17:29:12 2020 +0800
 
-    tsplayer: Compile tspalyer in the roku environment.  [1/1]
+    tsplayer: set dtv default volume to 100  [1/1]
     
     PD#SWPL-33747
     
     Problem:
-    Compile error.
+    if application layer didn't set volume, dtv volume too small
     
     Solution:
-    Modify the code to be compatible with
-    roku environment compilation.
+    set dtv default volume to 100
     
     Verify:
     T312_T962X3
     
-    Change-Id: I24b06f090be7c1d49aeee49578a516e67121ab0f
-    Signed-off-by: yunmin.chen <yunmin.chen@amlogic.com>
+    Change-Id: I0021f5b020a764ac78f3b7e15fdcbf6c50e67548
+    Signed-off-by: cheng tong <cheng.tong@amlogic.com>
 
 ========================================
 
-Release time: 2020-10-19-17-00
+Release time: 2020-11-03-20-30
 
 ========================================
 
-Builder: yunmin.chen
+Builder: cheng.tong
 
 ========================================
 Release file:
