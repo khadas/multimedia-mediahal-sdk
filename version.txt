@@ -5,29 +5,30 @@ Version: v2.0
 ========================================
 
 Git commit:
-commit 7f4ed39320fe9a0372715829d380941286f34de2
+commit f529c80bad794ea608b89deea866e6f231d98ed3
 Author: cheng tong <cheng.tong@amlogic.com>
-Date:   Tue Nov 3 17:29:12 2020 +0800
+Date:   Fri Dec 4 12:25:48 2020 +0800
 
-    tsplayer: set dtv default volume to 100  [1/1]
+    tsplayer: fix mpeg cc data error issue [1/1]
     
-    PD#SWPL-33747
+    PD#TV-26884
     
     Problem:
-    if application layer didn't set volume, dtv volume too small
+    only save cc date ptr then lost cc data
+    and write worng data when find next poc
     
     Solution:
-    set dtv default volume to 100
+    fix it
     
     Verify:
-    T312_T962X3
+    T318_T950D4
     
-    Change-Id: I0021f5b020a764ac78f3b7e15fdcbf6c50e67548
+    Change-Id: I97c91c72ea88b0d9bd6a1d3828590ac71e0964ba
     Signed-off-by: cheng tong <cheng.tong@amlogic.com>
 
 ========================================
 
-Release time: 2020-11-03-20-30
+Release time: 2020-12-04-16-00
 
 ========================================
 
