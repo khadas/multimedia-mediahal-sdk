@@ -5,30 +5,29 @@ Version: v2.0
 ========================================
 
 Git commit:
-commit f529c80bad794ea608b89deea866e6f231d98ed3
+commit 4a4f1b2f9d25041a4e70535234043ce52a6f1065
 Author: cheng tong <cheng.tong@amlogic.com>
-Date:   Fri Dec 4 12:25:48 2020 +0800
+Date:   Wed Dec 9 18:48:00 2020 +0800
 
-    tsplayer: fix mpeg cc data error issue [1/1]
+    tsplayer: remove some useless debug info [1/1]
     
-    PD#TV-26884
+    PD#SWPL-38710
     
     Problem:
-    only save cc date ptr then lost cc data
-    and write worng data when find next poc
+    after add tsplayer callback, there are too many useless debuf info
     
     Solution:
-    fix it
+    remove them
     
     Verify:
     T318_T950D4
     
-    Change-Id: I97c91c72ea88b0d9bd6a1d3828590ac71e0964ba
+    Change-Id: I72ca7330def845d758ba1230551e08b072ea86e3
     Signed-off-by: cheng tong <cheng.tong@amlogic.com>
 
 ========================================
 
-Release time: 2020-12-04-16-00
+Release time: 2020-12-09-18-59
 
 ========================================
 
