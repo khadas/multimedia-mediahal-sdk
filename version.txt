@@ -5,29 +5,30 @@ Version: v2.0
 ========================================
 
 Git commit:
-commit 4a4f1b2f9d25041a4e70535234043ce52a6f1065
+commit aa2ed064d25752806181a72988ac9534c0c636dc
 Author: cheng tong <cheng.tong@amlogic.com>
-Date:   Wed Dec 9 18:48:00 2020 +0800
+Date:   Mon Dec 14 17:38:04 2020 +0800
 
-    tsplayer: remove some useless debug info [1/1]
+    tsplayer: fix tsplayer crash when quit H264 with userdate playing [1/1]
     
-    PD#SWPL-38710
+    PD#TV-28354
     
     Problem:
-    after add tsplayer callback, there are too many useless debuf info
+    free wrong cc date ptr
     
     Solution:
-    remove them
+    save cc data to temporary buf in case of be flushed
+    then free it
     
     Verify:
     T318_T950D4
     
-    Change-Id: I72ca7330def845d758ba1230551e08b072ea86e3
+    Change-Id: I787acb18773813dbc803aaf95ba481bcde971edb
     Signed-off-by: cheng tong <cheng.tong@amlogic.com>
 
 ========================================
 
-Release time: 2020-12-09-18-59
+Release time: 2020-12-14-18-12
 
 ========================================
 
