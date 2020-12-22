@@ -5,30 +5,30 @@ Version: v2.0
 ========================================
 
 Git commit:
-commit aa2ed064d25752806181a72988ac9534c0c636dc
+commit b3796bbecab6bcc9d58811e13732ded574e160d5
 Author: cheng tong <cheng.tong@amlogic.com>
-Date:   Mon Dec 14 17:38:04 2020 +0800
+Date:   Tue Dec 22 17:46:09 2020 +0800
 
-    tsplayer: fix tsplayer crash when quit H264 with userdate playing [1/1]
+    tsplayer: fix demux can't filter date when use TS_MEMORY mode [1/1]
     
-    PD#TV-28354
+    PD#TV-28070
     
     Problem:
-    free wrong cc date ptr
+    amstream port didn't init,parser can't work
+    and adjust release_tool.sh to adapt mediahal sdk
     
     Solution:
-    save cc data to temporary buf in case of be flushed
-    then free it
+    fix pid vaild judgement
     
     Verify:
     T318_T950D4
     
-    Change-Id: I787acb18773813dbc803aaf95ba481bcde971edb
+    Change-Id: Id5df3dfc1ef930df49e5c52a84253f430fd0cf1a
     Signed-off-by: cheng tong <cheng.tong@amlogic.com>
 
 ========================================
 
-Release time: 2020-12-14-18-12
+Release time: 2020-12-28-13-36
 
 ========================================
 
@@ -38,11 +38,12 @@ Builder: cheng.tong
 Release file:
 
 Header file:
-resourcemanage.h
 AmTsPlayer.h
 AmVideoDecBase.h
+resourcemanage.h
 
-Library file:
+Library and Binary file:
+AmTsPlayerExample
 libmediahal_resman.so
 libmediahal_tsplayer.so
 libmediahal_videodec.so
@@ -50,8 +51,5 @@ libmediahal_videodec.so
 Example file:
 AmTsPlayerExample.cpp
 Makefile
-
-Binary  file:
-AmTsPlayerExample
 
 ========================================
