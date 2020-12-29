@@ -5,7 +5,7 @@ Version: v2.0
 ========================================
 
 Git commit:
-commit b3796bbecab6bcc9d58811e13732ded574e160d5
+commit e4ad56f0da527d69fa0c2793275f6fd0aa0957d7
 Author: cheng tong <cheng.tong@amlogic.com>
 Date:   Tue Dec 22 17:46:09 2020 +0800
 
@@ -28,11 +28,11 @@ Date:   Tue Dec 22 17:46:09 2020 +0800
 
 ========================================
 
-Release time: 2020-12-28-13-36
+Release time: 2020-12-29-15-33
 
 ========================================
 
-Builder: cheng.tong
+Builder: zhipeng.he
 
 ========================================
 Release file:
