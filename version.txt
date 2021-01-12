@@ -5,34 +5,33 @@ Version: v2.0
 ========================================
 
 Git commit:
-commit e4ad56f0da527d69fa0c2793275f6fd0aa0957d7
+commit 3ec1f9fe2e267e0d48c51678c6228c70bb5ca42d
 Author: cheng tong <cheng.tong@amlogic.com>
-Date:   Tue Dec 22 17:46:09 2020 +0800
+Date:   Tue Jan 12 13:45:00 2021 +0800
 
-    tsplayer: fix demux can't filter date when use TS_MEMORY mode [1/1]
+    tsplayer: fix sound mutation when switch dtv program [1/1]
     
-    PD#TV-28070
+    PD#TV-29784
     
     Problem:
-    amstream port didn't init,parser can't work
-    and adjust release_tool.sh to adapt mediahal sdk
+    sound mutation when switch dtv program
     
     Solution:
-    fix pid vaild judgement
+    no need set volume when audiopatch creat
     
     Verify:
     T318_T950D4
     
-    Change-Id: Id5df3dfc1ef930df49e5c52a84253f430fd0cf1a
+    Change-Id: I01c5c72a97591da9b50b12fcc204db887b66c897
     Signed-off-by: cheng tong <cheng.tong@amlogic.com>
 
 ========================================
 
-Release time: 2020-12-29-15-33
+Release time: 2021-01-12-14-00
 
 ========================================
 
-Builder: zhipeng.he
+Builder: cheng.tong
 
 ========================================
 Release file:
