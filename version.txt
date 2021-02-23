@@ -5,33 +5,33 @@ Version: v2.0
 ========================================
 
 Git commit:
-commit 3ec1f9fe2e267e0d48c51678c6228c70bb5ca42d
-Author: cheng tong <cheng.tong@amlogic.com>
-Date:   Tue Jan 12 13:45:00 2021 +0800
+commit 2b0809f4a011811faa9db45fadc2f5437793dc7c
+Author: zhipeng.he <zhipeng.he@amlogic.com>
+Date:   Tue Feb 23 10:59:24 2021 +0800
 
-    tsplayer: fix sound mutation when switch dtv program [1/1]
+    tsplayer: VDA_GET_VIDEO_INFO values sometimes not right. [1/1]
     
-    PD#TV-29784
+    PD#TV-31478
     
     Problem:
-    sound mutation when switch dtv program
+    VDA_GET_VIDEO_INFO values sometimes not right.
     
     Solution:
-    no need set volume when audiopatch creat
+    Fix the issue VDA_GET_VIDEO_INFO values sometimes not right.
     
     Verify:
-    T318_T950D4
+    AM32A1-T921D
     
-    Change-Id: I01c5c72a97591da9b50b12fcc204db887b66c897
-    Signed-off-by: cheng tong <cheng.tong@amlogic.com>
+    Change-Id: Id6e7784ef29e70d10fd7ab8c1c47e00dfdcfee4e
+    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
 
 ========================================
 
-Release time: 2021-01-12-14-00
+Release time: 2021-02-23-13-36
 
 ========================================
 
-Builder: cheng.tong
+Builder: zhipeng.he
 
 ========================================
 Release file:

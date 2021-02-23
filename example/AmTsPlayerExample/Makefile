@@ -1,8 +1,8 @@
 OBJ=AmTsPlayerExample.o
 
-LDFLAGS =-lpthread -levent -laudio_client -lmediahal_videodec -lmediahal_tsplayer -lmediahal_resman -lm -lz -g $(EXTRA_LDFLAGS)
+LDFLAGS=-lpthread -levent -laudio_client -lmediahal_videodec -lmediahal_tsplayer -lmediahal_resman -lm -lz -g
 
-CFLAGS =-I$(STAGING_DIR)/usr/include/ $(EXTRA_CFLAGS)
+CFLAGS=-I$(STAGING_DIR)/usr/include/
 
 %.o: %.cpp $(DEPS)
 	$(CXX) -c -o $@ $< $(CFLAGS)
