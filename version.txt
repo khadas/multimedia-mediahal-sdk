@@ -5,29 +5,29 @@ Version: v2.0
 ========================================
 
 Git commit:
-commit 937d7956b9910ca8b73a14ec26965e980530a909
+commit f7ff30abd0c3c52a522ee8c0d291a6aae08446b0
 Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Tue Mar 2 16:47:52 2021 +0800
+Date:   Tue Mar 16 15:44:55 2021 +0800
 
-    tsplayer: crash when AmportsAdaptor notifyEvent. [1/1]
+    tsplayer: can not send first frame event after stop decoding. [1/1]
     
-    PD#TV-31515
+    PD#TV-32232
     
     Problem:
-    crash when AmportsAdaptor notifyEvent.
+    send first frame event after stop decoding.
     
     Solution:
-    fix the issue crash when AmportsAdaptor notifyEvent.
+    can not send first frame event after stop decoding.
     
     Verify:
     AM32A1-T921D
     
-    Change-Id: I5baa472b9a2c10e5e5a1294fab50d20e10f5c85a
+    Change-Id: Ia220c293ae110992d4606599c2551980c2a22f4f
     Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
 
 ========================================
 
-Release time: 2021-03-04-14-30
+Release time: 2021-03-16-16-07
 
 ========================================
 
