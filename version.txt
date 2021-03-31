@@ -5,29 +5,29 @@ Version: v2.0
 ========================================
 
 Git commit:
-commit f7ff30abd0c3c52a522ee8c0d291a6aae08446b0
+commit f62e10b8864f67023e645f05df8dcc81294757b8
 Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Tue Mar 16 15:44:55 2021 +0800
+Date:   Wed Mar 31 10:32:27 2021 +0800
 
-    tsplayer: can not send first frame event after stop decoding. [1/1]
+    tsplayer: should send first frame event after start decoding. [1/1]
     
-    PD#TV-32232
+    PD#TV-32870
     
     Problem:
     send first frame event after stop decoding.
     
     Solution:
-    can not send first frame event after stop decoding.
+    should send first frame event after start decoding.
     
     Verify:
     AM32A1-T921D
     
-    Change-Id: Ia220c293ae110992d4606599c2551980c2a22f4f
+    Change-Id: I1bbce7eef7b0aa71f0cbebbcde5972ae70ff100f
     Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
 
 ========================================
 
-Release time: 2021-03-16-16-07
+Release time: 2021-03-31-10-43
 
 ========================================
 
