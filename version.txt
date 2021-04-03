@@ -5,29 +5,29 @@ Version: v2.0
 ========================================
 
 Git commit:
-commit f62e10b8864f67023e645f05df8dcc81294757b8
+commit 6f2b810aa23d7364f806a3e2f1b72d8121040ab6
 Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Wed Mar 31 10:32:27 2021 +0800
+Date:   Sat Apr 3 17:00:52 2021 +0800
 
-    tsplayer: should send first frame event after start decoding. [1/1]
+    tsplayer: CC thread and audio_curve_update crash. [1/1]
     
-    PD#TV-32870
+    PD#TV-32773
     
     Problem:
-    send first frame event after stop decoding.
+    CC thread and audio_curve_update crash when switch channel more times.
     
     Solution:
-    should send first frame event after start decoding.
+    Fix CC thread and audio_curve_update crash.
     
     Verify:
     AM32A1-T921D
     
-    Change-Id: I1bbce7eef7b0aa71f0cbebbcde5972ae70ff100f
+    Change-Id: I26ae164cf55a0e96e23504012fc60083fc142794
     Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
 
 ========================================
 
-Release time: 2021-03-31-10-43
+Release time: 2021-04-14-14-36
 
 ========================================
 
