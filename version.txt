@@ -5,29 +5,29 @@ Version: v2.0
 ========================================
 
 Git commit:
-commit 5e798dd2950344da12a5f2af9474d8f686da23b6
+commit cf10671ccdadff4f405fb3efb82de3907693cdb3
 Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Thu Apr 22 19:29:52 2021 +0800
+Date:   Fri May 21 13:21:10 2021 +0800
 
-    tsplayer: rdk libevent library does not match. [1/1]
+    tsplayer: linux tsplayer resman_acquire_para check. [1/1]
     
-    PD#SWPL-46877
+    PD#TV-34522
     
     Problem:
-    rdk libevent library does not match
+    not enable linux tsplayer resman_acquire_para check.
     
     Solution:
-    Fix rdk libevent library does not match.
+    linux tsplayer resman_acquire_para check.
     
     Verify:
-    S905X4_AH212
+    AM32A1-T921D
     
-    Change-Id: Ia6c4b97a013ee5506faf510c555489b6b519078d
+    Change-Id: I5002fcbddf972392bedccb25158aba1b4b6b3cab
     Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
 
 ========================================
 
-Release time: 2021-04-23-19-52
+Release time: 2021-05-21-13-28
 
 ========================================
 

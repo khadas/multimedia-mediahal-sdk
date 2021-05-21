@@ -11,7 +11,7 @@
 #ifdef  __cplusplus
 extern "C" {
 #endif
-
+#include <stdint.h>
 #include <linux/ioctl.h>
 #include <linux/types.h>
 #include <sys/types.h>
