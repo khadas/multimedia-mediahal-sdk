@@ -5,29 +5,29 @@ Version: v2.0
 ========================================
 
 Git commit:
-commit cf10671ccdadff4f405fb3efb82de3907693cdb3
+commit 4eff6a671b79f1e3f61587438731cfbb33957994
 Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Fri May 21 13:21:10 2021 +0800
+Date:   Mon May 24 17:23:00 2021 +0800
 
-    tsplayer: linux tsplayer resman_acquire_para check. [1/1]
+    tsplayer: yocto linux tsplayer compile failed. [1/1]
     
-    PD#TV-34522
+    PD#RSP-1909
     
     Problem:
-    not enable linux tsplayer resman_acquire_para check.
+    yocto linux tsplayer compile failed.
     
     Solution:
-    linux tsplayer resman_acquire_para check.
+    fix the issue that yocto linux tsplayer compile failed.
     
     Verify:
-    AM32A1-T921D
+    S905Y4
     
-    Change-Id: I5002fcbddf972392bedccb25158aba1b4b6b3cab
+    Change-Id: Ib4e7f690b222285fc16c5549d33ba9bfd2bf8321
     Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
 
 ========================================
 
-Release time: 2021-05-21-13-28
+Release time: 2021-05-24-19-44
 
 ========================================
 

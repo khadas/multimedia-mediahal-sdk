@@ -35,7 +35,6 @@
 #include <stdio.h>
 #include <sys/select.h>
 #include <termios.h>
-#include <stropts.h>
 #include <sys/ioctl.h>
 
 #include <iostream>
