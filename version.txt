@@ -5,29 +5,29 @@ Version: v2.0
 ========================================
 
 Git commit:
-commit 4eff6a671b79f1e3f61587438731cfbb33957994
+commit f46ab57339a48d10cfe7ec691f9edf02c0e8c6e1
 Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Mon May 24 17:23:00 2021 +0800
+Date:   Fri May 21 21:29:35 2021 +0800
 
-    tsplayer: yocto linux tsplayer compile failed. [1/1]
+    tsplayer: linux tsplayer add frame mode. [1/1]
     
-    PD#RSP-1909
+    PD#RSP-1878
     
     Problem:
-    yocto linux tsplayer compile failed.
+    linux tsplayer has no frame mode.
     
     Solution:
-    fix the issue that yocto linux tsplayer compile failed.
+    linux tsplayer add frame mode.
     
     Verify:
     S905Y4
     
-    Change-Id: Ib4e7f690b222285fc16c5549d33ba9bfd2bf8321
+    Change-Id: Id582ba5f3e688be38bef06860516e6d438ec6fef
     Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
 
 ========================================
 
-Release time: 2021-05-24-19-44
+Release time: 2021-06-01-14-30
 
 ========================================
 

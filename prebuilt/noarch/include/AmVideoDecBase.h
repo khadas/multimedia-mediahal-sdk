@@ -41,6 +41,7 @@ typedef struct {
     int32_t dmx_player_id;
     unsigned int  stbuf_start;
     unsigned int  stbuf_size;
+    uint32_t    nDecType;
 } init_param_t;
 
 class AmVideoDecCallback {

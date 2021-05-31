@@ -37,7 +37,9 @@ typedef enum {
     AM_TSPLAYER_EVENT_TYPE_STREAM_MODE_EOF, //endof stream mode
     AM_TSPLAYER_EVENT_TYPE_DECODE_FIRST_FRAME_VIDEO, //The video decoder outputs the first frame.
     AM_TSPLAYER_EVENT_TYPE_DECODE_FIRST_FRAME_AUDIO, //The audio decoder outputs the first frame.
-    AM_TSPLAYER_EVENT_TYPE_AV_SYNC_DONE //av sync done
+    AM_TSPLAYER_EVENT_TYPE_AV_SYNC_DONE, //av sync done
+    AM_TSPLAYER_EVENT_TYPE_INPUT_VIDEO_BUFFER_DONE,  // input video buffer done
+    AM_TSPLAYER_EVENT_TYPE_INPUT_AUDIO_BUFFER_DONE  // input audio buffer done
 } am_tsplayer_event_type;
 
 /*Call back event mask*/
@@ -71,6 +73,7 @@ typedef enum
 {
     TS_DEMOD = 0,                          // TS Data input from demod
     TS_MEMORY = 1,                         // TS Data input from memory
+    ES_MEMORY = 2,                         // ES Data input from memory
 } am_tsplayer_input_source_type;
 
 /*Input buffer type*/
@@ -79,6 +82,15 @@ typedef enum {
     TS_INPUT_BUFFER_TYPE_SECURE = 1,       // Input buffer is secure buffer
     TS_INPUT_BUFFER_TYPE_TVP = 2           // Input buffer is normal but tvp enable
 } am_tsplayer_input_buffer_type;
+
+/*AmTsPlayer input buffer type*/
+typedef struct {
+    am_tsplayer_input_buffer_type buf_type;// Input buffer type (secure/no secure)
+    void *buf_data;                        // Input buffer addr
+    int32_t buf_size;                      // Input buffer size
+    uint64_t pts;                          //frame pts,using only for frame mode
+    int32_t isvideo;
+} am_tsplayer_input_frame_buffer;
 
 /*Ts stream type*/
 typedef enum {
@@ -311,6 +323,8 @@ typedef struct {
         mpeg_user_data_t mpeg_user_data;
         /*Scrambling status changed send scramling info to caller*/
         scamling_t scramling;
+        /*callback audio/video input buffer ptr*/
+        void* bufptr;
     } event;
 }am_tsplayer_event;
 
@@ -370,6 +384,21 @@ am_tsplayer_result  AmTsPlayer_release(am_tsplayer_handle Hadl);
  *\inparam:      Time out limit .
  *\return:       The AmTsPlayer result.
  */
+
+/**
+ *\brief:        Write Frame data to specified AmTsPlayer instance.
+ *               It will only work when TS input's source type is TS_MEMORY.
+ *\inparam:      AmTsPlayer handle.
+ *\inparam:      Input buffer struct (1.Buffer type:secrue/no
+ *               2.secure buffer ptr 3.buffer len).
+ *\inparam:      Time out limit .
+ *\inparam:      AV_type(0 means audio, 1 means video)
+ *\return:       The AmTsPlayer result.
+ */
+am_tsplayer_result  AmTsPlayer_writeFrameData(am_tsplayer_handle Hadl,
+                                                   am_tsplayer_input_frame_buffer *buf,
+                                                   uint64_t timeout_ms);
+
 am_tsplayer_result  AmTsPlayer_writeData(am_tsplayer_handle Hadl, am_tsplayer_input_buffer *buf, uint64_t timeout_ms);
 /**
  *\brief:        Set work mode to specified AmTsPlayer instance.
