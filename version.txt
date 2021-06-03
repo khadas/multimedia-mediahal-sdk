@@ -5,29 +5,29 @@ Version: v2.0
 ========================================
 
 Git commit:
-commit f46ab57339a48d10cfe7ec691f9edf02c0e8c6e1
+commit a22e90c739f49cba0b4eb93fd48645b06e5e217a
 Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Fri May 21 21:29:35 2021 +0800
+Date:   Thu Jun 3 20:09:06 2021 +0800
 
-    tsplayer: linux tsplayer add frame mode. [1/1]
+    tsplayer: linux tsplayer support audio frame mode. [1/1]
     
-    PD#RSP-1878
+    PD#RSP-1897
     
     Problem:
-    linux tsplayer has no frame mode.
+    linux tsplayer not support audio framemode.
     
     Solution:
-    linux tsplayer add frame mode.
+    linux tsplayer support audio frame mode.
     
     Verify:
     S905Y4
     
-    Change-Id: Id582ba5f3e688be38bef06860516e6d438ec6fef
+    Change-Id: If54b144a6db413b552cf8e03922c01b0e32f8636
     Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
 
 ========================================
 
-Release time: 2021-06-01-14-30
+Release time: 2021-06-08-16-29
 
 ========================================
 
