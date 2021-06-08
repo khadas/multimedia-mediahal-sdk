@@ -5,29 +5,29 @@ Version: v2.0
 ========================================
 
 Git commit:
-commit a22e90c739f49cba0b4eb93fd48645b06e5e217a
+commit 0ff82cb5374a0ad05fc4aeea41f4181eb94c59be
 Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Thu Jun 3 20:09:06 2021 +0800
+Date:   Sat Jun 5 16:14:07 2021 +0800
 
-    tsplayer: linux tsplayer support audio frame mode. [1/1]
+    tsplayer: linux tsplayer support INPUT_LOCAL_SEC mode. [1/1]
     
-    PD#RSP-1897
+    PD#RSP-1959
     
     Problem:
-    linux tsplayer not support audio framemode.
+    linux tsplayer not support INPUT_LOCAL_SEC mode.
     
     Solution:
-    linux tsplayer support audio frame mode.
+    linux tsplayer support INPUT_LOCAL_SEC mode.
     
     Verify:
     S905Y4
     
-    Change-Id: If54b144a6db413b552cf8e03922c01b0e32f8636
+    Change-Id: I8b9fe58db5e5514354fef98aae6a35df3f73030d
     Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
 
 ========================================
 
-Release time: 2021-06-08-16-29
+Release time: 2021-06-08-21-26
 
 ========================================
 
