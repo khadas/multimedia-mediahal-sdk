@@ -5,29 +5,29 @@ Version: v2.0
 ========================================
 
 Git commit:
-commit 0ff82cb5374a0ad05fc4aeea41f4181eb94c59be
+commit 6f2d5ae908fb65a9aa666abad5cb9a4004b07dd2
 Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Sat Jun 5 16:14:07 2021 +0800
+Date:   Thu Jun 10 14:48:08 2021 +0800
 
-    tsplayer: linux tsplayer support INPUT_LOCAL_SEC mode. [1/1]
+    tsplayer: linux tsplayer support audio ac4 and dra type. [1/1]
     
-    PD#RSP-1959
+    PD#RSP-1976
     
     Problem:
-    linux tsplayer not support INPUT_LOCAL_SEC mode.
+    linux tsplayer not support audio ac4 and dra type.
     
     Solution:
-    linux tsplayer support INPUT_LOCAL_SEC mode.
+    linux tsplayer support audio ac4 and dra type.
     
     Verify:
     S905Y4
     
-    Change-Id: I8b9fe58db5e5514354fef98aae6a35df3f73030d
+    Change-Id: I706472901f3b1109eff04bddf7608ab01dcc05cb
     Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
 
 ========================================
 
-Release time: 2021-06-08-21-26
+Release time: 2021-06-10-15-09
 
 ========================================
 
