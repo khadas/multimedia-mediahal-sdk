@@ -5,29 +5,29 @@ Version: v2.0
 ========================================
 
 Git commit:
-commit 6f2d5ae908fb65a9aa666abad5cb9a4004b07dd2
+commit e2048e060dc21a573633fb3bca7dadbdffe1193e
 Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Thu Jun 10 14:48:08 2021 +0800
+Date:   Mon Jun 14 14:28:16 2021 +0800
 
-    tsplayer: linux tsplayer support audio ac4 and dra type. [1/1]
+    tsplayer: linux tsplayer compile error on 64-bit machine. [1/1]
     
-    PD#RSP-1976
+    PD#RSP-1903
     
     Problem:
-    linux tsplayer not support audio ac4 and dra type.
+    linux tsplayer compile error on 64-bit machine.
     
     Solution:
-    linux tsplayer support audio ac4 and dra type.
+    fix issue that linux tsplayer compile error on 64-bit machine.
     
     Verify:
-    S905Y4
+    Common
     
-    Change-Id: I706472901f3b1109eff04bddf7608ab01dcc05cb
+    Change-Id: I98cfbb10ecdffea267ec8d041de19a5f33187945
     Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
 
 ========================================
 
-Release time: 2021-06-10-15-09
+Release time: 2021-06-15-16-32
 
 ========================================
 
