@@ -5,29 +5,29 @@ Version: v2.0
 ========================================
 
 Git commit:
-commit e2048e060dc21a573633fb3bca7dadbdffe1193e
+commit a139dd31f722c4f329e2ad485c6c970abf3c1514
 Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Mon Jun 14 14:28:16 2021 +0800
+Date:   Fri Jun 18 14:05:54 2021 +0800
 
-    tsplayer: linux tsplayer compile error on 64-bit machine. [1/1]
+    tsplayer: linux tsplayer add audio seclevel. [1/1]
     
-    PD#RSP-1903
+    PD#SWPL-52975
     
     Problem:
-    linux tsplayer compile error on 64-bit machine.
+    linux tsplayer no audio seclevel.
     
     Solution:
-    fix issue that linux tsplayer compile error on 64-bit machine.
+    linux tsplayer add audio seclevel.
     
     Verify:
     Common
     
-    Change-Id: I98cfbb10ecdffea267ec8d041de19a5f33187945
+    Change-Id: Ic9cd70ed13d873f12951a1ed2e43ea669b15adb8
     Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
 
 ========================================
 
-Release time: 2021-06-15-16-32
+Release time: 2021-06-18-14-13
 
 ========================================
 

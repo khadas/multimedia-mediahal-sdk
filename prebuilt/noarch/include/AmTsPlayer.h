@@ -209,6 +209,7 @@ typedef struct {
 typedef struct {
     am_tsplayer_audio_codec codectype;     // Audio codec type
     int32_t pid;                           // Audio pid in ts
+    int32_t seclevel;                      // Audio security seclevel
 } am_tsplayer_audio_params;
 
 /*AmTsPlayer stream buffer status*/
