@@ -5,29 +5,30 @@ Version: v2.0
 ========================================
 
 Git commit:
-commit a139dd31f722c4f329e2ad485c6c970abf3c1514
+commit efa32fc47ea3d14404f81437fa5816b724190fb0
 Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Fri Jun 18 14:05:54 2021 +0800
+Date:   Fri Jun 25 11:08:58 2021 +0800
 
-    tsplayer: linux tsplayer add audio seclevel. [1/1]
+    tsplayer: add multidemux control speed writing. [1/1]
     
-    PD#SWPL-52975
+    PD#RSP-1995
     
     Problem:
-    linux tsplayer no audio seclevel.
+    without multidemux control speed writing.
+    drmptest exit tsplayer crash.
     
     Solution:
-    linux tsplayer add audio seclevel.
+    add multidemux control speed writing.
     
     Verify:
-    Common
+    S905Y4
     
-    Change-Id: Ic9cd70ed13d873f12951a1ed2e43ea669b15adb8
+    Change-Id: Ic5e35b72ca13e788bc9ee90805ba0a016e460afc
     Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
 
 ========================================
 
-Release time: 2021-06-18-14-13
+Release time: 2021-06-25-14-12
 
 ========================================
 
