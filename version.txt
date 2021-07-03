@@ -5,29 +5,29 @@ Version: v2.0
 ========================================
 
 Git commit:
-commit 0dace14e24ff51f06c4a5a625a3859d84628f577
-Author: nengwen.chen <nengwen.chen@amlogic.com>
-Date:   Thu Jun 17 16:35:46 2021 +0800
+commit c985c490f1b9e700762e963961384b8507758139
+Author: zhipeng.he <zhipeng.he@amlogic.com>
+Date:   Sat Jul 3 14:59:16 2021 +0800
 
-    media_hal: add ADC_PLL resource manage [1/1]
+    tsplayer: read cc data faild on kernel 5.4. [1/1]
     
-    PD#SWPL-41808
+    PD#SWPL-54152
     
     Problem:
-    add ADC_PLL resource manage.
+    read cc data faild on kernel 5.4.
     
     Solution:
-    1.add ADC_PLL resource manage.
+    reprocess the process of read cc data.
     
     Verify:
-    Verified by t5d.
+    Common
     
-    Change-Id: Ifbe99dc3edde2d7050e2d29e2465efa8d97ada38
-    Signed-off-by: nengwen.chen <nengwen.chen@amlogic.com>
+    Change-Id: I5995cab4cca03e3f574906f5243c4986e51116fb
+    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
 
 ========================================
 
-Release time: 2021-06-30-11-15
+Release time: 2021-07-05-16-08
 
 ========================================
 
