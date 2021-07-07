@@ -5,29 +5,29 @@ Version: v2.0
 ========================================
 
 Git commit:
-commit c985c490f1b9e700762e963961384b8507758139
+commit 526516d95d61ba474155d3e2a63622f98499aa64
 Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Sat Jul 3 14:59:16 2021 +0800
+Date:   Wed Jul 7 19:48:58 2021 +0800
 
-    tsplayer: read cc data faild on kernel 5.4. [1/1]
+    tsplayer: set has_video status to audiohal framemode. [1/1]
     
-    PD#SWPL-54152
+    PD#RSP-2081
     
     Problem:
-    read cc data faild on kernel 5.4.
+    not set has_video status to audiohal on framemode.
     
     Solution:
-    reprocess the process of read cc data.
+    set has_video status to audiohal on framemode.
     
     Verify:
     Common
     
-    Change-Id: I5995cab4cca03e3f574906f5243c4986e51116fb
+    Change-Id: I1623913e79082b14be755c9f5f489d6f81b5e8fb
     Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
 
 ========================================
 
-Release time: 2021-07-05-16-08
+Release time: 2021-07-07-19-54
 
 ========================================
 
