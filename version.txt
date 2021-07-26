@@ -5,29 +5,29 @@ Version: v2.0
 ========================================
 
 Git commit:
-commit 526516d95d61ba474155d3e2a63622f98499aa64
+commit 0d7b89bbbf5cf4405a6a048316e2e1944ffd25a5
 Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Wed Jul 7 19:48:58 2021 +0800
+Date:   Mon Jul 26 13:51:08 2021 +0800
 
-    tsplayer: set has_video status to audiohal framemode. [1/1]
+    tsplayer: set open_output_stream's flags with avsync. [1/1]
     
-    PD#RSP-2081
+    PD#OTT-21940
     
     Problem:
-    not set has_video status to audiohal on framemode.
+    open_output_stream's flag not has avsync.
     
     Solution:
-    set has_video status to audiohal on framemode.
+    set open_output_stream's flags with avsync.
     
     Verify:
     Common
     
-    Change-Id: I1623913e79082b14be755c9f5f489d6f81b5e8fb
+    Change-Id: I9e8c32ba17058455dd40751e29b9c764355c7c96
     Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
 
 ========================================
 
-Release time: 2021-07-07-19-54
+Release time: 2021-07-26-14-02
 
 ========================================
 
