@@ -5,33 +5,33 @@ Version: v2.0
 ========================================
 
 Git commit:
-commit 0d7b89bbbf5cf4405a6a048316e2e1944ffd25a5
-Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Mon Jul 26 13:51:08 2021 +0800
+commit fd26aabfc8a244a555be53318e53c8e0b9e1ae90
+Author: joy.rao <joy.rao@amlogic.com>
+Date:   Tue Jul 13 16:04:45 2021 +0800
 
-    tsplayer: set open_output_stream's flags with avsync. [1/1]
-    
-    PD#OTT-21940
-    
+    tsplayer: CF1 set setParams [1/1]
+
+    PD#RSP-2103
+
     Problem:
-    open_output_stream's flag not has avsync.
-    
+    need setParams for video seclevel
+
     Solution:
-    set open_output_stream's flags with avsync.
-    
+    add etParams, merge for Android #168321
+
     Verify:
-    Common
-    
-    Change-Id: I9e8c32ba17058455dd40751e29b9c764355c7c96
-    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
+    NONE
+
+    Change-Id: Ia831d693df832bd9f3c325e36285a57d30d0970c
+    Signed-off-by: joy.rao <joy.rao@amlogic.com>
 
 ========================================
 
-Release time: 2021-07-26-14-02
+Release time: 2021-08-02-13-30
 
 ========================================
 
-Builder: zhipeng.he
+Builder: joy.rao
 
 ========================================
 Release file:
