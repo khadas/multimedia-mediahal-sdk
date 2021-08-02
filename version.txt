@@ -5,33 +5,33 @@ Version: v2.0
 ========================================
 
 Git commit:
-commit fd26aabfc8a244a555be53318e53c8e0b9e1ae90
-Author: joy.rao <joy.rao@amlogic.com>
-Date:   Tue Jul 13 16:04:45 2021 +0800
+commit 095916869c1d456a5fc7b3ef37e4003714490419
+Author: zhipeng.he <zhipeng.he@amlogic.com>
+Date:   Thu Jul 29 14:57:36 2021 +0800
 
-    tsplayer: CF1 set setParams [1/1]
-
-    PD#RSP-2103
-
+    tsplayer: CB1 ES Mode playing not smoothly. [1/1]
+    
+    PD#SWPL-55935
+    
     Problem:
-    need setParams for video seclevel
-
+    ES Mode playing not smoothly.
+    
     Solution:
-    add etParams, merge for Android #168321
-
+    Fix the issue that ES Mode playing not smoothly.
+    
     Verify:
-    NONE
-
-    Change-Id: Ia831d693df832bd9f3c325e36285a57d30d0970c
-    Signed-off-by: joy.rao <joy.rao@amlogic.com>
-
-========================================
-
-Release time: 2021-08-02-13-30
+    Common
+    
+    Change-Id: I7bda2f1d1a0f40601920400e05291fc93863a425
+    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
 
 ========================================
 
-Builder: joy.rao
+Release time: 2021-08-02-16-37
+
+========================================
+
+Builder: zhipeng.he
 
 ========================================
 Release file:
