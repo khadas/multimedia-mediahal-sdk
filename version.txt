@@ -5,29 +5,29 @@ Version: v2.0
 ========================================
 
 Git commit:
-commit ea97c7c00f66e1456d0e1aec6eb93c46856b5bd7
+commit ccd753739303e2b3cfa155eb61bc718908e44125
 Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Fri Jul 30 14:35:00 2021 +0800
+Date:   Mon Aug 2 17:15:55 2021 +0800
 
-    tsplayer: CF2 enable video_global_output when start video. [1/1]
+    tsplayer: CF2 support dts type convert on tsplayer. [1/1]
     
-    PD#SWPL-56251
+    PD#OTT-22113
     
     Problem:
-    can not see video.
+    not support dts type convert on tsplayer.
     
     Solution:
-    enable video_global_output when start video.
+    support dts type convert on tsplayer.
     
     Verify:
     Common
     
-    Change-Id: Iabc96cc52e050d1ba94ddb1aba0e96899e9b4c9e
+    Change-Id: I1b0f59b440d780967daf72947d343c5f64e148ed
     Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
 
 ========================================
 
-Release time: 2021-08-03-10-06
+Release time: 2021-08-06-20-09
 
 ========================================
 
