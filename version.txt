@@ -5,29 +5,29 @@ Version: v2.0
 ========================================
 
 Git commit:
-commit ccd753739303e2b3cfa155eb61bc718908e44125
+commit ac484532fd1f80435ce51427c52bf8c8a73de1c3
 Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Mon Aug 2 17:15:55 2021 +0800
+Date:   Tue Aug 10 16:22:42 2021 +0800
 
-    tsplayer: CF2 support dts type convert on tsplayer. [1/1]
+    tsplayer: CB2 create VDA failed after restart video decoding. [1/1]
     
-    PD#OTT-22113
+    PD#SWPL-57234
     
     Problem:
-    not support dts type convert on tsplayer.
+    create VDA failed after restart video decoding.
     
     Solution:
-    support dts type convert on tsplayer.
+    fix the bug that create VDA failed after restart video decoding.
     
     Verify:
     Common
     
-    Change-Id: I1b0f59b440d780967daf72947d343c5f64e148ed
+    Change-Id: Iabc247aa49d285090614cef9813f205ce77225fc
     Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
 
 ========================================
 
-Release time: 2021-08-06-20-09
+Release time: 2021-08-12-11-00
 
 ========================================
 
