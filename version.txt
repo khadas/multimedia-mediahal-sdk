@@ -5,29 +5,29 @@ Version: v2.0
 ========================================
 
 Git commit:
-commit ac484532fd1f80435ce51427c52bf8c8a73de1c3
+commit 90b659f2c8a3f748d2877f43e3c6e907e7795c6b
 Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Tue Aug 10 16:22:42 2021 +0800
+Date:   Mon Aug 16 16:11:41 2021 +0800
 
-    tsplayer: CB2 create VDA failed after restart video decoding. [1/1]
+    tsplayer: CF2 use AmTsPlayer_setParams to setup secure level. [1/1]
     
-    PD#SWPL-57234
+    PD#RSP-2230
     
     Problem:
-    create VDA failed after restart video decoding.
+    now video and audio used different api to setup secure level.
     
     Solution:
-    fix the bug that create VDA failed after restart video decoding.
+    use AmTsPlayer_setParams to setup audio secure level.
     
     Verify:
     Common
     
-    Change-Id: Iabc247aa49d285090614cef9813f205ce77225fc
+    Change-Id: I0c63f26cf305a6c121320d4acc80b1ae3e61073a
     Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
 
 ========================================
 
-Release time: 2021-08-12-11-00
+Release time: 2021-08-17-12-13
 
 ========================================
 
