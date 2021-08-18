@@ -5,29 +5,29 @@ Version: v2.0
 ========================================
 
 Git commit:
-commit 90b659f2c8a3f748d2877f43e3c6e907e7795c6b
-Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Mon Aug 16 16:11:41 2021 +0800
+commit f49cbc68b99f4ac57018ebd579e86345de70b0ed
+Author: gaojie.song <gaojie.song@amlogic.com>
+Date:   Tue Aug 17 16:56:28 2021 +0800
 
-    tsplayer: CF2 use AmTsPlayer_setParams to setup secure level. [1/1]
+    tsplayer: CB2 ES mode no audio output. [1/1]
     
-    PD#RSP-2230
+    PD#SWPL-57896
     
     Problem:
-    now video and audio used different api to setup secure level.
+    ES mode no audio output when playing audio stream only.
     
     Solution:
-    use AmTsPlayer_setParams to setup audio secure level.
+    modify the return value of initialize.
     
     Verify:
-    Common
+    AH219+S905X4+RDK
     
-    Change-Id: I0c63f26cf305a6c121320d4acc80b1ae3e61073a
-    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
+    Change-Id: I7645b878c5fc99cde07721bf01cb9e33dbc368a9
+    Signed-off-by: gaojie.song <gaojie.song@amlogic.com>
 
 ========================================
 
-Release time: 2021-08-17-12-13
+Release time: 2021-08-18-17-45
 
 ========================================
 
