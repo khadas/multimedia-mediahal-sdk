@@ -5,29 +5,29 @@ Version: v2.0
 ========================================
 
 Git commit:
-commit 764829c6d8cec4309bf6330e3ef04c372c157788
+commit a1725a7e5ba655f9f4ba2ce4b7c1679bf3cc03a3
 Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Fri Aug 20 13:16:28 2021 +0800
+Date:   Mon Aug 23 19:36:48 2021 +0800
 
-    tsplayer: CB2 set audio secure level default value to 0. [1/1]
+    tsplayer: CB2 audio decoding before video will abort. [1/1]
     
-    PD#RSP-2230
+    PD#SWPL-58259
     
     Problem:
-    not set audio secure level default value to 0.
+    audio decoding before video will abort.
     
     Solution:
-    set audio secure level default value to 0.
+    fix the issue that audio decoding before video will abort.
     
     Verify:
     Common
     
-    Change-Id: Ieb36feab970d49877a8ce295adc1645e3e4c8802
+    Change-Id: Idcd742a04100c9bf7d610af7b7554595f82357e5
     Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
 
 ========================================
 
-Release time: 2021-08-20-13-25
+Release time: 2021-08-23-19-51
 
 ========================================
 
