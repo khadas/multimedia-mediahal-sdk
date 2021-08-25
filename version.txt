@@ -5,29 +5,29 @@ Version: v2.0
 ========================================
 
 Git commit:
-commit 3438565f26e9cec6bc4d4c70b46c93d56f03abb7
+commit 5929e609778fb65b34ab8f7bd24ebf6fad704a9c
 Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Mon Aug 30 17:39:27 2021 +0800
+Date:   Wed Aug 25 21:19:31 2021 +0800
 
-    tsplayer: CF2 support mpeg4 video format on tsplayer. [1/1]
+    tsplayer: CF2 audio format support flac. [1/1]
     
-    PD#OTT-22134
+    PD#OTT-23023
     
     Problem:
-    not support mpeg4 video format on tsplayer.
+    audio format not support flac.
     
     Solution:
-    support mpeg4 video format on tsplayer.
+    audio format support flac.
     
     Verify:
     Common
     
-    Change-Id: If1ce71e410e8a5e43194e65911ad8f571d0566eb
+    Change-Id: Iaf99f77cec3e12a8e496341e6ede6535e4320175
     Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
 
 ========================================
 
-Release time: 2021-08-30-17-43
+Release time: 2021-09-15-20-25
 
 ========================================
 
