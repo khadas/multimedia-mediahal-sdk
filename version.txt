@@ -5,29 +5,29 @@ Version: v2.0
 ========================================
 
 Git commit:
-commit a1725a7e5ba655f9f4ba2ce4b7c1679bf3cc03a3
+commit 3438565f26e9cec6bc4d4c70b46c93d56f03abb7
 Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Mon Aug 23 19:36:48 2021 +0800
+Date:   Mon Aug 30 17:39:27 2021 +0800
 
-    tsplayer: CB2 audio decoding before video will abort. [1/1]
+    tsplayer: CF2 support mpeg4 video format on tsplayer. [1/1]
     
-    PD#SWPL-58259
+    PD#OTT-22134
     
     Problem:
-    audio decoding before video will abort.
+    not support mpeg4 video format on tsplayer.
     
     Solution:
-    fix the issue that audio decoding before video will abort.
+    support mpeg4 video format on tsplayer.
     
     Verify:
     Common
     
-    Change-Id: Idcd742a04100c9bf7d610af7b7554595f82357e5
+    Change-Id: If1ce71e410e8a5e43194e65911ad8f571d0566eb
     Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
 
 ========================================
 
-Release time: 2021-08-23-19-51
+Release time: 2021-08-30-17-43
 
 ========================================
 
