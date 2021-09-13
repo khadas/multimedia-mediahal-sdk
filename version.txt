@@ -5,29 +5,29 @@ Version: v2.0
 ========================================
 
 Git commit:
-commit 01863585819aabf8d02438b3040d29f808ae4f84
+commit 120caf6bb655585767cf8e728ea7de364a3eb4c9
 Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Mon Nov 1 21:45:03 2021 +0800
+Date:   Fri Oct 29 16:58:37 2021 +0800
 
-    tsplayer: CB2 roku not need link libwayland. [1/1]
+    tsplayer: CF2 multi audio and AmTsPlayerMultiExample support. [1/1]
     
-    PD#SWPL-63443
+    PD#SWPL-60145
     
     Problem:
-    roku link libwayland,but roku not have libwayland.
+    multi audio and AmTsPlayerMultiExample not support.
     
     Solution:
-    roku not need link libwayland.
+    multi audio and AmTsPlayerMultiExample support.
     
     Verify:
-    roku
+    SC2+Y4
     
-    Change-Id: Ic9ecbf22c66b6ad3eacf52d1169a6d3102004e9b
+    Change-Id: I8e7bea4d363041bb6c550413caa34010778ebafd
     Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
 
 ========================================
 
-Release time: 2021-11-03-21-48
+Release time: 2021-11-05-10-31
 
 ========================================
 
@@ -44,6 +44,7 @@ resourcemanage.h
 
 Library and Binary file:
 AmTsPlayerExample
+AmTsPlayerMultiExample
 libmediahal_mediasync.so
 libmediahal_resman.so
 libmediahal_tsplayer.so
@@ -51,6 +52,10 @@ libmediahal_videodec.so
 
 Example file:
 AmTsPlayerExample.cpp
+Makefile
+
+Multi_Example file:
+AmTsPlayerMultiExample.cpp
 Makefile
 
 ========================================
