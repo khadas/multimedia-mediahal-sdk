@@ -5,29 +5,29 @@ Version: v2.0
 ========================================
 
 Git commit:
-commit c56879a1c2831c2dca19301b061c7bab44a57c51
-Author: jiabin.zhu <jiabin.zhu@amlogic.com>
-Date:   Fri Oct 15 09:57:12 2021 +0000
+commit f2000b5690c3ab060bce8b21c9f3b8ff3c8338f9
+Author: zhipeng.he <zhipeng.he@amlogic.com>
+Date:   Tue Sep 28 12:10:21 2021 +0800
 
-    TsPlayer: switch youtube with live tv,the DVB channel canot play
+    tsplayer: CF2 add essos resman. [1/1]
     
-    PD#SWPL-61463
+    PD#RSP-2466
     
     Problem:
-    1./dev/amstream_vbuf_sched will be hold by other process.
+    not have essos resman on linux tsplayer.
     
     Solution:
-    1.Use FD_CLOEXEC to open device.
+    add essos resman.
     
     Verify:
-    verified on T5D
+    S905C2-AH232
     
-    Change-Id: Ie3dd41094d865b17e5afbd7fd4bd8c5882a28f53
-    Signed-off-by: jiabin.zhu <jiabin.zhu@amlogic.com>
+    Change-Id: I796fd0aa7635ca0773074676c78e142ea7d3bf53
+    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
 
 ========================================
 
-Release time: 2021-10-15-19-22
+Release time: 2021-10-19-21-00
 
 ========================================
 
