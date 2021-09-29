@@ -5,29 +5,29 @@ Version: v2.0
 ========================================
 
 Git commit:
-commit 5929e609778fb65b34ab8f7bd24ebf6fad704a9c
-Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Wed Aug 25 21:19:31 2021 +0800
+commit 1a76c6eefa52438762642f7f1f0a5757d22168af
+Author: jiabin.zhu <jiabin.zhu@amlogic.com>
+Date:   Tue Sep 28 17:08:11 2021 +0800
 
-    tsplayer: CF2 audio format support flac. [1/1]
+    TsPlayer: CF1 Invalid pointer when zapping to a service
     
-    PD#OTT-23023
+    PD#SWPL-60576
     
     Problem:
-    audio format not support flac.
+    app crush when start playing stream.
     
     Solution:
-    audio format support flac.
+    1.change key work "new" to "malloc".
     
     Verify:
-    Common
+    verified on T5D
     
-    Change-Id: Iaf99f77cec3e12a8e496341e6ede6535e4320175
-    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
+    Change-Id: Id78dc434c4ca85d1176a0eda41a15d6f905a59d5
+    Signed-off-by: jiabin.zhu <jiabin.zhu@amlogic.com>
 
 ========================================
 
-Release time: 2021-09-15-20-25
+Release time: 2021-09-29-16-14
 
 ========================================
 
