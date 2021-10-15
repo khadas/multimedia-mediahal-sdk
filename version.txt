@@ -5,29 +5,29 @@ Version: v2.0
 ========================================
 
 Git commit:
-commit 1a76c6eefa52438762642f7f1f0a5757d22168af
+commit c56879a1c2831c2dca19301b061c7bab44a57c51
 Author: jiabin.zhu <jiabin.zhu@amlogic.com>
-Date:   Tue Sep 28 17:08:11 2021 +0800
+Date:   Fri Oct 15 09:57:12 2021 +0000
 
-    TsPlayer: CF1 Invalid pointer when zapping to a service
+    TsPlayer: switch youtube with live tv,the DVB channel canot play
     
-    PD#SWPL-60576
+    PD#SWPL-61463
     
     Problem:
-    app crush when start playing stream.
+    1./dev/amstream_vbuf_sched will be hold by other process.
     
     Solution:
-    1.change key work "new" to "malloc".
+    1.Use FD_CLOEXEC to open device.
     
     Verify:
     verified on T5D
     
-    Change-Id: Id78dc434c4ca85d1176a0eda41a15d6f905a59d5
+    Change-Id: Ie3dd41094d865b17e5afbd7fd4bd8c5882a28f53
     Signed-off-by: jiabin.zhu <jiabin.zhu@amlogic.com>
 
 ========================================
 
-Release time: 2021-09-29-16-14
+Release time: 2021-10-15-19-22
 
 ========================================
 
