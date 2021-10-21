@@ -5,29 +5,29 @@ Version: v2.0
 ========================================
 
 Git commit:
-commit f2000b5690c3ab060bce8b21c9f3b8ff3c8338f9
+commit 33598a13ed3ae8ab9d713bc572554bc3d3efbdb7
 Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Tue Sep 28 12:10:21 2021 +0800
+Date:   Thu Oct 21 19:59:37 2021 +0800
 
-    tsplayer: CF2 add essos resman. [1/1]
+    tsplayer: CF2 add essos resman by dlopen. [1/1]
     
     PD#RSP-2466
     
     Problem:
-    not have essos resman on linux tsplayer.
+    some platform have no essres lib.
     
     Solution:
-    add essos resman.
+    add essos resman by dlopen.
     
     Verify:
     S905C2-AH232
     
-    Change-Id: I796fd0aa7635ca0773074676c78e142ea7d3bf53
+    Change-Id: Ib4d0095e14878078603d937fe4ca0e1dbc6c6844
     Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
 
 ========================================
 
-Release time: 2021-10-19-21-00
+Release time: 2021-10-22-10-54
 
 ========================================
 
