@@ -5,33 +5,33 @@ Version: v2.0
 ========================================
 
 Git commit:
-commit 33598a13ed3ae8ab9d713bc572554bc3d3efbdb7
-Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Thu Oct 21 19:59:37 2021 +0800
+commit 5deb3b406f642abe4b2a0103f5b40403caa8937c
+Author: jiabin.zhu <jiabin.zhu@amlogic.com>
+Date:   Fri Oct 22 18:58:50 2021 +0800
 
-    tsplayer: CF2 add essos resman by dlopen. [1/1]
+    TsPlayer: CB2 admin tool was exit afer zapping sometimes [1/1]
     
-    PD#RSP-2466
+    PD#RSP-2589
     
     Problem:
-    some platform have no essres lib.
+    1.invalid pointer err happend something
     
     Solution:
-    add essos resman by dlopen.
+    1.use free instead of delete
     
     Verify:
-    S905C2-AH232
+    verified on T5D
     
-    Change-Id: Ib4d0095e14878078603d937fe4ca0e1dbc6c6844
-    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
+    Change-Id: I1904867e2b6bd48990f7cc6a48bc7eb54f8a749f
+    Signed-off-by: jiabin.zhu <jiabin.zhu@amlogic.com>
 
 ========================================
 
-Release time: 2021-10-22-10-54
+Release time: 2021-10-25-13-34
 
 ========================================
 
-Builder: zhipeng.he
+Builder: jiabin.zhu
 
 ========================================
 Release file:
