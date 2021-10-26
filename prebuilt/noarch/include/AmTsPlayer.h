@@ -176,7 +176,15 @@ typedef enum {
     AV_VIDEO_MATCH_MODE_PAN_SCAN = 3,      // Pan scan match mode
     AV_VIDEO_MATCH_MODE_COMBINED = 4,      // Combined pan scan and letter box
     AV_VIDEO_MATCH_MODE_WIDTHFULL = 5,     // Strech the video width to the full window
-    AV_VIDEO_MATCH_MODE_HEIGHFULL = 6      // Strech the video height to the full window
+    AV_VIDEO_MATCH_MODE_HEIGHFULL = 6,      // Strech the video height to the full window
+    AV_VIDEO_WIDEOPTION_4_3_LETTER_BOX = 7,
+    AV_VIDEO_WIDEOPTION_4_3_PAN_SCAN = 8,
+    AV_VIDEO_WIDEOPTION_4_3_COMBINED = 9,
+    AV_VIDEO_WIDEOPTION_16_9_IGNORE = 10,
+    AV_VIDEO_WIDEOPTION_16_9_LETTER_BOX = 11,
+    AV_VIDEO_WIDEOPTION_16_9_PAN_SCAN = 12,
+    AV_VIDEO_WIDEOPTION_16_9_COMBINED = 13,
+    AV_VIDEO_WIDEOPTION_CUSTOM = 14
 } am_tsplayer_video_match_mode;
 
 /*Video decoder type*/
@@ -388,6 +396,16 @@ am_tsplayer_result  AmTsPlayer_getVersion(uint32_t *versionM,
  *\return:       The AmTsPlayer result.
  */
 am_tsplayer_result  AmTsPlayer_getInstansNo(am_tsplayer_handle Hadl, uint32_t *Numb);
+
+/**
+ *\brief:        Get the sync instance number of specified AmTsPlayer .
+ *\inparam:      AmTsPlayer handle.
+ *\outparam:     AmTsPlayer instance number.
+ *\return:       The AmTsPlayer result.
+ */
+am_tsplayer_result  AmTsPlayer_getSyncInstansNo(am_tsplayer_handle Hadl,
+                                                                      int32_t *Numb);
+
 /**
  *\brief:        Register event callback to specified AmTsPlayer
  *\inparam:      AmTsPlayer handle.

@@ -48,6 +48,8 @@ const int kRwTimeout = 30000;
 #define UNUSED(x) (void)(x)
 #endif
 
+#define NO_AUDIO 1
+
 void video_callback(void *user_data, am_tsplayer_event *event)
 {
     UNUSED(user_data);
@@ -334,6 +336,10 @@ int main(int argc, char **argv)
     //am_tsplayer_handle session;
     am_tsplayer_init_params parm = {tsType, drmmode, 0, 0};
     AmTsPlayer_create(parm, &session);
+
+    int tunnelid = 0;
+    AmTsPlayer_setSurface(session,(void*)&tunnelid);
+    AmTsPlayer_setVideoWindow(session, 0, 0, 1920, 1080);
     uint32_t versionM, versionL;
     AmTsPlayer_getVersion(&versionM, &versionL);
     uint32_t instanceno;
@@ -341,14 +347,15 @@ int main(int argc, char **argv)
     AmTsPlayer_setWorkMode(session, TS_PLAYER_MODE_NORMAL);
     AmTsPlayer_registerCb(session, video_callback, NULL);
 
+#if NO_AUDIO
     AmTsPlayer_setSyncMode(session, avsyncMode);
-
+#endif
     am_tsplayer_video_params vparm;
     vparm.codectype = vCodec;
     vparm.pid = vPid;
     AmTsPlayer_setVideoParams(session, &vparm);
     AmTsPlayer_startVideoDecoding(session);
-
+#if NO_AUDIO
     if (adpid != -1 && adtype != -1 && tsType == TS_DEMOD) {
         am_tsplayer_audio_params adparm;
         adparm.codectype = static_cast<am_tsplayer_audio_codec>(adtype);
@@ -368,6 +375,8 @@ int main(int argc, char **argv)
     AmTsPlayer_startAudioDecoding(session);
 
     AmTsPlayer_setAudioVolume(session, gain);
+#endif
+
     AmTsPlayer_showVideo(session);
     AmTsPlayer_setTrickMode(session, vTrickMode);
 

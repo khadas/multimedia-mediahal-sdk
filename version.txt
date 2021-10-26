@@ -5,29 +5,29 @@ Version: v2.0
 ========================================
 
 Git commit:
-commit 5deb3b406f642abe4b2a0103f5b40403caa8937c
-Author: jiabin.zhu <jiabin.zhu@amlogic.com>
-Date:   Fri Oct 22 18:58:50 2021 +0800
+commit 0c4c416a73960c91e352f4c83ad4e139406f3bb4
+Author: zhipeng.he <zhipeng.he@amlogic.com>
+Date:   Thu Aug 19 11:32:27 2021 +0800
 
-    TsPlayer: CB2 admin tool was exit afer zapping sometimes [1/1]
+    tsplayer: CF0 support nontunnelmode. [1/1]
     
-    PD#RSP-2589
+    PD#SWPL-52772
     
     Problem:
-    1.invalid pointer err happend something
+    linux not support nontunnelmode.
     
     Solution:
-    1.use free instead of delete
+    support nontunnelmode.
     
     Verify:
-    verified on T5D
+    SC2+Y4
     
-    Change-Id: I1904867e2b6bd48990f7cc6a48bc7eb54f8a749f
-    Signed-off-by: jiabin.zhu <jiabin.zhu@amlogic.com>
+    Change-Id: I39a3194fa852a6c5b0df97f73812f0b7d0a557da
+    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
 
 ========================================
 
-Release time: 2021-10-27-11-20
+Release time: 2021-10-28-13-45
 
 ========================================
 
@@ -39,10 +39,12 @@ Release file:
 Header file:
 AmTsPlayer.h
 AmVideoDecBase.h
+MediaSyncInterface.h
 resourcemanage.h
 
 Library and Binary file:
 AmTsPlayerExample
+libmediahal_mediasync.so
 libmediahal_resman.so
 libmediahal_tsplayer.so
 libmediahal_videodec.so
