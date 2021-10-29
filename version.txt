@@ -5,33 +5,33 @@ Version: v2.0
 ========================================
 
 Git commit:
-commit 43563f3d5d667b438dbd232a887b924b4f378feb
-Author: jiabin.zhu <jiabin.zhu@amlogic.com>
-Date:   Wed Oct 20 17:35:01 2021 +0800
+commit c1d40ccfbe0908dbb0b0464c7dbe8f5ef93b7d76
+Author: zhipeng.he <zhipeng.he@amlogic.com>
+Date:   Thu Oct 28 20:58:42 2021 +0800
 
-    TsPlayer: CB2 Add flush function in tsplayer [1/1]
+    tsplayer: CF2 improve westeros display func. [1/1]
     
-    PD#OTT-23737
+    PD#SWPL-62645
     
     Problem:
-    1.Add flush function in tsplayer to aviod  pop sound
+    westeros display func has some issue.
     
     Solution:
-    1.Add flush API function tsplayer
+    improve westeros display func.
     
     Verify:
-    verified on T5D
+    SC2+Y4
     
-    Change-Id: Ic67f5443189ee0ad056cf41878a7b351f8c91ad7
-    Signed-off-by: jiabin.zhu <jiabin.zhu@amlogic.com>
+    Change-Id: I2ca9478b085fc0fedd0dd8fb45a33981942f5c9d
+    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
 
 ========================================
 
-Release time: 2021-10-29-10-44
+Release time: 2021-10-29-16-16
 
 ========================================
 
-Builder: jiabin.zhu
+Builder: zhipeng.he
 
 ========================================
 Release file:

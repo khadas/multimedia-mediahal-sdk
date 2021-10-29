@@ -379,7 +379,7 @@ int main(int argc, char **argv)
 
     AmTsPlayer_showVideo(session);
     AmTsPlayer_setTrickMode(session, vTrickMode);
-
+    bool bExitManual = false;
     am_tsplayer_input_buffer ibuf = {TS_INPUT_BUFFER_TYPE_NORMAL, (char*)buf, 0};
     long pos = 0;
     int ch = 0;
@@ -396,6 +396,14 @@ int main(int argc, char **argv)
             int retry = 100;
             am_tsplayer_result res;
             do {
+                if (_kbhit()) {
+                    ch = getchar();
+                    if (ch == 113) {
+                        printf("====>break by q \n");
+                        bExitManual = true;
+                        break;
+                    }
+               }
                 res = AmTsPlayer_writeData(session, &ibuf, kRwTimeout);
                // usleep(20000);
                 if (res == AM_TSPLAYER_ERROR_RETRY) {
@@ -403,6 +411,10 @@ int main(int argc, char **argv)
                 } else
                     break;
             } while(res || retry-- > 0);
+            if (bExitManual == true) {
+                printf("====>break by bExitManual \n");
+                break;
+            }
             if (_kbhit()) {
                 ch = getchar();
                 printf("----key input : %d quit:q\n",ch);
