@@ -5,33 +5,33 @@ Version: v2.0
 ========================================
 
 Git commit:
-commit 0c4c416a73960c91e352f4c83ad4e139406f3bb4
-Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Thu Aug 19 11:32:27 2021 +0800
+commit 43563f3d5d667b438dbd232a887b924b4f378feb
+Author: jiabin.zhu <jiabin.zhu@amlogic.com>
+Date:   Wed Oct 20 17:35:01 2021 +0800
 
-    tsplayer: CF0 support nontunnelmode. [1/1]
+    TsPlayer: CB2 Add flush function in tsplayer [1/1]
     
-    PD#SWPL-52772
+    PD#OTT-23737
     
     Problem:
-    linux not support nontunnelmode.
+    1.Add flush function in tsplayer to aviod  pop sound
     
     Solution:
-    support nontunnelmode.
+    1.Add flush API function tsplayer
     
     Verify:
-    SC2+Y4
+    verified on T5D
     
-    Change-Id: I39a3194fa852a6c5b0df97f73812f0b7d0a557da
-    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
+    Change-Id: Ic67f5443189ee0ad056cf41878a7b351f8c91ad7
+    Signed-off-by: jiabin.zhu <jiabin.zhu@amlogic.com>
 
 ========================================
 
-Release time: 2021-10-28-13-45
+Release time: 2021-10-29-10-44
 
 ========================================
 
-Builder: zhipeng.he
+Builder: jiabin.zhu
 
 ========================================
 Release file:
