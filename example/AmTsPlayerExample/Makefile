@@ -1,6 +1,13 @@
 OBJ=AmTsPlayerExample.o
 
-LDFLAGS =-lpthread -laudio_client -lmediahal_videodec -lmediahal_tsplayer -lmediahal_resman -lmediahal_mediasync -lwayland-client -lm -lz -g $(EXTRA_LDFLAGS)
+ifeq ($(CC_TARGET_FLOAT_ABI_)_$(CC_PACKAGE_WAYLAND_), softfp_)
+LD_SUPPORT_WAYLAND =
+else
+LD_SUPPORT_WAYLAND = -lwayland-client
+endif
+LDFLAGS =-lpthread -laudio_client -lmediahal_videodec -lmediahal_tsplayer -lmediahal_resman -lmediahal_mediasync -lm -lz -g $(EXTRA_LDFLAGS)
+
+LDFLAGS += $(LD_SUPPORT_WAYLAND)
 
 CFLAGS =-I$(STAGING_DIR)/usr/include/ $(EXTRA_CFLAGS)
 

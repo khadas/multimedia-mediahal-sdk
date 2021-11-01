@@ -5,29 +5,29 @@ Version: v2.0
 ========================================
 
 Git commit:
-commit c1d40ccfbe0908dbb0b0464c7dbe8f5ef93b7d76
+commit 01863585819aabf8d02438b3040d29f808ae4f84
 Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Thu Oct 28 20:58:42 2021 +0800
+Date:   Mon Nov 1 21:45:03 2021 +0800
 
-    tsplayer: CF2 improve westeros display func. [1/1]
+    tsplayer: CB2 roku not need link libwayland. [1/1]
     
-    PD#SWPL-62645
+    PD#SWPL-63443
     
     Problem:
-    westeros display func has some issue.
+    roku link libwayland,but roku not have libwayland.
     
     Solution:
-    improve westeros display func.
+    roku not need link libwayland.
     
     Verify:
-    SC2+Y4
+    roku
     
-    Change-Id: I2ca9478b085fc0fedd0dd8fb45a33981942f5c9d
+    Change-Id: Ic9ecbf22c66b6ad3eacf52d1169a6d3102004e9b
     Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
 
 ========================================
 
-Release time: 2021-10-29-16-16
+Release time: 2021-11-03-21-48
 
 ========================================
 
