@@ -213,6 +213,8 @@ typedef enum {
     AV_AUDIO_CODEC_AC4 = 9,                // AC4
     AV_AUDIO_CODEC_DRA = 10,               // DRA
     AV_AUDIO_CODEC_FLAC = 11,               // FLAC
+    AV_AUDIO_CODEC_VORBIS = 12,             //VORBIS
+    AV_AUDIO_CODEC_OPUS = 13,               //OPUS
     AV_AUDIO_CODEC_MAX,                    // max audio type
 //    AV_AUDIO_CODEC_HEAAC = 8,            // HEAAC
 //    AV_AUDIO_CODEC_AAC_ADTS = 9,         // AAC_ADTS

@@ -5,33 +5,33 @@ Version: v2.0
 ========================================
 
 Git commit:
-commit 120caf6bb655585767cf8e728ea7de364a3eb4c9
-Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Fri Oct 29 16:58:37 2021 +0800
+commit 09f88ee57277f6160a42f36224ed358daa9211c1
+Author: jiabin.zhu <jiabin.zhu@amlogic.com>
+Date:   Mon Nov 1 16:10:39 2021 +0800
 
-    tsplayer: CF2 multi audio and AmTsPlayerMultiExample support. [1/1]
+    TsPlayer: CB1 Calculate bitrate of stream [1/1]
     
-    PD#SWPL-60145
+    PD#OTT-24850
     
     Problem:
-    multi audio and AmTsPlayerMultiExample not support.
+    1.neet to report bitrate of stream
     
     Solution:
-    multi audio and AmTsPlayerMultiExample support.
+    1.calculate bitrate of stream
     
     Verify:
-    SC2+Y4
+    verified on Y4 & sc2
     
-    Change-Id: I8e7bea4d363041bb6c550413caa34010778ebafd
-    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
+    Change-Id: I06341434c80b7dfccbee2e5ca0e2dcf68b475a0d
+    Signed-off-by: jiabin.zhu <jiabin.zhu@amlogic.com>
 
 ========================================
 
-Release time: 2021-11-05-10-31
+Release time: 2021-11-08-11-07
 
 ========================================
 
-Builder: zhipeng.he
+Builder: jiabin.zhu
 
 ========================================
 Release file:
