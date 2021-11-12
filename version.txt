@@ -5,33 +5,35 @@ Version: v2.0
 ========================================
 
 Git commit:
-commit fca205dead31c78ffa90284d475ebe14b31d2896
-Author: jiabin.zhu <jiabin.zhu@amlogic.com>
-Date:   Wed Nov 10 18:52:24 2021 +0800
+commit aff23aa13fb85da0371403962eaf984679365311
+Author: zhipeng.he <zhipeng.he@amlogic.com>
+Date:   Fri Nov 12 16:24:20 2021 +0800
 
-    TsPlayer: CB1 enable fast show firstframe [1/1]
+    tsplayer: CF2 remove amcodecvda irrelevant printing. [1/1]
     
-    PD#SWPL-60036
+    PD#TV-43208
     
     Problem:
-    1.Show freeze about 2s after switching channel
+    1.amcodecvda irrelevant printing so much.
+    2.essesresman is created by global static.
     
     Solution:
-    1.enable fast show firstframe
+    1.remove amcodecvda irrelevant printing.
+    2.essesresman is created by object.
     
     Verify:
-    verified on Y4 & sc2
+    roku_T5D
     
-    Change-Id: I1573529d4be21632f05424fadb8e8777b24f3937
-    Signed-off-by: jiabin.zhu <jiabin.zhu@amlogic.com>
+    Change-Id: I4d2c66f04f013d770dd121d076dd8753134fbf12
+    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
 
 ========================================
 
-Release time: 2021-11-16-13-48
+Release time: 2021-11-17-16-16
 
 ========================================
 
-Builder: jiabin.zhu
+Builder: zhipeng.he
 
 ========================================
 Release file:
