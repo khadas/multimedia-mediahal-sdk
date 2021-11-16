@@ -5,29 +5,29 @@ Version: v2.0
 ========================================
 
 Git commit:
-commit 09f88ee57277f6160a42f36224ed358daa9211c1
+commit fca205dead31c78ffa90284d475ebe14b31d2896
 Author: jiabin.zhu <jiabin.zhu@amlogic.com>
-Date:   Mon Nov 1 16:10:39 2021 +0800
+Date:   Wed Nov 10 18:52:24 2021 +0800
 
-    TsPlayer: CB1 Calculate bitrate of stream [1/1]
+    TsPlayer: CB1 enable fast show firstframe [1/1]
     
-    PD#OTT-24850
+    PD#SWPL-60036
     
     Problem:
-    1.neet to report bitrate of stream
+    1.Show freeze about 2s after switching channel
     
     Solution:
-    1.calculate bitrate of stream
+    1.enable fast show firstframe
     
     Verify:
     verified on Y4 & sc2
     
-    Change-Id: I06341434c80b7dfccbee2e5ca0e2dcf68b475a0d
+    Change-Id: I1573529d4be21632f05424fadb8e8777b24f3937
     Signed-off-by: jiabin.zhu <jiabin.zhu@amlogic.com>
 
 ========================================
 
-Release time: 2021-11-08-11-07
+Release time: 2021-11-16-13-48
 
 ========================================
 
