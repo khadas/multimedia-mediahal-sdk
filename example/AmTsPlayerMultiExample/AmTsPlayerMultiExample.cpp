@@ -483,6 +483,7 @@ int main(int argc, char **argv)
             }
             ch = 0;
         }
+        run_false_index_count = 0;
         for (i = 0 ; i < changNum;i++) {
             if (mTsParams[i].run == false) {
                 run_false_index_count++;

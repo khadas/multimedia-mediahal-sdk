@@ -5,31 +5,29 @@ Version: v2.0
 ========================================
 
 Git commit:
-commit aff23aa13fb85da0371403962eaf984679365311
+commit 793c1f85946af39dc8564ae00ececea588d31c92
 Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Fri Nov 12 16:24:20 2021 +0800
+Date:   Wed Nov 17 19:50:05 2021 +0800
 
-    tsplayer: CF2 remove amcodecvda irrelevant printing. [1/1]
+    tsplayer: CB1 can not play after multiple resume on nontunnelmode. [1/1]
     
-    PD#TV-43208
+    PD#SWPL-64189
     
     Problem:
-    1.amcodecvda irrelevant printing so much.
-    2.essesresman is created by global static.
+    can not play after multiple resume on nontunnelmode.
     
     Solution:
-    1.remove amcodecvda irrelevant printing.
-    2.essesresman is created by object.
+    fix the issue can not play after multiple resume on nontunnelmode.
     
     Verify:
-    roku_T5D
+    AH212
     
-    Change-Id: I4d2c66f04f013d770dd121d076dd8753134fbf12
+    Change-Id: Ibba6049dd7059527f16f0e9601de3be981955694
     Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
 
 ========================================
 
-Release time: 2021-11-17-16-16
+Release time: 2021-11-22-17-09
 
 ========================================
 
