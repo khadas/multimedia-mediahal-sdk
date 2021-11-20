@@ -5,29 +5,29 @@ Version: v2.0
 ========================================
 
 Git commit:
-commit 793c1f85946af39dc8564ae00ececea588d31c92
+commit 2d692804827026282fc5fdbc0b85ffef55597ed3
 Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Wed Nov 17 19:50:05 2021 +0800
+Date:   Sat Nov 20 14:03:00 2021 +0800
 
-    tsplayer: CB1 can not play after multiple resume on nontunnelmode. [1/1]
+    tsplayer: CB1 unified method of getting vdec_id. [1/1]
     
-    PD#SWPL-64189
+    PD#SWPL-65031
     
     Problem:
-    can not play after multiple resume on nontunnelmode.
+    kernel 4.9 get the vdec_id not match tsplayer.
     
     Solution:
-    fix the issue can not play after multiple resume on nontunnelmode.
+    unified method of getting vdec_id.
     
     Verify:
-    AH212
+    roku_T5D
     
-    Change-Id: Ibba6049dd7059527f16f0e9601de3be981955694
+    Change-Id: I48531bb010b9aaae87ee827e44de1678164b9d0c
     Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
 
 ========================================
 
-Release time: 2021-11-22-17-09
+Release time: 2021-11-29-11-29
 
 ========================================
 
