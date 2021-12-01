@@ -339,7 +339,6 @@ int main(int argc, char **argv)
 
     int tunnelid = 0;
     AmTsPlayer_setSurface(session,(void*)&tunnelid);
-    AmTsPlayer_setVideoWindow(session, 0, 0, 1920, 1080);
     uint32_t versionM, versionL;
     AmTsPlayer_getVersion(&versionM, &versionL);
     uint32_t instanceno;

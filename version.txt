@@ -5,33 +5,34 @@ Version: v2.0
 ========================================
 
 Git commit:
-commit d5eddd7ea3207b738793780b8c067759f3c303c7
-Author: jiabin.zhu <jiabin.zhu@amlogic.com>
-Date:   Wed Nov 24 10:38:59 2021 +0800
+commit 74052cb131d9ca2e7b405523aabd6b5871d260ee
+Author: zhipeng.he <zhipeng.he@amlogic.com>
+Date:   Wed Dec 1 16:34:21 2021 +0800
 
-    TsPlayer: CF2 AmTsPlayer_getPts get wrong pts [1/1]
+    tsplayer: CB1 video jitter after seek on nontunnelmode. [1/1]
     
-    PD#SWPL-65307
+    PD#SWPL-65613
     
     Problem:
-    1.fix AmTsPlayer_getPts get wrong PTS
+    video jitter after seek on nontunnelmode.
     
     Solution:
-    1.fix pts culculate method
+    1.clear buffer,when stop play.
+    2.Sync some codes of android R to linux.
     
     Verify:
-    verified on Y4 & sc2
+    AH212
     
-    Change-Id: I87e52cdd5efb4f90255650b2c0883aafda57a8ec
-    Signed-off-by: jiabin.zhu <jiabin.zhu@amlogic.com>
+    Change-Id: I117286508ad69efcc0e531ec8bc87ea29122160d
+    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
 
 ========================================
 
-Release time: 2021-12-01-19-58
+Release time: 2021-12-06-17-02
 
 ========================================
 
-Builder: jiabin.zhu
+Builder: zhipeng.he
 
 ========================================
 Release file:
