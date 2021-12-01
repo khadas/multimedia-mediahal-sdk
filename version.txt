@@ -5,33 +5,33 @@ Version: v2.0
 ========================================
 
 Git commit:
-commit 2d692804827026282fc5fdbc0b85ffef55597ed3
-Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Sat Nov 20 14:03:00 2021 +0800
+commit d5eddd7ea3207b738793780b8c067759f3c303c7
+Author: jiabin.zhu <jiabin.zhu@amlogic.com>
+Date:   Wed Nov 24 10:38:59 2021 +0800
 
-    tsplayer: CB1 unified method of getting vdec_id. [1/1]
+    TsPlayer: CF2 AmTsPlayer_getPts get wrong pts [1/1]
     
-    PD#SWPL-65031
+    PD#SWPL-65307
     
     Problem:
-    kernel 4.9 get the vdec_id not match tsplayer.
+    1.fix AmTsPlayer_getPts get wrong PTS
     
     Solution:
-    unified method of getting vdec_id.
+    1.fix pts culculate method
     
     Verify:
-    roku_T5D
+    verified on Y4 & sc2
     
-    Change-Id: I48531bb010b9aaae87ee827e44de1678164b9d0c
-    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
+    Change-Id: I87e52cdd5efb4f90255650b2c0883aafda57a8ec
+    Signed-off-by: jiabin.zhu <jiabin.zhu@amlogic.com>
 
 ========================================
 
-Release time: 2021-11-29-11-29
+Release time: 2021-12-01-19-58
 
 ========================================
 
-Builder: zhipeng.he
+Builder: jiabin.zhu
 
 ========================================
 Release file:
