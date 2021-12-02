@@ -5,30 +5,29 @@ Version: v2.0
 ========================================
 
 Git commit:
-commit 74052cb131d9ca2e7b405523aabd6b5871d260ee
-Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Wed Dec 1 16:34:21 2021 +0800
+commit 0e2ab7c6583f1209fceb6d8abcc080aa491e2a25
+Author: cheng tong <cheng.tong@amlogic.com>
+Date:   Thu Dec 2 15:29:26 2021 +0800
 
-    tsplayer: CB1 video jitter after seek on nontunnelmode. [1/1]
+    TsPlayer: CB1 DTV playback no sound [1/1]
     
-    PD#SWPL-65613
+    PD#TV-44657
     
     Problem:
-    video jitter after seek on nontunnelmode.
+    didn't set audiopatch src
     
     Solution:
-    1.clear buffer,when stop play.
-    2.Sync some codes of android R to linux.
+    add hal_param_tuner_in to set right audiopatch src
     
     Verify:
-    AH212
+    verified on T5D
     
-    Change-Id: I117286508ad69efcc0e531ec8bc87ea29122160d
-    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
+    Change-Id: I20f0b1e57e061ab417f9009908e66ba5c9edbbfe
+    Signed-off-by: cheng tong <cheng.tong@amlogic.com>
 
 ========================================
 
-Release time: 2021-12-06-17-02
+Release time: 2021-12-06-17-48
 
 ========================================
 
