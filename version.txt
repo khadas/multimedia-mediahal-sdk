@@ -5,29 +5,30 @@ Version: v2.0
 ========================================
 
 Git commit:
-commit 0e2ab7c6583f1209fceb6d8abcc080aa491e2a25
-Author: cheng tong <cheng.tong@amlogic.com>
-Date:   Thu Dec 2 15:29:26 2021 +0800
+commit 48c90a41a5e7efd7908d851e92340606171b1260
+Author: zhipeng.he <zhipeng.he@amlogic.com>
+Date:   Tue Dec 7 21:08:04 2021 +0800
 
-    TsPlayer: CB1 DTV playback no sound [1/1]
+    tsplayer: CB1 can not play 4K stream on nontunnelmode. [1/1]
     
-    PD#TV-44657
+    PD#SWPL-66271
     
     Problem:
-    didn't set audiopatch src
+    can not play 4K stream on nontunnelmode.
     
     Solution:
-    add hal_param_tuner_in to set right audiopatch src
+    1.fix the issue can not play 4K stream on nontunnelmode.
+    2.remove the frequent printing on userdataThreadLoop.
     
     Verify:
-    verified on T5D
+    AH212/AM301
     
-    Change-Id: I20f0b1e57e061ab417f9009908e66ba5c9edbbfe
-    Signed-off-by: cheng tong <cheng.tong@amlogic.com>
+    Change-Id: I4fd927767e20d90395324dcf1071e6c50e8afb06
+    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
 
 ========================================
 
-Release time: 2021-12-06-17-48
+Release time: 2021-12-08-20-50
 
 ========================================
 
