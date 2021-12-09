@@ -5,30 +5,30 @@ Version: v2.0
 ========================================
 
 Git commit:
-commit 48c90a41a5e7efd7908d851e92340606171b1260
+commit 7e9750292615aeebc68de36cdd8d1886bbbcecc9
 Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Tue Dec 7 21:08:04 2021 +0800
+Date:   Thu Dec 9 10:50:47 2021 +0800
 
-    tsplayer: CB1 can not play 4K stream on nontunnelmode. [1/1]
+    tsplayer: CF2 improve the logic of CC Code. [1/1]
     
-    PD#SWPL-66271
+    PD#TV-45100
     
     Problem:
-    can not play 4K stream on nontunnelmode.
+    CC has many abnormal printing.
     
     Solution:
-    1.fix the issue can not play 4K stream on nontunnelmode.
-    2.remove the frequent printing on userdataThreadLoop.
+    1.remove the frequent printing on userdataThreadLoop.
+    2.improve the logic of CC Code.
     
     Verify:
-    AH212/AM301
+    T318
     
-    Change-Id: I4fd927767e20d90395324dcf1071e6c50e8afb06
+    Change-Id: I92fe3d6c08731d5104a3dcfca5429005f5515377
     Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
 
 ========================================
 
-Release time: 2021-12-08-20-50
+Release time: 2021-12-10-13-28
 
 ========================================
 
