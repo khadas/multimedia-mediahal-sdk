@@ -5,30 +5,29 @@ Version: v2.0
 ========================================
 
 Git commit:
-commit 7e9750292615aeebc68de36cdd8d1886bbbcecc9
+commit ef8d819a2198ed29eced19229aeadb736266d768
 Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Thu Dec 9 10:50:47 2021 +0800
+Date:   Tue Dec 14 13:36:00 2021 +0800
 
-    tsplayer: CF2 improve the logic of CC Code. [1/1]
+    tsplayer: CF2 send av_sync_type to audiohal. [1/1]
     
-    PD#TV-45100
+    PD#SWPL-67526
     
     Problem:
-    CC has many abnormal printing.
+    audiohal can not know which av_sync_type to use.
     
     Solution:
-    1.remove the frequent printing on userdataThreadLoop.
-    2.improve the logic of CC Code.
+    send av_sync_type to audiohal.
     
     Verify:
-    T318
+    AH212
     
-    Change-Id: I92fe3d6c08731d5104a3dcfca5429005f5515377
+    Change-Id: I67af559246a0940c8e0ce3f5879adf2d2018026f
     Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
 
 ========================================
 
-Release time: 2021-12-10-13-28
+Release time: 2021-12-15-21-35
 
 ========================================
 
