@@ -5,29 +5,29 @@ Version: v2.0
 ========================================
 
 Git commit:
-commit ef8d819a2198ed29eced19229aeadb736266d768
+commit 8bcdb8eea18e0d152069bd11431158935d406fd6
 Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Tue Dec 14 13:36:00 2021 +0800
+Date:   Thu Dec 16 14:50:10 2021 +0800
 
-    tsplayer: CF2 send av_sync_type to audiohal. [1/1]
+    tsplayer: CB1 can not play when switch channel on fcc mode. [1/1]
     
-    PD#SWPL-67526
+    PD#SWPL-67712
     
     Problem:
-    audiohal can not know which av_sync_type to use.
+    can not play when switch channel on fcc mode.
     
     Solution:
-    send av_sync_type to audiohal.
+    when disconnect need quit the release buffer thread.
     
     Verify:
     AH212
     
-    Change-Id: I67af559246a0940c8e0ce3f5879adf2d2018026f
+    Change-Id: Ib52af5559aa58893bc41d64d1f5cf8a62065cb96
     Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
 
 ========================================
 
-Release time: 2021-12-15-21-35
+Release time: 2021-12-20-10-50
 
 ========================================
 
