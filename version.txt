@@ -5,29 +5,29 @@ Version: v2.0
 ========================================
 
 Git commit:
-commit 8bcdb8eea18e0d152069bd11431158935d406fd6
+commit 9ad920aff0bf2a70c9228a3c2725c9a613e0c7a7
 Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Thu Dec 16 14:50:10 2021 +0800
+Date:   Wed Dec 22 20:01:52 2021 +0800
 
-    tsplayer: CB1 can not play when switch channel on fcc mode. [1/1]
+    tsplayer: CF1 enable multi-instance default. [1/1]
     
-    PD#SWPL-67712
+    PD#SWPL-67799
     
     Problem:
-    can not play when switch channel on fcc mode.
+    tsplayer is tunnel mode defautlt.
     
     Solution:
-    when disconnect need quit the release buffer thread.
+    enable multi-instance default.
     
     Verify:
     AH212
     
-    Change-Id: Ib52af5559aa58893bc41d64d1f5cf8a62065cb96
+    Change-Id: Ibe8812d74308a51d9d42c919172a2cd54097fdcc
     Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
 
 ========================================
 
-Release time: 2021-12-20-10-50
+Release time: 2021-12-23-15-59
 
 ========================================
 
