@@ -5,29 +5,34 @@ Version: v2.0
 ========================================
 
 Git commit:
-commit 9ad920aff0bf2a70c9228a3c2725c9a613e0c7a7
+commit 064058f8e15a6e64fdeb7fc4db69b81d34a57bd4
 Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Wed Dec 22 20:01:52 2021 +0800
+Date:   Tue Dec 28 14:51:27 2021 +0800
 
-    tsplayer: CF1 enable multi-instance default. [1/1]
+    tsplayer: CB1 audio catchtime not right. [1/1]
     
-    PD#SWPL-67799
+    PD#RSP-3030
     
     Problem:
-    tsplayer is tunnel mode defautlt.
+    1.onlyaudio catchtime not right nontunnelmode.
+    2.4k 30fps service play not smooth
+    3.need export /run for nontunnelmode.
+    4.es mode no audio output when twice play.
     
     Solution:
-    enable multi-instance default.
+    1.update the new ts write control from R.
+    2.set the default /run for westeros client.
+    3.not create audio patch when es mode.
     
     Verify:
     AH212
     
-    Change-Id: Ibe8812d74308a51d9d42c919172a2cd54097fdcc
+    Change-Id: I99c6379cd7098766eaa190342cf506e8f149f77c
     Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
 
 ========================================
 
-Release time: 2021-12-23-15-59
+Release time: 2022-01-04-16-10
 
 ========================================
 
