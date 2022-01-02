@@ -5,34 +5,29 @@ Version: v2.0
 ========================================
 
 Git commit:
-commit 064058f8e15a6e64fdeb7fc4db69b81d34a57bd4
+commit a173765b899b085167eea7cf07a1cfc6bba2a7b6
 Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Tue Dec 28 14:51:27 2021 +0800
+Date:   Sun Jan 2 16:28:18 2022 +0800
 
-    tsplayer: CB1 audio catchtime not right. [1/1]
+    tsplayer: CF1 support x2_demux es mode. [1/1]
     
-    PD#RSP-3030
+    PD#SWPL-67613
     
     Problem:
-    1.onlyaudio catchtime not right nontunnelmode.
-    2.4k 30fps service play not smooth
-    3.need export /run for nontunnelmode.
-    4.es mode no audio output when twice play.
+    x2_demux can not play es mode.
     
     Solution:
-    1.update the new ts write control from R.
-    2.set the default /run for westeros client.
-    3.not create audio patch when es mode.
+    support x2_demux es mode.
     
     Verify:
-    AH212
+    AM301
     
-    Change-Id: I99c6379cd7098766eaa190342cf506e8f149f77c
+    Change-Id: I4a0b5d5faab7abe6212bcb685be9f1abd3215acf
     Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
 
 ========================================
 
-Release time: 2022-01-04-16-10
+Release time: 2022-01-11-16-37
 
 ========================================
 
