@@ -53,7 +53,7 @@ enum _RenderKey {
     KEY_DEMUX_ID, //int type of value
     KEY_MEDIASYNC_SYNC_MODE, //int value, 0:vmaster,1:amaster,2:pcrmaster
     KEY_VIDEO_FORMAT, //int type of value
-    KEY_VIDEO_FPS, //int type of value
+    KEY_VIDEO_FPS, //int64_t type of value, hight 32bit is numerator,low 32bit is denominator
 };
 
 /*video display window size
@@ -73,9 +73,14 @@ typedef struct _RenderFrameSize {
 } RenderFrameSize;
 
 typedef enum _RenderMsgType {
-    MSG_RELEASE_BUFFER = 100, //the msg type is RenderBuffer
+    //frame buffer is released
+    MSG_RELEASE_BUFFER   = 100, //the msg type is RenderBuffer
+    //frame buffer is displayed
+    MSG_DISPLAYED_BUFFER = 101, //the msg type is RenderBuffer
 
-    MSG_CONNECTED_FAIL = 200, //the msg type is string
+    //render lib connected failed
+    MSG_CONNECTED_FAIL   = 200, //the msg type is string
+    //render lib disconnected failed
     MSG_DISCONNECTED_FAIL, //the msg type is string
 } RenderMsgType;
 
