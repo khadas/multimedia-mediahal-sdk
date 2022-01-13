@@ -5,35 +5,29 @@ Version: v2.0
 ========================================
 
 Git commit:
-commit 7bb294d6b2bc478b25e208b1d6d917e6f6ac2b99
-Author: fei.deng <fei.deng@amlogic.com>
-Date:   Thu Dec 30 19:41:07 2021 +0800
+commit 53ab5b3ea1810d0ec47833db8c1d9c8b3519c71d
+Author: zhipeng.he <zhipeng.he@amlogic.com>
+Date:   Thu Jan 13 17:19:11 2022 +0800
 
-    videorender: CF2 video render lib module [1/1]
+    tsplayer: CB1 Add setting video crop interface. [1/1]
     
-    PD#SWPL-56151
+    PD#SWPL-65090
     
     Problem:
-    1.fix block when close display
-    2.fix crash when stop dispatch thread
-    3.add new feature
+    Add setting video crop interface.
     
     Solution:
-    1.use a new poll
-    2.change stop thread first
-    3.add mediasync tunnel mode
-    4.add mediasync no tunnel mode
-    5.add notify frame displayed to user
+    Add setting video crop interface.
     
     Verify:
-    ap222
+    SC2
     
-    Change-Id: Ifbccf8cea5684053904d64a3afa00696656a43c3
-    Signed-off-by: fei.deng <fei.deng@amlogic.com>
+    Change-Id: I52ac908120626baa60e7441cf122c2f631971e6f
+    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
 
 ========================================
 
-Release time: 2022-01-11-17-14
+Release time: 2022-01-14-16-23
 
 ========================================
 

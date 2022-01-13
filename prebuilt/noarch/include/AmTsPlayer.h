@@ -554,6 +554,24 @@ am_tsplayer_result  AmTsPlayer_getBufferStat(am_tsplayer_handle Hadl, am_tsplaye
 am_tsplayer_result  AmTsPlayer_setVideoWindow(am_tsplayer_handle Hadl,
                                                             int32_t x,int32_t y,
                                                             int32_t width,int32_t height);
+
+/*Video interface*/
+/**
+*\brief:        Set the video crop rect size for specified
+*               AmTsPlayer instance.
+*\inparam:      AmTsPlayer handle.
+*\inparam:      The video crop rect left..
+*\inparam:      The video crop rect top..
+*\inparam:      The video crop rect right..
+*\inparam:      The video crop rect bottom..
+*\return:       The AmTsPlayer result.
+*/
+am_tsplayer_result  AmTsPlayer_setVideoCrop(am_tsplayer_handle Hadl,
+                                                      int32_t left,
+                                                      int32_t top,
+                                                      int32_t right,
+                                                      int32_t bottom);
+
 /**
  *\brief:        Set Surface ptr to specified AmTsPlayer instance.
  *\inparam:      AmTsPlayer handle.
