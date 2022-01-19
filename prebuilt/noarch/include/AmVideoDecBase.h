@@ -43,6 +43,7 @@ typedef struct {
     unsigned int  stbuf_size;
     uint32_t    nDecType;
     int32_t mPlayerInstansNo;
+    int32_t nVideoRecoveryValue;
 } init_param_t;
 
 class AmVideoDecCallback {

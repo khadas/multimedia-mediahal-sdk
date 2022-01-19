@@ -5,29 +5,29 @@ Version: v2.0
 ========================================
 
 Git commit:
-commit 53ab5b3ea1810d0ec47833db8c1d9c8b3519c71d
+commit 09eba95e2a7f5381220d80598eaec51771b93e60
 Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Thu Jan 13 17:19:11 2022 +0800
+Date:   Mon Jan 17 17:20:04 2022 +0800
 
-    tsplayer: CB1 Add setting video crop interface. [1/1]
+    tsplayer: CF2 Add video recovery mode to decoder. [1/1]
     
-    PD#SWPL-65090
+    PD#OTT-27111
     
     Problem:
-    Add setting video crop interface.
+    no command for decoder control error frame.
     
     Solution:
-    Add setting video crop interface.
+    Add params for decoder control error frame.
     
     Verify:
-    SC2
+    AP222
     
-    Change-Id: I52ac908120626baa60e7441cf122c2f631971e6f
+    Change-Id: I92f98c725e4f9fd8543cba17d45829668a9542c2
     Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
 
 ========================================
 
-Release time: 2022-01-18-11-05
+Release time: 2022-01-24-19-36
 
 ========================================
 
