@@ -5,29 +5,29 @@ Version: v2.0
 ========================================
 
 Git commit:
-commit 09eba95e2a7f5381220d80598eaec51771b93e60
+commit 3f1564d5238d2dd32358b54c13a44c8e65ea1933
 Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Mon Jan 17 17:20:04 2022 +0800
+Date:   Mon Jan 24 19:59:30 2022 +0800
 
-    tsplayer: CF2 Add video recovery mode to decoder. [1/1]
+    tsplayer: CB1 esmode can not play when onlyaudio x2_demux. [1/1]
     
-    PD#OTT-27111
+    PD#SWPL-67631
     
     Problem:
-    no command for decoder control error frame.
+    esmode can not play when onlyaudio x2_demux.
     
     Solution:
-    Add params for decoder control error frame.
+    fix issue that esmode can not play when onlyaudio x2_demux.
     
     Verify:
-    AP222
+    t5d
     
-    Change-Id: I92f98c725e4f9fd8543cba17d45829668a9542c2
+    Change-Id: If5db1c232cbe71d08ca005bc58ae1a4f38fb4ec8
     Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
 
 ========================================
 
-Release time: 2022-01-24-19-36
+Release time: 2022-02-18-11-35
 
 ========================================
 
@@ -40,7 +40,6 @@ Header file:
 AmTsPlayer.h
 AmVideoDecBase.h
 MediaSyncInterface.h
-render_lib.h
 resourcemanage.h
 
 Library and Binary file:
