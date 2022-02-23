@@ -526,6 +526,13 @@ am_tsplayer_result  AmTsPlayer_startFast(am_tsplayer_handle Hadl, float scale);
  */
 am_tsplayer_result  AmTsPlayer_stopFast(am_tsplayer_handle Hadl);
 /**
+ *\brief:        Get Fast play speed from specified AmTsPlayer instance.
+ *\inparam:      AmTsPlayer handle.
+ *\outparam:     Fast play speed
+ *\return:       The AmTsPlayer result.
+ */
+am_tsplayer_result  AmTsPlayer_getFastRate(am_tsplayer_handle Hadl, float* scale);
+/**
  *\brief:        Start trick mode for specified AmTsPlayer instance.
  *\inparam:      AmTsPlayer handle.
  *\inparam:      The enum of trick mode type

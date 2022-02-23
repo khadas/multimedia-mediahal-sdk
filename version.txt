@@ -5,33 +5,35 @@ Version: v2.0
 ========================================
 
 Git commit:
-commit 3f1564d5238d2dd32358b54c13a44c8e65ea1933
-Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Mon Jan 24 19:59:30 2022 +0800
+commit 6f5a89738b64d2aa87feb4ab53e097052cd2ff17
+Author: fei.deng <fei.deng@amlogic.com>
+Date:   Thu Mar 10 14:33:29 2022 +0800
 
-    tsplayer: CB1 esmode can not play when onlyaudio x2_demux. [1/1]
+    videorender: CB2 crash in notunnelmode [1/1]
     
-    PD#SWPL-67631
+    PD#SWPL-74608
     
     Problem:
-    esmode can not play when onlyaudio x2_demux.
+    1.crash when set notunnelmode
+    2.build error
     
     Solution:
-    fix issue that esmode can not play when onlyaudio x2_demux.
+    1.fix crash when set notunnelmode
+    2.fix build error
     
     Verify:
-    t5d
+    ap222-base
     
-    Change-Id: If5db1c232cbe71d08ca005bc58ae1a4f38fb4ec8
-    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
+    Change-Id: I030f7583674ea786c9e543493f5986c0269e5bb7
+    Signed-off-by: fei.deng <fei.deng@amlogic.com>
 
 ========================================
 
-Release time: 2022-02-18-11-35
+Release time: 2022-03-11-09-34
 
 ========================================
 
-Builder: zhipeng.he
+Builder: fei.deng
 
 ========================================
 Release file:
@@ -40,6 +42,7 @@ Header file:
 AmTsPlayer.h
 AmVideoDecBase.h
 MediaSyncInterface.h
+render_lib.h
 resourcemanage.h
 
 Library and Binary file:
