@@ -5,35 +5,33 @@ Version: v2.0
 ========================================
 
 Git commit:
-commit 6f5a89738b64d2aa87feb4ab53e097052cd2ff17
-Author: fei.deng <fei.deng@amlogic.com>
-Date:   Thu Mar 10 14:33:29 2022 +0800
+commit cc24e3a14c2d864fa12e32f0b7f4dfb9828de974
+Author: zhipeng.he <zhipeng.he@amlogic.com>
+Date:   Tue Mar 15 17:52:38 2022 +0800
 
-    videorender: CB2 crash in notunnelmode [1/1]
+    tsplayer: CF2 tsplayer support hidevideo for westeros display. [1/1]
     
-    PD#SWPL-74608
+    PD#RSP-3368
     
     Problem:
-    1.crash when set notunnelmode
-    2.build error
+    tsplayer can not support hidevideo for westeros display
     
     Solution:
-    1.fix crash when set notunnelmode
-    2.fix build error
+    tsplayer support hidevideo for westeros display
     
     Verify:
-    ap222-base
+    AH212
     
-    Change-Id: I030f7583674ea786c9e543493f5986c0269e5bb7
-    Signed-off-by: fei.deng <fei.deng@amlogic.com>
+    Change-Id: Icd0da842df30b0320c3b130535712d4ab4a4fc1f
+    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
 
 ========================================
 
-Release time: 2022-03-11-09-34
+Release time: 2022-03-18-11-24
 
 ========================================
 
-Builder: fei.deng
+Builder: zhipeng.he
 
 ========================================
 Release file:

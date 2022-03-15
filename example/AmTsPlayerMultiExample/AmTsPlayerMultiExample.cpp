@@ -345,6 +345,19 @@ void startVideo(TsParams* mTsParams,int number) {
     return;
 }
 
+void hideVideo(TsParams* mTsParams,int number) {
+    printf("index:%d AmTsPlayer_hideVideo g_session:0x%x \n",number,g_session[number]);
+    AmTsPlayer_hideVideo(g_session[number]);
+    return;
+}
+
+void showVideo(TsParams* mTsParams,int number) {
+    printf("index:%d AmTsPlayer_showVideo g_session:0x%x \n",number,g_session[number]);
+    AmTsPlayer_showVideo(g_session[number]);
+    return;
+}
+
+
 
 void printfStatus(TsParams* mTsParams,char ch) {
     int i = 0;
@@ -477,6 +490,14 @@ int main(int argc, char **argv)
                 case 'r':
                     //start video 2 decoding,test
                     startVideo(mTsParams,changNum-1);
+                    break;
+                case 'h':
+                    printf("----hide the video 1\n");
+                    hideVideo(mTsParams,changNum-1);
+                    break;
+                case 's':
+                    printf("----show the video 1\n");
+                    showVideo(mTsParams,changNum-1);
                     break;
                 default:
                     break;
