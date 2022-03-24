@@ -352,6 +352,9 @@ int main(int argc, char **argv)
     am_tsplayer_video_params vparm;
     vparm.codectype = vCodec;
     vparm.pid = vPid;
+    if (tsType == TS_DEMOD) {
+        AmTsPlayer_setPcrPid(session,vPid);
+    }
     AmTsPlayer_setVideoParams(session, &vparm);
     AmTsPlayer_startVideoDecoding(session);
 #if NO_AUDIO
