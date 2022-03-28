@@ -224,11 +224,11 @@ Date:   Fri Mar 18 10:18:33 2022 +0800
 
 ========================================
 
-Release time: 2022-04-12-15-48
+Release time: 2022-04-14-21-01
 
 ========================================
 
-Builder: drm.autobuild
+Builder: zhipeng.he
 
 ========================================
 Release file:
@@ -237,23 +237,24 @@ Header file:
 AmTsPlayer.h
 AmVideoDecBase.h
 MediaSyncInterface.h
+render_lib.h
 resourcemanage.h
 
-Library file:
+Library and Binary file:
+AmTsPlayerExample
+AmTsPlayerMultiExample
 libmediahal_mediasync.so
 libmediahal_resman.so
 libmediahal_tsplayer.so
 libmediahal_videodec.so
 libmediahal_videorender.so
+
 Example file:
 AmTsPlayerExample.cpp
 Makefile
+
 Multi_Example file:
 AmTsPlayerMultiExample.cpp
 Makefile
-
-Binary  file:
-AmTsPlayerExample
-AmTsPlayerMultiExample
 
 ========================================
