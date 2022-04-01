@@ -5,31 +5,29 @@ Version: v2.0
 ========================================
 
 Git commit:
-commit 1af0d860bc08a40f51a3b71d6ff036072e47d2d0
+commit 2b1e30ede88f7a830cb8730f839de5acad81c380
 Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Thu Mar 17 15:58:23 2022 +0800
+Date:   Fri Apr 1 16:46:29 2022 +0800
 
-    tsplayer: CF2 set windowsize and get pts for render_lib. [1/2]
+    tsplayer: CF1 tsplayer support keep frame for westeros display. [1/1]
     
-    PD#SWPL-73333
+    PD#SWPL-72334
     
     Problem:
-    1.not set windowsize and get pts for render_lib.
-    2.cannot operate the video_global_output on multimode.
+    tsplayer can not support keep frame for westeros display
     
     Solution:
-    1.set windowsize and get pts for render_lib.
-    2.operate the video_global_output only tunnelmode.
+    tsplayer support keep frame for westeros display
     
     Verify:
-    AH212/AP222
+    AH212
     
-    Change-Id: I8bd3cf48c3ec477f8dbc02324f05a84fc7c6c078
+    Change-Id: Ic97a44bd69a8d725ff4859d87637889221298f5f
     Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
 
 ========================================
 
-Release time: 2022-03-24-13-21
+Release time: 2022-04-02-16-00
 
 ========================================
 
