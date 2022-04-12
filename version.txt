@@ -1,10 +1,136 @@
 =========RELEALSE NOTE=================
 
-Version: v2.0
+Version: V3.2.27-g8706096
 
 ========================================
 
 Git commit:
+commit 8706096d7735ac8910c4538e88406d1fa1c66de7
+Author: zhipeng.he <zhipeng.he@amlogic.com>
+Date:   Sat Mar 5 22:57:28 2022 +0800
+
+    mediahal: CF1 linux mediahal_sdk auto release  [1/1]
+    
+    PD#SWPL-72624
+    
+    Problem:
+    media_hal can not auto release on autobuild
+    
+    Solution:
+    linux mediahal_sdk auto release
+    
+    Verify:
+    SC2
+    
+    Change-Id: Ibb6e60ca2d4a14d53b3cc3be80a6970851866adb
+    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
+
+commit 32592201bd6d4b51576b48ba07ea94832b9da140
+Author: fei.deng <fei.deng@amlogic.com>
+Date:   Thu Apr 7 19:33:22 2022 +0800
+
+    renderlib: CB2 fix render server crash [1/1]
+    
+    PD#SWPL-77860
+    
+    Problem:
+    1.render server crash when stop dvbtest
+    
+    Solution:
+    1.change the sequence of render lib disconnect
+    2.add a feature to set videotunnel id
+    3.support dual video when westeros plugin selected
+    4.fix dead lock when exit dvbtest
+    5.use a thread to process uevent and socket connection
+    
+    Verify:
+    ah222
+    
+    Change-Id: I4ec04144f2363c577f2d1ab98ff3a1f217684cd0
+    Signed-off-by: fei.deng <fei.deng@amlogic.com>
+
+commit 4a5b15f4ae1844b44151d33cfb3374fbeb42f33b
+Author: houren.wang <houren.wang@amlogic.com>
+Date:   Tue Mar 15 18:25:57 2022 +0800
+
+    AmTsPlayer: CB0 fix write audio ES crashed issue in 64bit version. [1/1]
+    
+    PD#SWPL-75037
+    
+    Problem:
+    1) pointer cast to int variable will be truncated.
+    2) after stop audio decoding, mTransBuf has been released.
+    
+    Solution:
+    1) change param type to ssize_t instead of int.
+    2) release mTransBuf in Am_AudioHalWrapper destructor.
+    
+    Verify:
+    AH212
+    
+    Change-Id: Icd336e5b33c0242dc65cf0cb3b9b44587c0a6981
+    Signed-off-by: houren.wang <houren.wang@amlogic.com>
+
+commit 54c3db8296743c9f3aeade80ab979a999b80f095
+Author: yunmin.chen <yunmin.chen@amlogic.com>
+Date:   Tue Dec 28 21:02:09 2021 +0800
+
+    mediahal: CF1 linux add version manager  [1/1]
+    
+    PD#SWPL-48769
+    
+    Problem:
+    linux add version manager
+    
+    Solution:
+    linux add version manager
+    
+    Verify:
+    SC2
+    
+    Change-Id: I14cf4d67ce71721abbcf8823563da283120a927f
+    Signed-off-by: yunmin.chen <yunmin.chen@amlogic.com>
+
+commit 2d5549e724638ee35ed3b331204e4335d55e6397
+Author: yichen.li <yichen.li@amlogic.com>
+Date:   Fri Mar 25 22:08:57 2022 +0800
+
+    media_hal: CF1 fix depend build error [1/1]
+    
+    PD#SWPL-77006
+    
+    Problem:
+    can't get media_hal internal lib
+    
+    Solution:
+    used build path
+    
+    Verify:
+    DRM_Build
+    
+    Change-Id: I99fbafbaa998e48a4a35be37a8a540b0aa70f3cd
+    Signed-off-by: yichen.li <yichen.li@amlogic.com>
+
+commit 38f7354f776a7c814aa21a5e1e73142bbef0e1d6
+Author: yichen.li <yichen.li@amlogic.com>
+Date:   Fri Mar 25 22:08:57 2022 +0800
+
+    media_hal: CF1 fix 64bit build error [1/1]
+    
+    PD#SWPL-77006
+    
+    Problem:
+    in 64 bit build point is eight byte
+    
+    Solution:
+    used int64_t
+    
+    Verify:
+    DRM_Build
+    
+    Change-Id: Ia15aa344f87f8921458ac19943769c90103d5b59
+    Signed-off-by: yichen.li <yichen.li@amlogic.com>
+
 commit 2b1e30ede88f7a830cb8730f839de5acad81c380
 Author: zhipeng.he <zhipeng.he@amlogic.com>
 Date:   Fri Apr 1 16:46:29 2022 +0800
@@ -25,13 +151,84 @@ Date:   Fri Apr 1 16:46:29 2022 +0800
     Change-Id: Ic97a44bd69a8d725ff4859d87637889221298f5f
     Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
 
+commit d04811555f25609cbde300d6b2e3b3932e5117d9
+Author: fei.deng <fei.deng@amlogic.com>
+Date:   Fri Mar 25 20:36:29 2022 +0800
+
+    renderserver: CF1 integrate videosink with socket [1/1]
+    
+    PD#SWPL-75250
+    
+    Problem:
+    1.integrate videosink with socket
+    2.Video flicker when gstreamer playing
+    
+    Solution:
+    1.integrate videosink with socket
+    2.fix sink manager crash when socket close
+    3.use env to control wl_buffer recycling
+    4.fix mediasync mode error when caller had set
+    5.fix no output frame to compositor when tsplayer
+    playing special ts file
+    6.add print pid and thread id in logger
+    
+    Verify:
+    ar321
+    
+    Change-Id: I4f88e3a20494939b4581d27fce80f577ef130b2b
+    Signed-off-by: fei.deng <fei.deng@amlogic.com>
+
+commit 1af0d860bc08a40f51a3b71d6ff036072e47d2d0
+Author: zhipeng.he <zhipeng.he@amlogic.com>
+Date:   Thu Mar 17 15:58:23 2022 +0800
+
+    tsplayer: CF2 set windowsize and get pts for render_lib. [1/2]
+    
+    PD#SWPL-73333
+    
+    Problem:
+    1.not set windowsize and get pts for render_lib.
+    2.cannot operate the video_global_output on multimode.
+    
+    Solution:
+    1.set windowsize and get pts for render_lib.
+    2.operate the video_global_output only tunnelmode.
+    
+    Verify:
+    AH212/AP222
+    
+    Change-Id: I8bd3cf48c3ec477f8dbc02324f05a84fc7c6c078
+    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
+
+commit e84763851534504640ca97f5c0dd5d321da48896
+Author: fei.deng <fei.deng@amlogic.com>
+Date:   Fri Mar 18 10:18:33 2022 +0800
+
+    renderserver: CF1 add videotunnel display [1/1]
+    
+    PD#SWPL-75018
+    
+    Problem:
+    add a new feature to support displaying
+    frame with videotunnel
+    
+    Solution:
+    add a new feature to support displaying
+    frame with videotunnel
+    
+    Verify:
+    ar321
+    
+    Change-Id: Ia7fa5d0623725b9c8d4bb5c9f0d38d99d6eb1781
+    Signed-off-by: fei.deng <fei.deng@amlogic.com>
+
 ========================================
 
-Release time: 2022-04-02-16-00
+Release time: 2022-04-12-15-48
 
 ========================================
 
-Builder: zhipeng.he
+Builder: drm.autobuild
 
 ========================================
 Release file:
@@ -40,24 +237,23 @@ Header file:
 AmTsPlayer.h
 AmVideoDecBase.h
 MediaSyncInterface.h
-render_lib.h
 resourcemanage.h
 
-Library and Binary file:
-AmTsPlayerExample
-AmTsPlayerMultiExample
+Library file:
 libmediahal_mediasync.so
 libmediahal_resman.so
 libmediahal_tsplayer.so
 libmediahal_videodec.so
 libmediahal_videorender.so
-
 Example file:
 AmTsPlayerExample.cpp
 Makefile
-
 Multi_Example file:
 AmTsPlayerMultiExample.cpp
 Makefile
+
+Binary  file:
+AmTsPlayerExample
+AmTsPlayerMultiExample
 
 ========================================

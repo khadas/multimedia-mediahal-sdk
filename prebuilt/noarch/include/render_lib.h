@@ -48,7 +48,7 @@ enum _RenderKey {
     KEY_FRAME_SIZE, //set/get frame size,value type is RenderFrameSize
     KEY_VIDEO_FORMAT, //set/get video pixel format, value type is int,detail see RenderVideoFormat enum
     KEY_VIDEO_FPS, //set/get video framerate, value type is int64_t, hight 32bit is numerator,low 32bit is denominator
-    KEY_VIDEO_PIP, //set/get pip window flag, value type is int, 0:prime video,1:pip
+    KEY_VIDEO_PIP, //set/get pip window flag, value type is int, 0:prime video,1:pip,this flag must set before render_connect
     KEY_FRAME_DROPPED,//get dropped video frames count,value type is int
     KEY_ZORDER, //set/get zorder of video plane,value type is int
     KEY_MEDIASYNC_INSTANCE_ID = 400, //set/get mediasync instance id, value type is int
@@ -63,6 +63,8 @@ enum _RenderKey {
     KEY_MEDIASYNC_AUDIO_MUTE, //set/get
     KEY_MEDIASYNC_SOURCETYPE, //set/get
     KEY_MEDIASYNC_VIDEOFRAME, //set/get
+    //set/get video tunnel instance id when videotunnel plugin be selected,value type is int,this key must set before render_connect
+    KEY_VIDEOTUNNEL_ID = 450,
 };
 
 /*video display window size
