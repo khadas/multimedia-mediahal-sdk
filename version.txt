@@ -1,10 +1,97 @@
 =========RELEALSE NOTE=================
 
-Version: V3.2.27-g8706096
+Version: V3.2.31-g1534edd
 
 ========================================
 
 Git commit:
+commit 1534edd2439271cb89e1c9c630af4a1e2ffac35f
+Author: zhipeng.he <zhipeng.he@amlogic.com>
+Date:   Fri Apr 15 15:08:17 2022 +0800
+
+    tsplayer: CB1 not avsync for renderlib westeros diplay. [1/1]
+    
+    PD#SWPL-77246
+    
+    Problem:
+    tsplayer use render_lib not avsync for westeros diplay.
+    
+    Solution:
+    fix the issue not avsync for render_lib westeros.
+    
+    Verify:
+    AH212
+    
+    Change-Id: Ief0866431a78a7622a602ac9b56a1b16eb6f5b54
+    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
+
+commit 6ae2f29c19555469abc676e5177eef93a845a0f6
+Author: Chao Yin <chao.yin@amlogic.com>
+Date:   Fri Apr 15 07:20:20 2022 +0000
+
+    TsPlayer: CB2 Fix seek to the beginning error [1/1]
+    
+    PD#SWPL-74576
+    
+    Problem:
+    mVideoSesEsData in hwdemuxwrap was not reset after
+    seek, and seepdcontorl in tsplayer use wrong value,
+    cannot write data continuously.
+    
+    Solution:
+    reset mVideoSesEsData correctly
+    
+    Verify:
+    S905X4
+    
+    Change-Id: I8b755aeba5b869479e91e6e55e870acd7432b254
+    Signed-off-by: Chao Yin <chao.yin@amlogic.com>
+
+commit 99b3667c2c190d7c962298b57da883d9f0aeedaa
+Author: fei.deng <fei.deng@amlogic.com>
+Date:   Fri Apr 15 14:30:53 2022 +0800
+
+    renderlib: CB2 not show pip [1/1]
+    
+    PD#SWPL-78811
+    
+    Problem:
+    1.av not sync
+    2.not show pip
+    
+    Solution:
+    1.continue do next action when wayland
+    open fail
+    2.set default solution to 0
+    
+    Verify:
+    ap222
+    
+    Change-Id: I663ddc8f4404b1588f929a109aabe6ff91a62b7c
+    Signed-off-by: fei.deng <fei.deng@amlogic.com>
+
+commit ea0d3fa12cb7da024eee453be6f3dd486a7aed91
+Author: jianchuan.ping <jianchuan.ping@amlogic.com>
+Date:   Fri Apr 1 10:26:34 2022 +0800
+
+    TsPlayer: CB1 Not set hasvideo info to audio_hal. [1/1]
+    
+    PD#SWPL-75430
+    
+    Problem:
+    Audio_hal not do sync for not have video info.
+    Need impliment audio pause and resume.
+    
+    Solution:
+    Deliver hasvideo info
+    Add impliment pause and resume
+    
+    Verify:
+    AP222
+    
+    Change-Id: I4799bafe9422b410fda429dac34aa291199ce039
+    Signed-off-by: jianchuan.ping <jianchuan.ping@amlogic.com>
+
 commit 8706096d7735ac8910c4538e88406d1fa1c66de7
 Author: zhipeng.he <zhipeng.he@amlogic.com>
 Date:   Sat Mar 5 22:57:28 2022 +0800
@@ -131,104 +218,13 @@ Date:   Fri Mar 25 22:08:57 2022 +0800
     Change-Id: Ia15aa344f87f8921458ac19943769c90103d5b59
     Signed-off-by: yichen.li <yichen.li@amlogic.com>
 
-commit 2b1e30ede88f7a830cb8730f839de5acad81c380
-Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Fri Apr 1 16:46:29 2022 +0800
+========================================
 
-    tsplayer: CF1 tsplayer support keep frame for westeros display. [1/1]
-    
-    PD#SWPL-72334
-    
-    Problem:
-    tsplayer can not support keep frame for westeros display
-    
-    Solution:
-    tsplayer support keep frame for westeros display
-    
-    Verify:
-    AH212
-    
-    Change-Id: Ic97a44bd69a8d725ff4859d87637889221298f5f
-    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
-
-commit d04811555f25609cbde300d6b2e3b3932e5117d9
-Author: fei.deng <fei.deng@amlogic.com>
-Date:   Fri Mar 25 20:36:29 2022 +0800
-
-    renderserver: CF1 integrate videosink with socket [1/1]
-    
-    PD#SWPL-75250
-    
-    Problem:
-    1.integrate videosink with socket
-    2.Video flicker when gstreamer playing
-    
-    Solution:
-    1.integrate videosink with socket
-    2.fix sink manager crash when socket close
-    3.use env to control wl_buffer recycling
-    4.fix mediasync mode error when caller had set
-    5.fix no output frame to compositor when tsplayer
-    playing special ts file
-    6.add print pid and thread id in logger
-    
-    Verify:
-    ar321
-    
-    Change-Id: I4f88e3a20494939b4581d27fce80f577ef130b2b
-    Signed-off-by: fei.deng <fei.deng@amlogic.com>
-
-commit 1af0d860bc08a40f51a3b71d6ff036072e47d2d0
-Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Thu Mar 17 15:58:23 2022 +0800
-
-    tsplayer: CF2 set windowsize and get pts for render_lib. [1/2]
-    
-    PD#SWPL-73333
-    
-    Problem:
-    1.not set windowsize and get pts for render_lib.
-    2.cannot operate the video_global_output on multimode.
-    
-    Solution:
-    1.set windowsize and get pts for render_lib.
-    2.operate the video_global_output only tunnelmode.
-    
-    Verify:
-    AH212/AP222
-    
-    Change-Id: I8bd3cf48c3ec477f8dbc02324f05a84fc7c6c078
-    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
-
-commit e84763851534504640ca97f5c0dd5d321da48896
-Author: fei.deng <fei.deng@amlogic.com>
-Date:   Fri Mar 18 10:18:33 2022 +0800
-
-    renderserver: CF1 add videotunnel display [1/1]
-    
-    PD#SWPL-75018
-    
-    Problem:
-    add a new feature to support displaying
-    frame with videotunnel
-    
-    Solution:
-    add a new feature to support displaying
-    frame with videotunnel
-    
-    Verify:
-    ar321
-    
-    Change-Id: Ia7fa5d0623725b9c8d4bb5c9f0d38d99d6eb1781
-    Signed-off-by: fei.deng <fei.deng@amlogic.com>
+Release time: 2022-04-16-15-28
 
 ========================================
 
-Release time: 2022-04-14-21-01
-
-========================================
-
-Builder: zhipeng.he
+Builder: drm.autobuild
 
 ========================================
 Release file:
@@ -237,24 +233,23 @@ Header file:
 AmTsPlayer.h
 AmVideoDecBase.h
 MediaSyncInterface.h
-render_lib.h
 resourcemanage.h
 
-Library and Binary file:
-AmTsPlayerExample
-AmTsPlayerMultiExample
+Library file:
 libmediahal_mediasync.so
 libmediahal_resman.so
 libmediahal_tsplayer.so
 libmediahal_videodec.so
 libmediahal_videorender.so
-
 Example file:
 AmTsPlayerExample.cpp
 Makefile
-
 Multi_Example file:
 AmTsPlayerMultiExample.cpp
 Makefile
+
+Binary  file:
+AmTsPlayerExample
+AmTsPlayerMultiExample
 
 ========================================

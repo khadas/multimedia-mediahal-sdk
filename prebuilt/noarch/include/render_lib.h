@@ -88,6 +88,8 @@ typedef enum _RenderMsgType {
     MSG_RELEASE_BUFFER   = 100, //the msg type is RenderBuffer
     //frame buffer is displayed
     MSG_DISPLAYED_BUFFER = 101, //the msg type is RenderBuffer
+    //the frame buffer is droped
+    MSG_DROPED_BUFFER = 102,//the msg type is RenderBuffer
 
     //render lib connected failed
     MSG_CONNECTED_FAIL   = 200, //the msg type is string
@@ -381,6 +383,25 @@ int render_mediasync_get_current_audio_pts(void *handle, int64_t *pts);
  * @return int 0 success, -1 if failed
  */
 int render_mediasync_get_playback_rate(void *handle, float *scale);
+
+/**
+ * @brief queue pts that output from demux to mediasync for a/v sync
+ *
+ * @param handle a handle of render device that was opened
+ * @param ptsUs the pts that output from demux, the unit is Us
+ * @param size the frame size or 0 if unknow
+ * @return int 0 success, -1 if failed
+ */
+int render_mediasync_queue_demux_pts(void *handle, int64_t ptsUs, uint32_t size);
+
+/**
+ * @brief set user print tag to render lib,the log tag will reset to it
+ * is set tag to null,render lib print default tag
+ *
+ * @param handle a handle of render device that was opened
+ * @param tag user log tag
+ */
+void render_set_user_print_tag(void *handle, char *tag);
 
 #ifdef  __cplusplus
 }
