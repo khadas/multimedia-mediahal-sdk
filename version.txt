@@ -1,10 +1,35 @@
 =========RELEALSE NOTE=================
 
-Version: V3.2.33-g73c2689
+Version: V3.2.34-ge63657b
 
 ========================================
 
 Git commit:
+commit e63657b00513257ae2b994ab80ccbb9feb6a39f2
+Author: fei.deng <fei.deng@amlogic.com>
+Date:   Mon Apr 18 11:37:43 2022 +0800
+
+    renderlib: CB1 crash when tsplay dual video [1/1]
+    
+    PD#SWPL-79013
+    
+    Problem:
+    1.crash when tsplay dual video
+    2.set a unified label to distinguish renderlib
+    instances
+    3.frames drop count error
+    
+    Solution:
+    1.fix random crash when std::unordered_map earse item
+    2.Added multi-instance unified label
+    3.fix droped frame count error
+    
+    Verify:
+    ap212
+    
+    Change-Id: Ice4f985ca7d83cce7789d3aa74fb58fff25055be
+    Signed-off-by: fei.deng <fei.deng@amlogic.com>
+
 commit 73c2689cbb37c02e35d92f7b7fbeba35f7ef4a6a
 Author: zhipeng.he <zhipeng.he@amlogic.com>
 Date:   Sat Apr 16 14:27:12 2022 +0800
@@ -198,29 +223,9 @@ Date:   Tue Mar 15 18:25:57 2022 +0800
     Change-Id: Icd336e5b33c0242dc65cf0cb3b9b44587c0a6981
     Signed-off-by: houren.wang <houren.wang@amlogic.com>
 
-commit 54c3db8296743c9f3aeade80ab979a999b80f095
-Author: yunmin.chen <yunmin.chen@amlogic.com>
-Date:   Tue Dec 28 21:02:09 2021 +0800
-
-    mediahal: CF1 linux add version manager  [1/1]
-    
-    PD#SWPL-48769
-    
-    Problem:
-    linux add version manager
-    
-    Solution:
-    linux add version manager
-    
-    Verify:
-    SC2
-    
-    Change-Id: I14cf4d67ce71721abbcf8823563da283120a927f
-    Signed-off-by: yunmin.chen <yunmin.chen@amlogic.com>
-
 ========================================
 
-Release time: 2022-04-18-14-16
+Release time: 2022-04-18-20-45
 
 ========================================
 

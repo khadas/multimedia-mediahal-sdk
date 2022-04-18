@@ -234,6 +234,20 @@ typedef enum {
 void *render_open(char *name);
 
 /**
+ * @brief open a render lib,render lib will open a compositer with the special
+ * render name and with a caller tag,this tag can set to NULL,it will equal
+ * render_open
+ *
+ * @param name the render device name
+ * the name value list is:
+ * wayland will open wayland render
+ * videotunnel will open tunnel render
+ * @param userTag a tag print by user defined
+ * @return void* a handle of render lib , return null if failed
+ */
+void *render_open_with_tag(char *name, char *userTag);
+
+/**
  * registe callback to render lib, render device will call
  * these callbacks to send msg to user or get some value from user
  * @param handle a handle of render device that was opened
@@ -393,15 +407,6 @@ int render_mediasync_get_playback_rate(void *handle, float *scale);
  * @return int 0 success, -1 if failed
  */
 int render_mediasync_queue_demux_pts(void *handle, int64_t ptsUs, uint32_t size);
-
-/**
- * @brief set user print tag to render lib,the log tag will reset to it
- * is set tag to null,render lib print default tag
- *
- * @param handle a handle of render device that was opened
- * @param tag user log tag
- */
-void render_set_user_print_tag(void *handle, char *tag);
 
 #ifdef  __cplusplus
 }
