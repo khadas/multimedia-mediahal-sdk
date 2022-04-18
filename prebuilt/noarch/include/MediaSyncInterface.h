@@ -22,7 +22,8 @@ typedef enum {
     MEDIA_VIDEO = 0,
     MEDIA_AUDIO = 1,
     MEDIA_DMXPCR = 2,
-    MEDIA_OTHER = 3,
+    MEDIA_SUBTITLE = 3,
+    MEDIA_COMMON = 4,
     MEDIA_TYPE_MAX = 255,
 }sync_stream_type;
 
