@@ -1,10 +1,30 @@
 =========RELEALSE NOTE=================
 
-Version: V3.2.34-ge63657b
+Version: V3.2.35-g8967697
 
 ========================================
 
 Git commit:
+commit 8967697cac0aa2ac27b8eecf0845b2ea565fb3f5
+Author: zhipeng.he <zhipeng.he@amlogic.com>
+Date:   Thu Apr 21 15:41:50 2022 +0800
+
+    tsplayer: CF1 improve setsurface interface. [1/1]
+    
+    PD#RSP-3550
+    
+    Problem:
+    setsurface interface maybe loss the tunnelid
+    
+    Solution:
+    improve setsurface interface.
+    
+    Verify:
+    AP232
+    
+    Change-Id: I1506239e295c1e531015e56f732e8c3a1e46655c
+    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
+
 commit e63657b00513257ae2b994ab80ccbb9feb6a39f2
 Author: fei.deng <fei.deng@amlogic.com>
 Date:   Mon Apr 18 11:37:43 2022 +0800
@@ -201,31 +221,9 @@ Date:   Thu Apr 7 19:33:22 2022 +0800
     Change-Id: I4ec04144f2363c577f2d1ab98ff3a1f217684cd0
     Signed-off-by: fei.deng <fei.deng@amlogic.com>
 
-commit 4a5b15f4ae1844b44151d33cfb3374fbeb42f33b
-Author: houren.wang <houren.wang@amlogic.com>
-Date:   Tue Mar 15 18:25:57 2022 +0800
-
-    AmTsPlayer: CB0 fix write audio ES crashed issue in 64bit version. [1/1]
-    
-    PD#SWPL-75037
-    
-    Problem:
-    1) pointer cast to int variable will be truncated.
-    2) after stop audio decoding, mTransBuf has been released.
-    
-    Solution:
-    1) change param type to ssize_t instead of int.
-    2) release mTransBuf in Am_AudioHalWrapper destructor.
-    
-    Verify:
-    AH212
-    
-    Change-Id: Icd336e5b33c0242dc65cf0cb3b9b44587c0a6981
-    Signed-off-by: houren.wang <houren.wang@amlogic.com>
-
 ========================================
 
-Release time: 2022-04-18-20-45
+Release time: 2022-04-21-15-56
 
 ========================================
 
