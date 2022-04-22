@@ -1,11 +1,31 @@
 =========RELEALSE NOTE=================
 
-Version: V3.2.35-g8967697
+Version: V3.2.36-g9e0c385
 
 ========================================
 
 Git commit:
-commit 8967697cac0aa2ac27b8eecf0845b2ea565fb3f5
+commit 9e0c385f1ad34a5b555888569fa68ef078588f5e
+Author: zhipeng.he <zhipeng.he@amlogic.com>
+Date:   Thu Mar 31 17:29:47 2022 +0800
+
+    tsplayer: CB1 fix the crash when mVDAAdaptor is null. [1/1]
+    
+    PD#SWPL-76210
+    
+    Problem:
+    crash when mVDAAdaptor is null.
+    
+    Solution:
+    fix the crash when mVDAAdaptor is null.
+    
+    Verify:
+    AH212
+    
+    Change-Id: I1e790ce449337c354ebb80c0db89c0c277f6846a
+    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
+
+commit 30a46545060965249adf987ccbbc5fade6933e29
 Author: zhipeng.he <zhipeng.he@amlogic.com>
 Date:   Thu Apr 21 15:41:50 2022 +0800
 
@@ -197,33 +217,9 @@ Date:   Sat Mar 5 22:57:28 2022 +0800
     Change-Id: Ibb6e60ca2d4a14d53b3cc3be80a6970851866adb
     Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
 
-commit 32592201bd6d4b51576b48ba07ea94832b9da140
-Author: fei.deng <fei.deng@amlogic.com>
-Date:   Thu Apr 7 19:33:22 2022 +0800
-
-    renderlib: CB2 fix render server crash [1/1]
-    
-    PD#SWPL-77860
-    
-    Problem:
-    1.render server crash when stop dvbtest
-    
-    Solution:
-    1.change the sequence of render lib disconnect
-    2.add a feature to set videotunnel id
-    3.support dual video when westeros plugin selected
-    4.fix dead lock when exit dvbtest
-    5.use a thread to process uevent and socket connection
-    
-    Verify:
-    ah222
-    
-    Change-Id: I4ec04144f2363c577f2d1ab98ff3a1f217684cd0
-    Signed-off-by: fei.deng <fei.deng@amlogic.com>
-
 ========================================
 
-Release time: 2022-04-21-15-56
+Release time: 2022-04-22-13-47
 
 ========================================
 
