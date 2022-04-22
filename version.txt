@@ -1,10 +1,50 @@
 =========RELEALSE NOTE=================
 
-Version: V3.2.37-geadce9b
+Version: V3.3.39-g93ef740
 
 ========================================
 
 Git commit:
+commit 93ef7409fedb9e4b8a7401fce87c7d3a37286823
+Author: zhipeng.he <zhipeng.he@amlogic.com>
+Date:   Wed Apr 13 17:10:36 2022 +0800
+
+    amvideodec: CF2 support play audio after stop video on x2_demux. [1/1]
+    
+    PD#TV-48789
+    
+    Problem:
+    can not play audio after stop video on x2_demux.
+    
+    Solution:
+    support play audio after stop video on x2_demux.
+    
+    Verify:
+    AM301
+    
+    Change-Id: Ifabdba06a344a91efd30b47d444267fc11b18c88
+    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
+
+commit ce9102e37ad5a082049884a05a87aadcd29dcc2e
+Author: zhipeng.he <zhipeng.he@amlogic.com>
+Date:   Fri Apr 22 16:24:52 2022 +0800
+
+    media_hal: CF2 linux media_hal use odd number as version number. [1/1]
+    
+    PD#SWPL-72624
+    
+    Problem:
+    linux media_hal use an even number as verion number.
+    
+    Solution:
+    linux media_hal use odd number as version number.
+    
+    Verify:
+    All
+    
+    Change-Id: I4eca4d3d3c64ed370a7f819a000a8e21127d3fd0
+    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
+
 commit eadce9b5c450d232212fd5c141ebb53aa79b434a
 Author: wenli.xu <wenli.xu@amlogic.com>
 Date:   Thu Mar 31 17:12:58 2022 +0800
@@ -172,54 +212,9 @@ Date:   Fri Apr 15 07:20:20 2022 +0000
     Change-Id: I8b755aeba5b869479e91e6e55e870acd7432b254
     Signed-off-by: Chao Yin <chao.yin@amlogic.com>
 
-commit 99b3667c2c190d7c962298b57da883d9f0aeedaa
-Author: fei.deng <fei.deng@amlogic.com>
-Date:   Fri Apr 15 14:30:53 2022 +0800
-
-    renderlib: CB2 not show pip [1/1]
-    
-    PD#SWPL-78811
-    
-    Problem:
-    1.av not sync
-    2.not show pip
-    
-    Solution:
-    1.continue do next action when wayland
-    open fail
-    2.set default solution to 0
-    
-    Verify:
-    ap222
-    
-    Change-Id: I663ddc8f4404b1588f929a109aabe6ff91a62b7c
-    Signed-off-by: fei.deng <fei.deng@amlogic.com>
-
-commit ea0d3fa12cb7da024eee453be6f3dd486a7aed91
-Author: jianchuan.ping <jianchuan.ping@amlogic.com>
-Date:   Fri Apr 1 10:26:34 2022 +0800
-
-    TsPlayer: CB1 Not set hasvideo info to audio_hal. [1/1]
-    
-    PD#SWPL-75430
-    
-    Problem:
-    Audio_hal not do sync for not have video info.
-    Need impliment audio pause and resume.
-    
-    Solution:
-    Deliver hasvideo info
-    Add impliment pause and resume
-    
-    Verify:
-    AP222
-    
-    Change-Id: I4799bafe9422b410fda429dac34aa291199ce039
-    Signed-off-by: jianchuan.ping <jianchuan.ping@amlogic.com>
-
 ========================================
 
-Release time: 2022-04-22-15-55
+Release time: 2022-04-22-21-24
 
 ========================================
 
