@@ -481,6 +481,16 @@ am_tsplayer_result  AmTsPlayer_getCurrentTime(am_tsplayer_handle Hadl, int64_t *
  *\return:       The AmTsPlayer result.
  */
 am_tsplayer_result  AmTsPlayer_getPts(am_tsplayer_handle Hadl, am_tsplayer_stream_type StrType, uint64_t *pts);
+
+/**
+ *\brief:        Get the first pts of specified AmTsPlayer instance.
+ *\inparam:      AmTsPlayer handle.
+ *\inparam:      stream type.
+ *\outparam:     pts.
+ *\return:       The AmTsPlayer result.
+ */
+am_tsplayer_result  AmTsPlayer_getFirstPts(am_tsplayer_handle Hadl, am_tsplayer_stream_type StrType, uint64_t *pts);
+
 /**
  *\brief:        Set the tsync mode for specified AmTsPlayer instance.
  *\inparam:      AmTsPlayer handle.

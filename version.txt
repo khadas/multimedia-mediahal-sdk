@@ -1,10 +1,30 @@
 =========RELEALSE NOTE=================
 
-Version: V3.2.36-g9e0c385
+Version: V3.2.37-geadce9b
 
 ========================================
 
 Git commit:
+commit eadce9b5c450d232212fd5c141ebb53aa79b434a
+Author: wenli.xu <wenli.xu@amlogic.com>
+Date:   Thu Mar 31 17:12:58 2022 +0800
+
+    tsplayer: CF1 add get first pts function [1/1]
+    
+    PD#SWPL-77117
+    
+    Problem:
+    need get first av pts
+    
+    Solution:
+    add get first pts function
+    
+    Verify:
+    ohm
+    
+    Change-Id: I7ecfd306b8f391418b6880918b1b01976edb920a
+    Signed-off-by: wenli.xu <wenli.xu@amlogic.com>
+
 commit 9e0c385f1ad34a5b555888569fa68ef078588f5e
 Author: zhipeng.he <zhipeng.he@amlogic.com>
 Date:   Thu Mar 31 17:29:47 2022 +0800
@@ -197,29 +217,9 @@ Date:   Fri Apr 1 10:26:34 2022 +0800
     Change-Id: I4799bafe9422b410fda429dac34aa291199ce039
     Signed-off-by: jianchuan.ping <jianchuan.ping@amlogic.com>
 
-commit 8706096d7735ac8910c4538e88406d1fa1c66de7
-Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Sat Mar 5 22:57:28 2022 +0800
-
-    mediahal: CF1 linux mediahal_sdk auto release  [1/1]
-    
-    PD#SWPL-72624
-    
-    Problem:
-    media_hal can not auto release on autobuild
-    
-    Solution:
-    linux mediahal_sdk auto release
-    
-    Verify:
-    SC2
-    
-    Change-Id: Ibb6e60ca2d4a14d53b3cc3be80a6970851866adb
-    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
-
 ========================================
 
-Release time: 2022-04-22-13-47
+Release time: 2022-04-22-15-55
 
 ========================================
 
