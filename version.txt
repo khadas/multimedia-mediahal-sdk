@@ -1,10 +1,30 @@
 =========RELEALSE NOTE=================
 
-Version: V3.5.2-g8095105
+Version: V3.5.3-g5d8a520
 
 ========================================
 
 Git commit:
+commit 5d8a520cba545038a1d681c79d8569d2d9909dc8
+Author: zhipeng.he <zhipeng.he@amlogic.com>
+Date:   Fri Apr 22 11:16:04 2022 +0800
+
+    mediasync: CF2 getMediaTime without realtime. [1/1]
+    
+    PD#SWPL-78835
+    
+    Problem:
+    mediasync getMediaTime must with realtime.
+    
+    Solution:
+    mediasync getMediaTime without realtime.
+    
+    Verify:
+    AP222
+    
+    Change-Id: Ibc1956bc65e209c277cc73b661fe7016598783ab
+    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
+
 commit 8095105c52d3bcfe46e1a0e5fbed468fac90c8af
 Author: zhipeng.he <zhipeng.he@amlogic.com>
 Date:   Mon Apr 18 19:36:47 2022 +0800
@@ -192,29 +212,9 @@ Date:   Mon Apr 18 11:37:43 2022 +0800
     Change-Id: Ice4f985ca7d83cce7789d3aa74fb58fff25055be
     Signed-off-by: fei.deng <fei.deng@amlogic.com>
 
-commit 73c2689cbb37c02e35d92f7b7fbeba35f7ef4a6a
-Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Sat Apr 16 14:27:12 2022 +0800
-
-    tsplayer: CB1 send resourceid for new westeros server. [1/1]
-    
-    PD#RSP-3508
-    
-    Problem:
-    send pip flag for new westeros server will crash.
-    
-    Solution:
-    send resourceid for new westeros server.
-    
-    Verify:
-    AH212
-    
-    Change-Id: Ib61188b74d823e52e15e1f3516ee24e47bfab03b
-    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
-
 ========================================
 
-Release time: 2022-04-28-10-59
+Release time: 2022-04-28-16-38
 
 ========================================
 
