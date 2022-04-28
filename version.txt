@@ -1,10 +1,72 @@
 =========RELEALSE NOTE=================
 
-Version: V3.3.39-g93ef740
+Version: V3.5.2-g8095105
 
 ========================================
 
 Git commit:
+commit 8095105c52d3bcfe46e1a0e5fbed468fac90c8af
+Author: zhipeng.he <zhipeng.he@amlogic.com>
+Date:   Mon Apr 18 19:36:47 2022 +0800
+
+    tsplayer: CF2 add set/get ad volume function. [1/1]
+    
+    PD#TV-48835
+    
+    Problem:
+    has not set/get ad volume API.
+    
+    Solution:
+    add set/get ad volume function.
+    
+    Verify:
+    AM301
+    
+    Change-Id: Iaff3fd7eeeab01766d858ddd9e46a2715f2c6e1b
+    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
+
+commit 2d1a2b97b939b77f84a227025b11574abfb26617
+Author: fei.deng <fei.deng@amlogic.com>
+Date:   Tue Apr 26 16:20:12 2022 +0800
+
+    videorenderer: CB2 change vout device to 80 [1/1]
+    
+    PD#SWPL-79859
+    
+    Problem:
+    1.sync with driver,change vout device to 80
+    2.std::list pop item maybe crash when flush
+    
+    Solution:
+    1.sync with driver,change vout device to 80
+    2.add mutex when std::list pop item
+    
+    Verify:
+    ar321
+    
+    Change-Id: Ia6394d3ae5ddc164efe62deeb490007e4646daa0
+    Signed-off-by: fei.deng <fei.deng@amlogic.com>
+
+commit f18ca8b4a5b77ced748993b598e6e59db7f480d1
+Author: yunmin.chen <yunmin.chen@amlogic.com>
+Date:   Fri Apr 22 21:15:08 2022 +0800
+
+    mediahal: CF1 mediahal release [1/1]
+    
+    PD#SWPL-48769
+    
+    Problem:
+    mediahal release
+    
+    Solution:
+    release V3.3
+    
+    Verify:
+    SC2
+    
+    Change-Id: I353f6ae2d922b7ac3e10b18952a924931124104d
+    Signed-off-by: yunmin.chen <yunmin.chen@amlogic.com>
+
 commit 93ef7409fedb9e4b8a7401fce87c7d3a37286823
 Author: zhipeng.he <zhipeng.he@amlogic.com>
 Date:   Wed Apr 13 17:10:36 2022 +0800
@@ -150,71 +212,9 @@ Date:   Sat Apr 16 14:27:12 2022 +0800
     Change-Id: Ib61188b74d823e52e15e1f3516ee24e47bfab03b
     Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
 
-commit 27f61554d4b00a2459233768b1096b6f69222d55
-Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Mon Apr 11 19:42:45 2022 +0800
-
-    tsplayer: CB1 switch audiotrack no avsync. [1/1]
-    
-    PD#SWPL-73780
-    
-    Problem:
-    switch audiotrack no avsync.
-    
-    Solution:
-    update the mediasync and tsplayer code from Android.
-    
-    Verify:
-    AH212
-    
-    Change-Id: Ic8d5cba79438332922e0dc06a3fa94dd591be447
-    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
-
-commit 1534edd2439271cb89e1c9c630af4a1e2ffac35f
-Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Fri Apr 15 15:08:17 2022 +0800
-
-    tsplayer: CB1 not avsync for renderlib westeros diplay. [1/1]
-    
-    PD#SWPL-77246
-    
-    Problem:
-    tsplayer use render_lib not avsync for westeros diplay.
-    
-    Solution:
-    fix the issue not avsync for render_lib westeros.
-    
-    Verify:
-    AH212
-    
-    Change-Id: Ief0866431a78a7622a602ac9b56a1b16eb6f5b54
-    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
-
-commit 6ae2f29c19555469abc676e5177eef93a845a0f6
-Author: Chao Yin <chao.yin@amlogic.com>
-Date:   Fri Apr 15 07:20:20 2022 +0000
-
-    TsPlayer: CB2 Fix seek to the beginning error [1/1]
-    
-    PD#SWPL-74576
-    
-    Problem:
-    mVideoSesEsData in hwdemuxwrap was not reset after
-    seek, and seepdcontorl in tsplayer use wrong value,
-    cannot write data continuously.
-    
-    Solution:
-    reset mVideoSesEsData correctly
-    
-    Verify:
-    S905X4
-    
-    Change-Id: I8b755aeba5b869479e91e6e55e870acd7432b254
-    Signed-off-by: Chao Yin <chao.yin@amlogic.com>
-
 ========================================
 
-Release time: 2022-04-22-21-24
+Release time: 2022-04-28-10-59
 
 ========================================
 

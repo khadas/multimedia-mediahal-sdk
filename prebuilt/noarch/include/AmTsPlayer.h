@@ -692,6 +692,23 @@ am_tsplayer_result  AmTsPlayer_setAudioVolume(am_tsplayer_handle Hadl, int32_t v
  *\return:       The AmTsPlayer result.
  */
 am_tsplayer_result  AmTsPlayer_getAudioVolume(am_tsplayer_handle Hadl, int32_t *volume);
+
+/*Audio interface*/
+/**
+ *\brief:        Set AD volume to specified AmTsPlayer instance .
+ *\inparam:      AmTsPlayer handle.
+ *\inparam:      Volume value.
+ *\return:       The AmTsPlayer result.
+ */
+am_tsplayer_result  AmTsPlayer_setADVolume(am_tsplayer_handle Hadl, int32_t volume);
+/**
+ *\brief:        Get AD volume value from specified AmTsPlayer instance .
+ *\inparam:      AmTsPlayer handle.
+ *\outparam:     Volume value.
+ *\return:       The AmTsPlayer result.
+ */
+am_tsplayer_result  AmTsPlayer_getADVolume(am_tsplayer_handle Hadl, int32_t *volume);
+
 /**
  *\brief:        Set audio stereo mode to specified AmTsPlayer instance .
  *\inparam:      AmTsPlayer handle.
