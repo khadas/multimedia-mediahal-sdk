@@ -1,10 +1,30 @@
 =========RELEALSE NOTE=================
 
-Version: V3.5.5-g3fb0676
+Version: V3.5.6-g6b00ab5
 
 ========================================
 
 Git commit:
+commit 6b00ab55b1e87c355a6ca42a76808b7159d7503f
+Author: zhipeng.he <zhipeng.he@amlogic.com>
+Date:   Wed Apr 13 15:55:31 2022 +0800
+
+    tsplayer: CB1 x2_demux only audio no audio on ts_mode. [1/1]
+    
+    PD#TV-52764
+    
+    Problem:
+    x2_demux only audio no audio on ts_mode.
+    
+    Solution:
+    fix the issue x2_demux only audio no audio on ts_mode.
+    
+    Verify:
+    AM301
+    
+    Change-Id: Id176cecbdfd4d2ab6d6c188adee8cfe11bbd85dc
+    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
+
 commit 3fb0676e6683ef6fe19c626f110c56098a721a86
 Author: zhipeng.he <zhipeng.he@amlogic.com>
 Date:   Thu Apr 28 12:11:38 2022 +0800
@@ -196,29 +216,9 @@ Date:   Thu Mar 31 17:12:58 2022 +0800
     Change-Id: I7ecfd306b8f391418b6880918b1b01976edb920a
     Signed-off-by: wenli.xu <wenli.xu@amlogic.com>
 
-commit 9e0c385f1ad34a5b555888569fa68ef078588f5e
-Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Thu Mar 31 17:29:47 2022 +0800
-
-    tsplayer: CB1 fix the crash when mVDAAdaptor is null. [1/1]
-    
-    PD#SWPL-76210
-    
-    Problem:
-    crash when mVDAAdaptor is null.
-    
-    Solution:
-    fix the crash when mVDAAdaptor is null.
-    
-    Verify:
-    AH212
-    
-    Change-Id: I1e790ce449337c354ebb80c0db89c0c277f6846a
-    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
-
 ========================================
 
-Release time: 2022-05-07-19-01
+Release time: 2022-05-07-20-29
 
 ========================================
 
