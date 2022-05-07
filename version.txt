@@ -1,10 +1,59 @@
 =========RELEALSE NOTE=================
 
-Version: V3.5.3-g5d8a520
+Version: V3.5.5-g3fb0676
 
 ========================================
 
 Git commit:
+commit 3fb0676e6683ef6fe19c626f110c56098a721a86
+Author: zhipeng.he <zhipeng.he@amlogic.com>
+Date:   Thu Apr 28 12:11:38 2022 +0800
+
+    tsplayer: CB1 after av pause,can not resume. [1/2]
+    
+    PD#SWPL-79684
+    
+    Problem:
+    1.after av pause,can not resume on renderlib.
+    2.can not fcc on renderlib
+    
+    Solution:
+    1.fix the issue after av pause,can not resume.
+    2.can fcc on renderlib
+    
+    Verify:
+    AH212
+    
+    Change-Id: Ibe2381d645f1b7223438ae69c0c4ae74d5e3418c
+    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
+
+commit a188ba554c3c186a851125541362e84524467e77
+Author: fei.deng <fei.deng@amlogic.com>
+Date:   Fri May 6 20:34:55 2022 +0800
+
+    videorenderer: CB1 fcc support [1/1]
+    
+    PD#SWPL-80182
+    
+    Problem:
+    1.black screen when fcc chanel switch
+    2.add mediasync key property set
+    
+    Solution:
+    1.add mediasync key property of video work mode
+    2.add mediasync key property of source type
+    3.add mediasync key property of has audio
+    4.add mediasync key property of video latency
+    5.add mediasync key property of start threshold
+    6.refine westeros message logic
+    7.refine anchor pts to mediasync when only video
+    
+    Verify:
+    ah212
+    
+    Change-Id: I54a08190f715cbf495110affb35b225d86bc5c0d
+    Signed-off-by: fei.deng <fei.deng@amlogic.com>
+
 commit 5d8a520cba545038a1d681c79d8569d2d9909dc8
 Author: zhipeng.he <zhipeng.he@amlogic.com>
 Date:   Fri Apr 22 11:16:04 2022 +0800
@@ -167,54 +216,9 @@ Date:   Thu Mar 31 17:29:47 2022 +0800
     Change-Id: I1e790ce449337c354ebb80c0db89c0c277f6846a
     Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
 
-commit 30a46545060965249adf987ccbbc5fade6933e29
-Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Thu Apr 21 15:41:50 2022 +0800
-
-    tsplayer: CF1 improve setsurface interface. [1/1]
-    
-    PD#RSP-3550
-    
-    Problem:
-    setsurface interface maybe loss the tunnelid
-    
-    Solution:
-    improve setsurface interface.
-    
-    Verify:
-    AP232
-    
-    Change-Id: I1506239e295c1e531015e56f732e8c3a1e46655c
-    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
-
-commit e63657b00513257ae2b994ab80ccbb9feb6a39f2
-Author: fei.deng <fei.deng@amlogic.com>
-Date:   Mon Apr 18 11:37:43 2022 +0800
-
-    renderlib: CB1 crash when tsplay dual video [1/1]
-    
-    PD#SWPL-79013
-    
-    Problem:
-    1.crash when tsplay dual video
-    2.set a unified label to distinguish renderlib
-    instances
-    3.frames drop count error
-    
-    Solution:
-    1.fix random crash when std::unordered_map earse item
-    2.Added multi-instance unified label
-    3.fix droped frame count error
-    
-    Verify:
-    ap212
-    
-    Change-Id: Ice4f985ca7d83cce7789d3aa74fb58fff25055be
-    Signed-off-by: fei.deng <fei.deng@amlogic.com>
-
 ========================================
 
-Release time: 2022-04-28-16-38
+Release time: 2022-05-07-19-01
 
 ========================================
 

@@ -57,12 +57,13 @@ enum _RenderKey {
     KEY_MEDIASYNC_SYNC_MODE, //set/get mediasync sync mode,value type is int, 0:vmaster,1:amaster,2:pcrmaster
     KEY_MEDIASYNC_TUNNEL_MODE, //set mediasync to use tunnel mode, 0:notunnelmode 1:tunnelmode
     KEY_MEDIASYNC_HAS_AUDIO, //set/get having audio,value type is int,0:not,1:has
-    KEY_MEDIASYNC_VIDEOLATENCY, //set/get
-    KEY_MEDIASYNC_STARTTHRESHOLD, //set/get
-    KEY_MEDIASYNC_VIDEOWORKMODE, //set/get
+    KEY_MEDIASYNC_VIDEOLATENCY, //set/get mediasync video latency
+    KEY_MEDIASYNC_STARTTHRESHOLD, //set/get mediasync start threshold
+    KEY_MEDIASYNC_VIDEOWORKMODE, //set/get mediasync video work mode
     KEY_MEDIASYNC_AUDIO_MUTE, //set/get
-    KEY_MEDIASYNC_SOURCETYPE, //set/get
+    KEY_MEDIASYNC_SOURCETYPE, //set/get media sync source type
     KEY_MEDIASYNC_VIDEOFRAME, //set/get
+    KEY_MEDIASYNC_PLAYER_INSTANCE_ID,
     //set/get video tunnel instance id when videotunnel plugin be selected,value type is int,this key must set before render_connect
     KEY_VIDEOTUNNEL_ID = 450,
 };
