@@ -25,6 +25,8 @@ typedef struct _RenderRawBuffer {
 typedef struct _RenderDmaBuffer {
     int width;
     int height;
+    uint32_t pixel;
+    uint64_t pts;
     int planeCnt;
     uint32_t handle[RENDER_MAX_PLANES];
     uint32_t stride[RENDER_MAX_PLANES];
@@ -51,6 +53,8 @@ enum _RenderKey {
     KEY_VIDEO_PIP, //set/get pip window flag, value type is int, 0:prime video,1:pip,this flag must set before render_connect
     KEY_FRAME_DROPPED,//get dropped video frames count,value type is int
     KEY_ZORDER, //set/get zorder of video plane,value type is int
+    KEY_KEEP_LAST_FRAME, //set/get keep last frame when play end ,value type is int, 0 not keep, 1 keep
+    KEY_HIDE_VIDEO, //set/get hide video,it effect immediatialy,value type is int, 0 not hide, 1 hide
     KEY_MEDIASYNC_INSTANCE_ID = 400, //set/get mediasync instance id, value type is int
     KEY_MEDIASYNC_PCR_PID, ///set/get mediasync pcr id ,value type is int
     KEY_MEDIASYNC_DEMUX_ID, //set/get mediasync demux id ,value type is int
