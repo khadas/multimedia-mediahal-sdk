@@ -1,10 +1,35 @@
 =========RELEALSE NOTE=================
 
-Version: V3.5.13-gf5fe7cf
+Version: V3.5.14-g683c234
 
 ========================================
 
 Git commit:
+commit 683c234d8c3c13e23560483a91d7901062abf69e
+Author: fei.deng <fei.deng@amlogic.com>
+Date:   Mon May 16 14:55:03 2022 +0800
+
+    videorenderer: CB2 fix mediasync hold time error [1/1]
+    
+    PD#SWPL-81094
+    
+    Problem:
+    1.hold time is -1 when mediasync_video_policy output
+    hold policy
+    2.remove ld audio_client  cutils lib
+    
+    Solution:
+    1.reset to 4 ms when hold time is -1
+    2.remove ld audio_client  cutils lib
+    3.fix bind mediasync id issue when id is 0
+    4.refine wait ms to us
+    
+    Verify:
+    an400
+    
+    Change-Id: I191955c79a83ed5651b67589fabef38e7c2cc0bd
+    Signed-off-by: fei.deng <fei.deng@amlogic.com>
+
 commit f5fe7cf7a5c52df5278c7d9930465c28ae377699
 Author: zhipeng.he <zhipeng.he@amlogic.com>
 Date:   Fri May 13 17:50:47 2022 +0800
@@ -194,36 +219,9 @@ Date:   Thu Apr 28 12:11:38 2022 +0800
     Change-Id: Ibe2381d645f1b7223438ae69c0c4ae74d5e3418c
     Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
 
-commit a188ba554c3c186a851125541362e84524467e77
-Author: fei.deng <fei.deng@amlogic.com>
-Date:   Fri May 6 20:34:55 2022 +0800
-
-    videorenderer: CB1 fcc support [1/1]
-    
-    PD#SWPL-80182
-    
-    Problem:
-    1.black screen when fcc chanel switch
-    2.add mediasync key property set
-    
-    Solution:
-    1.add mediasync key property of video work mode
-    2.add mediasync key property of source type
-    3.add mediasync key property of has audio
-    4.add mediasync key property of video latency
-    5.add mediasync key property of start threshold
-    6.refine westeros message logic
-    7.refine anchor pts to mediasync when only video
-    
-    Verify:
-    ah212
-    
-    Change-Id: I54a08190f715cbf495110affb35b225d86bc5c0d
-    Signed-off-by: fei.deng <fei.deng@amlogic.com>
-
 ========================================
 
-Release time: 2022-05-14-15-18
+Release time: 2022-05-20-15-32
 
 ========================================
 
