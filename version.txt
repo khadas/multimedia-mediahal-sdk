@@ -1,10 +1,30 @@
 =========RELEALSE NOTE=================
 
-Version: V3.5.14-g683c234
+Version: V3.5.15-g778c811
 
 ========================================
 
 Git commit:
+commit 778c8112da5f03ba5ff40be2e2648506c3f322e7
+Author: zhipeng.he <zhipeng.he@amlogic.com>
+Date:   Tue May 17 19:24:41 2022 +0800
+
+    tsplayer: CB2 es_mode cat not set volume and mute. [1/1]
+    
+    PD#SWPL-71710
+    
+    Problem:
+    es_mode cat not set volume and mute.
+    
+    Solution:
+    es_mode support set volume and mute
+    
+    Verify:
+    AH212
+    
+    Change-Id: I423082e2f2d4afee43083d692096db43c2a9f258
+    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
+
 commit 683c234d8c3c13e23560483a91d7901062abf69e
 Author: fei.deng <fei.deng@amlogic.com>
 Date:   Mon May 16 14:55:03 2022 +0800
@@ -197,31 +217,9 @@ Date:   Wed Apr 13 15:55:31 2022 +0800
     Change-Id: Id176cecbdfd4d2ab6d6c188adee8cfe11bbd85dc
     Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
 
-commit 3fb0676e6683ef6fe19c626f110c56098a721a86
-Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Thu Apr 28 12:11:38 2022 +0800
-
-    tsplayer: CB1 after av pause,can not resume. [1/2]
-    
-    PD#SWPL-79684
-    
-    Problem:
-    1.after av pause,can not resume on renderlib.
-    2.can not fcc on renderlib
-    
-    Solution:
-    1.fix the issue after av pause,can not resume.
-    2.can fcc on renderlib
-    
-    Verify:
-    AH212
-    
-    Change-Id: Ibe2381d645f1b7223438ae69c0c4ae74d5e3418c
-    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
-
 ========================================
 
-Release time: 2022-05-20-15-32
+Release time: 2022-05-21-18-28
 
 ========================================
 
