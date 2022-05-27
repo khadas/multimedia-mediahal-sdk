@@ -1,10 +1,73 @@
 =========RELEALSE NOTE=================
 
-Version: V3.5.15-g778c811
+Version: V3.5.18-gaa1c3ea
 
 ========================================
 
 Git commit:
+commit aa1c3eab5df8c81787faab97f97d2e80e85bb3b3
+Author: jiabin.zhu <jiabin.zhu@amlogic.com>
+Date:   Fri May 13 14:44:51 2022 +0800
+
+    mediasync: CF1 add static alloc ins ID. [1/1]
+    
+    PD#SWPL-78921
+    
+    Problem:
+    need to alloc static insID in media_sync
+    
+    Solution:
+    1.alloc static ins ID in media_sync
+    2.new ioctl for MEDIASYNC_IOC_INSTANCE_STATIC_BINDER
+    
+    Verify:
+    ohm
+    
+    Change-Id: I86880aae9938f76940d9cecd98e33f423e6c409d
+    Signed-off-by: jiabin.zhu <jiabin.zhu@amlogic.com>
+
+commit 1c8bc7fdd39147885f36c8e1da1cc8c75fa11e19
+Author: fei.deng <fei.deng@amlogic.com>
+Date:   Fri May 20 15:47:41 2022 +0800
+
+    videorenderer: CB2 refine mediasync logic [1/1]
+    
+    PD#SWPL-82464
+    
+    Problem:
+    refine mediasync logic
+    
+    Solution:
+    1.remove alloc mediasync instance id
+    at render_open
+    2.refine mediasync property setting
+    
+    Verify:
+    ap222
+    
+    Change-Id: Idf12359648795955f65a2a5188142cc9a4c98ad5
+    Signed-off-by: fei.deng <fei.deng@amlogic.com>
+
+commit 294fee35a3e89d8d19240a054ea3a7ff33c6201f
+Author: zhipeng.he <zhipeng.he@amlogic.com>
+Date:   Mon May 23 21:24:40 2022 +0800
+
+    tsplayer: CB2 improve tsplayer call to renderlib. [1/1]
+    
+    PD#SWPL-82464
+    
+    Problem:
+    The order of renderlib alloc mediasync changed.
+    
+    Solution:
+    improve tsplayer call to renderlib.
+    
+    Verify:
+    AH212
+    
+    Change-Id: I5c7595a24d10b242b8d0d09abf738612a09d7d72
+    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
+
 commit 778c8112da5f03ba5ff40be2e2648506c3f322e7
 Author: zhipeng.he <zhipeng.he@amlogic.com>
 Date:   Tue May 17 19:24:41 2022 +0800
@@ -154,72 +217,9 @@ Date:   Tue May 10 14:59:34 2022 +0800
     Change-Id: I2dcaed6276bc9a32ba8b4c548fbee1e66da9b2f6
     Signed-off-by: jiabin.zhu <jiabin.zhu@amlogic.com>
 
-commit 163f424d533ba2546f1dc79b79c8fe738b7bfc5d
-Author: fei.deng <fei.deng@amlogic.com>
-Date:   Mon May 9 17:55:07 2022 +0800
-
-    videorenderer: CB2 control renderlib compile plugin module [1/1]
-    
-    PD#SWPL-80847
-    
-    Problem:
-    don't compile plugin according to project config
-    
-    Solution:
-    1.config renderlib compiling westeros or weston or videotunnel
-    2.release videorender_server default
-    3.compatibility buildroot platform
-    
-    Verify:
-    ap222
-    
-    Change-Id: I40bfe87e50e5c06a800ff9ebddb6f4ebbe83d058
-    Signed-off-by: fei.deng <fei.deng@amlogic.com>
-
-commit 797ecda0bc55df7c6de022e3ca337d17efe53025
-Author: fei.deng <fei.deng@amlogic.com>
-Date:   Mon May 9 16:21:41 2022 +0800
-
-    videorenderer: CB2 control renderlib compile plugin module [1/1]
-    
-    PD#SWPL-80847
-    
-    Problem:
-    don't compile plugin according to project config
-    
-    Solution:
-    1.config renderlib compiling westeros or weston or videotunnel
-    2.release videorender_server default
-    
-    Verify:
-    ap222
-    
-    Change-Id: Ibde3d0bd8ef69e45446338889637f0526190e8b1
-    Signed-off-by: fei.deng <fei.deng@amlogic.com>
-
-commit 6b00ab55b1e87c355a6ca42a76808b7159d7503f
-Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Wed Apr 13 15:55:31 2022 +0800
-
-    tsplayer: CB1 x2_demux only audio no audio on ts_mode. [1/1]
-    
-    PD#TV-52764
-    
-    Problem:
-    x2_demux only audio no audio on ts_mode.
-    
-    Solution:
-    fix the issue x2_demux only audio no audio on ts_mode.
-    
-    Verify:
-    AM301
-    
-    Change-Id: Id176cecbdfd4d2ab6d6c188adee8cfe11bbd85dc
-    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
-
 ========================================
 
-Release time: 2022-05-21-18-28
+Release time: 2022-05-27-21-05
 
 ========================================
 
