@@ -1,10 +1,30 @@
 =========RELEALSE NOTE=================
 
-Version: V3.5.18-gaa1c3ea
+Version: V3.5.19-g33fe699
 
 ========================================
 
 Git commit:
+commit 33fe6990ee9a2cd5d019daee8fbb885e3cfd8d41
+Author: zhipeng.he <zhipeng.he@amlogic.com>
+Date:   Wed May 11 20:15:52 2022 +0800
+
+    tsplayer: CF1 es_mode support nontunelmode [1/1]
+    
+    PD#SWPL-79583
+    
+    Problem:
+    es_mode only support tunnelmode
+    
+    Solution:
+    es_mode support nontunelmode
+    
+    Verify:
+    AH212
+    
+    Change-Id: Iee9efa189606e27ea2f1dc5d1acb0aaa60efde2c
+    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
+
 commit aa1c3eab5df8c81787faab97f97d2e80e85bb3b3
 Author: jiabin.zhu <jiabin.zhu@amlogic.com>
 Date:   Fri May 13 14:44:51 2022 +0800
@@ -197,29 +217,9 @@ Date:   Tue May 10 15:46:01 2022 +0800
     Change-Id: Ie977f79c164bcbb7381bcdcf4401fcc8f55618e4
     Signed-off-by: fei.deng <fei.deng@amlogic.com>
 
-commit ad5ac3669951598272dcc4feefa5038b7d63ce4e
-Author: jiabin.zhu <jiabin.zhu@amlogic.com>
-Date:   Tue May 10 14:59:34 2022 +0800
-
-    v4ldvb_test: CF1 enable audio pipeline [1/1]
-    
-    PD#SWPL-80842
-    
-    Problem:
-    enable audio pipeline
-    
-    Solution:
-    enable audio pipeline
-    
-    Verify:
-    AR321
-    
-    Change-Id: I2dcaed6276bc9a32ba8b4c548fbee1e66da9b2f6
-    Signed-off-by: jiabin.zhu <jiabin.zhu@amlogic.com>
-
 ========================================
 
-Release time: 2022-05-27-21-05
+Release time: 2022-05-31-16-47
 
 ========================================
 
