@@ -1,10 +1,50 @@
 =========RELEALSE NOTE=================
 
-Version: V3.5.19-g33fe699
+Version: V3.5.21-g2c3507b
 
 ========================================
 
 Git commit:
+commit 2c3507b7ad391dd643692f250ed3d79fca85ca9a
+Author: fei.deng <fei.deng@amlogic.com>
+Date:   Wed Jun 1 13:34:35 2022 +0800
+
+    videorenderer: CB2 compile error [1/1]
+    
+    PD#SWPL-81993
+    
+    Problem:
+    media_hal compile error
+    
+    Solution:
+    media_hal compile error
+    
+    Verify:
+    ah212
+    
+    Change-Id: I23b8f799821f3cf0b3840588516ad455715b5927
+    Signed-off-by: fei.deng <fei.deng@amlogic.com>
+
+commit ff321ce9d68c5db94aa49f48594c86169aacb1ee
+Author: jianchuan.ping <jianchuan.ping@amlogic.com>
+Date:   Mon Mar 7 19:55:02 2022 +0800
+
+    mediasync: CF2 Add get PCR and STC interface. [1/2]
+    
+    PD#SWPL-75800
+    
+    Problem:
+    Need api to get pcr and stc
+    
+    Solution:
+    Add needed interface
+    
+    Verify:
+    AP222
+    
+    Change-Id: Ibd44f944d31bf8697eee632a61835c65f701d4e3
+    Signed-off-by: jianchuan.ping <jianchuan.ping@amlogic.com>
+
 commit 33fe6990ee9a2cd5d019daee8fbb885e3cfd8d41
 Author: zhipeng.he <zhipeng.he@amlogic.com>
 Date:   Wed May 11 20:15:52 2022 +0800
@@ -177,49 +217,9 @@ Date:   Wed May 11 16:39:22 2022 +0800
     Change-Id: I725c09bd8d95519be09e136cca43f93a7217cf61
     Signed-off-by: fei.deng <fei.deng@amlogic.com>
 
-commit 3b8287e21f2e9ad216598f755f6f2cdb97e2f1fa
-Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Mon May 9 19:04:12 2022 +0800
-
-    tsplayer: CB2 keep frame and hidevideo on renderlib [1/1]
-    
-    PD#SWPL-80834
-    
-    Problem:
-    can not keep frame and hidevideo on renderlib.
-    
-    Solution:
-    keep frame and hidevideo on renderlib.
-    
-    Verify:
-    AH212
-    
-    Change-Id: Ife23d9cace27a48073061653aa13c5d80015a6d5
-    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
-
-commit 427d3943447c142efd9d33669be3fb2d8f8fc7a3
-Author: fei.deng <fei.deng@amlogic.com>
-Date:   Tue May 10 15:46:01 2022 +0800
-
-    videorenderer: CF2 add keep last frame [1/1]
-    
-    PD#SWPL-80835
-    
-    Problem:
-    black screen when tsplayer change channel
-    
-    Solution:
-    send keep last frame to westeros
-    
-    Verify:
-    ap222
-    
-    Change-Id: Ie977f79c164bcbb7381bcdcf4401fcc8f55618e4
-    Signed-off-by: fei.deng <fei.deng@amlogic.com>
-
 ========================================
 
-Release time: 2022-05-31-16-47
+Release time: 2022-06-01-14-30
 
 ========================================
 

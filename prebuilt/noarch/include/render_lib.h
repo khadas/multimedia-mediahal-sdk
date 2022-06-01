@@ -393,6 +393,17 @@ int render_mediasync_get_first_audio_pts(void *handle, int64_t *pts);
 int render_mediasync_get_current_audio_pts(void *handle, int64_t *pts);
 
 /**
+ * @brief get current media time
+ *
+ * @param handle a handle of render device that was opened
+ * @param mediaTimeType type of media
+ * @param tunit type of time
+ * @param mediaTime the current time
+ * @return int 0 success, -1 if failed
+ */
+int render_mediasync_get_media_time_by_type(void *handle, int mediaTimeType, int tunit, int64_t *mediaTime);
+
+/**
  * @brief get playback rate from mediasync
  *
  * @param handle a handle of render device that was opened
