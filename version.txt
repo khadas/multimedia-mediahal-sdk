@@ -1,10 +1,32 @@
 =========RELEALSE NOTE=================
 
-Version: V3.5.21-g2c3507b
+Version: V3.5.22-gaec8872
 
 ========================================
 
 Git commit:
+commit aec88725f8b4ea5bd20a7634ad1c671b701a2f43
+Author: zhipeng.he <zhipeng.he@amlogic.com>
+Date:   Wed Jun 1 16:12:46 2022 +0800
+
+    mediasync: CB2 improve the interface GetMediaTimeByType  [1/2]
+    
+    PD#SWPL-81993
+    
+    Problem:
+    1.GetMediaTimeByType not right when seek.
+    2.can not get holdtime when hold on first
+    
+    Solution:
+    1.Improve the interface GetMediaTimeByType.
+    2.Can get the hold time when hold on first.
+    
+    Verify:
+    AP222
+    
+    Change-Id: I9ea4bd3289b85c801c8233f73f132dc37fbeeead
+    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
+
 commit 2c3507b7ad391dd643692f250ed3d79fca85ca9a
 Author: fei.deng <fei.deng@amlogic.com>
 Date:   Wed Jun 1 13:34:35 2022 +0800
@@ -193,33 +215,9 @@ Date:   Fri May 13 17:50:47 2022 +0800
     Change-Id: I596d070c19f5d8d3dd8fbcebe730231596e7c96a
     Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
 
-commit f69b89af00a39afbf34258621a389c2606ba4159
-Author: fei.deng <fei.deng@amlogic.com>
-Date:   Wed May 11 16:39:22 2022 +0800
-
-    videorenderer: CB1 crash when call std unordered_map [1/1]
-    
-    PD#SWPL-80725
-    
-    Problem:
-    1.sometimes crash when call std unordered_map
-    to insert a item
-    2.black srceen when wait audio anchor mediasync
-    timeout
-    
-    Solution:
-    1.add mutex to protect std::unorder_map
-    2.recommit to areasurface to wake up xdg surface
-    
-    Verify:
-    an400
-    
-    Change-Id: I725c09bd8d95519be09e136cca43f93a7217cf61
-    Signed-off-by: fei.deng <fei.deng@amlogic.com>
-
 ========================================
 
-Release time: 2022-06-01-14-30
+Release time: 2022-06-02-16-31
 
 ========================================
 
