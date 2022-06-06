@@ -1,10 +1,30 @@
 =========RELEALSE NOTE=================
 
-Version: V3.5.22-gaec8872
+Version: V3.5.23-g2f1b580
 
 ========================================
 
 Git commit:
+commit 2f1b580431ddc94efa0970bca71f1a36adbd55b2
+Author: zhipeng.he <zhipeng.he@amlogic.com>
+Date:   Fri Jun 3 19:34:04 2022 +0800
+
+    mediahal: CF2 add the mediahal log control [1/1]
+    
+    PD#TV-56589
+    
+    Problem:
+    no mediahal log control
+    
+    Solution:
+    add the mediahal log control
+    
+    Verify:
+    T5D
+    
+    Change-Id: I2543c32a165e0a7662671b5915b88be225bd117b
+    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
+
 commit aec88725f8b4ea5bd20a7634ad1c671b701a2f43
 Author: zhipeng.he <zhipeng.he@amlogic.com>
 Date:   Wed Jun 1 16:12:46 2022 +0800
@@ -195,29 +215,9 @@ Date:   Mon May 16 14:55:03 2022 +0800
     Change-Id: I191955c79a83ed5651b67589fabef38e7c2cc0bd
     Signed-off-by: fei.deng <fei.deng@amlogic.com>
 
-commit f5fe7cf7a5c52df5278c7d9930465c28ae377699
-Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Fri May 13 17:50:47 2022 +0800
-
-    tsplayer: CF2 use renderlib on nontunlmode default [1/1]
-    
-    PD#SWPL-80720
-    
-    Problem:
-    not use renderlib on nontunlmode default
-    
-    Solution:
-    use renderlib on nontunlmode default
-    
-    Verify:
-    AH212
-    
-    Change-Id: I596d070c19f5d8d3dd8fbcebe730231596e7c96a
-    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
-
 ========================================
 
-Release time: 2022-06-02-16-31
+Release time: 2022-06-06-13-35
 
 ========================================
 
