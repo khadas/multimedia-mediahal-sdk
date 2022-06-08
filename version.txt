@@ -1,6 +1,6 @@
 =========RELEALSE NOTE=================
 
-Version: V3.5.23-g2f1b580
+Version: V3.5.24-g2cce3d8
 
 ========================================
 
@@ -190,34 +190,9 @@ Date:   Tue May 17 19:24:41 2022 +0800
     Change-Id: I423082e2f2d4afee43083d692096db43c2a9f258
     Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
 
-commit 683c234d8c3c13e23560483a91d7901062abf69e
-Author: fei.deng <fei.deng@amlogic.com>
-Date:   Mon May 16 14:55:03 2022 +0800
-
-    videorenderer: CB2 fix mediasync hold time error [1/1]
-    
-    PD#SWPL-81094
-    
-    Problem:
-    1.hold time is -1 when mediasync_video_policy output
-    hold policy
-    2.remove ld audio_client  cutils lib
-    
-    Solution:
-    1.reset to 4 ms when hold time is -1
-    2.remove ld audio_client  cutils lib
-    3.fix bind mediasync id issue when id is 0
-    4.refine wait ms to us
-    
-    Verify:
-    an400
-    
-    Change-Id: I191955c79a83ed5651b67589fabef38e7c2cc0bd
-    Signed-off-by: fei.deng <fei.deng@amlogic.com>
-
 ========================================
 
-Release time: 2022-06-06-13-35
+Release time: 2022-06-08-17-00
 
 ========================================
 
