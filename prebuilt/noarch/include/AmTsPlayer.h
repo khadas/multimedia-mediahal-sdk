@@ -52,6 +52,8 @@ typedef enum {
     AM_TSPLAYER_KEY_SET_VIDEO_RECOVERY_MODE,
     AM_TSPLAYER_KEY_SET_OSD,
     AM_TSPLAYER_KEY_SET_LOGGER_LEVEL,
+    AM_TSPLAYER_KEY_SET_WMA_DESCR,
+    AM_TSPLAYER_KEY_SET_ES_AUDIO_EXTRA_PARAM,
 } am_tsplayer_parameter;
 
 
@@ -239,6 +241,11 @@ typedef enum {
     AV_AUDIO_CODEC_FLAC = 11,              // FLAC
     AV_AUDIO_CODEC_VORBIS = 12,            // VORBIS
     AV_AUDIO_CODEC_OPUS = 13,              // OPUS
+    AV_AUDIO_CODEC_WMAV1 = 14,             // WMAV1
+    AV_AUDIO_CODEC_WMAV2 = 15,             // WMAV 2
+    AV_AUDIO_CODEC_WMAPRO = 16,            // WMAV pro
+    AV_AUDIO_CODEC_WMALOSSLESS = 17,       // WMAV loss less
+    AV_AUDIO_CODEC_PCM_U8 = 18,            //PCM U8
     AV_AUDIO_CODEC_MAX = 1000,             // Out of range type (Unsupport)
 } am_tsplayer_audio_codec;
 
