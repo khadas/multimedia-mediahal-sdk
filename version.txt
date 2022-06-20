@@ -1,10 +1,93 @@
 =========RELEALSE NOTE=================
 
-Version: V3.5.26-g679224a
+Version: V3.5.30-gf6f0427
 
 ========================================
 
 Git commit:
+commit f6f042714dd92b62a9dccc3f4d9f4e760e1b7291
+Author: zhipeng.he <zhipeng.he@amlogic.com>
+Date:   Fri Jun 17 20:03:51 2022 +0800
+
+    tsplayer: CB2 t5d esmode onlyvideo show first frame slow [1/1]
+    
+    PD#SWPL-67624
+    
+    Problem:
+    t5d esmode onlyvideo show first frame slow
+    
+    Solution:
+    fix onlyvideo show first frame slow.
+    
+    Verify:
+    A213Y
+    
+    Change-Id: I792f37ffb85684d4565d1b39852caf8ed95ba9a6
+    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
+
+commit 92fa86fad29dba1f27300b8a19f8db8a376377a8
+Author: jiabin.zhu <jiabin.zhu@amlogic.com>
+Date:   Thu May 26 17:54:33 2022 +0800
+
+    v4ldvb_test: CF2 adjust av sync code. [1/1]
+    
+    PD#SWPL-80848
+    
+    Problem:
+    adjust av sync code.
+    
+    Solution:
+    adjust av sync code.
+    
+    Verify:
+    ohm
+    
+    Change-Id: I20e1ad944b5a061e2aec6b507b71a35337b7133a
+    Signed-off-by: jiabin.zhu <jiabin.zhu@amlogic.com>
+
+commit 2c443e86f522f1a626451ed74a1f8917b2f2b09c
+Author: fei.deng <fei.deng@amlogic.com>
+Date:   Wed Jun 15 15:52:12 2022 +0800
+
+    videorenderer: CF2 replace link videotunnel with dlopen [1/1]
+    
+    PD#SWPL-84828
+    
+    Problem:
+    replace link videotunnel with dlopen
+    
+    Solution:
+    replace link videotunnel with dlopen
+    
+    Verify:
+    ar321
+    
+    Change-Id: I1e613e4cdff7cfb81e048134630f42302ca83069
+    Signed-off-by: fei.deng <fei.deng@amlogic.com>
+
+commit 1fb294a5b6845b2e2fb8bb9c40cf3ffffc5d6386
+Author: fei.deng <fei.deng@amlogic.com>
+Date:   Tue Jun 14 10:20:32 2022 +0800
+
+    videorenderer: CB2 drop/release buffer when disconnect [1/1]
+    
+    PD#SWPL-83911
+    
+    Problem:
+    1.not drop frame when disconnect
+    2.not release buffer those had commited to westeros server
+    
+    Solution:
+    1.drop frame when disconnect
+    2.release buffers those had commited to westeros server
+    when disconnect
+    
+    Verify:
+    ap222
+    
+    Change-Id: I4d0018ab6ae9a48b95759981ffe1009c5fe23a3e
+    Signed-off-by: fei.deng <fei.deng@amlogic.com>
+
 commit 679224a7aa076f808dada6ac865ff531cb9f8cfd
 Author: zhipeng.he <zhipeng.he@amlogic.com>
 Date:   Fri Jun 10 14:16:49 2022 +0800
@@ -139,92 +222,9 @@ Date:   Wed Jun 1 13:34:35 2022 +0800
     Change-Id: I23b8f799821f3cf0b3840588516ad455715b5927
     Signed-off-by: fei.deng <fei.deng@amlogic.com>
 
-commit ff321ce9d68c5db94aa49f48594c86169aacb1ee
-Author: jianchuan.ping <jianchuan.ping@amlogic.com>
-Date:   Mon Mar 7 19:55:02 2022 +0800
-
-    mediasync: CF2 Add get PCR and STC interface. [1/2]
-    
-    PD#SWPL-75800
-    
-    Problem:
-    Need api to get pcr and stc
-    
-    Solution:
-    Add needed interface
-    
-    Verify:
-    AP222
-    
-    Change-Id: Ibd44f944d31bf8697eee632a61835c65f701d4e3
-    Signed-off-by: jianchuan.ping <jianchuan.ping@amlogic.com>
-
-commit 33fe6990ee9a2cd5d019daee8fbb885e3cfd8d41
-Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Wed May 11 20:15:52 2022 +0800
-
-    tsplayer: CF1 es_mode support nontunelmode [1/1]
-    
-    PD#SWPL-79583
-    
-    Problem:
-    es_mode only support tunnelmode
-    
-    Solution:
-    es_mode support nontunelmode
-    
-    Verify:
-    AH212
-    
-    Change-Id: Iee9efa189606e27ea2f1dc5d1acb0aaa60efde2c
-    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
-
-commit aa1c3eab5df8c81787faab97f97d2e80e85bb3b3
-Author: jiabin.zhu <jiabin.zhu@amlogic.com>
-Date:   Fri May 13 14:44:51 2022 +0800
-
-    mediasync: CF1 add static alloc ins ID. [1/1]
-    
-    PD#SWPL-78921
-    
-    Problem:
-    need to alloc static insID in media_sync
-    
-    Solution:
-    1.alloc static ins ID in media_sync
-    2.new ioctl for MEDIASYNC_IOC_INSTANCE_STATIC_BINDER
-    
-    Verify:
-    ohm
-    
-    Change-Id: I86880aae9938f76940d9cecd98e33f423e6c409d
-    Signed-off-by: jiabin.zhu <jiabin.zhu@amlogic.com>
-
-commit 1c8bc7fdd39147885f36c8e1da1cc8c75fa11e19
-Author: fei.deng <fei.deng@amlogic.com>
-Date:   Fri May 20 15:47:41 2022 +0800
-
-    videorenderer: CB2 refine mediasync logic [1/1]
-    
-    PD#SWPL-82464
-    
-    Problem:
-    refine mediasync logic
-    
-    Solution:
-    1.remove alloc mediasync instance id
-    at render_open
-    2.refine mediasync property setting
-    
-    Verify:
-    ap222
-    
-    Change-Id: Idf12359648795955f65a2a5188142cc9a4c98ad5
-    Signed-off-by: fei.deng <fei.deng@amlogic.com>
-
 ========================================
 
-Release time: 2022-06-10-18-06
+Release time: 2022-06-20-19-53
 
 ========================================
 
