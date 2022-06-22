@@ -1,10 +1,51 @@
 =========RELEALSE NOTE=================
 
-Version: V3.5.31-g46da44e
+Version: V3.5.33-g07912e4
 
 ========================================
 
 Git commit:
+commit 07912e4beb84579c7fb4f2a793840eec4233a7a9
+Author: zhipeng.he <zhipeng.he@amlogic.com>
+Date:   Fri Jun 17 17:21:17 2022 +0800
+
+    mediasync: CB2 compile mediasync use g++ [1/1]
+    
+    PD#SWPL-85156
+    
+    Problem:
+    audiohal dlopen libmediahal_mediasync.so failed
+    
+    Solution:
+    compile mediasync use g++
+    
+    Verify:
+    A213Y
+    
+    Change-Id: I9cf815952bca23babdd5fb6ab6f34f4eb5439a5c
+    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
+
+commit 4d6e64ac13d5640febf970dac1121afbeb4822ea
+Author: fei.deng <fei.deng@amlogic.com>
+Date:   Wed Jun 22 14:44:35 2022 +0800
+
+    videorenderer: CB2 set fixed mediasync instance id for debug [1/1]
+    
+    PD#SWPL-85961
+    
+    Problem:
+    set fixed mediasync instance id for debug
+    
+    Solution:
+    set fixed mediasync instance id 11 to render lib
+    for debug
+    
+    Verify:
+    ar321
+    
+    Change-Id: Id7db38b2d74fbb60072cf338aa9722f8417a7542
+    Signed-off-by: fei.deng <fei.deng@amlogic.com>
+
 commit 46da44ed322babc15385e4fe2f86956f993bf235
 Author: zhipeng.he <zhipeng.he@amlogic.com>
 Date:   Mon Jun 20 17:33:42 2022 +0800
@@ -180,51 +221,9 @@ Date:   Wed Jun 8 17:10:19 2022 +0800
     Change-Id: Iaeff513ccb53b4b1b4b06cf322fb927d6b62036e
     Signed-off-by: fei.deng <fei.deng@amlogic.com>
 
-commit 2f1b580431ddc94efa0970bca71f1a36adbd55b2
-Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Fri Jun 3 19:34:04 2022 +0800
-
-    mediahal: CF2 add the mediahal log control [1/1]
-    
-    PD#TV-56589
-    
-    Problem:
-    no mediahal log control
-    
-    Solution:
-    add the mediahal log control
-    
-    Verify:
-    T5D
-    
-    Change-Id: I2543c32a165e0a7662671b5915b88be225bd117b
-    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
-
-commit aec88725f8b4ea5bd20a7634ad1c671b701a2f43
-Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Wed Jun 1 16:12:46 2022 +0800
-
-    mediasync: CB2 improve the interface GetMediaTimeByType  [1/2]
-    
-    PD#SWPL-81993
-    
-    Problem:
-    1.GetMediaTimeByType not right when seek.
-    2.can not get holdtime when hold on first
-    
-    Solution:
-    1.Improve the interface GetMediaTimeByType.
-    2.Can get the hold time when hold on first.
-    
-    Verify:
-    AP222
-    
-    Change-Id: I9ea4bd3289b85c801c8233f73f132dc37fbeeead
-    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
-
 ========================================
 
-Release time: 2022-06-22-16-08
+Release time: 2022-06-22-17-17
 
 ========================================
 
