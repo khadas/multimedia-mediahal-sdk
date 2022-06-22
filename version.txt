@@ -1,10 +1,30 @@
 =========RELEALSE NOTE=================
 
-Version: V3.5.30-gf6f0427
+Version: V3.5.31-g46da44e
 
 ========================================
 
 Git commit:
+commit 46da44ed322babc15385e4fe2f86956f993bf235
+Author: zhipeng.he <zhipeng.he@amlogic.com>
+Date:   Mon Jun 20 17:33:42 2022 +0800
+
+    tsplayer: CB2 esmode use stream to send mediasync_id. [1/1]
+    
+    PD#SWPL-84885
+    
+    Problem:
+    esmode use device to send mediasync_id.
+    
+    Solution:
+    esmode use stream to send mediasync_id.
+    
+    Verify:
+    t5d
+    
+    Change-Id: I9847bd2ee6117b3ced60c0c42a8b4badd1633952
+    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
+
 commit f6f042714dd92b62a9dccc3f4d9f4e760e1b7291
 Author: zhipeng.he <zhipeng.he@amlogic.com>
 Date:   Fri Jun 17 20:03:51 2022 +0800
@@ -202,29 +222,9 @@ Date:   Wed Jun 1 16:12:46 2022 +0800
     Change-Id: I9ea4bd3289b85c801c8233f73f132dc37fbeeead
     Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
 
-commit 2c3507b7ad391dd643692f250ed3d79fca85ca9a
-Author: fei.deng <fei.deng@amlogic.com>
-Date:   Wed Jun 1 13:34:35 2022 +0800
-
-    videorenderer: CB2 compile error [1/1]
-    
-    PD#SWPL-81993
-    
-    Problem:
-    media_hal compile error
-    
-    Solution:
-    media_hal compile error
-    
-    Verify:
-    ah212
-    
-    Change-Id: I23b8f799821f3cf0b3840588516ad455715b5927
-    Signed-off-by: fei.deng <fei.deng@amlogic.com>
-
 ========================================
 
-Release time: 2022-06-20-19-53
+Release time: 2022-06-22-16-08
 
 ========================================
 
