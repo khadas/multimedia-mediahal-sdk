@@ -1,10 +1,50 @@
 =========RELEALSE NOTE=================
 
-Version: V3.5.33-g07912e4
+Version: V3.5.35-g8e26868
 
 ========================================
 
 Git commit:
+commit 8e268682a42fe76133039239f1a69a4ce60d19ba
+Author: zhipeng.he <zhipeng.he@amlogic.com>
+Date:   Mon Jun 20 20:22:31 2022 +0800
+
+    videodec: CB2 fix SCTE_TYPE cc can't display [1/1]
+    
+    PD#TV-55857
+    
+    Problem:
+    mScteEnable not initialized
+    
+    Solution:
+    Initialize mScteEnable
+    
+    Verify:
+    T950D4
+    
+    Change-Id: I8e81dec9388baa8db556ef96657b6002b602627f
+    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
+
+commit cae210b11579152dcddcb69e13b64c482f51250f
+Author: fei.deng <fei.deng@amlogic.com>
+Date:   Wed Jun 22 20:28:53 2022 +0800
+
+    videorenderer: CF2 output log to logcat [1/1]
+    
+    PD#SWPL-86007
+    
+    Problem:
+    output log to logcat
+    
+    Solution:
+    output log to logcat
+    
+    Verify:
+    ap222
+    
+    Change-Id: I5e961a196fd7bd31f0e1c8b75bf104161a20ae7c
+    Signed-off-by: fei.deng <fei.deng@amlogic.com>
+
 commit 07912e4beb84579c7fb4f2a793840eec4233a7a9
 Author: zhipeng.he <zhipeng.he@amlogic.com>
 Date:   Fri Jun 17 17:21:17 2022 +0800
@@ -170,60 +210,9 @@ Date:   Fri Jun 10 14:16:49 2022 +0800
     Change-Id: I8cd5c9ab56837da569e812d9bf31b7746a199e64
     Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
 
-commit 03911f8919bf3fedfea1fb8871da65706d67a2aa
-Author: jiabin.zhu <jiabin.zhu@amlogic.com>
-Date:   Wed Dec 1 19:51:16 2021 +0800
-
-    TsPlayer: CF2 support set channel mask/rate to audiohal [1/1]
-    
-    PD#SWPL-82915
-    
-    Problem:
-    1.need to support wma format
-    2.need to set channel mask/rate to audiohal
-    3.need support pcm_u8
-    
-    Solution:
-    1.add interface to support wma format
-    2.add config interface to set extra audio params
-    3.support pcm_u8
-    
-    Verify:
-    A213Y
-    
-    Change-Id: I0873a2ba0e01dc5f27c437753598935fe9a796e2
-    Signed-off-by: jiabin.zhu <jiabin.zhu@amlogic.com>
-
-commit eae54a8335054691bad21b8272705bc5c83ca5ce
-Author: fei.deng <fei.deng@amlogic.com>
-Date:   Wed Jun 8 17:10:19 2022 +0800
-
-    videorenderer: CB2 fix yts test case fail [1/1]
-    
-    PD#SWPL-84291
-    
-    Problem:
-    1.support videotunnel by set env
-    2.set realtime to -1 when MediaSync_getRealTimeFor fail
-    3.not count frame when input same pts frame twice
-    4.not flush frames if frames had commited to westeros server
-    
-    Solution:
-    1.support videotunnel by set env
-    2.set realtime to -1 when MediaSync_getRealTimeFor fail
-    3.replace Mediasync_bindInstance with  MediaSync_bindStaticInstance
-    4.count frame when input same pts frame twice
-    5.flush frames those had commited to westeros server when flush
-    
-    Verify:
-    ar321
-    
-    Change-Id: Iaeff513ccb53b4b1b4b06cf322fb927d6b62036e
-    Signed-off-by: fei.deng <fei.deng@amlogic.com>
-
 ========================================
 
-Release time: 2022-06-22-17-17
+Release time: 2022-06-23-11-31
 
 ========================================
 
