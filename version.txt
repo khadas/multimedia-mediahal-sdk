@@ -1,11 +1,31 @@
 =========RELEALSE NOTE=================
 
-Version: V3.5.35-g8e26868
+Version: V3.5.36-g0e2fc18
 
 ========================================
 
 Git commit:
-commit 8e268682a42fe76133039239f1a69a4ce60d19ba
+commit 0e2fc1825fcc0c00c3a7ee17c16b53ffcf1a9968
+Author: fei.deng <fei.deng@amlogic.com>
+Date:   Mon Jun 27 14:23:31 2022 +0800
+
+    videorenderer: CB1 jenkins compile error [1/1]
+    
+    PD#SWPL-86364
+    
+    Problem:
+    jenkins compile error
+    
+    Solution:
+    jenkins compile error
+    
+    Verify:
+    ar321
+    
+    Change-Id: I19c8ccb57402d8ef43934908d7fe4e60497b5467
+    Signed-off-by: fei.deng <fei.deng@amlogic.com>
+
+commit d480055aa6e79824831c9d9db96d9d6786c103a8
 Author: zhipeng.he <zhipeng.he@amlogic.com>
 Date:   Mon Jun 20 20:22:31 2022 +0800
 
@@ -189,30 +209,9 @@ Date:   Tue Jun 14 10:20:32 2022 +0800
     Change-Id: I4d0018ab6ae9a48b95759981ffe1009c5fe23a3e
     Signed-off-by: fei.deng <fei.deng@amlogic.com>
 
-commit 679224a7aa076f808dada6ac865ff531cb9f8cfd
-Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Fri Jun 10 14:16:49 2022 +0800
-
-    TsPlayer: CB2 add the alloc_only flag on alloc buf [1/1]
-    
-    PD#SWPL-84670
-    
-    Problem:
-    system-user can not alloc dmabuf
-    
-    Solution:
-    tsplayer add alloc_only flag when alloc buf
-    blz libdrm_meson use the render128 to alloc buf
-    
-    Verify:
-    AH212
-    
-    Change-Id: I8cd5c9ab56837da569e812d9bf31b7746a199e64
-    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
-
 ========================================
 
-Release time: 2022-06-23-11-31
+Release time: 2022-06-27-15-39
 
 ========================================
 
