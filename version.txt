@@ -1,11 +1,31 @@
 =========RELEALSE NOTE=================
 
-Version: V3.5.36-g0e2fc18
+Version: V3.5.37-g9a82308
 
 ========================================
 
 Git commit:
-commit 0e2fc1825fcc0c00c3a7ee17c16b53ffcf1a9968
+commit 9a82308849ef2d659af2ffb5cf78a7278441a27b
+Author: zhipeng.he <zhipeng.he@amlogic.com>
+Date:   Wed Jun 29 13:33:25 2022 +0800
+
+    videodec: CB2 CS1-CS6 can't show when play Sarnoff C41miscc.trp [1/1]
+    
+    PD#TV-58351
+    
+    Problem:
+    CS1-CS6 can't show when play Sarnoff stream C41miscc.trp
+    
+    Solution:
+    fix the issue that some cc data loss
+    
+    Verify:
+    T950D4_AM301
+    
+    Change-Id: I0a5e34c79358cff6b53843d42547dd8fcf5d1daf
+    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
+
+commit e12331d2dc3a3ff8c02408908c8ef2dea999b04e
 Author: fei.deng <fei.deng@amlogic.com>
 Date:   Mon Jun 27 14:23:31 2022 +0800
 
@@ -186,32 +206,9 @@ Date:   Wed Jun 15 15:52:12 2022 +0800
     Change-Id: I1e613e4cdff7cfb81e048134630f42302ca83069
     Signed-off-by: fei.deng <fei.deng@amlogic.com>
 
-commit 1fb294a5b6845b2e2fb8bb9c40cf3ffffc5d6386
-Author: fei.deng <fei.deng@amlogic.com>
-Date:   Tue Jun 14 10:20:32 2022 +0800
-
-    videorenderer: CB2 drop/release buffer when disconnect [1/1]
-    
-    PD#SWPL-83911
-    
-    Problem:
-    1.not drop frame when disconnect
-    2.not release buffer those had commited to westeros server
-    
-    Solution:
-    1.drop frame when disconnect
-    2.release buffers those had commited to westeros server
-    when disconnect
-    
-    Verify:
-    ap222
-    
-    Change-Id: I4d0018ab6ae9a48b95759981ffe1009c5fe23a3e
-    Signed-off-by: fei.deng <fei.deng@amlogic.com>
-
 ========================================
 
-Release time: 2022-06-27-15-39
+Release time: 2022-06-29-14-09
 
 ========================================
 
