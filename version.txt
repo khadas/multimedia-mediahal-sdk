@@ -1,11 +1,31 @@
 =========RELEALSE NOTE=================
 
-Version: V3.5.37-g9a82308
+Version: V3.5.38-g1b318be
 
 ========================================
 
 Git commit:
-commit 9a82308849ef2d659af2ffb5cf78a7278441a27b
+commit 1b318bed3908a4f5044776b464d10b2249b38880
+Author: zhipeng.he <zhipeng.he@amlogic.com>
+Date:   Fri Jun 17 16:47:48 2022 +0800
+
+    tsplayer: CB2 send streameof to tsplayer [1/1]
+    
+    PD#SWPL-85475
+    
+    Problem:
+    can not send the streamof to tsplayer
+    
+    Solution:
+    add send the streamof to tsplayer
+    
+    Verify:
+    A213Y
+    
+    Change-Id: I0bac968f3febc561886c322e5dfd0a0d79701bbd
+    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
+
+commit bec6b0cf511c83ac7f40756ff7ad7505bf282e29
 Author: zhipeng.he <zhipeng.he@amlogic.com>
 Date:   Wed Jun 29 13:33:25 2022 +0800
 
@@ -186,29 +206,9 @@ Date:   Thu May 26 17:54:33 2022 +0800
     Change-Id: I20e1ad944b5a061e2aec6b507b71a35337b7133a
     Signed-off-by: jiabin.zhu <jiabin.zhu@amlogic.com>
 
-commit 2c443e86f522f1a626451ed74a1f8917b2f2b09c
-Author: fei.deng <fei.deng@amlogic.com>
-Date:   Wed Jun 15 15:52:12 2022 +0800
-
-    videorenderer: CF2 replace link videotunnel with dlopen [1/1]
-    
-    PD#SWPL-84828
-    
-    Problem:
-    replace link videotunnel with dlopen
-    
-    Solution:
-    replace link videotunnel with dlopen
-    
-    Verify:
-    ar321
-    
-    Change-Id: I1e613e4cdff7cfb81e048134630f42302ca83069
-    Signed-off-by: fei.deng <fei.deng@amlogic.com>
-
 ========================================
 
-Release time: 2022-06-29-14-09
+Release time: 2022-07-01-13-30
 
 ========================================
 
