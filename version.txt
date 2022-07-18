@@ -1,10 +1,114 @@
 =========RELEALSE NOTE=================
 
-Version: V3.5.38-g1b318be
+Version: V3.7.4-g4ef78cf
 
 ========================================
 
 Git commit:
+commit 4ef78cfeb853a92f71b688252a0432dd58daab8b
+Author: fei.deng <fei.deng@amlogic.com>
+Date:   Wed Jul 13 20:30:07 2022 +0800
+
+    videorenderer: CB2 crash when create zwp linux buffer [1/1]
+    
+    PD#SWPL-86130
+    
+    Problem:
+    if creating zwp linux buffer sucess before waiting
+    zwp linux buffer callback,zwp linux buffer point be set
+    after waiting buffer callback
+    
+    Solution:
+    if creating zwp linux buffer sucess,do not invoking waiting
+    buffer callback
+    
+    Verify:
+    an400
+    
+    Change-Id: I0ea66ad99e56bbf918539a7cca19c67438455d93
+    Signed-off-by: fei.deng <fei.deng@amlogic.com>
+
+commit 9381fe0c8b03de83a3d09a73fb9db7da08659e64
+Author: zhipeng.he <zhipeng.he@amlogic.com>
+Date:   Wed Jun 29 13:49:39 2022 +0800
+
+    mediasync: CB2 2.0 playback drop frame [1/1]
+    
+    PD#SWPL-80199
+    
+    Problem:
+    2.0 playback drop frame.
+    
+    Solution:
+    fix the issue that 2.0 playback drop frame.
+    
+    Verify:
+    AP222
+    
+    Change-Id: I6b1468db45ac4f7fe3278af9cd9bfbd6856a5a52
+    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
+
+commit 062e45d37dd2e321a29a99179dd5ce143f7936c8
+Author: fei.deng <fei.deng@amlogic.com>
+Date:   Fri Jul 8 23:20:15 2022 +0800
+
+    videorenderer: CB2 no video after HDMI inplug [1/1]
+    
+    PD#SWPL-80944
+    
+    Problem:
+    no video output after hdmi inplug when playing video
+    
+    Solution:
+    implementing wl_output detect hdmi inplug
+    
+    Verify:
+    an400
+    
+    Change-Id: I35bce310d8fb3e8a22fad1aabbae2378592dcc2d
+    Signed-off-by: fei.deng <fei.deng@amlogic.com>
+
+commit a5dce906fafb989f521056d4e893385fc100f3e3
+Author: fei.deng <fei.deng@amlogic.com>
+Date:   Thu Jul 7 16:27:54 2022 +0800
+
+    mediasync: CB2 fix get mediatime issue [1/1]
+    
+    PD#SWPL-80199
+    
+    Problem:
+    get wrong stc time with MediaSync_GetMediaTimeByType
+    if audio frame is not arrived
+    
+    Solution:
+    return 0 when audio frame is not arrived
+    
+    Verify:
+    ap222
+    
+    Change-Id: Icc36df8f80b2419d56ff9f378de941e9a3d157c4
+    Signed-off-by: fei.deng <fei.deng@amlogic.com>
+
+commit 0f7db0222639505765b76262e3fa17b232f600a7
+Author: yunmin.chen <yunmin.chen@amlogic.com>
+Date:   Mon Jul 11 09:27:18 2022 +0800
+
+    mediahal: CF2 mediahal release [1/1]
+    
+    PD#SWPL-87736
+    
+    Problem:
+    mediahal release
+    
+    Solution:
+    release v3.5.38-g1b318be
+    
+    Verify:
+    SC2
+    
+    Change-Id: Ic6d0236f07b2f61d9edfca8f56daec7a6b2d4afd
+    Signed-off-by: yunmin.chen <yunmin.chen@amlogic.com>
+
 commit 1b318bed3908a4f5044776b464d10b2249b38880
 Author: zhipeng.he <zhipeng.he@amlogic.com>
 Date:   Fri Jun 17 16:47:48 2022 +0800
@@ -105,110 +209,9 @@ Date:   Wed Jun 22 20:28:53 2022 +0800
     Change-Id: I5e961a196fd7bd31f0e1c8b75bf104161a20ae7c
     Signed-off-by: fei.deng <fei.deng@amlogic.com>
 
-commit 07912e4beb84579c7fb4f2a793840eec4233a7a9
-Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Fri Jun 17 17:21:17 2022 +0800
-
-    mediasync: CB2 compile mediasync use g++ [1/1]
-    
-    PD#SWPL-85156
-    
-    Problem:
-    audiohal dlopen libmediahal_mediasync.so failed
-    
-    Solution:
-    compile mediasync use g++
-    
-    Verify:
-    A213Y
-    
-    Change-Id: I9cf815952bca23babdd5fb6ab6f34f4eb5439a5c
-    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
-
-commit 4d6e64ac13d5640febf970dac1121afbeb4822ea
-Author: fei.deng <fei.deng@amlogic.com>
-Date:   Wed Jun 22 14:44:35 2022 +0800
-
-    videorenderer: CB2 set fixed mediasync instance id for debug [1/1]
-    
-    PD#SWPL-85961
-    
-    Problem:
-    set fixed mediasync instance id for debug
-    
-    Solution:
-    set fixed mediasync instance id 11 to render lib
-    for debug
-    
-    Verify:
-    ar321
-    
-    Change-Id: Id7db38b2d74fbb60072cf338aa9722f8417a7542
-    Signed-off-by: fei.deng <fei.deng@amlogic.com>
-
-commit 46da44ed322babc15385e4fe2f86956f993bf235
-Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Mon Jun 20 17:33:42 2022 +0800
-
-    tsplayer: CB2 esmode use stream to send mediasync_id. [1/1]
-    
-    PD#SWPL-84885
-    
-    Problem:
-    esmode use device to send mediasync_id.
-    
-    Solution:
-    esmode use stream to send mediasync_id.
-    
-    Verify:
-    t5d
-    
-    Change-Id: I9847bd2ee6117b3ced60c0c42a8b4badd1633952
-    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
-
-commit f6f042714dd92b62a9dccc3f4d9f4e760e1b7291
-Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Fri Jun 17 20:03:51 2022 +0800
-
-    tsplayer: CB2 t5d esmode onlyvideo show first frame slow [1/1]
-    
-    PD#SWPL-67624
-    
-    Problem:
-    t5d esmode onlyvideo show first frame slow
-    
-    Solution:
-    fix onlyvideo show first frame slow.
-    
-    Verify:
-    A213Y
-    
-    Change-Id: I792f37ffb85684d4565d1b39852caf8ed95ba9a6
-    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
-
-commit 92fa86fad29dba1f27300b8a19f8db8a376377a8
-Author: jiabin.zhu <jiabin.zhu@amlogic.com>
-Date:   Thu May 26 17:54:33 2022 +0800
-
-    v4ldvb_test: CF2 adjust av sync code. [1/1]
-    
-    PD#SWPL-80848
-    
-    Problem:
-    adjust av sync code.
-    
-    Solution:
-    adjust av sync code.
-    
-    Verify:
-    ohm
-    
-    Change-Id: I20e1ad944b5a061e2aec6b507b71a35337b7133a
-    Signed-off-by: jiabin.zhu <jiabin.zhu@amlogic.com>
-
 ========================================
 
-Release time: 2022-07-01-13-30
+Release time: 2022-07-18-10-49
 
 ========================================
 
