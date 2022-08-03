@@ -53,6 +53,7 @@ enum _RenderKey {
     KEY_ZORDER, //set/get zorder of video plane,value type is int
     KEY_KEEP_LAST_FRAME, //set/get keep last frame when play end ,value type is int, 0 not keep, 1 keep
     KEY_HIDE_VIDEO, //set/get hide video,it effect immediatialy,value type is int, 0 not hide, 1 hide
+    KEY_FORCE_ASPECT_RATIO, //set/gst force pixel aspect ratio,value type is int, 1 is force,0 is not force
     KEY_MEDIASYNC_INSTANCE_ID = 400, //set/get mediasync instance id, value type is int
     KEY_MEDIASYNC_PCR_PID, ///set/get mediasync pcr id ,value type is int
     KEY_MEDIASYNC_DEMUX_ID, //set/get mediasync demux id ,value type is int
@@ -66,6 +67,7 @@ enum _RenderKey {
     KEY_MEDIASYNC_SOURCETYPE, //set/get media sync source type
     KEY_MEDIASYNC_VIDEOFRAME, //set/get
     KEY_MEDIASYNC_PLAYER_INSTANCE_ID,
+    KEY_MEDIASYNC_PLAYBACK_RATE, //set/get playback rate,value type is float,0.5 is 0.5 rate, 1.0 is normal, 2.0 is 2x rate
     //set/get video tunnel instance id when videotunnel plugin be selected,value type is int,this key must set before render_connect
     KEY_VIDEOTUNNEL_ID = 450,
 };

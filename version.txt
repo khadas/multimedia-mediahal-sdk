@@ -1,10 +1,121 @@
 =========RELEALSE NOTE=================
 
-Version: V3.7.4-g4ef78cf
+Version: V3.7.9-g614c669
 
 ========================================
 
 Git commit:
+commit 614c669ff3608f894382c9d7c92973d5b051033c
+Author: fei.deng <fei.deng@amlogic.com>
+Date:   Tue Jul 26 17:19:50 2022 +0800
+
+    videorenderer: CF2 fix video resizing failed [1/1]
+    
+    PD#SWPL-87796
+    
+    Problem:
+    if ui is doing resizing, video resizing not match ui size
+    
+    Solution:
+    updating video position if window size is changed
+    
+    Verify:
+    ap222
+    
+    Change-Id: I848ddddaf272229c1c639cdf0d85500534d6f7b0
+    Signed-off-by: fei.deng <fei.deng@amlogic.com>
+
+commit a0fbdfbcb907ae22c50d95f656660157ac4cf729
+Author: fei.deng <fei.deng@amlogic.com>
+Date:   Fri Jul 22 11:27:11 2022 +0800
+
+    videorenderer: CF2 implement vdo v4l2 ioctl [1/1]
+    
+    PD#SWPL-87817
+    
+    Problem:
+    implement vdo v4l2 ioctl
+    1.V4L2_CID_EXT_VDEC_DECODING_SPEED
+    2.V4L2_CID_EXT_VDEC_DISPLAY_DELAY
+    3.V4L2_CID_EXT_VDEC_FREEZE_MODE
+    4.V4L2_CID_EXT_VDEC_AUDIO_CHANNEL
+    5.V4L2_CID_EXT_VDEC_AV_SYNC
+    6.V4L2_CID_EXT_VDEC_VSYNC_THRESHOLD
+    7.V4L2_CID_EXT_VDEC_STC_MODE
+    8.V4L2_CID_EXT_VDEC_LIPSYNC_MASTER
+    
+    Solution:
+    implement vdo v4l2 ioctl
+    
+    Verify:
+    ar321
+    
+    Change-Id: If394c6fe131d60d193571e13363c660650d3d764
+    Signed-off-by: fei.deng <fei.deng@amlogic.com>
+
+commit 3a0ccad35398b8aea92199c2e23911340816df71
+Author: fei.deng <fei.deng@amlogic.com>
+Date:   Mon Jul 18 16:40:28 2022 +0800
+
+    videorenderer: CB2 window size aspect ratio issue [1/1]
+    
+    PD#SWPL-87761
+    
+    Problem:
+    1.frame size is not set before window size set, this cause
+    render lib calculating video frame rectangle issue
+    2.video sink not set pixel aspect ration
+    
+    Solution:
+    1.update video frame position when set frame size
+    2.video sink set pixel aspect ratio after render lib connected
+    
+    Verify:
+    ap222
+    
+    Change-Id: I6aefa39e536cc766e223b5b94419fa97dad92805
+    Signed-off-by: fei.deng <fei.deng@amlogic.com>
+
+commit 29c35683dc4cd062d558282538ee4554ba23939f
+Author: yunmin.chen <yunmin.chen@amlogic.com>
+Date:   Wed May 4 18:51:53 2022 +0800
+
+    mediasync: CF2 Calculation of cache time. [2/2]
+    
+    PD#SWPL-78920
+    
+    Problem:
+    Use mediasync to drive the computational cache
+    
+    Solution:
+    Use mediasync to drive the computational cache
+    
+    Verify:
+    SC2
+    
+    Change-Id: Icfbc11340f6b96b5abf6d4c8172d3ac6be8ebc33
+    Signed-off-by: yunmin.chen <yunmin.chen@amlogic.com>
+
+commit da9b260b6b19c49ff77cf638fc4f53205a28fa64
+Author: yunmin.chen <yunmin.chen@amlogic.com>
+Date:   Thu Jul 14 21:56:05 2022 +0800
+
+    mediasync: CB2 Fix the exception of getting stc time after pause [1/1]
+    
+    PD#SWPL-80046
+    
+    Problem:
+    After pause, use the current system time to calculate the stc time.
+    
+    Solution:
+    After pause, use the current pause system time to calculate the stc time.
+    
+    Verify:
+    SC2
+    
+    Change-Id: I097a94aa995c9e49c5fc47fa8f3b34eb6fda9b64
+    Signed-off-by: yunmin.chen <yunmin.chen@amlogic.com>
+
 commit 4ef78cfeb853a92f71b688252a0432dd58daab8b
 Author: fei.deng <fei.deng@amlogic.com>
 Date:   Wed Jul 13 20:30:07 2022 +0800
@@ -109,109 +220,9 @@ Date:   Mon Jul 11 09:27:18 2022 +0800
     Change-Id: Ic6d0236f07b2f61d9edfca8f56daec7a6b2d4afd
     Signed-off-by: yunmin.chen <yunmin.chen@amlogic.com>
 
-commit 1b318bed3908a4f5044776b464d10b2249b38880
-Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Fri Jun 17 16:47:48 2022 +0800
-
-    tsplayer: CB2 send streameof to tsplayer [1/1]
-    
-    PD#SWPL-85475
-    
-    Problem:
-    can not send the streamof to tsplayer
-    
-    Solution:
-    add send the streamof to tsplayer
-    
-    Verify:
-    A213Y
-    
-    Change-Id: I0bac968f3febc561886c322e5dfd0a0d79701bbd
-    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
-
-commit bec6b0cf511c83ac7f40756ff7ad7505bf282e29
-Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Wed Jun 29 13:33:25 2022 +0800
-
-    videodec: CB2 CS1-CS6 can't show when play Sarnoff C41miscc.trp [1/1]
-    
-    PD#TV-58351
-    
-    Problem:
-    CS1-CS6 can't show when play Sarnoff stream C41miscc.trp
-    
-    Solution:
-    fix the issue that some cc data loss
-    
-    Verify:
-    T950D4_AM301
-    
-    Change-Id: I0a5e34c79358cff6b53843d42547dd8fcf5d1daf
-    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
-
-commit e12331d2dc3a3ff8c02408908c8ef2dea999b04e
-Author: fei.deng <fei.deng@amlogic.com>
-Date:   Mon Jun 27 14:23:31 2022 +0800
-
-    videorenderer: CB1 jenkins compile error [1/1]
-    
-    PD#SWPL-86364
-    
-    Problem:
-    jenkins compile error
-    
-    Solution:
-    jenkins compile error
-    
-    Verify:
-    ar321
-    
-    Change-Id: I19c8ccb57402d8ef43934908d7fe4e60497b5467
-    Signed-off-by: fei.deng <fei.deng@amlogic.com>
-
-commit d480055aa6e79824831c9d9db96d9d6786c103a8
-Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Mon Jun 20 20:22:31 2022 +0800
-
-    videodec: CB2 fix SCTE_TYPE cc can't display [1/1]
-    
-    PD#TV-55857
-    
-    Problem:
-    mScteEnable not initialized
-    
-    Solution:
-    Initialize mScteEnable
-    
-    Verify:
-    T950D4
-    
-    Change-Id: I8e81dec9388baa8db556ef96657b6002b602627f
-    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
-
-commit cae210b11579152dcddcb69e13b64c482f51250f
-Author: fei.deng <fei.deng@amlogic.com>
-Date:   Wed Jun 22 20:28:53 2022 +0800
-
-    videorenderer: CF2 output log to logcat [1/1]
-    
-    PD#SWPL-86007
-    
-    Problem:
-    output log to logcat
-    
-    Solution:
-    output log to logcat
-    
-    Verify:
-    ap222
-    
-    Change-Id: I5e961a196fd7bd31f0e1c8b75bf104161a20ae7c
-    Signed-off-by: fei.deng <fei.deng@amlogic.com>
-
 ========================================
 
-Release time: 2022-07-18-10-49
+Release time: 2022-08-03-15-07
 
 ========================================
 
