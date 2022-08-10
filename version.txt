@@ -1,10 +1,72 @@
 =========RELEALSE NOTE=================
 
-Version: V3.7.9-g614c669
+Version: V3.7.12-gb16bbfd
 
 ========================================
 
 Git commit:
+commit b16bbfdfa3d6228e2b4d079c81e82a90fdf22531
+Author: peixing.mai <peixing.mai@amlogic.com>
+Date:   Tue Jul 26 16:22:21 2022 +0800
+
+    tsplayer: CB2 Stearm control is abnormal [1/1]
+    
+    PD#TV-59812
+    
+    Problem:
+    Stearm control is abnormal
+    
+    Solution:
+    Updata tsplayer stream control code
+    
+    Verify:
+    T5D
+    
+    Change-Id: I2182413456f1c6787343484e2d8f855ac035ec3d
+    Signed-off-by: peixing.mai <peixing.mai@amlogic.com>
+
+commit b7a52073857ae7087cb855a9a9e12050a0e98ec3
+Author: jiabin.zhu <jiabin.zhu@amlogic.com>
+Date:   Mon Aug 8 20:45:20 2022 +0800
+
+    v4ldvb_test: CB2 fix memory leak in v4ldvb_test. [1/1]
+    
+    PD#SWPL-88960
+    
+    Problem:
+    memory leak in v4ldvb_test.
+    
+    Solution:
+    1.add usleep in audio read thread.
+    
+    Verify:
+    ar321
+    
+    Change-Id: Iac980991889f91c238e626fd0995810fa0f0e0db
+    Signed-off-by: jiabin.zhu <jiabin.zhu@amlogic.com>
+
+commit 5eb555c826e1914738e071f957aa61a1f726d3bf
+Author: fei.deng <fei.deng@amlogic.com>
+Date:   Thu Aug 4 15:50:38 2022 +0800
+
+    videorenderer: CB2 fix black screen [1/1]
+    
+    PD#SWPL-81664
+    
+    Problem:
+    video tunnel don't release last video frame
+    when play end
+    
+    Solution:
+    1.notify frame displayed when frame sended to videotunnel
+    2.remove send cmd VT_CMD_SET_VIDEO_STATUS
+    
+    Verify:
+    ar321
+    
+    Change-Id: I1279270213b77c3c9f3e3a7ee8fabd688a3b1d5b
+    Signed-off-by: fei.deng <fei.deng@amlogic.com>
+
 commit 614c669ff3608f894382c9d7c92973d5b051033c
 Author: fei.deng <fei.deng@amlogic.com>
 Date:   Tue Jul 26 17:19:50 2022 +0800
@@ -159,70 +221,9 @@ Date:   Wed Jun 29 13:49:39 2022 +0800
     Change-Id: I6b1468db45ac4f7fe3278af9cd9bfbd6856a5a52
     Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
 
-commit 062e45d37dd2e321a29a99179dd5ce143f7936c8
-Author: fei.deng <fei.deng@amlogic.com>
-Date:   Fri Jul 8 23:20:15 2022 +0800
-
-    videorenderer: CB2 no video after HDMI inplug [1/1]
-    
-    PD#SWPL-80944
-    
-    Problem:
-    no video output after hdmi inplug when playing video
-    
-    Solution:
-    implementing wl_output detect hdmi inplug
-    
-    Verify:
-    an400
-    
-    Change-Id: I35bce310d8fb3e8a22fad1aabbae2378592dcc2d
-    Signed-off-by: fei.deng <fei.deng@amlogic.com>
-
-commit a5dce906fafb989f521056d4e893385fc100f3e3
-Author: fei.deng <fei.deng@amlogic.com>
-Date:   Thu Jul 7 16:27:54 2022 +0800
-
-    mediasync: CB2 fix get mediatime issue [1/1]
-    
-    PD#SWPL-80199
-    
-    Problem:
-    get wrong stc time with MediaSync_GetMediaTimeByType
-    if audio frame is not arrived
-    
-    Solution:
-    return 0 when audio frame is not arrived
-    
-    Verify:
-    ap222
-    
-    Change-Id: Icc36df8f80b2419d56ff9f378de941e9a3d157c4
-    Signed-off-by: fei.deng <fei.deng@amlogic.com>
-
-commit 0f7db0222639505765b76262e3fa17b232f600a7
-Author: yunmin.chen <yunmin.chen@amlogic.com>
-Date:   Mon Jul 11 09:27:18 2022 +0800
-
-    mediahal: CF2 mediahal release [1/1]
-    
-    PD#SWPL-87736
-    
-    Problem:
-    mediahal release
-    
-    Solution:
-    release v3.5.38-g1b318be
-    
-    Verify:
-    SC2
-    
-    Change-Id: Ic6d0236f07b2f61d9edfca8f56daec7a6b2d4afd
-    Signed-off-by: yunmin.chen <yunmin.chen@amlogic.com>
-
 ========================================
 
-Release time: 2022-08-03-20-43
+Release time: 2022-08-10-15-40
 
 ========================================
 
