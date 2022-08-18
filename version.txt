@@ -1,10 +1,31 @@
 =========RELEALSE NOTE=================
 
-Version: V3.7.12-gb16bbfd
+Version: V3.7.13-g4819fbb
 
 ========================================
 
 Git commit:
+commit 4819fbb91d7dcd75380b0a9735afbd1fcdd10393
+Author: fei.deng <fei.deng@amlogic.com>
+Date:   Tue Aug 2 17:16:48 2022 +0800
+
+    videorenderer: CF1 support libdrm meson compositor [1/1]
+    
+    PD#SWPL-89478
+    
+    Problem:
+    support libdrm meson display video when
+    the platform don't implement westeros,weston,videotunnel
+    
+    Solution:
+    support libdrm meson compositor
+    
+    Verify:
+    ap222
+    
+    Change-Id: Ic2cb0d9d0e3b4dcfceb9df362647479315753e45
+    Signed-off-by: fei.deng <fei.deng@amlogic.com>
+
 commit b16bbfdfa3d6228e2b4d079c81e82a90fdf22531
 Author: peixing.mai <peixing.mai@amlogic.com>
 Date:   Tue Jul 26 16:22:21 2022 +0800
@@ -201,29 +222,9 @@ Date:   Wed Jul 13 20:30:07 2022 +0800
     Change-Id: I0ea66ad99e56bbf918539a7cca19c67438455d93
     Signed-off-by: fei.deng <fei.deng@amlogic.com>
 
-commit 9381fe0c8b03de83a3d09a73fb9db7da08659e64
-Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Wed Jun 29 13:49:39 2022 +0800
-
-    mediasync: CB2 2.0 playback drop frame [1/1]
-    
-    PD#SWPL-80199
-    
-    Problem:
-    2.0 playback drop frame.
-    
-    Solution:
-    fix the issue that 2.0 playback drop frame.
-    
-    Verify:
-    AP222
-    
-    Change-Id: I6b1468db45ac4f7fe3278af9cd9bfbd6856a5a52
-    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
-
 ========================================
 
-Release time: 2022-08-10-15-40
+Release time: 2022-08-18-14-40
 
 ========================================
 
