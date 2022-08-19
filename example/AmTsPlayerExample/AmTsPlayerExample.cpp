@@ -405,6 +405,30 @@ int main(int argc, char **argv)
                         bExitManual = true;
                         break;
                     }
+                   if (ch == 'p') {
+                       printf("====> stop video when writedata \n");
+                       AmTsPlayer_stopVideoDecoding(session);
+                   }
+                   if (ch == 'r') {
+                       am_tsplayer_video_params vparm;
+                       vparm.codectype = vCodec;
+                       vparm.pid = vPid;
+                       printf("====> start video when writedata \n");
+                       AmTsPlayer_setVideoParams(session, &vparm);
+                       AmTsPlayer_startVideoDecoding(session);
+                   }
+                   if (ch == 'a') {
+                       printf("====> stop audio when writedata \n");
+                       AmTsPlayer_stopAudioDecoding(session);
+                   }
+                   if (ch == 's') {
+                       printf("====> start audio when writedata \n");
+                       am_tsplayer_audio_params aparm;
+                       aparm.codectype = aCodec;
+                       aparm.pid = aPid;
+                       AmTsPlayer_setAudioParams(session, &aparm);
+                       AmTsPlayer_startAudioDecoding(session);
+                   }
                }
                 res = AmTsPlayer_writeData(session, &ibuf, kRwTimeout);
                // usleep(20000);
@@ -423,6 +447,30 @@ int main(int argc, char **argv)
                 if (ch == 113) {
                     printf("----break\n");
                     break;
+                }
+                if (ch == 'p') {
+                    printf("====>stop video \n");
+                    AmTsPlayer_stopVideoDecoding(session);
+                }
+                if (ch == 'r') {
+                    am_tsplayer_video_params vparm;
+                    vparm.codectype = vCodec;
+                    vparm.pid = vPid;
+                    printf("====>start video \n");
+                    AmTsPlayer_setVideoParams(session, &vparm);
+                    AmTsPlayer_startVideoDecoding(session);
+                }
+                if (ch == 'a') {
+                    printf("====> stop audio \n");
+                    AmTsPlayer_stopAudioDecoding(session);
+                }
+                if (ch == 's') {
+                    printf("====> start audio \n");
+                    am_tsplayer_audio_params aparm;
+                    aparm.codectype = aCodec;
+                    aparm.pid = aPid;
+                    AmTsPlayer_setAudioParams(session, &aparm);
+                    AmTsPlayer_startAudioDecoding(session);
                 }
             }
         }

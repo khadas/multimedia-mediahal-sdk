@@ -53,7 +53,8 @@ enum _RenderKey {
     KEY_ZORDER, //set/get zorder of video plane,value type is int
     KEY_KEEP_LAST_FRAME, //set/get keep last frame when play end ,value type is int, 0 not keep, 1 keep
     KEY_HIDE_VIDEO, //set/get hide video,it effect immediatialy,value type is int, 0 not hide, 1 hide
-    KEY_FORCE_ASPECT_RATIO, //set/gst force pixel aspect ratio,value type is int, 1 is force,0 is not force
+    KEY_FORCE_ASPECT_RATIO, //set/get force pixel aspect ratio,value type is int, 1 is force,0 is not force
+    KEY_SELECT_DISPLAY_OUTPUT,//set/get display output index,value type is int,0 is primary output and default value, 1 is extend display output
     KEY_MEDIASYNC_INSTANCE_ID = 400, //set/get mediasync instance id, value type is int
     KEY_MEDIASYNC_PCR_PID, ///set/get mediasync pcr id ,value type is int
     KEY_MEDIASYNC_DEMUX_ID, //set/get mediasync demux id ,value type is int

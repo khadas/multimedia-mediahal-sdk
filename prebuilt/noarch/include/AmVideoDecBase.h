@@ -98,6 +98,11 @@ public:
     virtual int32_t allocIonBuffer(size_t size, void** mapaddr, int* fd = 0) = 0;
     virtual int32_t freeIonBuffer(void* mapaddr) = 0;
     virtual int32_t freeAllIonBuffer() = 0;
+
+    /* uvm output for non-bufferqueue */
+    virtual int32_t allocUvmBuffer(uint32_t width, uint32_t height, void** mapaddr, unsigned int i,
+        int* fd = 0) = 0;
+    virtual int32_t freeUvmBuffers() = 0;
 };
 
 extern "C" AmVideoDecBase* AmVideoDec_create(AmVideoDecCallback* callback);

@@ -138,7 +138,7 @@ void* TsPlayerThread(void *arg) {
     int kRwSize = 188*300;
     int kRwTimeout = 30000;
     char buf[kRwSize];
-    uint64_t fsize = 0;
+    long long fsize = 0;
     ifstream file(inputTsName.c_str(), ifstream::binary);
     if (mTsParams->inPutTsType == TS_MEMORY) {
         file.seekg(0, file.end);
@@ -329,7 +329,7 @@ void changAudio(TsParams* mTsParams,int number) {
 #endif
 
 void stopVideo(TsParams* mTsParams,int number) {
-    printf("index:%d AmTsPlayer_stopVideoDecoding g_session:0x%x \n",number,g_session[number]);
+    printf("index:%d AmTsPlayer_stopVideoDecoding \n",number);
     AmTsPlayer_stopVideoDecoding(g_session[number]);
     return;
 }
@@ -338,7 +338,7 @@ void startVideo(TsParams* mTsParams,int number) {
     am_tsplayer_video_params vparm;
     vparm.codectype = mTsParams->videoFmt;
     vparm.pid = mTsParams->vpid;
-    printf("index:%d AmTsPlayer_startVideoDecoding g_session:0x%x \n",number,g_session[number]);
+    printf("index:%d AmTsPlayer_startVideoDecoding \n",number);
     AmTsPlayer_setVideoParams(g_session[number], &vparm);
     AmTsPlayer_startVideoDecoding(g_session[number]);
 
@@ -346,13 +346,13 @@ void startVideo(TsParams* mTsParams,int number) {
 }
 
 void hideVideo(TsParams* mTsParams,int number) {
-    printf("index:%d AmTsPlayer_hideVideo g_session:0x%x \n",number,g_session[number]);
+    printf("index:%d AmTsPlayer_hideVideo \n",number);
     AmTsPlayer_hideVideo(g_session[number]);
     return;
 }
 
 void showVideo(TsParams* mTsParams,int number) {
-    printf("index:%d AmTsPlayer_showVideo g_session:0x%x \n",number,g_session[number]);
+    printf("index:%d AmTsPlayer_showVideo \n",number);
     AmTsPlayer_showVideo(g_session[number]);
     return;
 }

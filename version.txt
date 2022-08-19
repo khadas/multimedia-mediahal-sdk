@@ -1,10 +1,54 @@
 =========RELEALSE NOTE=================
 
-Version: V3.7.13-g4819fbb
+Version: V3.7.15-gf9b63cb
 
 ========================================
 
 Git commit:
+commit f9b63cbe40933b858bb377ab93dbb259cf116293
+Author: fei.deng <fei.deng@amlogic.com>
+Date:   Wed Aug 10 17:36:11 2022 +0800
+
+    videorenderer: CF2 support two display output [1/1]
+    
+    PD#SH-10946
+    
+    Problem:
+    the origin render lib supports only one display wayland
+    output. if platform contains two display output, this causes
+    video output size issue
+    
+    Solution:
+    support two wayland display output,one is primary output and another
+    is extend output. primary output is default output if user don't select
+    special output
+    
+    Verify:
+    a311d2
+    
+    Change-Id: I5b0b5ddaa35c4bde9da3e207ce7af52e3ccaf58d
+    Signed-off-by: fei.deng <fei.deng@amlogic.com>
+
+commit ba06c903bce037fbc856a094f1c7eb3a62687ecd
+Author: zhipeng.he <zhipeng.he@amlogic.com>
+Date:   Thu Jul 14 21:22:48 2022 +0800
+
+    example: CF2 add esvideodecplayer example [1/1]
+    
+    PD#SWPL-87744
+    
+    Problem:
+    no esvideodecplayer example
+    
+    Solution:
+    add esvideodecplayer example
+    
+    Verify:
+    AH212
+    
+    Change-Id: I5c267b58b513c7a43e3cf14f8ef46d6bb5bbf3c1
+    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
+
 commit 4819fbb91d7dcd75380b0a9735afbd1fcdd10393
 Author: fei.deng <fei.deng@amlogic.com>
 Date:   Tue Aug 2 17:16:48 2022 +0800
@@ -179,52 +223,9 @@ Date:   Wed May 4 18:51:53 2022 +0800
     Change-Id: Icfbc11340f6b96b5abf6d4c8172d3ac6be8ebc33
     Signed-off-by: yunmin.chen <yunmin.chen@amlogic.com>
 
-commit da9b260b6b19c49ff77cf638fc4f53205a28fa64
-Author: yunmin.chen <yunmin.chen@amlogic.com>
-Date:   Thu Jul 14 21:56:05 2022 +0800
-
-    mediasync: CB2 Fix the exception of getting stc time after pause [1/1]
-    
-    PD#SWPL-80046
-    
-    Problem:
-    After pause, use the current system time to calculate the stc time.
-    
-    Solution:
-    After pause, use the current pause system time to calculate the stc time.
-    
-    Verify:
-    SC2
-    
-    Change-Id: I097a94aa995c9e49c5fc47fa8f3b34eb6fda9b64
-    Signed-off-by: yunmin.chen <yunmin.chen@amlogic.com>
-
-commit 4ef78cfeb853a92f71b688252a0432dd58daab8b
-Author: fei.deng <fei.deng@amlogic.com>
-Date:   Wed Jul 13 20:30:07 2022 +0800
-
-    videorenderer: CB2 crash when create zwp linux buffer [1/1]
-    
-    PD#SWPL-86130
-    
-    Problem:
-    if creating zwp linux buffer sucess before waiting
-    zwp linux buffer callback,zwp linux buffer point be set
-    after waiting buffer callback
-    
-    Solution:
-    if creating zwp linux buffer sucess,do not invoking waiting
-    buffer callback
-    
-    Verify:
-    an400
-    
-    Change-Id: I0ea66ad99e56bbf918539a7cca19c67438455d93
-    Signed-off-by: fei.deng <fei.deng@amlogic.com>
-
 ========================================
 
-Release time: 2022-08-18-14-40
+Release time: 2022-08-19-11-39
 
 ========================================
 
