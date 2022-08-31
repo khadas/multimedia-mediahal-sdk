@@ -52,9 +52,12 @@ const int kRwTimeout = 30000;
 
 void video_callback(void *user_data, am_tsplayer_event *event)
 {
+    if (!event) {
+        return ;
+    }
     UNUSED(user_data);
-    printf("video_callback type %d\n", event? event->type : 0);
-	switch (event->type) {
+    printf("video_callback type %d\n", event->type);
+    switch (event->type) {
         case AM_TSPLAYER_EVENT_TYPE_VIDEO_CHANGED:
         {
             printf("[evt] AM_TSPLAYER_EVENT_TYPE_VIDEO_CHANGED: %d x %d @%d [%d]\n",
@@ -98,7 +101,7 @@ void video_callback(void *user_data, am_tsplayer_event *event)
         }
         default:
             break;
-	}
+    }
 }
 
 static int set_osd_blank(int blank)

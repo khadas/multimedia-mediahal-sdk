@@ -1,10 +1,155 @@
 =========RELEALSE NOTE=================
 
-Version: V3.7.15-gf9b63cb
+Version: V3.7.22-g4b6d75b
 
 ========================================
 
 Git commit:
+commit 4b6d75b9964d636d5bf96fa952ca5695ad92602f
+Author: fei.deng <fei.deng@amlogic.com>
+Date:   Tue Aug 30 11:24:13 2022 +0800
+
+    videorenderer: CB2 compile error on jekins [1/1]
+    
+    PD#SWPL-92904
+    
+    Problem:
+    compile error on jekins
+    
+    Solution:
+    compile error on jekins
+    
+    Verify:
+    ap222
+    
+    Change-Id: Ic8bb2116c8f5be0b7b732a1db2bea928148d34ba
+    Signed-off-by: fei.deng <fei.deng@amlogic.com>
+
+commit 106dee207ea1aeeb0855daadb043383135af5f23
+Author: zhipeng.he <zhipeng.he@amlogic.com>
+Date:   Fri Aug 26 16:01:04 2022 +0800
+
+    example: CB2 check event pointer is empty or not [1/1]
+    
+    PD#TV-61231
+    
+    Problem:
+    need check event pointer is empty or not
+    
+    Solution:
+    check event pointer is empty or not
+    
+    Verify:
+    common
+    
+    Change-Id: I5178571e19c05c01afd9ebaaddc4e9ea2258a644
+    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
+
+commit d72a0024467f6b6740ac42ee94c6b456e7a45ddb
+Author: zhipeng.he <zhipeng.he@amlogic.com>
+Date:   Wed Aug 3 14:15:28 2022 +0800
+
+    mediahal: CB2 optimize debug printing [1/1]
+    
+    PD#SWPL-89288
+    
+    Problem:
+    too debug printing on media_hal
+    
+    Solution:
+    optimize debug printing
+    
+    Verify:
+    ah212
+    
+    Change-Id: I7da37e9dc2bd1d1ad6f7ac55d8e303890c1c4c3a
+    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
+
+commit 4dd229ad0cb088951558f6187c7e8f4956520204
+Author: fei.deng <fei.deng@amlogic.com>
+Date:   Thu Aug 25 15:25:49 2022 +0800
+
+    videorenderer: CB2 LGE VDEC IOCTL [1/1]
+    
+    PD#SWPL-88958
+    
+    Problem:
+    implement the followed ioctl:
+    1.V4L2_CID_EXT_VDEC_FREEZE_MODE
+    2.V4L2_CID_EXT_VDEC_STC_MODE
+    3.V4L2_CID_EXT_VDEC_LIPSYNC_MASTER
+    
+    Solution:
+    implement vdec ioctl
+    
+    Verify:
+    ar321
+    
+    Change-Id: I9963db1582ea10dc2236194c9d543117c0ae7032
+    Signed-off-by: fei.deng <fei.deng@amlogic.com>
+
+commit bd09b48063983464f9e626a5a6f33d65dd29d25e
+Author: fei.deng <fei.deng@amlogic.com>
+Date:   Thu Aug 25 14:39:05 2022 +0800
+
+    videorenderer: CB2 memory leak when play stop with drm output [1/1]
+    
+    PD#SWPL-92476
+    
+    Problem:
+    memory leak when play stop with libdrm meson output
+    
+    Solution:
+    free drm buf when stop playing
+    
+    Verify:
+    ap222
+    
+    Change-Id: Icc61f6ca43d51bd81637c81ad3190060d7fbf03e
+    Signed-off-by: fei.deng <fei.deng@amlogic.com>
+
+commit 495b7615cce88cb0f2267d31fd22ea94f81b147b
+Author: zhipeng.he <zhipeng.he@amlogic.com>
+Date:   Tue Aug 9 19:06:06 2022 +0800
+
+    videodec: CB2 crash in processScteData [1/1]
+    
+    PD#TV-59543
+    
+    Problem:
+    crash in processScteData.
+    
+    Solution:
+    fix the issue crash in processScteData.
+    
+    Verify:
+    AM301
+    
+    Change-Id: I90e2681bf93ebbf2b0cfc688fb9f0d97897dac07
+    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
+
+commit 83a862f1369c2906f0dd5da71498979ba1d69ff8
+Author: Yani Shi <yani.shi@amlogic.com>
+Date:   Thu Aug 18 19:20:33 2022 +0800
+
+    mediasync: CB2 Optimize the start time of special stream. [1/1]
+    
+    PD#SWPL-88809
+    
+    Problem:
+    For some special stream, the first_frame_nosync
+    the first vpts is larger lot than the first apts
+    let the start time is too long
+    
+    Solution:
+    add the avdiff ladder to optimize the start time
+    
+    Verify:
+    AP232-Irdeto
+    
+    Change-Id: I5aee2851d5e0cc2d89c15a1c81fcd9f9554f62b6
+    Signed-off-by: Yani Shi <yani.shi@amlogic.com>
+
 commit f9b63cbe40933b858bb377ab93dbb259cf116293
 Author: fei.deng <fei.deng@amlogic.com>
 Date:   Wed Aug 10 17:36:11 2022 +0800
@@ -70,162 +215,9 @@ Date:   Tue Aug 2 17:16:48 2022 +0800
     Change-Id: Ic2cb0d9d0e3b4dcfceb9df362647479315753e45
     Signed-off-by: fei.deng <fei.deng@amlogic.com>
 
-commit b16bbfdfa3d6228e2b4d079c81e82a90fdf22531
-Author: peixing.mai <peixing.mai@amlogic.com>
-Date:   Tue Jul 26 16:22:21 2022 +0800
-
-    tsplayer: CB2 Stearm control is abnormal [1/1]
-    
-    PD#TV-59812
-    
-    Problem:
-    Stearm control is abnormal
-    
-    Solution:
-    Updata tsplayer stream control code
-    
-    Verify:
-    T5D
-    
-    Change-Id: I2182413456f1c6787343484e2d8f855ac035ec3d
-    Signed-off-by: peixing.mai <peixing.mai@amlogic.com>
-
-commit b7a52073857ae7087cb855a9a9e12050a0e98ec3
-Author: jiabin.zhu <jiabin.zhu@amlogic.com>
-Date:   Mon Aug 8 20:45:20 2022 +0800
-
-    v4ldvb_test: CB2 fix memory leak in v4ldvb_test. [1/1]
-    
-    PD#SWPL-88960
-    
-    Problem:
-    memory leak in v4ldvb_test.
-    
-    Solution:
-    1.add usleep in audio read thread.
-    
-    Verify:
-    ar321
-    
-    Change-Id: Iac980991889f91c238e626fd0995810fa0f0e0db
-    Signed-off-by: jiabin.zhu <jiabin.zhu@amlogic.com>
-
-commit 5eb555c826e1914738e071f957aa61a1f726d3bf
-Author: fei.deng <fei.deng@amlogic.com>
-Date:   Thu Aug 4 15:50:38 2022 +0800
-
-    videorenderer: CB2 fix black screen [1/1]
-    
-    PD#SWPL-81664
-    
-    Problem:
-    video tunnel don't release last video frame
-    when play end
-    
-    Solution:
-    1.notify frame displayed when frame sended to videotunnel
-    2.remove send cmd VT_CMD_SET_VIDEO_STATUS
-    
-    Verify:
-    ar321
-    
-    Change-Id: I1279270213b77c3c9f3e3a7ee8fabd688a3b1d5b
-    Signed-off-by: fei.deng <fei.deng@amlogic.com>
-
-commit 614c669ff3608f894382c9d7c92973d5b051033c
-Author: fei.deng <fei.deng@amlogic.com>
-Date:   Tue Jul 26 17:19:50 2022 +0800
-
-    videorenderer: CF2 fix video resizing failed [1/1]
-    
-    PD#SWPL-87796
-    
-    Problem:
-    if ui is doing resizing, video resizing not match ui size
-    
-    Solution:
-    updating video position if window size is changed
-    
-    Verify:
-    ap222
-    
-    Change-Id: I848ddddaf272229c1c639cdf0d85500534d6f7b0
-    Signed-off-by: fei.deng <fei.deng@amlogic.com>
-
-commit a0fbdfbcb907ae22c50d95f656660157ac4cf729
-Author: fei.deng <fei.deng@amlogic.com>
-Date:   Fri Jul 22 11:27:11 2022 +0800
-
-    videorenderer: CF2 implement vdo v4l2 ioctl [1/1]
-    
-    PD#SWPL-87817
-    
-    Problem:
-    implement vdo v4l2 ioctl
-    1.V4L2_CID_EXT_VDEC_DECODING_SPEED
-    2.V4L2_CID_EXT_VDEC_DISPLAY_DELAY
-    3.V4L2_CID_EXT_VDEC_FREEZE_MODE
-    4.V4L2_CID_EXT_VDEC_AUDIO_CHANNEL
-    5.V4L2_CID_EXT_VDEC_AV_SYNC
-    6.V4L2_CID_EXT_VDEC_VSYNC_THRESHOLD
-    7.V4L2_CID_EXT_VDEC_STC_MODE
-    8.V4L2_CID_EXT_VDEC_LIPSYNC_MASTER
-    
-    Solution:
-    implement vdo v4l2 ioctl
-    
-    Verify:
-    ar321
-    
-    Change-Id: If394c6fe131d60d193571e13363c660650d3d764
-    Signed-off-by: fei.deng <fei.deng@amlogic.com>
-
-commit 3a0ccad35398b8aea92199c2e23911340816df71
-Author: fei.deng <fei.deng@amlogic.com>
-Date:   Mon Jul 18 16:40:28 2022 +0800
-
-    videorenderer: CB2 window size aspect ratio issue [1/1]
-    
-    PD#SWPL-87761
-    
-    Problem:
-    1.frame size is not set before window size set, this cause
-    render lib calculating video frame rectangle issue
-    2.video sink not set pixel aspect ration
-    
-    Solution:
-    1.update video frame position when set frame size
-    2.video sink set pixel aspect ratio after render lib connected
-    
-    Verify:
-    ap222
-    
-    Change-Id: I6aefa39e536cc766e223b5b94419fa97dad92805
-    Signed-off-by: fei.deng <fei.deng@amlogic.com>
-
-commit 29c35683dc4cd062d558282538ee4554ba23939f
-Author: yunmin.chen <yunmin.chen@amlogic.com>
-Date:   Wed May 4 18:51:53 2022 +0800
-
-    mediasync: CF2 Calculation of cache time. [2/2]
-    
-    PD#SWPL-78920
-    
-    Problem:
-    Use mediasync to drive the computational cache
-    
-    Solution:
-    Use mediasync to drive the computational cache
-    
-    Verify:
-    SC2
-    
-    Change-Id: Icfbc11340f6b96b5abf6d4c8172d3ac6be8ebc33
-    Signed-off-by: yunmin.chen <yunmin.chen@amlogic.com>
-
 ========================================
 
-Release time: 2022-08-19-11-39
+Release time: 2022-08-31-13-30
 
 ========================================
 

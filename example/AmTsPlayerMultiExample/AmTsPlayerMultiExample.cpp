@@ -67,9 +67,11 @@ typedef struct {
 
 void video_callback(void *user_data, am_tsplayer_event *event)
 {
-    //UNUSED(user_data);
+    if (!event || !user_data) {
+        return ;
+    }
     TsParams* mTsParams = (TsParams*)user_data;
-    //printf("video_callback type %d\n", event? event->type : 0);
+    printf("video_callback type %d\n", event->type);
     switch (event->type) {
         case AM_TSPLAYER_EVENT_TYPE_VIDEO_CHANGED:
         {
