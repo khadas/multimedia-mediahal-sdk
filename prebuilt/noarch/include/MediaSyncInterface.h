@@ -61,6 +61,7 @@ typedef enum {
     MEDIASYNC_KEY_ALSAREADY,
     MEDIASYNC_KEY_VSYNC_INTERVAL_MS,
     MEDIASYNC_KEY_VIDEOFRAME,
+    MEDIASYNC_KEY_VIDEOTRICKMODE,
     MEDIASYNC_KEY_MAX = 255,
 } mediasync_parameter;
 
@@ -135,7 +136,7 @@ struct mediasync_audio_queue_info{
 typedef struct frameinfo{
     int64_t framePts;
     int64_t frameSystemTime;
-}mediasync_frameinfo;
+} mediasync_frameinfo;
 
 extern void* MediaSync_create();
 

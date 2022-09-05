@@ -1,10 +1,99 @@
 =========RELEALSE NOTE=================
 
-Version: V3.7.22-g4b6d75b
+Version: V3.7.26-gd197c28
 
 ========================================
 
 Git commit:
+commit d197c284477491ebbe54144d0ecfe8179b0617ff
+Author: yunmin.chen <yunmin.chen@amlogic.com>
+Date:   Thu Aug 11 19:41:22 2022 +0800
+
+    mediasync: CB2 fixed dropped frames after resume [2/3]
+    
+    PD#SWPL-88573
+    
+    Problem:
+    Drop frames after resume.
+    
+    Solution:
+    After resume, if the audio pts is larger than the video pts,
+    the audio will wait for the video output first.
+    
+    Verify:
+    AP222
+    
+    Change-Id: Icbcce49207b96abf93e3775f7b88f5fbb74173fa
+    Signed-off-by: yunmin.chen <yunmin.chen@amlogic.com>
+
+commit 96d77ed170a9568de88a351f707a139706443dfd
+Author: yunmin.chen <yunmin.chen@amlogic.com>
+Date:   Wed Aug 3 21:25:20 2022 +0800
+
+    mediasync: CB2 fix dropped frames [1/1]
+    
+    PD#SWPL-88573
+    
+    Problem:
+    Add frame control.
+    
+    Solution:
+    Add frame control.
+    
+    Verify:
+    AP222
+    
+    Change-Id: I7f3d06e936f1080c7c46dab9973e5622cfb339e5
+    Signed-off-by: yunmin.chen <yunmin.chen@amlogic.com>
+
+commit bdefd411243bccf3c16e09e5195db205b22d3fb0
+Author: yunmin.chen <yunmin.chen@amlogic.com>
+Date:   Thu Jun 9 22:27:52 2022 +0800
+
+    mediasync: CF1 mediasync architecture optimization [1/1]
+    
+    PD#SWPL-78999
+    
+    Problem:
+    mediasync architecture optimization.
+    
+    Solution:
+    mediasync architecture optimization.
+    
+    Verify:
+    SC2
+    
+    Change-Id: Ib50ea447c990260c0c22d27f6db97527c535629b
+    Signed-off-by: yunmin.chen <yunmin.chen@amlogic.com>
+
+commit f3c6ad83fd6f2e53a7e6c4ad5c1e2f8cd7ab0fc6
+Author: fei.deng <fei.deng@amlogic.com>
+Date:   Sun Aug 21 21:14:56 2022 +0800
+
+    videorenderer: CF2 send pause event after all frame displayed [1/1]
+    
+    PD#SWPL-88573
+    
+    Problem:
+    dropped frame issue in video mono sync mode if frames had commit to
+    westeros server from pause to resume state. because system mono clock
+    is going when pausing state,but frame mono time is constant,all frames will
+    be expired when resume playing
+    
+    Solution:
+    1.send pause event to westeros server after all frames those commited
+    to westeros server had displayed
+    2.add under flow msg
+    3.add first frame msg
+    4.add pause api with the special pts
+    5.add a notify thread to send callback to caller
+    
+    Verify:
+    ap222
+    
+    Change-Id: I855bb66d99bab52d21fa105fc742670566edcfe3
+    Signed-off-by: fei.deng <fei.deng@amlogic.com>
+
 commit 4b6d75b9964d636d5bf96fa952ca5695ad92602f
 Author: fei.deng <fei.deng@amlogic.com>
 Date:   Tue Aug 30 11:24:13 2022 +0800
@@ -128,96 +217,9 @@ Date:   Tue Aug 9 19:06:06 2022 +0800
     Change-Id: I90e2681bf93ebbf2b0cfc688fb9f0d97897dac07
     Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
 
-commit 83a862f1369c2906f0dd5da71498979ba1d69ff8
-Author: Yani Shi <yani.shi@amlogic.com>
-Date:   Thu Aug 18 19:20:33 2022 +0800
-
-    mediasync: CB2 Optimize the start time of special stream. [1/1]
-    
-    PD#SWPL-88809
-    
-    Problem:
-    For some special stream, the first_frame_nosync
-    the first vpts is larger lot than the first apts
-    let the start time is too long
-    
-    Solution:
-    add the avdiff ladder to optimize the start time
-    
-    Verify:
-    AP232-Irdeto
-    
-    Change-Id: I5aee2851d5e0cc2d89c15a1c81fcd9f9554f62b6
-    Signed-off-by: Yani Shi <yani.shi@amlogic.com>
-
-commit f9b63cbe40933b858bb377ab93dbb259cf116293
-Author: fei.deng <fei.deng@amlogic.com>
-Date:   Wed Aug 10 17:36:11 2022 +0800
-
-    videorenderer: CF2 support two display output [1/1]
-    
-    PD#SH-10946
-    
-    Problem:
-    the origin render lib supports only one display wayland
-    output. if platform contains two display output, this causes
-    video output size issue
-    
-    Solution:
-    support two wayland display output,one is primary output and another
-    is extend output. primary output is default output if user don't select
-    special output
-    
-    Verify:
-    a311d2
-    
-    Change-Id: I5b0b5ddaa35c4bde9da3e207ce7af52e3ccaf58d
-    Signed-off-by: fei.deng <fei.deng@amlogic.com>
-
-commit ba06c903bce037fbc856a094f1c7eb3a62687ecd
-Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Thu Jul 14 21:22:48 2022 +0800
-
-    example: CF2 add esvideodecplayer example [1/1]
-    
-    PD#SWPL-87744
-    
-    Problem:
-    no esvideodecplayer example
-    
-    Solution:
-    add esvideodecplayer example
-    
-    Verify:
-    AH212
-    
-    Change-Id: I5c267b58b513c7a43e3cf14f8ef46d6bb5bbf3c1
-    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
-
-commit 4819fbb91d7dcd75380b0a9735afbd1fcdd10393
-Author: fei.deng <fei.deng@amlogic.com>
-Date:   Tue Aug 2 17:16:48 2022 +0800
-
-    videorenderer: CF1 support libdrm meson compositor [1/1]
-    
-    PD#SWPL-89478
-    
-    Problem:
-    support libdrm meson display video when
-    the platform don't implement westeros,weston,videotunnel
-    
-    Solution:
-    support libdrm meson compositor
-    
-    Verify:
-    ap222
-    
-    Change-Id: Ic2cb0d9d0e3b4dcfceb9df362647479315753e45
-    Signed-off-by: fei.deng <fei.deng@amlogic.com>
-
 ========================================
 
-Release time: 2022-08-31-13-30
+Release time: 2022-09-05-14-39
 
 ========================================
 

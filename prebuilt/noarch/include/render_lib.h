@@ -95,7 +95,11 @@ typedef enum _RenderMsgType {
     //frame buffer is displayed
     MSG_DISPLAYED_BUFFER = 101, //the msg type is RenderBuffer
     //the frame buffer is droped
-    MSG_DROPED_BUFFER = 102,//the msg type is RenderBuffer
+    MSG_DROPED_BUFFER    = 102,//the msg type is RenderBuffer
+    //first frame displayed msg
+    MSG_FIRST_FRAME       = 103, //the msg type is frame pts
+    //under flow msg
+    MSG_UNDER_FLOW       = 104, //the msg type is last displayed pts
 
     //render lib connected failed
     MSG_CONNECTED_FAIL   = 200, //the msg type is string
@@ -319,6 +323,15 @@ int render_flush(void *handle);
  * @return 0 sucess,-1 fail
  */
 int render_pause(void *handle);
+
+/**
+ * @brief pause display,when display frame reached to the special pts video
+ *
+ * @param handle a handle of render device that was opened
+ * @param pts the will paused video frame pts, the pts unit is nano second
+ * @return 0 sucess,-1 fail
+ */
+int render_pause_pts(void *handle, int64_t pts);
 
 /**
  * resume display video frame
