@@ -1,10 +1,91 @@
 =========RELEALSE NOTE=================
 
-Version: V3.7.26-gd197c28
+Version: V3.7.30-g9669caa
 
 ========================================
 
 Git commit:
+commit 9669caa723d535c32d99a04b1cb9db91c057baa5
+Author: fei.deng <fei.deng@amlogic.com>
+Date:   Mon Sep 5 18:58:48 2022 +0800
+
+    videorenderer: CB2 remove wayland link on roku [1/1]
+    
+    PD#SWPL-93474
+    
+    Problem:
+    remove wayland link on roku
+    
+    Solution:
+    remove wayland link on roku
+    
+    Verify:
+    ap222
+    
+    Change-Id: Ie9ef3d5cfbcf09919c4e5ccc52b3423651efacf7
+    Signed-off-by: fei.deng <fei.deng@amlogic.com>
+
+commit b5c6bb44fc716982123ae1012b84b9081251afe7
+Author: zhipeng.he <zhipeng.he@amlogic.com>
+Date:   Wed Aug 31 13:16:14 2022 +0800
+
+    tsplayer: CB2 onlyaudio cannot play on TS_MEMORY [1/1]
+    
+    PD#OTT-34248
+    
+    Problem:
+    onlyaudio cannot play on TS_MEMORY
+    
+    Solution:
+    fix the issue that onlyaudio cannot play on TS_MEMORY
+    
+    Verify:
+    S905Y4
+    
+    Change-Id: Idf8b8da8cd8e8bff1ee0f0af1916d0e6e45d9e7b
+    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
+
+commit 75922b01b56cf7e05c463c852733943b2782026b
+Author: fei.deng <fei.deng@amlogic.com>
+Date:   Fri Sep 2 15:03:12 2022 +0800
+
+    videorenderer: CB2 crash when signal under flow message [1/1]
+    
+    PD#SWPL-91601
+    
+    Problem:
+    crash when signal under flow message
+    
+    Solution:
+    signal under flow with none message
+    
+    Verify:
+    ap222
+    
+    Change-Id: Ib4fb350517ea68257ee89961d3f9e7f4a2f5dfac
+    Signed-off-by: fei.deng <fei.deng@amlogic.com>
+
+commit 0e3beee580e3dffad18632a8679c75936963e776
+Author: fei.deng <fei.deng@amlogic.com>
+Date:   Mon Sep 5 17:07:53 2022 +0800
+
+    videorenderer: CB2 load render lib failed [1/1]
+    
+    PD#SWPL-93492
+    
+    Problem:
+    gstamlvideosink load render lib so failed,
+    because libdrm meson not support drmwaitblank api
+    
+    Solution:
+    link libdrm instead of libdrm_meson when compile
+    
+    Verify:
+    ar321
+    
+    Change-Id: I2ee6b2888da13cd37188e8ee2ab1623614bff498
+    Signed-off-by: fei.deng <fei.deng@amlogic.com>
+
 commit d197c284477491ebbe54144d0ecfe8179b0617ff
 Author: yunmin.chen <yunmin.chen@amlogic.com>
 Date:   Thu Aug 11 19:41:22 2022 +0800
@@ -134,92 +215,9 @@ Date:   Fri Aug 26 16:01:04 2022 +0800
     Change-Id: I5178571e19c05c01afd9ebaaddc4e9ea2258a644
     Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
 
-commit d72a0024467f6b6740ac42ee94c6b456e7a45ddb
-Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Wed Aug 3 14:15:28 2022 +0800
-
-    mediahal: CB2 optimize debug printing [1/1]
-    
-    PD#SWPL-89288
-    
-    Problem:
-    too debug printing on media_hal
-    
-    Solution:
-    optimize debug printing
-    
-    Verify:
-    ah212
-    
-    Change-Id: I7da37e9dc2bd1d1ad6f7ac55d8e303890c1c4c3a
-    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
-
-commit 4dd229ad0cb088951558f6187c7e8f4956520204
-Author: fei.deng <fei.deng@amlogic.com>
-Date:   Thu Aug 25 15:25:49 2022 +0800
-
-    videorenderer: CB2 LGE VDEC IOCTL [1/1]
-    
-    PD#SWPL-88958
-    
-    Problem:
-    implement the followed ioctl:
-    1.V4L2_CID_EXT_VDEC_FREEZE_MODE
-    2.V4L2_CID_EXT_VDEC_STC_MODE
-    3.V4L2_CID_EXT_VDEC_LIPSYNC_MASTER
-    
-    Solution:
-    implement vdec ioctl
-    
-    Verify:
-    ar321
-    
-    Change-Id: I9963db1582ea10dc2236194c9d543117c0ae7032
-    Signed-off-by: fei.deng <fei.deng@amlogic.com>
-
-commit bd09b48063983464f9e626a5a6f33d65dd29d25e
-Author: fei.deng <fei.deng@amlogic.com>
-Date:   Thu Aug 25 14:39:05 2022 +0800
-
-    videorenderer: CB2 memory leak when play stop with drm output [1/1]
-    
-    PD#SWPL-92476
-    
-    Problem:
-    memory leak when play stop with libdrm meson output
-    
-    Solution:
-    free drm buf when stop playing
-    
-    Verify:
-    ap222
-    
-    Change-Id: Icc61f6ca43d51bd81637c81ad3190060d7fbf03e
-    Signed-off-by: fei.deng <fei.deng@amlogic.com>
-
-commit 495b7615cce88cb0f2267d31fd22ea94f81b147b
-Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Tue Aug 9 19:06:06 2022 +0800
-
-    videodec: CB2 crash in processScteData [1/1]
-    
-    PD#TV-59543
-    
-    Problem:
-    crash in processScteData.
-    
-    Solution:
-    fix the issue crash in processScteData.
-    
-    Verify:
-    AM301
-    
-    Change-Id: I90e2681bf93ebbf2b0cfc688fb9f0d97897dac07
-    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
-
 ========================================
 
-Release time: 2022-09-05-14-39
+Release time: 2022-09-08-10-07
 
 ========================================
 
