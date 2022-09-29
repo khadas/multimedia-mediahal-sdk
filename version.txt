@@ -1,223 +1,231 @@
 =========RELEALSE NOTE=================
 
-Version: V3.7.30-g9669caa
+Version: V3.7.41-gcee7c8a
 
 ========================================
 
 Git commit:
-commit 9669caa723d535c32d99a04b1cb9db91c057baa5
-Author: fei.deng <fei.deng@amlogic.com>
-Date:   Mon Sep 5 18:58:48 2022 +0800
+commit cee7c8a54da15876fe5f99fdceb988da363c1fc3
+Author: yunmin.chen <yunmin.chen@amlogic.com>
+Date:   Wed Sep 21 16:10:14 2022 +0800
 
-    videorenderer: CB2 remove wayland link on roku [1/1]
+    mediasync: CF1 Added video frame advance function. [1/1]
     
-    PD#SWPL-93474
+    PD#SWPL-77942
     
     Problem:
-    remove wayland link on roku
+    Added video frame advance function
     
     Solution:
-    remove wayland link on roku
+    Set MEDIASYNC_KEY_VIDEO_FRAME_ADVANCE to enable the feature.
+    After the function is enabled,
+    the display time of each frame is
+    calculated according to the current system time.
     
     Verify:
-    ap222
+    T3
     
-    Change-Id: Ie9ef3d5cfbcf09919c4e5ccc52b3423651efacf7
-    Signed-off-by: fei.deng <fei.deng@amlogic.com>
+    Change-Id: Ibf3057bd029f8d69f02106d9f3c38f2b4d011d3f
+    Signed-off-by: yunmin.chen <yunmin.chen@amlogic.com>
 
-commit b5c6bb44fc716982123ae1012b84b9081251afe7
-Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Wed Aug 31 13:16:14 2022 +0800
+commit c25bfd1a23589baaaf2c7520fa12d201fbc1eb74
+Author: yunmin.chen <yunmin.chen@amlogic.com>
+Date:   Sat Sep 10 23:51:06 2022 +0800
 
-    tsplayer: CB2 onlyaudio cannot play on TS_MEMORY [1/1]
+    mediasync: CF1 Requirements for STC synchronization control [1/2]
     
-    PD#OTT-34248
+    PD#SWPL-88952
     
     Problem:
-    onlyaudio cannot play on TS_MEMORY
+    1.Optimize  mediasync.
+    2.Dynamic control video is not synchronized with STC.
     
     Solution:
-    fix the issue that onlyaudio cannot play on TS_MEMORY
+    1.Optimize videoprocess() and audioprocess()
+    2.Add video freerun function.
+    3.Add the slow sync function of the video during playback.
     
     Verify:
-    S905Y4
+    T3
     
-    Change-Id: Idf8b8da8cd8e8bff1ee0f0af1916d0e6e45d9e7b
-    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
+    Change-Id: Iaf80deeb32338bfb9ce961742a93e58906785740
+    Signed-off-by: yunmin.chen <yunmin.chen@amlogic.com>
 
-commit 75922b01b56cf7e05c463c852733943b2782026b
-Author: fei.deng <fei.deng@amlogic.com>
-Date:   Fri Sep 2 15:03:12 2022 +0800
+commit d5789953ed1773c939b1bd10665934e1d1ae7f34
+Author: yunmin.chen <yunmin.chen@amlogic.com>
+Date:   Sat Sep 3 23:57:26 2022 +0800
 
-    videorenderer: CB2 crash when signal under flow message [1/1]
+    mediasync: CF1 Requirements for STC synchronization control [1/1]
     
-    PD#SWPL-91601
+    PD#SWPL-88952
     
     Problem:
-    crash when signal under flow message
+    The following controls need to be added:
+    V4L2_CID_EXT_VDEC_VSYNC_THRESHOLD
+    V4L2_CID_EXT_VDEC_DISPLAY_DELAY
+    V4L2_CID_EXT_VDEC_AV_SYNC
     
     Solution:
-    signal under flow with none message
+    1. Add the control interface of AV synchronization threshold.
+    2. Add VideoLatency.
+    3. Add stc synchronization control interface.
     
     Verify:
-    ap222
+    T3
     
-    Change-Id: Ib4fb350517ea68257ee89961d3f9e7f4a2f5dfac
-    Signed-off-by: fei.deng <fei.deng@amlogic.com>
+    Change-Id: Ie17f682ce7c947bb6e77c129a10eb204b2d0633e
+    Signed-off-by: yunmin.chen <yunmin.chen@amlogic.com>
 
-commit 0e3beee580e3dffad18632a8679c75936963e776
-Author: fei.deng <fei.deng@amlogic.com>
-Date:   Mon Sep 5 17:07:53 2022 +0800
+commit e0c236a38240e2c93e239a9ce66d0b706eb3e53d
+Author: Nanxin Qin <nanxin.qin@amlogic.com>
+Date:   Mon Sep 12 19:29:10 2022 +0800
 
-    videorenderer: CB2 load render lib failed [1/1]
+    v4ldvb_test: CF2 add userdata event handle. [1/1]
     
-    PD#SWPL-93492
+    PD#SWPL-77958
     
     Problem:
-    gstamlvideosink load render lib so failed,
-    because libdrm meson not support drmwaitblank api
+    Implement extend cmd V4L2_CID_EXT_VDEC_USER_EVENT_DATA
     
     Solution:
-    link libdrm instead of libdrm_meson when compile
+    add userdata event handle.
     
     Verify:
     ar321
     
-    Change-Id: I2ee6b2888da13cd37188e8ee2ab1623614bff498
-    Signed-off-by: fei.deng <fei.deng@amlogic.com>
+    Change-Id: Ic39dc29706ae7b339246014bb9b5db983e78755a
+    Signed-off-by: Nanxin Qin <nanxin.qin@amlogic.com>
 
-commit d197c284477491ebbe54144d0ecfe8179b0617ff
-Author: yunmin.chen <yunmin.chen@amlogic.com>
-Date:   Thu Aug 11 19:41:22 2022 +0800
-
-    mediasync: CB2 fixed dropped frames after resume [2/3]
-    
-    PD#SWPL-88573
-    
-    Problem:
-    Drop frames after resume.
-    
-    Solution:
-    After resume, if the audio pts is larger than the video pts,
-    the audio will wait for the video output first.
-    
-    Verify:
-    AP222
-    
-    Change-Id: Icbcce49207b96abf93e3775f7b88f5fbb74173fa
-    Signed-off-by: yunmin.chen <yunmin.chen@amlogic.com>
-
-commit 96d77ed170a9568de88a351f707a139706443dfd
-Author: yunmin.chen <yunmin.chen@amlogic.com>
-Date:   Wed Aug 3 21:25:20 2022 +0800
-
-    mediasync: CB2 fix dropped frames [1/1]
-    
-    PD#SWPL-88573
-    
-    Problem:
-    Add frame control.
-    
-    Solution:
-    Add frame control.
-    
-    Verify:
-    AP222
-    
-    Change-Id: I7f3d06e936f1080c7c46dab9973e5622cfb339e5
-    Signed-off-by: yunmin.chen <yunmin.chen@amlogic.com>
-
-commit bdefd411243bccf3c16e09e5195db205b22d3fb0
-Author: yunmin.chen <yunmin.chen@amlogic.com>
-Date:   Thu Jun 9 22:27:52 2022 +0800
-
-    mediasync: CF1 mediasync architecture optimization [1/1]
-    
-    PD#SWPL-78999
-    
-    Problem:
-    mediasync architecture optimization.
-    
-    Solution:
-    mediasync architecture optimization.
-    
-    Verify:
-    SC2
-    
-    Change-Id: Ib50ea447c990260c0c22d27f6db97527c535629b
-    Signed-off-by: yunmin.chen <yunmin.chen@amlogic.com>
-
-commit f3c6ad83fd6f2e53a7e6c4ad5c1e2f8cd7ab0fc6
-Author: fei.deng <fei.deng@amlogic.com>
-Date:   Sun Aug 21 21:14:56 2022 +0800
-
-    videorenderer: CF2 send pause event after all frame displayed [1/1]
-    
-    PD#SWPL-88573
-    
-    Problem:
-    dropped frame issue in video mono sync mode if frames had commit to
-    westeros server from pause to resume state. because system mono clock
-    is going when pausing state,but frame mono time is constant,all frames will
-    be expired when resume playing
-    
-    Solution:
-    1.send pause event to westeros server after all frames those commited
-    to westeros server had displayed
-    2.add under flow msg
-    3.add first frame msg
-    4.add pause api with the special pts
-    5.add a notify thread to send callback to caller
-    
-    Verify:
-    ap222
-    
-    Change-Id: I855bb66d99bab52d21fa105fc742670566edcfe3
-    Signed-off-by: fei.deng <fei.deng@amlogic.com>
-
-commit 4b6d75b9964d636d5bf96fa952ca5695ad92602f
-Author: fei.deng <fei.deng@amlogic.com>
-Date:   Tue Aug 30 11:24:13 2022 +0800
-
-    videorenderer: CB2 compile error on jekins [1/1]
-    
-    PD#SWPL-92904
-    
-    Problem:
-    compile error on jekins
-    
-    Solution:
-    compile error on jekins
-    
-    Verify:
-    ap222
-    
-    Change-Id: Ic8bb2116c8f5be0b7b732a1db2bea928148d34ba
-    Signed-off-by: fei.deng <fei.deng@amlogic.com>
-
-commit 106dee207ea1aeeb0855daadb043383135af5f23
+commit 2ac19851bb0331c6ff1f280790c27e578511c4f5
 Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Fri Aug 26 16:01:04 2022 +0800
+Date:   Fri Aug 12 16:06:02 2022 +0800
 
-    example: CB2 check event pointer is empty or not [1/1]
+    tsplayer: CB2 Optimize the size of mediahal libs. [1/1]
     
-    PD#TV-61231
+    PD#SWPL-89707
     
     Problem:
-    need check event pointer is empty or not
+    need to optimize the size of mediahal libs
     
     Solution:
-    check event pointer is empty or not
+    Optimize the size of mediahal libs
     
     Verify:
-    common
+    T5D
     
-    Change-Id: I5178571e19c05c01afd9ebaaddc4e9ea2258a644
+    Change-Id: I920425e4f95173e8d57d65049cdacce80d6e212e
     Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
+
+commit d2e345f96d91e25aba74797930857c5f250c739b
+Author: yu.xie <yu.xie@amlogic.com>
+Date:   Fri Sep 23 15:53:35 2022 +0800
+
+    v4l: CB2 change the value of vdec channel [1/1]
+    
+    PD#SWPL-94871
+    
+    Problem:
+    Vdec channel setting is illegal
+    
+    Solution:
+    Change the value of vdec channel to 0
+    
+    Verify:
+    AR321
+    
+    Change-Id: I1ba55589ec5302fadb9197f300dca8f77684f5cf
+    Signed-off-by: yu.xie <yu.xie@amlogic.com>
+
+commit 7dce5cb804609a881fc5c571c8117df3737f6d94
+Author: fei.deng <fei.deng@amlogic.com>
+Date:   Fri Sep 16 18:57:56 2022 +0800
+
+    videorenderer: CF2 drip and direct mode [1/1]
+    
+    PD#SWPL-94046
+    
+    Problem:
+    add new ioctl
+    1.V4L2_CID_EXT_VDEC_DIRECT_ESDATA
+    2.V4L2_SUB_EXT_VOUT_DRIP_DECODING
+    
+    Solution:
+    add new ioctl
+    1.V4L2_CID_EXT_VDEC_DIRECT_ESDATA
+    2.V4L2_SUB_EXT_VOUT_DRIP_DECODING
+    
+    Verify:
+    ar321
+    
+    Change-Id: I71878bfb2269bbc917e678741422f62f44cc1c31
+    Signed-off-by: fei.deng <fei.deng@amlogic.com>
+
+commit e017a8e46f2d1c52cf0e7e91b107600e2bd8f37c
+Author: Nanxin Qin <nanxin.qin@amlogic.com>
+Date:   Tue Sep 20 20:45:26 2022 +0800
+
+    v4l: CB2 optimize v4l2 ctrls. [1/1]
+    
+    PD#SWPL-77956
+    
+    Problem:
+    reports stream and video information.
+    
+    Solution:
+    optimize v4l2 ctrls.
+    
+    Verify:
+    ar321
+    
+    Change-Id: I7c90b37e4874f34bf8094e91a3764bf311ab0dc3
+    Signed-off-by: Nanxin Qin <nanxin.qin@amlogic.com>
+
+commit 6c1e53f53e9d1f8eb55606804e3255f6d5698803
+Author: yu.xie <yu.xie@amlogic.com>
+Date:   Fri Sep 16 20:29:19 2022 +0800
+
+    v4l_dvb_test: CF2 add unsubcribe event of extend commands. [1/1]
+    
+    PD#SWPL-77951
+    
+    Problem:
+    Add the subscribe event in SWPL-77955 without unsubscribe.
+    
+    Solution:
+    In the function of close, add the unsubscribe event.
+    
+    Verify:
+    AR321
+    
+    Change-Id: Ic191c4b80c2896c58ead4ae7a0e204ad19caea45
+    Signed-off-by: yu.xie <yu.xie@amlogic.com>
+
+commit 70f2f5ebbd321fb2ce57b2246f1f7aab6a50742f
+Author: yu.xie <yu.xie@amlogic.com>
+Date:   Tue Sep 13 14:08:05 2022 +0800
+
+    v4l_dvb_test: CF2 test extend cmd V4L2_CID_EXT_VDEC_DECODER_STATUS. [1/1]
+    
+    PD#SWPL-77955
+    
+    Problem:
+    support to test three extend commands,
+    and add the file that drip decoder mode will use.
+    
+    Solution:
+    add v4l2 event subscribe codes when v4l2 device open,
+    and then add the event handle codes in the function of
+    _v4l2_handle_event
+    
+    Verify:
+    AR321
+    
+    Change-Id: I7182e40b939b6b265afe03fe0dd9bd076413aebb
+    Signed-off-by: yu.xie <yu.xie@amlogic.com>
 
 ========================================
 
-Release time: 2022-09-08-10-07
+Release time: 2022-09-29-17-03
 
 ========================================
 

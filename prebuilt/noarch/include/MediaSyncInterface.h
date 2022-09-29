@@ -50,7 +50,7 @@ typedef enum {
 typedef enum {
     MEDIASYNC_KEY_HASAUDIO = 0,
     MEDIASYNC_KEY_HASVIDEO,
-    MEDIASYNC_KEY_VIDEOLATENCY,
+    MEDIASYNC_KEY_VIDEOLATENCY,        //us
     MEDIASYNC_KEY_AUDIOFORMAT,
     MEDIASYNC_KEY_STARTTHRESHOLD,
     MEDIASYNC_KEY_ISOMXTUNNELMODE,
@@ -62,6 +62,12 @@ typedef enum {
     MEDIASYNC_KEY_VSYNC_INTERVAL_MS,
     MEDIASYNC_KEY_VIDEOFRAME,
     MEDIASYNC_KEY_VIDEOTRICKMODE,
+    MEDIASYNC_KEY_VIDEO_FREERUN,
+    MEDIASYNC_KEY_AUDIO_FREERUN,
+    MEDIASYNC_KEY_VIDEO_SYNC_THRESHOLD,  //us
+    MEDIASYNC_KEY_AUDIO_SYNC_THRESHOLD,  //us
+    MEDIASYNC_KEY_VIDEO_DURING_SLOW_SYNC,
+    MEDIASYNC_KEY_VIDEO_FRAME_ADVANCE,
     MEDIASYNC_KEY_MAX = 255,
 } mediasync_parameter;
 
@@ -91,6 +97,14 @@ typedef enum {
     MEDIASYNC_VIDEO_DROP,
     MEDIASYNC_VIDEO_EXIT,
 } video_policy;
+
+/*Video trick mode*/
+typedef enum {
+    VIDEO_TRICK_MODE_NONE = 0,          // Disable trick mode
+    VIDEO_TRICK_MODE_PAUSE = 1,         // Pause the video decoder
+    VIDEO_TRICK_MODE_PAUSE_NEXT = 2,    // Pause the video decoder when a new frame dispalyed
+    VIDEO_TRICK_MODE_IONLY = 3          // Decoding and Out I frame only
+} mediasync_video_trick_mode;
 
 struct mediasync_audio_policy {
     audio_policy audiopolicy;

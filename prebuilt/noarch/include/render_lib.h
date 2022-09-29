@@ -55,6 +55,7 @@ enum _RenderKey {
     KEY_HIDE_VIDEO, //set/get hide video,it effect immediatialy,value type is int, 0 not hide, 1 hide
     KEY_FORCE_ASPECT_RATIO, //set/get force pixel aspect ratio,value type is int, 1 is force,0 is not force
     KEY_SELECT_DISPLAY_OUTPUT,//set/get display output index,value type is int,0 is primary output and default value, 1 is extend display output
+    KEY_IMMEDIATELY_OUTPUT, //set/get immediately output video frame to display, 0 is default value off, 1 is on
     KEY_MEDIASYNC_INSTANCE_ID = 400, //set/get mediasync instance id, value type is int
     KEY_MEDIASYNC_PCR_PID, ///set/get mediasync pcr id ,value type is int
     KEY_MEDIASYNC_DEMUX_ID, //set/get mediasync demux id ,value type is int
@@ -91,20 +92,20 @@ typedef struct _RenderFrameSize {
 
 typedef enum _RenderMsgType {
     //frame buffer is released
-    MSG_RELEASE_BUFFER   = 100, //the msg type is RenderBuffer
+    MSG_RELEASE_BUFFER   = 100, //the msg value type is RenderBuffer
     //frame buffer is displayed
-    MSG_DISPLAYED_BUFFER = 101, //the msg type is RenderBuffer
+    MSG_DISPLAYED_BUFFER = 101, //the msg value type is RenderBuffer
     //the frame buffer is droped
-    MSG_DROPED_BUFFER    = 102,//the msg type is RenderBuffer
+    MSG_DROPED_BUFFER    = 102,//the msg value type is RenderBuffer
     //first frame displayed msg
-    MSG_FIRST_FRAME       = 103, //the msg type is frame pts
+    MSG_FIRST_FRAME       = 103, //the msg value type is frame pts
     //under flow msg
-    MSG_UNDER_FLOW       = 104, //the msg type is last displayed pts
+    MSG_UNDER_FLOW       = 104, //the msg value type is null
 
     //render lib connected failed
-    MSG_CONNECTED_FAIL   = 200, //the msg type is string
+    MSG_CONNECTED_FAIL   = 200, //the msg value type is string
     //render lib disconnected failed
-    MSG_DISCONNECTED_FAIL, //the msg type is string
+    MSG_DISCONNECTED_FAIL, //the msg value type is string
 } RenderMsgType;
 
 /**
