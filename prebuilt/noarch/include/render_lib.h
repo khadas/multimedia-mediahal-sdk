@@ -42,6 +42,11 @@ typedef struct _RenderBuffer {
     void *priv;
 } RenderBuffer;
 
+typedef struct _StepFrameInfo {
+    int on; //if 1 means on, 0 means off
+    int intervalMs; //step display frame interval, if this set to -1,only step one frame until next api invoked
+} StepFrameInfo;
+
 /*render key*/
 enum _RenderKey {
     KEY_WINDOW_SIZE = 300, //set/get the video window size,value type is RenderWindowSize
@@ -56,20 +61,23 @@ enum _RenderKey {
     KEY_FORCE_ASPECT_RATIO, //set/get force pixel aspect ratio,value type is int, 1 is force,0 is not force
     KEY_SELECT_DISPLAY_OUTPUT,//set/get display output index,value type is int,0 is primary output and default value, 1 is extend display output
     KEY_IMMEDIATELY_OUTPUT, //set/get immediately output video frame to display, 0 is default value off, 1 is on
+    KEY_STEP_DISPLAY_FRAME, //set/get step display frame,the value type is StepFrameInfo struct
     KEY_MEDIASYNC_INSTANCE_ID = 400, //set/get mediasync instance id, value type is int
     KEY_MEDIASYNC_PCR_PID, ///set/get mediasync pcr id ,value type is int
     KEY_MEDIASYNC_DEMUX_ID, //set/get mediasync demux id ,value type is int
-    KEY_MEDIASYNC_SYNC_MODE, //set/get mediasync sync mode,value type is int, 0:vmaster,1:amaster,2:pcrmaster
+    KEY_MEDIASYNC_SYNC_MODE, //set/get mediasync sync mode,value type is int, 0:vmaster,1:amaster,2:pcrmaster,3:videofreerun
     KEY_MEDIASYNC_TUNNEL_MODE, //set mediasync to use tunnel mode, 0:notunnelmode 1:tunnelmode
     KEY_MEDIASYNC_HAS_AUDIO, //set/get having audio,value type is int,0:not,1:has
     KEY_MEDIASYNC_VIDEOLATENCY, //set/get mediasync video latency
     KEY_MEDIASYNC_STARTTHRESHOLD, //set/get mediasync start threshold
     KEY_MEDIASYNC_VIDEOWORKMODE, //set/get mediasync video work mode
-    KEY_MEDIASYNC_AUDIO_MUTE, //set/get
+    KEY_MEDIASYNC_AUDIO_MUTE, //set/get audio mute
     KEY_MEDIASYNC_SOURCETYPE, //set/get media sync source type
     KEY_MEDIASYNC_VIDEOFRAME, //set/get
     KEY_MEDIASYNC_PLAYER_INSTANCE_ID,
     KEY_MEDIASYNC_PLAYBACK_RATE, //set/get playback rate,value type is float,0.5 is 0.5 rate, 1.0 is normal, 2.0 is 2x rate
+    KEY_MEDIASYNC_VIDEO_SYNC_THRESHOLD, //set/get video free run threshold,value type is int,time is us
+    KEY_MEDIASYNC_VIDEO_FREERUN, //set/get video freerun when video is displayed
     //set/get video tunnel instance id when videotunnel plugin be selected,value type is int,this key must set before render_connect
     KEY_VIDEOTUNNEL_ID = 450,
 };
@@ -92,20 +100,22 @@ typedef struct _RenderFrameSize {
 
 typedef enum _RenderMsgType {
     //frame buffer is released
-    MSG_RELEASE_BUFFER   = 100, //the msg value type is RenderBuffer
+    MSG_RELEASE_BUFFER            = 100, //the msg value type is RenderBuffer
     //frame buffer is displayed
-    MSG_DISPLAYED_BUFFER = 101, //the msg value type is RenderBuffer
+    MSG_DISPLAYED_BUFFER          = 101, //the msg value type is RenderBuffer
     //the frame buffer is droped
-    MSG_DROPED_BUFFER    = 102,//the msg value type is RenderBuffer
+    MSG_DROPED_BUFFER             = 102,//the msg value type is RenderBuffer
     //first frame displayed msg
-    MSG_FIRST_FRAME       = 103, //the msg value type is frame pts
+    MSG_FIRST_FRAME               = 103, //the msg value type is frame pts
     //under flow msg
-    MSG_UNDER_FLOW       = 104, //the msg value type is null
+    MSG_UNDER_FLOW                = 104, //the msg value type is null
+    //pause with special pts
+    MSG_PAUSED_PTS                = 105, //the msg value type is RenderBuffer
 
     //render lib connected failed
-    MSG_CONNECTED_FAIL   = 200, //the msg value type is string
+    MSG_CONNECTED_FAIL            = 200, //the msg value type is string
     //render lib disconnected failed
-    MSG_DISCONNECTED_FAIL, //the msg value type is string
+    MSG_DISCONNECTED_FAIL         = 201, //the msg value type is string
 } RenderMsgType;
 
 /**
