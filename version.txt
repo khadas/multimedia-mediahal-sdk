@@ -1,10 +1,94 @@
 =========RELEALSE NOTE=================
 
-Version: V3.7.42-gd05cab3
+Version: V3.7.46-g44c0060
 
 ========================================
 
 Git commit:
+commit 44c0060d3ebdcb13a4229cb28b89b3554fad74d8
+Author: Yani Shi <yani.shi@amlogic.com>
+Date:   Sun Oct 9 19:34:37 2022 +0800
+
+    mediasync: CB2 Add discontinue when dmxpcr invalid. [1/1]
+    
+    PD#SWPL-67100
+    
+    Problem:
+    For Scramble stream,when streamXpress set pts self-accumulation.
+    the dmxpcr will increase with systemtime but the a/vpts will jump
+    back when stream back.
+    cause the avsync issue.
+    
+    Solution:
+    add discontinue logic when demux pcr invalid
+    
+    Verify:
+    S905C3
+    
+    Change-Id: Ia2f349e155bc0dcecca09060f7cb527a27b5e729
+    Signed-off-by: Yani Shi <yani.shi@amlogic.com>
+
+commit 9b5f2b494d25e4e718dc136307b324832bd028b2
+Author: fei.deng <fei.deng@amlogic.com>
+Date:   Fri Oct 14 10:52:49 2022 +0800
+
+    videorenderer: CB2 fix fds leak and render server crash [1/1]
+    
+    PD#SWPL-96477
+    
+    Problem:
+    1.render server appears fds leak when playback exit.
+    2.render server crash when test case pvr of socts test
+    
+    Solution:
+    flush buffers posted to videotunnel when exit playback
+    
+    Verify:
+    ar321
+    
+    Change-Id: I4fa8517a93986b44f6c0776fe0d873aa2c751846
+    Signed-off-by: fei.deng <fei.deng@amlogic.com>
+
+commit 92a3f951b7f28aeac6baa5f517ec220b1e1b7166
+Author: zhipeng.he <zhipeng.he@amlogic.com>
+Date:   Thu Sep 29 22:07:02 2022 +0800
+
+    mediahal: CB2 enable use libdrm when no compositor [1/1]
+    
+    PD#SWPL-91357
+    
+    Problem:
+    not use libdrm when no compositor
+    
+    Solution:
+    use libdrm when no compositor
+    
+    Verify:
+    at302-t5w
+    
+    Change-Id: Idbdac133030e0363f6d05bdc6d5e03c680dbff71
+    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
+
+commit 6d58fbf6896373fc3fd82daa11f70bef7df28268
+Author: zhipeng.he <zhipeng.he@amlogic.com>
+Date:   Sun Oct 9 19:48:44 2022 +0800
+
+    mediasync: CB2 use drm_meson open need to close fd [1/1]
+    
+    PD#SWPL-96543
+    
+    Problem:
+    onlyaudio switch to av cannot show video on libdrm
+    
+    Solution:
+    use drm_meson open need to close fd
+    
+    Verify:
+    at302
+    
+    Change-Id: Ic5b8c2ad0db7abfcb655ce37785be54a00009634
+    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
+
 commit d05cab305f6c4850c0e068669c9260a540b5e0f9
 Author: fei.deng <fei.deng@amlogic.com>
 Date:   Wed Sep 21 19:55:00 2022 +0800
@@ -140,93 +224,9 @@ Date:   Fri Aug 12 16:06:02 2022 +0800
     Change-Id: I920425e4f95173e8d57d65049cdacce80d6e212e
     Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
 
-commit d2e345f96d91e25aba74797930857c5f250c739b
-Author: yu.xie <yu.xie@amlogic.com>
-Date:   Fri Sep 23 15:53:35 2022 +0800
-
-    v4l: CB2 change the value of vdec channel [1/1]
-    
-    PD#SWPL-94871
-    
-    Problem:
-    Vdec channel setting is illegal
-    
-    Solution:
-    Change the value of vdec channel to 0
-    
-    Verify:
-    AR321
-    
-    Change-Id: I1ba55589ec5302fadb9197f300dca8f77684f5cf
-    Signed-off-by: yu.xie <yu.xie@amlogic.com>
-
-commit 7dce5cb804609a881fc5c571c8117df3737f6d94
-Author: fei.deng <fei.deng@amlogic.com>
-Date:   Fri Sep 16 18:57:56 2022 +0800
-
-    videorenderer: CF2 drip and direct mode [1/1]
-    
-    PD#SWPL-94046
-    
-    Problem:
-    add new ioctl
-    1.V4L2_CID_EXT_VDEC_DIRECT_ESDATA
-    2.V4L2_SUB_EXT_VOUT_DRIP_DECODING
-    
-    Solution:
-    add new ioctl
-    1.V4L2_CID_EXT_VDEC_DIRECT_ESDATA
-    2.V4L2_SUB_EXT_VOUT_DRIP_DECODING
-    
-    Verify:
-    ar321
-    
-    Change-Id: I71878bfb2269bbc917e678741422f62f44cc1c31
-    Signed-off-by: fei.deng <fei.deng@amlogic.com>
-
-commit e017a8e46f2d1c52cf0e7e91b107600e2bd8f37c
-Author: Nanxin Qin <nanxin.qin@amlogic.com>
-Date:   Tue Sep 20 20:45:26 2022 +0800
-
-    v4l: CB2 optimize v4l2 ctrls. [1/1]
-    
-    PD#SWPL-77956
-    
-    Problem:
-    reports stream and video information.
-    
-    Solution:
-    optimize v4l2 ctrls.
-    
-    Verify:
-    ar321
-    
-    Change-Id: I7c90b37e4874f34bf8094e91a3764bf311ab0dc3
-    Signed-off-by: Nanxin Qin <nanxin.qin@amlogic.com>
-
-commit 6c1e53f53e9d1f8eb55606804e3255f6d5698803
-Author: yu.xie <yu.xie@amlogic.com>
-Date:   Fri Sep 16 20:29:19 2022 +0800
-
-    v4l_dvb_test: CF2 add unsubcribe event of extend commands. [1/1]
-    
-    PD#SWPL-77951
-    
-    Problem:
-    Add the subscribe event in SWPL-77955 without unsubscribe.
-    
-    Solution:
-    In the function of close, add the unsubscribe event.
-    
-    Verify:
-    AR321
-    
-    Change-Id: Ic191c4b80c2896c58ead4ae7a0e204ad19caea45
-    Signed-off-by: yu.xie <yu.xie@amlogic.com>
-
 ========================================
 
-Release time: 2022-09-30-17-27
+Release time: 2022-10-17-10-52
 
 ========================================
 
