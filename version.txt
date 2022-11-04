@@ -1,10 +1,73 @@
 =========RELEALSE NOTE=================
 
-Version: V3.7.46-g44c0060
+Version: V3.7.49-g746f8c2
 
 ========================================
 
 Git commit:
+commit 746f8c26f0a3dbff143d0bb3ddfd48c4a58a6fe9
+Author: fei.deng <fei.deng@amlogic.com>
+Date:   Wed Oct 26 13:36:25 2022 +0800
+
+    videorenderer: CB2 random render server crash [1/1]
+    
+    PD#SWPL-97750
+    
+    Problem:
+    Stress testing of vdec module, render server crashed
+    
+    Solution:
+    1.fix Monitor thread crash
+    2.add amlogic license
+    3.add pip to videotunnel module
+    4.add VIDEO_RENDER_NO_AV_MODULE to disable avsyn for debug
+    
+    Verify:
+    ar321
+    
+    Change-Id: I40eabe49d316f5cda6f6ee1552ace0f6968c9afa
+    Signed-off-by: fei.deng <fei.deng@amlogic.com>
+
+commit aea572bb6b2642450d595cea8d885d661e0816f1
+Author: zhipeng.he <zhipeng.he@amlogic.com>
+Date:   Mon Oct 24 20:08:45 2022 +0800
+
+    tsplayer: CB2 multi instance not need send syncmode to tsync [1/1]
+    
+    PD#SWPL-93095
+    
+    Problem:
+    multi instance send syncmode to tsync
+    
+    Solution:
+    multi instance not need send syncmode to tsync
+    
+    Verify:
+    AT302
+    
+    Change-Id: I1e57a8ffe3c59f88185f5d685570535fa3a6b3f3
+    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
+
+commit d238be0916b52a829df170cc7a58e88d3c5ae662
+Author: zhipeng.he <zhipeng.he@amlogic.com>
+Date:   Mon Oct 17 21:18:43 2022 +0800
+
+    tsplayer: CB1 Send decodec first audio under non tunnel [1/1]
+    
+    PD#SWPL-97194
+    
+    Problem:
+    No audio output in Radio program.
+    
+    Solution:
+    Add send first audio msg.
+    
+    Verify:
+    AT302
+    
+    Change-Id: I69efe12dc0bab12e60deaf62db951d0e8393c90b
+    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
+
 commit 44c0060d3ebdcb13a4229cb28b89b3554fad74d8
 Author: Yani Shi <yani.shi@amlogic.com>
 Date:   Sun Oct 9 19:34:37 2022 +0800
@@ -159,74 +222,9 @@ Date:   Sat Sep 10 23:51:06 2022 +0800
     Change-Id: Iaf80deeb32338bfb9ce961742a93e58906785740
     Signed-off-by: yunmin.chen <yunmin.chen@amlogic.com>
 
-commit d5789953ed1773c939b1bd10665934e1d1ae7f34
-Author: yunmin.chen <yunmin.chen@amlogic.com>
-Date:   Sat Sep 3 23:57:26 2022 +0800
-
-    mediasync: CF1 Requirements for STC synchronization control [1/1]
-    
-    PD#SWPL-88952
-    
-    Problem:
-    The following controls need to be added:
-    V4L2_CID_EXT_VDEC_VSYNC_THRESHOLD
-    V4L2_CID_EXT_VDEC_DISPLAY_DELAY
-    V4L2_CID_EXT_VDEC_AV_SYNC
-    
-    Solution:
-    1. Add the control interface of AV synchronization threshold.
-    2. Add VideoLatency.
-    3. Add stc synchronization control interface.
-    
-    Verify:
-    T3
-    
-    Change-Id: Ie17f682ce7c947bb6e77c129a10eb204b2d0633e
-    Signed-off-by: yunmin.chen <yunmin.chen@amlogic.com>
-
-commit e0c236a38240e2c93e239a9ce66d0b706eb3e53d
-Author: Nanxin Qin <nanxin.qin@amlogic.com>
-Date:   Mon Sep 12 19:29:10 2022 +0800
-
-    v4ldvb_test: CF2 add userdata event handle. [1/1]
-    
-    PD#SWPL-77958
-    
-    Problem:
-    Implement extend cmd V4L2_CID_EXT_VDEC_USER_EVENT_DATA
-    
-    Solution:
-    add userdata event handle.
-    
-    Verify:
-    ar321
-    
-    Change-Id: Ic39dc29706ae7b339246014bb9b5db983e78755a
-    Signed-off-by: Nanxin Qin <nanxin.qin@amlogic.com>
-
-commit 2ac19851bb0331c6ff1f280790c27e578511c4f5
-Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Fri Aug 12 16:06:02 2022 +0800
-
-    tsplayer: CB2 Optimize the size of mediahal libs. [1/1]
-    
-    PD#SWPL-89707
-    
-    Problem:
-    need to optimize the size of mediahal libs
-    
-    Solution:
-    Optimize the size of mediahal libs
-    
-    Verify:
-    T5D
-    
-    Change-Id: I920425e4f95173e8d57d65049cdacce80d6e212e
-    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
-
 ========================================
 
-Release time: 2022-10-17-10-52
+Release time: 2022-11-04-13-36
 
 ========================================
 
