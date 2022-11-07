@@ -1,10 +1,31 @@
 =========RELEALSE NOTE=================
 
-Version: V3.7.49-g746f8c2
+Version: V3.7.50-g08c9c29
 
 ========================================
 
 Git commit:
+commit 08c9c29bf8120c660d4b076b73e43e44d8ff0f07
+Author: fei.deng <fei.deng@amlogic.com>
+Date:   Thu Nov 3 17:13:09 2022 +0800
+
+    videorenderer: CB2 fix Half screen video is seen in FCC test [1/1]
+    
+    PD#SWPL-100037
+    
+    Problem:
+    tsplayer sets window size before render lib connected that cause
+    render core set window size to plugin wrong
+    
+    Solution:
+    set window size to plugin immediately
+    
+    Verify:
+    ah212
+    
+    Change-Id: I8350a8bb149c5290d4836ba8a078a26172ad6a12
+    Signed-off-by: fei.deng <fei.deng@amlogic.com>
+
 commit 746f8c26f0a3dbff143d0bb3ddfd48c4a58a6fe9
 Author: fei.deng <fei.deng@amlogic.com>
 Date:   Wed Oct 26 13:36:25 2022 +0800
@@ -199,32 +220,9 @@ Date:   Wed Sep 21 16:10:14 2022 +0800
     Change-Id: Ibf3057bd029f8d69f02106d9f3c38f2b4d011d3f
     Signed-off-by: yunmin.chen <yunmin.chen@amlogic.com>
 
-commit c25bfd1a23589baaaf2c7520fa12d201fbc1eb74
-Author: yunmin.chen <yunmin.chen@amlogic.com>
-Date:   Sat Sep 10 23:51:06 2022 +0800
-
-    mediasync: CF1 Requirements for STC synchronization control [1/2]
-    
-    PD#SWPL-88952
-    
-    Problem:
-    1.Optimize  mediasync.
-    2.Dynamic control video is not synchronized with STC.
-    
-    Solution:
-    1.Optimize videoprocess() and audioprocess()
-    2.Add video freerun function.
-    3.Add the slow sync function of the video during playback.
-    
-    Verify:
-    T3
-    
-    Change-Id: Iaf80deeb32338bfb9ce961742a93e58906785740
-    Signed-off-by: yunmin.chen <yunmin.chen@amlogic.com>
-
 ========================================
 
-Release time: 2022-11-04-13-36
+Release time: 2022-11-07-10-12
 
 ========================================
 
