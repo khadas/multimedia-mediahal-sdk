@@ -42,7 +42,7 @@
 using namespace std;
 
 const int kRwSize = 188*1024;
-const int kRwTimeout = 30000;
+const int kRwTimeout = 500;
 
 #ifndef UNUSED
 #define UNUSED(x) (void)(x)
@@ -434,7 +434,7 @@ int main(int argc, char **argv)
                    }
                }
                 res = AmTsPlayer_writeData(session, &ibuf, kRwTimeout);
-               // usleep(20000);
+                //usleep(20000);
                 if (res == AM_TSPLAYER_ERROR_RETRY) {
                     usleep(50000);
                 } else
@@ -493,10 +493,12 @@ int main(int argc, char **argv)
             }
         }
     }
-    delete [](buf);
+    if (buf) {
+        delete [](buf);
+        buf = NULL;
+    }
     if (file.is_open())
         file.close();
-
     set_osd_blank(0);
     AmTsPlayer_stopVideoDecoding(session);
     AmTsPlayer_stopAudioDecoding(session);

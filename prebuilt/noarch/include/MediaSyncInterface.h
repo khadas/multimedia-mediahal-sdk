@@ -192,6 +192,10 @@ extern mediasync_result MediaSync_VideoProcess(void* handle, int64_t vpts, int64
 extern mediasync_result MediaSync_getFirstAudioFrameInfo(void* handle, mediasync_frameinfo* info);
 extern mediasync_result MediaSync_getCurAudioFrameInfo(void* handle, mediasync_frameinfo* info);
 extern mediasync_result MediaSync_GetMediaTimeByType(void* handle, media_time_type mediaTimeType,mediasync_time_unit tunit,int64_t* mediaTime);
+extern mediasync_result MediaSync_GetFirstQueueVideoInfo(void* handle, mediasync_frameinfo *info);
+extern mediasync_result MediaSync_GetQueueVideoInfo(void* handle, mediasync_frameinfo *info);
+extern mediasync_result MediaSync_GetFirstQueueAudioInfo(void* handle, mediasync_frameinfo *info);
+extern mediasync_result MediaSync_GetQueueAudioInfo(void* handle, mediasync_frameinfo *info);
 
 extern mediasync_result MediaSync_reset(void* handle);
 extern void MediaSync_destroy(void* handle);

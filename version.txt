@@ -1,10 +1,138 @@
 =========RELEALSE NOTE=================
 
-Version: V3.7.50-g08c9c29
+Version: vV3.7.56-gdb048e4
 
 ========================================
 
 Git commit:
+commit db048e40785551063786a7e426e66dc570abfd2e
+Author: zhipeng.he <zhipeng.he@amlogic.com>
+Date:   Mon Jun 20 13:44:00 2022 +0800
+
+    mediahal: CF2 t5d support mediasync [1/1]
+    
+    PD#SWPL-83967
+    
+    Problem:
+    t5d not support mediasync
+    
+    Solution:
+    t5d support mediasync
+    
+    Verify:
+    T5D
+    
+    Change-Id: I0a284579ea6c9889c5e92af2cba9b006bcddfcc7
+    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
+
+commit 2850308b8eec6aeeaf1fa89c6e609be31e3903d6
+Author: zhipeng.he <zhipeng.he@amlogic.com>
+Date:   Wed Oct 26 20:17:00 2022 +0800
+
+    tsplayer: CB2 add setvideo crop function [1/1]
+    
+    PD#SWPL-98503
+    
+    Problem:
+    not send the videocrop to renderlib
+    
+    Solution:
+    send the videocrop to renderlib
+    
+    Verify:
+    AH212
+    
+    Change-Id: Ic0fff285f8dd773b81e6806ea9eb9686200ce9ea
+    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
+
+commit 576619ef71bb1557dacb4fcba4ab53a1b37934ca
+Author: fei.deng <fei.deng@amlogic.com>
+Date:   Wed Nov 2 22:49:50 2022 +0800
+
+    videorenderer: CF2 add crop frame size for westeros [1/1]
+    
+    PD#SWPL-98793
+    
+    Problem:
+    add crop frame size for westeros
+    
+    Solution:
+    add crop frame size for westeros
+    
+    Verify:
+    ap222
+    
+    Change-Id: I757652357173391e8f67bead11d923db501e9f29
+    Signed-off-by: fei.deng <fei.deng@amlogic.com>
+
+commit c7eba4bbee4d1f3aba911c9e732754894235e6e5
+Author: fei.deng <fei.deng@amlogic.com>
+Date:   Tue Nov 15 16:38:24 2022 +0800
+
+    videorenderer: CB2 change render thread priority to RR [1/1]
+    
+    PD#SWPL-100347
+    
+    Problem:
+    render thread schedule late in low memory platform
+    
+    Solution:
+    change render thread priority to RR and use
+    VIDEO_RENDER_THREAD_PRIORITY to configure priority value
+    
+    Verify:
+    aq2432
+    
+    Change-Id: I77622c702d43dda23aca1c84fcc4ee50b1e00ad4
+    Signed-off-by: fei.deng <fei.deng@amlogic.com>
+
+commit 2e0fb939fd5df487aa596deb443f5a84134930d4
+Author: fei.deng <fei.deng@amlogic.com>
+Date:   Tue Nov 8 11:26:25 2022 +0800
+
+    videorenderer: CB2 fix rendlib unordered_map crash [1/1]
+    
+    PD#SWPL-97750
+    
+    Problem:
+    1.std::unordered_map is not thread safe if multi thread read
+    and write map at the same time
+    2.do not streamon at readyToRun
+    3.refine Thread class
+    4.reduce vdo sink epoll timeout
+    5.add mutex to protect vdo sink create and destroy
+    
+    Solution:
+    add mutex protect
+    
+    Verify:
+    ar321
+    
+    Change-Id: I825c818f30716b681e5172900297613eacfffdc7
+    Signed-off-by: fei.deng <fei.deng@amlogic.com>
+
+commit d7e4ac12be5dead0e7eaeff501406003fbd5a8e9
+Author: zhipeng.he <zhipeng.he@amlogic.com>
+Date:   Thu Oct 20 20:05:09 2022 +0800
+
+    videodec: CB2 h264/h265 cc data can not post [1/2]
+    
+    PD#OTT-34084
+    
+    Problem:
+    1.h264/h265 cc data can not post
+    2.can not get the pts from decoder
+    
+    Solution:
+    1.h264/h265 cc data can not post
+    2.add pts server on driver
+    
+    Verify:
+    AH212
+    
+    Change-Id: Idb846f9d7705e5d2fe96ba76fada95d29818784f
+    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
+
 commit 08c9c29bf8120c660d4b076b73e43e44d8ff0f07
 Author: fei.deng <fei.deng@amlogic.com>
 Date:   Thu Nov 3 17:13:09 2022 +0800
@@ -89,144 +217,13 @@ Date:   Mon Oct 17 21:18:43 2022 +0800
     Change-Id: I69efe12dc0bab12e60deaf62db951d0e8393c90b
     Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
 
-commit 44c0060d3ebdcb13a4229cb28b89b3554fad74d8
-Author: Yani Shi <yani.shi@amlogic.com>
-Date:   Sun Oct 9 19:34:37 2022 +0800
+========================================
 
-    mediasync: CB2 Add discontinue when dmxpcr invalid. [1/1]
-    
-    PD#SWPL-67100
-    
-    Problem:
-    For Scramble stream,when streamXpress set pts self-accumulation.
-    the dmxpcr will increase with systemtime but the a/vpts will jump
-    back when stream back.
-    cause the avsync issue.
-    
-    Solution:
-    add discontinue logic when demux pcr invalid
-    
-    Verify:
-    S905C3
-    
-    Change-Id: Ia2f349e155bc0dcecca09060f7cb527a27b5e729
-    Signed-off-by: Yani Shi <yani.shi@amlogic.com>
-
-commit 9b5f2b494d25e4e718dc136307b324832bd028b2
-Author: fei.deng <fei.deng@amlogic.com>
-Date:   Fri Oct 14 10:52:49 2022 +0800
-
-    videorenderer: CB2 fix fds leak and render server crash [1/1]
-    
-    PD#SWPL-96477
-    
-    Problem:
-    1.render server appears fds leak when playback exit.
-    2.render server crash when test case pvr of socts test
-    
-    Solution:
-    flush buffers posted to videotunnel when exit playback
-    
-    Verify:
-    ar321
-    
-    Change-Id: I4fa8517a93986b44f6c0776fe0d873aa2c751846
-    Signed-off-by: fei.deng <fei.deng@amlogic.com>
-
-commit 92a3f951b7f28aeac6baa5f517ec220b1e1b7166
-Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Thu Sep 29 22:07:02 2022 +0800
-
-    mediahal: CB2 enable use libdrm when no compositor [1/1]
-    
-    PD#SWPL-91357
-    
-    Problem:
-    not use libdrm when no compositor
-    
-    Solution:
-    use libdrm when no compositor
-    
-    Verify:
-    at302-t5w
-    
-    Change-Id: Idbdac133030e0363f6d05bdc6d5e03c680dbff71
-    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
-
-commit 6d58fbf6896373fc3fd82daa11f70bef7df28268
-Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Sun Oct 9 19:48:44 2022 +0800
-
-    mediasync: CB2 use drm_meson open need to close fd [1/1]
-    
-    PD#SWPL-96543
-    
-    Problem:
-    onlyaudio switch to av cannot show video on libdrm
-    
-    Solution:
-    use drm_meson open need to close fd
-    
-    Verify:
-    at302
-    
-    Change-Id: Ic5b8c2ad0db7abfcb655ce37785be54a00009634
-    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
-
-commit d05cab305f6c4850c0e068669c9260a540b5e0f9
-Author: fei.deng <fei.deng@amlogic.com>
-Date:   Wed Sep 21 19:55:00 2022 +0800
-
-    videorenderer: CF2 frame advance [1/1]
-    
-    PD#SWPL-77942
-    
-    Problem:
-    add new ioctl
-    1.V4L2_CID_EXT_VDEC_FRAME_ADVANCE
-    2.V4L2_CID_EXT_VDEC_DECODED_PICTURE_BUFFER
-    
-    Solution:
-    add new ioctl
-    1.V4L2_CID_EXT_VDEC_FRAME_ADVANCE
-    2.V4L2_CID_EXT_VDEC_DECODED_PICTURE_BUFFER
-    
-    Verify:
-    ar321
-    
-    Change-Id: I6523361081c6b482c290343403f40a4d3587b991
-    Signed-off-by: fei.deng <fei.deng@amlogic.com>
-
-commit cee7c8a54da15876fe5f99fdceb988da363c1fc3
-Author: yunmin.chen <yunmin.chen@amlogic.com>
-Date:   Wed Sep 21 16:10:14 2022 +0800
-
-    mediasync: CF1 Added video frame advance function. [1/1]
-    
-    PD#SWPL-77942
-    
-    Problem:
-    Added video frame advance function
-    
-    Solution:
-    Set MEDIASYNC_KEY_VIDEO_FRAME_ADVANCE to enable the feature.
-    After the function is enabled,
-    the display time of each frame is
-    calculated according to the current system time.
-    
-    Verify:
-    T3
-    
-    Change-Id: Ibf3057bd029f8d69f02106d9f3c38f2b4d011d3f
-    Signed-off-by: yunmin.chen <yunmin.chen@amlogic.com>
+Release time: 2022-11-22-17-45
 
 ========================================
 
-Release time: 2022-11-07-10-12
-
-========================================
-
-Builder: drm.autobuild
+Builder: zhipeng.he
 
 ========================================
 Release file:
@@ -235,23 +232,29 @@ Header file:
 AmTsPlayer.h
 AmVideoDecBase.h
 MediaSyncInterface.h
+render_lib.h
 resourcemanage.h
 
-Library file:
+Library and Binary file:
+AmTsPlayerExample
+AmTsPlayerMultiExample
+EsVideoDecPlayer
 libmediahal_mediasync.so
 libmediahal_resman.so
 libmediahal_tsplayer.so
 libmediahal_videodec.so
 libmediahal_videorender.so
+videorender_server
+
 Example file:
 AmTsPlayerExample.cpp
 Makefile
+
 Multi_Example file:
 AmTsPlayerMultiExample.cpp
 Makefile
-
-Binary  file:
-AmTsPlayerExample
-AmTsPlayerMultiExample
+Esvideodecplayer file:
+EsVideoDecPlayer.cpp
+Makefile
 
 ========================================

@@ -62,6 +62,7 @@ enum _RenderKey {
     KEY_SELECT_DISPLAY_OUTPUT,//set/get display output index,value type is int,0 is primary output and default value, 1 is extend display output
     KEY_IMMEDIATELY_OUTPUT, //set/get immediately output video frame to display, 0 is default value off, 1 is on
     KEY_STEP_DISPLAY_FRAME, //set/get step display frame,the value type is StepFrameInfo struct
+    KEY_VIDEO_CROP, //set/get the video crop,value type is RenderWindowSize
     KEY_MEDIASYNC_INSTANCE_ID = 400, //set/get mediasync instance id, value type is int
     KEY_MEDIASYNC_PCR_PID, ///set/get mediasync pcr id ,value type is int
     KEY_MEDIASYNC_DEMUX_ID, //set/get mediasync demux id ,value type is int
@@ -448,6 +449,42 @@ int render_mediasync_get_playback_rate(void *handle, float *scale);
  * @return int 0 success, -1 if failed
  */
 int render_mediasync_queue_demux_pts(void *handle, int64_t ptsUs, uint32_t size);
+
+/**
+ * @brief get first queuevideo pts from mediasync
+ *
+ *@param handle a handle of render device that was opened
+ * @param pts the first queuevideo pts
+ * @return int 0 success, -1 if failed
+ */
+int render_mediasync_get_first_queuevideo_pts(void *handle, int64_t *pts);
+
+/**
+ * @brief get queuevideo pts from mediasync
+ *
+ *@param handle a handle of render device that was opened
+ * @param pts the queuevideo pts
+ * @return int 0 success, -1 if failed
+ */
+int render_mediasync_get_queuevideo_pts(void *handle, int64_t *pts);
+
+/**
+ * @brief get first queueaudio pts from mediasync
+ *
+ *@param handle a handle of render device that was opened
+ * @param pts the first queueaudio pts
+ * @return int 0 success, -1 if failed
+ */
+int render_mediasync_get_first_queueaudio_pts(void *handle, int64_t *pts);
+
+/**
+ * @brief get queueaudio pts from mediasync
+ *
+ *@param handle a handle of render device that was opened
+ * @param pts the queueaudio pts
+ * @return int 0 success, -1 if failed
+ */
+int render_mediasync_get_queueaudio_pts(void *handle, int64_t *pts);
 
 #ifdef  __cplusplus
 }
