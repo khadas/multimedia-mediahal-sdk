@@ -1,10 +1,30 @@
 =========RELEALSE NOTE=================
 
-Version: vV3.7.56-gdb048e4
+Version: vV3.7.57-g51423d8
 
 ========================================
 
 Git commit:
+commit 51423d8356b02615cd6df4b75c0b1708c3c91354
+Author: zhipeng.he <zhipeng.he@amlogic.com>
+Date:   Tue Nov 22 19:33:21 2022 +0800
+
+    videodec: CB2 vdec_status struct updated to match driver [1/1]
+    
+    PD#SWPL-102192
+    
+    Problem:
+    dec_status struct not match with driver
+    
+    Solution:
+    vdec_status struct updated to match driver
+    
+    Verify:
+    AH212
+    
+    Change-Id: I67b21474c9751972299e74985c048f37c18dbeb3
+    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
+
 commit db048e40785551063786a7e426e66dc570abfd2e
 Author: zhipeng.he <zhipeng.he@amlogic.com>
 Date:   Mon Jun 20 13:44:00 2022 +0800
@@ -197,29 +217,9 @@ Date:   Mon Oct 24 20:08:45 2022 +0800
     Change-Id: I1e57a8ffe3c59f88185f5d685570535fa3a6b3f3
     Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
 
-commit d238be0916b52a829df170cc7a58e88d3c5ae662
-Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Mon Oct 17 21:18:43 2022 +0800
-
-    tsplayer: CB1 Send decodec first audio under non tunnel [1/1]
-    
-    PD#SWPL-97194
-    
-    Problem:
-    No audio output in Radio program.
-    
-    Solution:
-    Add send first audio msg.
-    
-    Verify:
-    AT302
-    
-    Change-Id: I69efe12dc0bab12e60deaf62db951d0e8393c90b
-    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
-
 ========================================
 
-Release time: 2022-11-22-17-45
+Release time: 2022-11-22-19-59
 
 ========================================
 
