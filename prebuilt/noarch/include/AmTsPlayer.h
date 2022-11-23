@@ -195,12 +195,12 @@ typedef enum {
 /*Video display match mode*/
 typedef enum {
     AV_VIDEO_MATCH_MODE_NONE = 0,          // Keep original
-    AV_VIDEO_MATCH_MODE_FULLSCREEN = 1,    // Strech the video to the full window
+    AV_VIDEO_MATCH_MODE_FULLSCREEN = 1,    // Stretch the video to the full window
     AV_VIDEO_MATCH_MODE_LETTER_BOX = 2,    // Letter box match mode
     AV_VIDEO_MATCH_MODE_PAN_SCAN = 3,      // Pan scan match mode
     AV_VIDEO_MATCH_MODE_COMBINED = 4,      // Combined pan scan and letter box
-    AV_VIDEO_MATCH_MODE_WIDTHFULL = 5,     // Strech the video width to the full window
-    AV_VIDEO_MATCH_MODE_HEIGHFULL = 6,      // Strech the video height to the full window
+    AV_VIDEO_MATCH_MODE_WIDTHFULL = 5,     // Stretch the video width to the full window
+    AV_VIDEO_MATCH_MODE_HEIGHTFULL = 6,      // Stretch the video height to the full window
     AV_VIDEO_WIDEOPTION_4_3_LETTER_BOX = 7,
     AV_VIDEO_WIDEOPTION_4_3_PAN_SCAN = 8,
     AV_VIDEO_WIDEOPTION_4_3_COMBINED = 9,

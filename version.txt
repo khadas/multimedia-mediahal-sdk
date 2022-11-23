@@ -1,10 +1,30 @@
 =========RELEALSE NOTE=================
 
-Version: vV3.7.57-g51423d8
+Version: V3.7.58-gec6c509
 
 ========================================
 
 Git commit:
+commit ec6c50923c9c5a0ca0ddb1a45406b6fc79163961
+Author: dehong.chen <dehong.chen@amlogic.com>
+Date:   Wed Nov 23 03:22:45 2022 +0000
+
+    tsplayer: CB2 clear typo error in linux branch [1/1]
+    
+    PD#SWPL-101232
+    
+    Problem:
+    macro definition name typo check is incorrect
+    
+    Solution:
+    fix Macro definition name
+    
+    Verify:
+    SC2
+    
+    Change-Id: I50c0755d777c93a85d94945e8d916bc8afc02807
+    Signed-off-by: dehong.chen <dehong.chen@amlogic.com>
+
 commit 51423d8356b02615cd6df4b75c0b1708c3c91354
 Author: zhipeng.he <zhipeng.he@amlogic.com>
 Date:   Tue Nov 22 19:33:21 2022 +0800
@@ -197,33 +217,13 @@ Date:   Wed Oct 26 13:36:25 2022 +0800
     Change-Id: I40eabe49d316f5cda6f6ee1552ace0f6968c9afa
     Signed-off-by: fei.deng <fei.deng@amlogic.com>
 
-commit aea572bb6b2642450d595cea8d885d661e0816f1
-Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Mon Oct 24 20:08:45 2022 +0800
+========================================
 
-    tsplayer: CB2 multi instance not need send syncmode to tsync [1/1]
-    
-    PD#SWPL-93095
-    
-    Problem:
-    multi instance send syncmode to tsync
-    
-    Solution:
-    multi instance not need send syncmode to tsync
-    
-    Verify:
-    AT302
-    
-    Change-Id: I1e57a8ffe3c59f88185f5d685570535fa3a6b3f3
-    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
+Release time: 2022-11-23-16-51
 
 ========================================
 
-Release time: 2022-11-22-19-59
-
-========================================
-
-Builder: zhipeng.he
+Builder: drm.autobuild
 
 ========================================
 Release file:
@@ -232,29 +232,23 @@ Header file:
 AmTsPlayer.h
 AmVideoDecBase.h
 MediaSyncInterface.h
-render_lib.h
 resourcemanage.h
 
-Library and Binary file:
-AmTsPlayerExample
-AmTsPlayerMultiExample
-EsVideoDecPlayer
+Library file:
 libmediahal_mediasync.so
 libmediahal_resman.so
 libmediahal_tsplayer.so
 libmediahal_videodec.so
 libmediahal_videorender.so
-videorender_server
-
 Example file:
 AmTsPlayerExample.cpp
 Makefile
-
 Multi_Example file:
 AmTsPlayerMultiExample.cpp
 Makefile
-Esvideodecplayer file:
-EsVideoDecPlayer.cpp
-Makefile
+
+Binary  file:
+AmTsPlayerExample
+AmTsPlayerMultiExample
 
 ========================================
