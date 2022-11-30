@@ -1,10 +1,53 @@
 =========RELEALSE NOTE=================
 
-Version: V3.7.62-g59947be
+Version: V3.7.64-gcfd0ee5
 
 ========================================
 
 Git commit:
+commit cfd0ee50dc5bf0e614a188047ba1c4272a1ac3fa
+Author: fei.deng <fei.deng@amlogic.com>
+Date:   Mon Nov 28 10:16:57 2022 +0800
+
+    videorenderer: CB2 refine render server [1/1]
+    
+    PD#SWPL-102813
+    
+    Problem:
+    socts advance test case failed, because render server open and close
+    vout device every time when vdo connect and disconnect, it takes a
+    long time
+    
+    Solution:
+    open and close vout only one time
+    
+    Verify:
+    ar321
+    
+    Change-Id: I9cc538d6d7db69fcf7e4e335f549e49c47148f41
+    Signed-off-by: fei.deng <fei.deng@amlogic.com>
+
+commit 044c8ec8457148ea5c2e96c2b3f1fd6d335381cd
+Author: Nanxin Qin <nanxin.qin@amlogic.com>
+Date:   Thu Nov 24 15:12:06 2022 +0800
+
+    v4l: CF1 VDO supports proc file to instead of uevent. [1/1]
+    
+    PD#SWPL-102740
+    
+    Problem:
+    vdo supports proc file that was designed to
+    instead of uevent.
+    
+    Solution:
+    VDO supports proc file to instead of uevent.
+    
+    Verify:
+    ar321
+    
+    Change-Id: I2032cfec9661722444960e6aef46d74fc29e6bcb
+    Signed-off-by: Nanxin Qin <nanxin.qin@amlogic.com>
+
 commit 59947be7f4c6346e04b88e2b21f9c26ac9bf076f
 Author: zhipeng.he <zhipeng.he@amlogic.com>
 Date:   Tue Nov 8 14:22:58 2022 +0800
@@ -165,50 +208,9 @@ Date:   Wed Oct 26 20:17:00 2022 +0800
     Change-Id: Ic0fff285f8dd773b81e6806ea9eb9686200ce9ea
     Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
 
-commit 576619ef71bb1557dacb4fcba4ab53a1b37934ca
-Author: fei.deng <fei.deng@amlogic.com>
-Date:   Wed Nov 2 22:49:50 2022 +0800
-
-    videorenderer: CF2 add crop frame size for westeros [1/1]
-    
-    PD#SWPL-98793
-    
-    Problem:
-    add crop frame size for westeros
-    
-    Solution:
-    add crop frame size for westeros
-    
-    Verify:
-    ap222
-    
-    Change-Id: I757652357173391e8f67bead11d923db501e9f29
-    Signed-off-by: fei.deng <fei.deng@amlogic.com>
-
-commit c7eba4bbee4d1f3aba911c9e732754894235e6e5
-Author: fei.deng <fei.deng@amlogic.com>
-Date:   Tue Nov 15 16:38:24 2022 +0800
-
-    videorenderer: CB2 change render thread priority to RR [1/1]
-    
-    PD#SWPL-100347
-    
-    Problem:
-    render thread schedule late in low memory platform
-    
-    Solution:
-    change render thread priority to RR and use
-    VIDEO_RENDER_THREAD_PRIORITY to configure priority value
-    
-    Verify:
-    aq2432
-    
-    Change-Id: I77622c702d43dda23aca1c84fcc4ee50b1e00ad4
-    Signed-off-by: fei.deng <fei.deng@amlogic.com>
-
 ========================================
 
-Release time: 2022-11-23-19-43
+Release time: 2022-11-30-13-42
 
 ========================================
 
