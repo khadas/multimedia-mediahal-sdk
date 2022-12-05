@@ -1,10 +1,51 @@
 =========RELEALSE NOTE=================
 
-Version: V3.7.64-gcfd0ee5
+Version: V3.7.66-gff8cfe2
 
 ========================================
 
 Git commit:
+commit ff8cfe25d21014a46f6f4be97f58130e8b39447b
+Author: zhipeng.he <zhipeng.he@amlogic.com>
+Date:   Thu Nov 24 20:21:07 2022 +0800
+
+    tsplayer: CB2 X2 esmode no video when start audio first [1/1]
+    
+    PD#SWPL-85502
+    
+    Problem:
+    X2 esmode no video when start audio first
+    
+    Solution:
+    x2 esmode av should be separated to start.
+    
+    Verify:
+    A213Y
+    
+    Change-Id: I48fd25d57a39cca11b41a6ca48e53284412069c6
+    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
+
+commit 3a96607630ef12abf7c580248532c6fb44c25bdf
+Author: zhipeng.he <zhipeng.he@amlogic.com>
+Date:   Wed Nov 30 14:52:11 2022 +0800
+
+    tsplayer: CB2 set audioparam crash on 64bit [1/1]
+    
+    PD#SWPL-103349
+    
+    Problem:
+    set audioparam crash on 64bit
+    
+    Solution:
+    pointer is 8 bytes on 64bit,
+    cannot write a dead parameter of type int
+    
+    Verify:
+    AH212
+    
+    Change-Id: Iceb6b9cfae1969bbe757bb3ab2d9f51083cbeb71
+    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
+
 commit cfd0ee50dc5bf0e614a188047ba1c4272a1ac3fa
 Author: fei.deng <fei.deng@amlogic.com>
 Date:   Mon Nov 28 10:16:57 2022 +0800
@@ -168,49 +209,9 @@ Date:   Tue Nov 22 19:33:21 2022 +0800
     Change-Id: I67b21474c9751972299e74985c048f37c18dbeb3
     Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
 
-commit db048e40785551063786a7e426e66dc570abfd2e
-Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Mon Jun 20 13:44:00 2022 +0800
-
-    mediahal: CF2 t5d support mediasync [1/1]
-    
-    PD#SWPL-83967
-    
-    Problem:
-    t5d not support mediasync
-    
-    Solution:
-    t5d support mediasync
-    
-    Verify:
-    T5D
-    
-    Change-Id: I0a284579ea6c9889c5e92af2cba9b006bcddfcc7
-    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
-
-commit 2850308b8eec6aeeaf1fa89c6e609be31e3903d6
-Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Wed Oct 26 20:17:00 2022 +0800
-
-    tsplayer: CB2 add setvideo crop function [1/1]
-    
-    PD#SWPL-98503
-    
-    Problem:
-    not send the videocrop to renderlib
-    
-    Solution:
-    send the videocrop to renderlib
-    
-    Verify:
-    AH212
-    
-    Change-Id: Ic0fff285f8dd773b81e6806ea9eb9686200ce9ea
-    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
-
 ========================================
 
-Release time: 2022-11-30-13-42
+Release time: 2022-12-05-19-07
 
 ========================================
 
