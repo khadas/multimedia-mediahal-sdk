@@ -1,10 +1,54 @@
 =========RELEALSE NOTE=================
 
-Version: V3.7.66-gff8cfe2
+Version: V3.7.68-ge425172
 
 ========================================
 
 Git commit:
+commit e4251724481cf50c7aa34cea35122495d57a85d3
+Author: fei.deng <fei.deng@amlogic.com>
+Date:   Fri Dec 2 11:23:02 2022 +0800
+
+    videorenderer: CF2 refine render lib [1/1]
+    
+    PD#SWPL-78218
+    
+    Problem:
+    1.add open and close render plugin feature
+    sometimes we want that video frame do not sends
+    to compositor but we need video frame release buffer with av sync,
+    so we can close plugin,
+    
+    Solution:
+    new feature
+    
+    Verify:
+    ar321
+    
+    Change-Id: I275c9a083987f185f142f6582519135cb3c8450b
+    Signed-off-by: fei.deng <fei.deng@amlogic.com>
+
+commit e9e3c1874d6f37775ccd6865de7d1df1d475caea
+Author: yu.xie <yu.xie@amlogic.com>
+Date:   Mon Dec 12 08:32:49 2022 +0000
+
+    v4ldvbTest: CF2 Supprot test in kernel 5.4.96. [1/1]
+    
+    PD#SWPL-98535
+    
+    Problem:
+    lge kernel use 5.4.96, but only support 5.4.125.
+    
+    Solution:
+    supprot to run test in kernel 5.4.96 and kernel
+    5.4.125
+    
+    Verify:
+    AR321
+    
+    Change-Id: I2e8acc28635dc4b2a113167e27fcb7ab941adbdc
+    Signed-off-by: yu.xie <yu.xie@amlogic.com>
+
 commit ff8cfe25d21014a46f6f4be97f58130e8b39447b
 Author: zhipeng.he <zhipeng.he@amlogic.com>
 Date:   Thu Nov 24 20:21:07 2022 +0800
@@ -169,49 +213,9 @@ Date:   Thu Nov 17 17:02:00 2022 +0800
     Change-Id: I290adc7dc585125d02fefea3bc20b2e4c620167c
     Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
 
-commit ec6c50923c9c5a0ca0ddb1a45406b6fc79163961
-Author: dehong.chen <dehong.chen@amlogic.com>
-Date:   Wed Nov 23 03:22:45 2022 +0000
-
-    tsplayer: CB2 clear typo error in linux branch [1/1]
-    
-    PD#SWPL-101232
-    
-    Problem:
-    macro definition name typo check is incorrect
-    
-    Solution:
-    fix Macro definition name
-    
-    Verify:
-    SC2
-    
-    Change-Id: I50c0755d777c93a85d94945e8d916bc8afc02807
-    Signed-off-by: dehong.chen <dehong.chen@amlogic.com>
-
-commit 51423d8356b02615cd6df4b75c0b1708c3c91354
-Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Tue Nov 22 19:33:21 2022 +0800
-
-    videodec: CB2 vdec_status struct updated to match driver [1/1]
-    
-    PD#SWPL-102192
-    
-    Problem:
-    dec_status struct not match with driver
-    
-    Solution:
-    vdec_status struct updated to match driver
-    
-    Verify:
-    AH212
-    
-    Change-Id: I67b21474c9751972299e74985c048f37c18dbeb3
-    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
-
 ========================================
 
-Release time: 2022-12-05-19-07
+Release time: 2022-12-13-17-51
 
 ========================================
 
