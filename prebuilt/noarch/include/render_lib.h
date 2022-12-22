@@ -81,10 +81,11 @@ enum _RenderKey {
     KEY_MEDIASYNC_VIDEO_FREERUN, //set/get video freerun when video is displayed
     //set/get video tunnel instance id when videotunnel plugin be selected,value type is int,this key must set before render_connect
     KEY_VIDEOTUNNEL_ID = 450,
-    /*it is useful for controlling render plugin to connect to compositor or disconnect from compositor*/
-    KEY_PLUGIN_OPEN = 600, //set render plugin connect to compositor,if plugin had connected,render plugin will do nothing,value type is NULL
-    KEY_PLUGIN_CLOSE, //set render plugin disconnect from compositor,if plugin had disconnected,render plugin will do nothing,,value type is NULL
-    KEY_PLUGIN_STATE, //get render plugin state,value type is int,0:closed,1:opened
+    /*set render plugin to connect to compositor or disconnect from compositor, if set to 1
+      and plugin is closed,render core will open plugin again,if set to 0 and plugin is opened,
+      render core will close plugin. render core will do nothing if plugin is opened and set to 1.
+      get render plugin state, 1:connected,0:disconnected*/
+    KEY_PLUGIN_STATE = 600, //set render plugin connect to compositor,if plugin had connected,render plugin will do nothing,value type is NULL
 };
 
 /*video display window size

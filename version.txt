@@ -1,10 +1,32 @@
 =========RELEALSE NOTE=================
 
-Version: V3.7.68-ge425172
+Version: V3.7.69-g08199e9
 
 ========================================
 
 Git commit:
+commit 08199e93522224fcd2763d210610ab86057446f3
+Author: fei.deng <fei.deng@amlogic.com>
+Date:   Mon Dec 19 16:48:57 2022 +0800
+
+    videorenderer: CB2 fix render lib plugin open fail [1/1]
+    
+    PD#SWPL-105989
+    
+    Problem:
+    1.fix videotunnel plugin open failed again after close
+    2.add underflow msg
+    
+    Solution:
+    1.fix videotunnel plugin open failed again after close
+    2.add underflow msg
+    
+    Verify:
+    ar321
+    
+    Change-Id: If2cd87a3c40d0afda45248d1630a42a22bfe9111
+    Signed-off-by: fei.deng <fei.deng@amlogic.com>
+
 commit e4251724481cf50c7aa34cea35122495d57a85d3
 Author: fei.deng <fei.deng@amlogic.com>
 Date:   Fri Dec 2 11:23:02 2022 +0800
@@ -193,29 +215,9 @@ Date:   Thu Sep 29 16:01:31 2022 +0800
     Change-Id: If60b4fe698a755f55ea04ecc19ea34eead9b18ad
     Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
 
-commit 6e38a952cc238330000984b9df384d4e588054b3
-Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Thu Nov 17 17:02:00 2022 +0800
-
-    tsplayer: CB2 esmode switch tsmode no audio [1/1]
-    
-    PD#SWPL-99173
-    
-    Problem:
-    esmode switch tsmode no audio
-    
-    Solution:
-    esmode need use stream to set mute
-    
-    Verify:
-    AH232
-    
-    Change-Id: I290adc7dc585125d02fefea3bc20b2e4c620167c
-    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
-
 ========================================
 
-Release time: 2022-12-13-17-51
+Release time: 2022-12-22-10-23
 
 ========================================
 
