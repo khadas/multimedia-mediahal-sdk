@@ -1,10 +1,52 @@
 =========RELEALSE NOTE=================
 
-Version: V3.7.70-gfaaa2a7
+Version: V3.7.72-g3051c39
 
 ========================================
 
 Git commit:
+commit 3051c398697506cc5ac58e2b62768f84e66efd9b
+Author: zhipeng.he <zhipeng.he@amlogic.com>
+Date:   Fri Dec 16 23:03:34 2022 +0800
+
+    tsplayer: CB2  Fix fcc switch channel slowly. [1/1]
+    
+    PD#SWPL-79272
+    
+    Problem:
+    fcc switch channel slowly sometimes.
+    
+    Solution:
+    cache mode need to reset mediasync
+    getupdateinfo need update the status.
+    
+    Verify:
+    AH212
+    
+    Change-Id: Ifa6997cdfd3a9fc39cfc32bf036cff1ace475fec
+    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
+
+commit 1f7460a4a3a93d115471da780aad42bdb74ac49d
+Author: fei.deng <fei.deng@amlogic.com>
+Date:   Wed Jan 4 09:42:16 2023 +0800
+
+    videorenderer: CF2 no video displayed [1/1]
+    
+    PD#TV-70905
+    
+    Problem:
+    No video frame displayed when video resolution changed more
+    than one time if DTV video playing.
+    
+    Solution:
+    render server don't wait all buffer recycled and flush buffer
+    
+    Verify:
+    ar321
+    
+    Change-Id: I4331a4c765fbe7e3932273337f0efa21a57ada11
+    Signed-off-by: fei.deng <fei.deng@amlogic.com>
+
 commit faaa2a7ff402c148d3fcab279d7ed0b64338afd4
 Author: fei.deng <fei.deng@amlogic.com>
 Date:   Mon Dec 26 14:45:55 2022 +0800
@@ -175,49 +217,9 @@ Date:   Thu Nov 24 15:12:06 2022 +0800
     Change-Id: I2032cfec9661722444960e6aef46d74fc29e6bcb
     Signed-off-by: Nanxin Qin <nanxin.qin@amlogic.com>
 
-commit 59947be7f4c6346e04b88e2b21f9c26ac9bf076f
-Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Tue Nov 8 14:22:58 2022 +0800
-
-    mediasync: CB2 fix the crash in getVsyncFracTime [1/1]
-    
-    PD#OTT-35878
-    
-    Problem:
-    crash in getVsyncFracTime when vsyncPeriod is 0
-    
-    Solution:
-    fix the crash in getVsyncFracTime
-    
-    Verify:
-    AQ2432
-    
-    Change-Id: I957e85d311d9daefaead31d173b2603ca1bb3ea3
-    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
-
-commit 6dd02e69db496bf35bd1f5fdb4696aed7ae31748
-Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Tue Nov 1 17:29:31 2022 +0800
-
-    tsplayer: CB2 set volume invalid [1/1]
-    
-    PD#OTT-35680
-    
-    Problem:
-    set volume not match with audiohal
-    
-    Solution:
-    set volume match with audiohal
-    
-    Verify:
-    AH212
-    
-    Change-Id: Ica4d5ccf37f0b0dbe89fd8fa2c25aab8243a5d49
-    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
-
 ========================================
 
-Release time: 2023-01-03-13-20
+Release time: 2023-01-13-16-00
 
 ========================================
 

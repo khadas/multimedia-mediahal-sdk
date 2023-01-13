@@ -39,7 +39,9 @@ typedef struct _RenderBuffer {
     RenderDmaBuffer dma;
     RenderRawBuffer raw;
     int64_t pts; //time is nano second
-    void *priv;
+    void *priv; //user data passed to render lib
+    int eos; //indicate the last frame of stream if needed, set 1 to indicate this frame is last frame,default is 0
+    int reserved[4]; //reserved for extend
 } RenderBuffer;
 
 typedef struct _StepFrameInfo {
