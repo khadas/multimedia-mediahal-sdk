@@ -1,10 +1,70 @@
 =========RELEALSE NOTE=================
 
-Version: V3.7.72-g3051c39
+Version: vV3.9.2-gbcaede2
 
 ========================================
 
 Git commit:
+commit bcaede2a8f2a9ef797189053c3aac55573a81c38
+Author: zhipeng.he <zhipeng.he@amlogic.com>
+Date:   Mon Jan 30 19:39:02 2023 +0800
+
+    videocdec: CB2 fix the crash on invalid ptsserver. [1/1]
+    
+    PD#TV-72018
+    
+    Problem:
+    crash on invalid ptsserver
+    
+    Solution:
+    fix the crash on invalid ptsserver
+    
+    Verify:
+    common
+    
+    Change-Id: I0310cab9685032ae54e9b67bcee3788480b2f2b8
+    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
+
+commit 9fcb81a8fb0c3d7070618a1be2273c48428eb112
+Author: zhipeng.he <zhipeng.he@amlogic.com>
+Date:   Wed Jan 11 17:43:03 2023 +0800
+
+    tsplayer: CB2 stop videodecoding not need create buf [1/1]
+    
+    PD#OTT-37984
+    
+    Problem:
+    stop videodecoding crash in AdaptorThread
+    
+    Solution:
+    stop videodecoding not need create buf
+    
+    Verify:
+    AH212
+    
+    Change-Id: I9dab84cf04b2b85d0fbd4007cdeb8ab0f0f591a8
+    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
+
+commit d91e0a9d022f9a838d82e940fb331d3cfb7eb556
+Author: yunmin.chen <yunmin.chen@amlogic.com>
+Date:   Fri Feb 3 15:18:02 2023 +0800
+
+    mediahal: CF2 mediahal release  [1/1]
+    
+    PD#SWPL-97591
+    
+    Problem:
+    mediahal release
+    
+    Solution:
+    release V3.7.72-g3051c39
+    
+    Verify:
+    SC2
+    
+    Change-Id: I22662dc29ae55c19618993b7ad1cdbcd91bd7e8e
+    Signed-off-by: yunmin.chen <yunmin.chen@amlogic.com>
+
 commit 3051c398697506cc5ac58e2b62768f84e66efd9b
 Author: zhipeng.he <zhipeng.he@amlogic.com>
 Date:   Fri Dec 16 23:03:34 2022 +0800
@@ -153,77 +213,13 @@ Date:   Thu Nov 24 20:21:07 2022 +0800
     Change-Id: I48fd25d57a39cca11b41a6ca48e53284412069c6
     Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
 
-commit 3a96607630ef12abf7c580248532c6fb44c25bdf
-Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Wed Nov 30 14:52:11 2022 +0800
+========================================
 
-    tsplayer: CB2 set audioparam crash on 64bit [1/1]
-    
-    PD#SWPL-103349
-    
-    Problem:
-    set audioparam crash on 64bit
-    
-    Solution:
-    pointer is 8 bytes on 64bit,
-    cannot write a dead parameter of type int
-    
-    Verify:
-    AH212
-    
-    Change-Id: Iceb6b9cfae1969bbe757bb3ab2d9f51083cbeb71
-    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
-
-commit cfd0ee50dc5bf0e614a188047ba1c4272a1ac3fa
-Author: fei.deng <fei.deng@amlogic.com>
-Date:   Mon Nov 28 10:16:57 2022 +0800
-
-    videorenderer: CB2 refine render server [1/1]
-    
-    PD#SWPL-102813
-    
-    Problem:
-    socts advance test case failed, because render server open and close
-    vout device every time when vdo connect and disconnect, it takes a
-    long time
-    
-    Solution:
-    open and close vout only one time
-    
-    Verify:
-    ar321
-    
-    Change-Id: I9cc538d6d7db69fcf7e4e335f549e49c47148f41
-    Signed-off-by: fei.deng <fei.deng@amlogic.com>
-
-commit 044c8ec8457148ea5c2e96c2b3f1fd6d335381cd
-Author: Nanxin Qin <nanxin.qin@amlogic.com>
-Date:   Thu Nov 24 15:12:06 2022 +0800
-
-    v4l: CF1 VDO supports proc file to instead of uevent. [1/1]
-    
-    PD#SWPL-102740
-    
-    Problem:
-    vdo supports proc file that was designed to
-    instead of uevent.
-    
-    Solution:
-    VDO supports proc file to instead of uevent.
-    
-    Verify:
-    ar321
-    
-    Change-Id: I2032cfec9661722444960e6aef46d74fc29e6bcb
-    Signed-off-by: Nanxin Qin <nanxin.qin@amlogic.com>
+Release time: 2023-02-09-17-03
 
 ========================================
 
-Release time: 2023-01-17-14-56
-
-========================================
-
-Builder: drm.autobuild
+Builder: zhipeng.he
 
 ========================================
 Release file:
@@ -232,23 +228,29 @@ Header file:
 AmTsPlayer.h
 AmVideoDecBase.h
 MediaSyncInterface.h
+render_lib.h
 resourcemanage.h
 
-Library file:
+Library and Binary file:
+AmTsPlayerExample
+AmTsPlayerMultiExample
+EsVideoDecPlayer
 libmediahal_mediasync.so
 libmediahal_resman.so
 libmediahal_tsplayer.so
 libmediahal_videodec.so
 libmediahal_videorender.so
+videorender_server
+
 Example file:
 AmTsPlayerExample.cpp
 Makefile
+
 Multi_Example file:
 AmTsPlayerMultiExample.cpp
 Makefile
-
-Binary  file:
-AmTsPlayerExample
-AmTsPlayerMultiExample
+Esvideodecplayer file:
+EsVideoDecPlayer.cpp
+Makefile
 
 ========================================
