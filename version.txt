@@ -1,10 +1,165 @@
 =========RELEALSE NOTE=================
 
-Version: vV3.9.2-gbcaede2
+Version: vV3.9.9-gc203541
 
 ========================================
 
 Git commit:
+commit c2035414d2b22318697722a0c52aabfa55213363
+Author: zhipeng.he <zhipeng.he@amlogic.com>
+Date:   Fri Feb 24 16:50:45 2023 +0800
+
+    mediasync: CB2 holdtime not right when check isstartvideo [1/1]
+    
+    PD#TV-73727
+    
+    Problem:
+    holdtime not right when check isstartvideo
+    
+    Solution:
+    Set initial value for mStcParmUpdateCount,
+    adjust the holdtime value when exception
+    
+    Verify:
+    AT30A3-T962D4
+    
+    Change-Id: If1bd9df868ba80fff0551fb2f6c797b132fc4f87
+    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
+
+commit 702f885cffe9404cdbd03874d64b699a771d0fcf
+Author: zhipeng.he <zhipeng.he@amlogic.com>
+Date:   Mon Feb 20 20:39:34 2023 +0800
+
+    mediasync: CB2 audio has intermittentl after discontinue. [1/1]
+    
+    PD#SWPL-106912
+    
+    Problem:
+    audio discontinue enter too early
+    
+    Solution:
+    need to compare audiopts and current pcr to enter discontinue
+    
+    Verify:
+    AH212
+    
+    Change-Id: I5e80d1def0d362347480bfe43eec1041742c5cbd
+    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
+
+commit 11696ffe03b72750df4ff5b43066e593dc6ae417
+Author: fei.deng <fei.deng@amlogic.com>
+Date:   Wed Feb 15 04:04:04 2023 -0500
+
+    videorenderer: CB2 change display thread priority [1/1]
+    
+    PD#OTT-39212
+    
+    Problem:
+    now display thread priority is SCHED_RR, we need to
+    change it to SCHED_FIFO and its priority to 60
+    
+    Solution:
+    now display thread priority is SCHED_RR, we need to
+    change it to SCHED_FIFO and its priority to 60
+    
+    Verify:
+    ar321
+    
+    Change-Id: I91f4de10364659b401349abbe10bb729b3e410e7
+    Signed-off-by: fei.deng <fei.deng@amlogic.com>
+
+commit dce89258ccc0e4480c472440228406b33f0a2299
+Author: zhipeng.he <zhipeng.he@amlogic.com>
+Date:   Fri Feb 24 20:29:49 2023 +0800
+
+    tsplayer: CB2 check demux_type fail on kernel_5.15 [1/1]
+    
+    PD#SWPL-112497
+    
+    Problem:
+    check demux_type fail on kernel_5.15
+    
+    Solution:
+    1.Fix the demux driver path
+    2.Fix path of demux0_source node
+    
+    Verify:
+    AH212/T5D
+    
+    Change-Id: Idd28b9a68f775f2e5cacfa718af8f9d620a01333
+    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
+
+commit 0b4a169477ee58793789c1ef87e1aa31d8686b0e
+Author: hui.an <hui.an@amlogic.com>
+Date:   Mon Feb 27 16:23:48 2023 +0800
+
+    tsplayer: CB2 avoid AD function invalid [1/1]
+    
+    PD#TV-73941
+    
+    Problem:
+    AD function is invalid
+    
+    Solution:
+    Replace param1 with param2
+    
+    Verify:
+    t5w
+    
+    Change-Id: I0683b11d09632675151c8de07174fa4cb1bb524e
+    Signed-off-by: hui.an <hui.an@amlogic.com>
+
+commit dc291360d5bcc4fa7afbeda7fea47877a31b260d
+Merge: 1edee97 4ec7cf2
+Author: Lifeng Cao <lifeng.cao@amlogic.com>
+Date:   Wed Feb 22 05:52:34 2023 -0800
+
+    Merge "videorenderer: CF2 support format changed [1/1]" into Linux
+
+commit 4ec7cf278d3fd142dc7861abfd125569dc2798b9
+Author: fei.deng <fei.deng@amlogic.com>
+Date:   Mon Feb 6 15:15:28 2023 +0800
+
+    videorenderer: CF2 support format changed [1/1]
+    
+    PD#SWPL-109669
+    
+    Problem:
+    render lib can not support DVB format changed in
+    vdo sink of render server
+    
+    Solution:
+    1.add underflow detect in videotunnel
+    2.remove some log that print too more
+    3.reset vout when vout trigger format changed event
+    4.fix render server crash when pause at the special pts
+    
+    Verify:
+    ar321
+    
+    Change-Id: I9521a6d972019e9fd84457ca50b4a1ef74be6656
+    Signed-off-by: fei.deng <fei.deng@amlogic.com>
+
+commit 1edee9755b21aace9ead9cda4feffe00182be7bc
+Author: zhipeng.he <zhipeng.he@amlogic.com>
+Date:   Sat Jan 28 14:47:57 2023 +0800
+
+    tsplayer: CF2 support av1 format on framemode. [1/1]
+    
+    PD#OTT-37896
+    
+    Problem:
+    not support av1 format on framemode
+    
+    Solution:
+    support av1 format on framemode
+    
+    Verify:
+    AH212
+    
+    Change-Id: I5c473e07d400f411ba9f10e313f96933402af097
+    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
+
 commit bcaede2a8f2a9ef797189053c3aac55573a81c38
 Author: zhipeng.he <zhipeng.he@amlogic.com>
 Date:   Mon Jan 30 19:39:02 2023 +0800
@@ -45,177 +200,9 @@ Date:   Wed Jan 11 17:43:03 2023 +0800
     Change-Id: I9dab84cf04b2b85d0fbd4007cdeb8ab0f0f591a8
     Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
 
-commit d91e0a9d022f9a838d82e940fb331d3cfb7eb556
-Author: yunmin.chen <yunmin.chen@amlogic.com>
-Date:   Fri Feb 3 15:18:02 2023 +0800
-
-    mediahal: CF2 mediahal release  [1/1]
-    
-    PD#SWPL-97591
-    
-    Problem:
-    mediahal release
-    
-    Solution:
-    release V3.7.72-g3051c39
-    
-    Verify:
-    SC2
-    
-    Change-Id: I22662dc29ae55c19618993b7ad1cdbcd91bd7e8e
-    Signed-off-by: yunmin.chen <yunmin.chen@amlogic.com>
-
-commit 3051c398697506cc5ac58e2b62768f84e66efd9b
-Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Fri Dec 16 23:03:34 2022 +0800
-
-    tsplayer: CB2  Fix fcc switch channel slowly. [1/1]
-    
-    PD#SWPL-79272
-    
-    Problem:
-    fcc switch channel slowly sometimes.
-    
-    Solution:
-    cache mode need to reset mediasync
-    getupdateinfo need update the status.
-    
-    Verify:
-    AH212
-    
-    Change-Id: Ifa6997cdfd3a9fc39cfc32bf036cff1ace475fec
-    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
-
-commit 1f7460a4a3a93d115471da780aad42bdb74ac49d
-Author: fei.deng <fei.deng@amlogic.com>
-Date:   Wed Jan 4 09:42:16 2023 +0800
-
-    videorenderer: CF2 no video displayed [1/1]
-    
-    PD#TV-70905
-    
-    Problem:
-    No video frame displayed when video resolution changed more
-    than one time if DTV video playing.
-    
-    Solution:
-    render server don't wait all buffer recycled and flush buffer
-    
-    Verify:
-    ar321
-    
-    Change-Id: I4331a4c765fbe7e3932273337f0efa21a57ada11
-    Signed-off-by: fei.deng <fei.deng@amlogic.com>
-
-commit faaa2a7ff402c148d3fcab279d7ed0b64338afd4
-Author: fei.deng <fei.deng@amlogic.com>
-Date:   Mon Dec 26 14:45:55 2022 +0800
-
-    videorenderer: CB2 render server adds resolution changed [1/1]
-    
-    PD#SWPL-106487
-    
-    Problem:
-    render server cann't process dtv resolution changed event
-    
-    Solution:
-    add processing resolution changed
-    
-    Verify:
-    ar321
-    
-    Change-Id: Ib6421580e5c2b5bdbc000c39978de713b3f4693b
-    Signed-off-by: fei.deng <fei.deng@amlogic.com>
-
-commit 08199e93522224fcd2763d210610ab86057446f3
-Author: fei.deng <fei.deng@amlogic.com>
-Date:   Mon Dec 19 16:48:57 2022 +0800
-
-    videorenderer: CB2 fix render lib plugin open fail [1/1]
-    
-    PD#SWPL-105989
-    
-    Problem:
-    1.fix videotunnel plugin open failed again after close
-    2.add underflow msg
-    
-    Solution:
-    1.fix videotunnel plugin open failed again after close
-    2.add underflow msg
-    
-    Verify:
-    ar321
-    
-    Change-Id: If2cd87a3c40d0afda45248d1630a42a22bfe9111
-    Signed-off-by: fei.deng <fei.deng@amlogic.com>
-
-commit e4251724481cf50c7aa34cea35122495d57a85d3
-Author: fei.deng <fei.deng@amlogic.com>
-Date:   Fri Dec 2 11:23:02 2022 +0800
-
-    videorenderer: CF2 refine render lib [1/1]
-    
-    PD#SWPL-78218
-    
-    Problem:
-    1.add open and close render plugin feature
-    sometimes we want that video frame do not sends
-    to compositor but we need video frame release buffer with av sync,
-    so we can close plugin,
-    
-    Solution:
-    new feature
-    
-    Verify:
-    ar321
-    
-    Change-Id: I275c9a083987f185f142f6582519135cb3c8450b
-    Signed-off-by: fei.deng <fei.deng@amlogic.com>
-
-commit e9e3c1874d6f37775ccd6865de7d1df1d475caea
-Author: yu.xie <yu.xie@amlogic.com>
-Date:   Mon Dec 12 08:32:49 2022 +0000
-
-    v4ldvbTest: CF2 Supprot test in kernel 5.4.96. [1/1]
-    
-    PD#SWPL-98535
-    
-    Problem:
-    lge kernel use 5.4.96, but only support 5.4.125.
-    
-    Solution:
-    supprot to run test in kernel 5.4.96 and kernel
-    5.4.125
-    
-    Verify:
-    AR321
-    
-    Change-Id: I2e8acc28635dc4b2a113167e27fcb7ab941adbdc
-    Signed-off-by: yu.xie <yu.xie@amlogic.com>
-
-commit ff8cfe25d21014a46f6f4be97f58130e8b39447b
-Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Thu Nov 24 20:21:07 2022 +0800
-
-    tsplayer: CB2 X2 esmode no video when start audio first [1/1]
-    
-    PD#SWPL-85502
-    
-    Problem:
-    X2 esmode no video when start audio first
-    
-    Solution:
-    x2 esmode av should be separated to start.
-    
-    Verify:
-    A213Y
-    
-    Change-Id: I48fd25d57a39cca11b41a6ca48e53284412069c6
-    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
-
 ========================================
 
-Release time: 2023-02-09-17-03
+Release time: 2023-03-03-17-10
 
 ========================================
 
