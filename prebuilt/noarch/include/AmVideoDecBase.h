@@ -45,6 +45,7 @@ typedef struct {
     int32_t mPlayerInstansNo;
     int32_t nVideoRecoveryValue;
     int32_t mSourceType;
+    int32_t mLowMem;
 } init_param_t;
 
 class AmVideoDecCallback {

@@ -1,10 +1,138 @@
 =========RELEALSE NOTE=================
 
-Version: vV3.9.9-gc203541
+Version: V3.9.15-g2ea662a
 
 ========================================
 
 Git commit:
+commit 2ea662a6d6a857255c9e7869884676dbb3da42ca
+Author: fei.deng <fei.deng@amlogic.com>
+Date:   Thu Mar 30 02:38:39 2023 +0000
+
+    mediasync: CB1 state change error when reset [1/1]
+    
+    PD#OTT-41137
+    
+    Problem:
+    state change error when video reset mediasync
+    state from running to init, it should be from
+    running to lost
+    
+    Solution:
+    don't reset hasAudio or hasVideo flag at beginning
+    of reset function
+    
+    Verify:
+    ah212
+    
+    Change-Id: Ia1210d703fbc7d8e192a502de2e382daa4bd83fa
+    Signed-off-by: fei.deng <fei.deng@amlogic.com>
+
+commit e39129d650adc817623bcba1a28408bb9d98784e
+Author: zhipeng.he <zhipeng.he@amlogic.com>
+Date:   Sat Mar 11 17:44:46 2023 +0800
+
+    media_hal: CF1 amvideo pipeline support mediasync. [1/1]
+    
+    PD#SWPL-109640
+    
+    Problem:
+    amvideo pipeline not support mediasync
+    
+    Solution:
+    amvideo pipeline support mediasync
+    
+    Verify:
+    AH212
+    
+    Change-Id: I462898d65a452f618649815eb714cf52a366bac5
+    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
+
+commit b720ebd25578de2ae6041542ee5ba9993f324628
+Author: zhipeng.he <zhipeng.he@amlogic.com>
+Date:   Thu Mar 16 17:09:46 2023 +0800
+
+    mediasync: CB2 increase the start threshold on some case [1/1]
+    
+    PD#SWPL-99151
+    
+    Problem:
+    audio insufficient cache sometimes
+    
+    Solution:
+    1.increase the start threshold on some case
+    2.update code from master(ab894a5188a7e8fad6ac65a1bbb50a9cf7eafabb)
+    
+    Verify:
+    AH212/t5w
+    
+    Change-Id: Iece34c7444bdfdc10a1f08218920fb2b5e533e97
+    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
+
+commit 55c4dc5e9c627f385246ead249a9773b15fa208c
+Author: hui.an <hui.an@amlogic.com>
+Date:   Mon Mar 6 13:18:09 2023 +0800
+
+    videorenderer: CB2 A black screen is displayed when switching channels [1/1]
+    
+    PD#TV-73729
+    
+    Problem:
+    Failed to send display frame via westeros client.
+    RenderCore::disconnect() is not called when stop playing,
+    now it is just workround.
+    
+    Solution:
+    1.close plugin module on release.
+    2.set fd to invalid value when fd closed
+    3.fix memory leak because not delete queue
+    
+    Verify:
+    t5w
+    
+    Change-Id: I6494ac0f8645e23c81ac1955dd2f8121d2c3b645
+    Signed-off-by: hui.an <hui.an@amlogic.com>
+
+commit 526d595f5e8ed4648d7d56ba63132e04620844c0
+Author: zhipeng.he <zhipeng.he@amlogic.com>
+Date:   Fri Mar 3 14:05:49 2023 +0800
+
+    mediasync: CB2 update mediasync code from android [1/1]
+    
+    PD#TV-70898
+    
+    Problem:
+    after discontinue that av not sync
+    
+    Solution:
+    update mediasync code from android
+    
+    Verify:
+    AH212
+    
+    Change-Id: Ic136241cfdc4a168b651decf66037c6ba276e3fc
+    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
+
+commit b8a4a45273c8f6ccf7638c02a42bc33e385bbf27
+Author: zhipeng.he <zhipeng.he@amlogic.com>
+Date:   Fri Sep 23 13:54:26 2022 +0800
+
+    tsplayer: CB2 Optimize demux size. [1/1]
+    
+    PD#SWPL-99883
+    
+    Problem:
+    demux size need to optimize
+    
+    Solution:
+    optimize demux size
+    
+    Verify:
+    aq2432
+    
+    Change-Id: Ibbf524c9bd56b3a77334aa8448c5582df70b9d81
+    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
+
 commit c2035414d2b22318697722a0c52aabfa55213363
 Author: zhipeng.he <zhipeng.he@amlogic.com>
 Date:   Fri Feb 24 16:50:45 2023 +0800
@@ -50,7 +178,7 @@ commit 11696ffe03b72750df4ff5b43066e593dc6ae417
 Author: fei.deng <fei.deng@amlogic.com>
 Date:   Wed Feb 15 04:04:04 2023 -0500
 
-    videorenderer: CB2 change display thread priority [1/1]
+    video_renderer: CB2 change display thread priority [1/1]
     
     PD#OTT-39212
     
@@ -89,124 +217,13 @@ Date:   Fri Feb 24 20:29:49 2023 +0800
     Change-Id: Idd28b9a68f775f2e5cacfa718af8f9d620a01333
     Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
 
-commit 0b4a169477ee58793789c1ef87e1aa31d8686b0e
-Author: hui.an <hui.an@amlogic.com>
-Date:   Mon Feb 27 16:23:48 2023 +0800
+========================================
 
-    tsplayer: CB2 avoid AD function invalid [1/1]
-    
-    PD#TV-73941
-    
-    Problem:
-    AD function is invalid
-    
-    Solution:
-    Replace param1 with param2
-    
-    Verify:
-    t5w
-    
-    Change-Id: I0683b11d09632675151c8de07174fa4cb1bb524e
-    Signed-off-by: hui.an <hui.an@amlogic.com>
-
-commit dc291360d5bcc4fa7afbeda7fea47877a31b260d
-Merge: 1edee97 4ec7cf2
-Author: Lifeng Cao <lifeng.cao@amlogic.com>
-Date:   Wed Feb 22 05:52:34 2023 -0800
-
-    Merge "videorenderer: CF2 support format changed [1/1]" into Linux
-
-commit 4ec7cf278d3fd142dc7861abfd125569dc2798b9
-Author: fei.deng <fei.deng@amlogic.com>
-Date:   Mon Feb 6 15:15:28 2023 +0800
-
-    videorenderer: CF2 support format changed [1/1]
-    
-    PD#SWPL-109669
-    
-    Problem:
-    render lib can not support DVB format changed in
-    vdo sink of render server
-    
-    Solution:
-    1.add underflow detect in videotunnel
-    2.remove some log that print too more
-    3.reset vout when vout trigger format changed event
-    4.fix render server crash when pause at the special pts
-    
-    Verify:
-    ar321
-    
-    Change-Id: I9521a6d972019e9fd84457ca50b4a1ef74be6656
-    Signed-off-by: fei.deng <fei.deng@amlogic.com>
-
-commit 1edee9755b21aace9ead9cda4feffe00182be7bc
-Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Sat Jan 28 14:47:57 2023 +0800
-
-    tsplayer: CF2 support av1 format on framemode. [1/1]
-    
-    PD#OTT-37896
-    
-    Problem:
-    not support av1 format on framemode
-    
-    Solution:
-    support av1 format on framemode
-    
-    Verify:
-    AH212
-    
-    Change-Id: I5c473e07d400f411ba9f10e313f96933402af097
-    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
-
-commit bcaede2a8f2a9ef797189053c3aac55573a81c38
-Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Mon Jan 30 19:39:02 2023 +0800
-
-    videocdec: CB2 fix the crash on invalid ptsserver. [1/1]
-    
-    PD#TV-72018
-    
-    Problem:
-    crash on invalid ptsserver
-    
-    Solution:
-    fix the crash on invalid ptsserver
-    
-    Verify:
-    common
-    
-    Change-Id: I0310cab9685032ae54e9b67bcee3788480b2f2b8
-    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
-
-commit 9fcb81a8fb0c3d7070618a1be2273c48428eb112
-Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Wed Jan 11 17:43:03 2023 +0800
-
-    tsplayer: CB2 stop videodecoding not need create buf [1/1]
-    
-    PD#OTT-37984
-    
-    Problem:
-    stop videodecoding crash in AdaptorThread
-    
-    Solution:
-    stop videodecoding not need create buf
-    
-    Verify:
-    AH212
-    
-    Change-Id: I9dab84cf04b2b85d0fbd4007cdeb8ab0f0f591a8
-    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
+Release time: 2023-04-06-07-37
 
 ========================================
 
-Release time: 2023-03-03-17-10
-
-========================================
-
-Builder: zhipeng.he
+Builder: drm.autobuild
 
 ========================================
 Release file:
@@ -215,29 +232,23 @@ Header file:
 AmTsPlayer.h
 AmVideoDecBase.h
 MediaSyncInterface.h
-render_lib.h
 resourcemanage.h
 
-Library and Binary file:
-AmTsPlayerExample
-AmTsPlayerMultiExample
-EsVideoDecPlayer
+Library file:
 libmediahal_mediasync.so
 libmediahal_resman.so
 libmediahal_tsplayer.so
 libmediahal_videodec.so
 libmediahal_videorender.so
-videorender_server
-
 Example file:
 AmTsPlayerExample.cpp
 Makefile
-
 Multi_Example file:
 AmTsPlayerMultiExample.cpp
 Makefile
-Esvideodecplayer file:
-EsVideoDecPlayer.cpp
-Makefile
+
+Binary  file:
+AmTsPlayerExample
+AmTsPlayerMultiExample
 
 ========================================
