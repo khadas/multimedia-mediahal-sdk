@@ -1,10 +1,96 @@
 =========RELEALSE NOTE=================
 
-Version: V3.9.15-g2ea662a
+Version: V3.9.19-g4f1a365
 
 ========================================
 
 Git commit:
+commit 4f1a365debce3ebcd7f204f73c0ceecfa66c703b
+Author: fei.deng <fei.deng@amlogic.com>
+Date:   Thu Apr 13 06:59:06 2023 +0000
+
+    videorenderer: CB2 playing failed when changed from DTV to MM [1/1]
+    
+    PD#TV-77127
+    
+    Problem:
+    playing failed when changed from DTV to MM or
+    changed from MM to DTV
+    because videotunnal is busy when DTV is open
+    
+    Solution:
+    we should open videotunel when DTV begin playing
+    fix ion memory leak
+    
+    Verify:
+    AR321
+    
+    Change-Id: Ib82febed074eb8b62fd8e5a7529ff3420fb01152
+    Signed-off-by: fei.deng <fei.deng@amlogic.com>
+
+commit 079f9397c37ad2456ee7f26f657b69f6dce05624
+Author: fei.deng <fei.deng@amlogic.com>
+Date:   Thu Apr 13 03:03:58 2023 +0000
+
+    videorenderer: CF2 keep last frame on drm plugin [1/1]
+    
+    PD#OTT-39180
+    
+    Problem:
+    keep last frame on drm plugin
+    
+    Solution:
+    keep last frame on drm plugin
+    
+    Verify:
+    AP23A9
+    
+    Change-Id: Ib6c1dbb3b79ef6ab98fc770c448ef3b3a069965e
+    Signed-off-by: fei.deng <fei.deng@amlogic.com>
+
+commit 2dd83b7df88682e1643a592d22f2b15ef159f98d
+Author: fei.deng <fei.deng@amlogic.com>
+Date:   Tue Mar 21 08:21:42 2023 +0000
+
+    videorenderer: CB2 add logs callback and show first frame asap [1/1]
+    
+    PD#OTT-40594
+    
+    Problem:
+    1.render logs output to file or logcat, it is hard for debugging on webos
+    2.lge requests showing first frame asap
+    we redirect logs to gst with log callback function
+    
+    Solution:
+    1.we redirect logs to gst with log callback function
+    2.add showing first frame asap feature
+    
+    Verify:
+    ah212
+    
+    Change-Id: I8b1e2fc060970164eaf0046d7253e1e61c8cdced
+    Signed-off-by: fei.deng <fei.deng@amlogic.com>
+
+commit 466eb9ea723fc3723cff4ec880c266832b188330
+Author: fei.deng <fei.deng@amlogic.com>
+Date:   Mon Apr 10 12:53:47 2023 +0000
+
+    videorenderer: CB2 show or hide video [1/1]
+    
+    PD#OTT-39179
+    
+    Problem:
+    can't show or hide video on drm plugin
+    
+    Solution:
+    show or hide video frame
+    
+    Verify:
+    AP23A9
+    
+    Change-Id: I2d11326cbcf997755f10a7bd48c46a3f30d30f82
+    Signed-off-by: fei.deng <fei.deng@amlogic.com>
+
 commit 2ea662a6d6a857255c9e7869884676dbb3da42ca
 Author: fei.deng <fei.deng@amlogic.com>
 Date:   Thu Mar 30 02:38:39 2023 +0000
@@ -52,7 +138,7 @@ commit b720ebd25578de2ae6041542ee5ba9993f324628
 Author: zhipeng.he <zhipeng.he@amlogic.com>
 Date:   Thu Mar 16 17:09:46 2023 +0800
 
-    mediasync: CB2 increase the start threshold on some case [1/1]
+    mediasync: CB2 increase the start threshold on case [1/1]
     
     PD#SWPL-99151
     
@@ -60,7 +146,7 @@ Date:   Thu Mar 16 17:09:46 2023 +0800
     audio insufficient cache sometimes
     
     Solution:
-    1.increase the start threshold on some case
+    1.increase the start threshold on case
     2.update code from master(ab894a5188a7e8fad6ac65a1bbb50a9cf7eafabb)
     
     Verify:
@@ -97,7 +183,7 @@ commit 526d595f5e8ed4648d7d56ba63132e04620844c0
 Author: zhipeng.he <zhipeng.he@amlogic.com>
 Date:   Fri Mar 3 14:05:49 2023 +0800
 
-    mediasync: CB2 update mediasync code from android [1/1]
+    mediasync: CB2 update mediasync code from android trunck [1/1]
     
     PD#TV-70898
     
@@ -105,7 +191,7 @@ Date:   Fri Mar 3 14:05:49 2023 +0800
     after discontinue that av not sync
     
     Solution:
-    update mediasync code from android
+    update mediasync code from android trunck
     
     Verify:
     AH212
@@ -125,7 +211,7 @@ Date:   Fri Sep 23 13:54:26 2022 +0800
     demux size need to optimize
     
     Solution:
-    optimize demux size
+    ptimize demux size
     
     Verify:
     aq2432
@@ -133,93 +219,9 @@ Date:   Fri Sep 23 13:54:26 2022 +0800
     Change-Id: Ibbf524c9bd56b3a77334aa8448c5582df70b9d81
     Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
 
-commit c2035414d2b22318697722a0c52aabfa55213363
-Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Fri Feb 24 16:50:45 2023 +0800
-
-    mediasync: CB2 holdtime not right when check isstartvideo [1/1]
-    
-    PD#TV-73727
-    
-    Problem:
-    holdtime not right when check isstartvideo
-    
-    Solution:
-    Set initial value for mStcParmUpdateCount,
-    adjust the holdtime value when exception
-    
-    Verify:
-    AT30A3-T962D4
-    
-    Change-Id: If1bd9df868ba80fff0551fb2f6c797b132fc4f87
-    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
-
-commit 702f885cffe9404cdbd03874d64b699a771d0fcf
-Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Mon Feb 20 20:39:34 2023 +0800
-
-    mediasync: CB2 audio has intermittentl after discontinue. [1/1]
-    
-    PD#SWPL-106912
-    
-    Problem:
-    audio discontinue enter too early
-    
-    Solution:
-    need to compare audiopts and current pcr to enter discontinue
-    
-    Verify:
-    AH212
-    
-    Change-Id: I5e80d1def0d362347480bfe43eec1041742c5cbd
-    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
-
-commit 11696ffe03b72750df4ff5b43066e593dc6ae417
-Author: fei.deng <fei.deng@amlogic.com>
-Date:   Wed Feb 15 04:04:04 2023 -0500
-
-    video_renderer: CB2 change display thread priority [1/1]
-    
-    PD#OTT-39212
-    
-    Problem:
-    now display thread priority is SCHED_RR, we need to
-    change it to SCHED_FIFO and its priority to 60
-    
-    Solution:
-    now display thread priority is SCHED_RR, we need to
-    change it to SCHED_FIFO and its priority to 60
-    
-    Verify:
-    ar321
-    
-    Change-Id: I91f4de10364659b401349abbe10bb729b3e410e7
-    Signed-off-by: fei.deng <fei.deng@amlogic.com>
-
-commit dce89258ccc0e4480c472440228406b33f0a2299
-Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Fri Feb 24 20:29:49 2023 +0800
-
-    tsplayer: CB2 check demux_type fail on kernel_5.15 [1/1]
-    
-    PD#SWPL-112497
-    
-    Problem:
-    check demux_type fail on kernel_5.15
-    
-    Solution:
-    1.Fix the demux driver path
-    2.Fix path of demux0_source node
-    
-    Verify:
-    AH212/T5D
-    
-    Change-Id: Idd28b9a68f775f2e5cacfa718af8f9d620a01333
-    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
-
 ========================================
 
-Release time: 2023-04-06-07-37
+Release time: 2023-04-14-12-20
 
 ========================================
 

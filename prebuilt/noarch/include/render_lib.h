@@ -2,10 +2,19 @@
 #define __RENDER_LIB_H__
 #include <stdint.h>
 #include <stdlib.h>
+#include <stdarg.h>
 
 #ifdef  __cplusplus
 extern "C" {
 #endif
+
+#define RLIB_LOG_LEVEL_ERROR   0
+#define RLIB_LOG_LEVEL_WARNING 1
+#define RLIB_LOG_LEVEL_INFO    2
+#define RLIB_LOG_LEVEL_DEBUG   3
+#define RLIB_LOG_LEVEL_TRACE1  4
+#define RLIB_LOG_LEVEL_TRACE2  5
+#define RLIB_LOG_LEVEL_TRACE3  6
 
 #define RENDER_MAX_PLANES 3
 
@@ -65,6 +74,7 @@ enum _RenderKey {
     KEY_IMMEDIATELY_OUTPUT, //set/get immediately output video frame to display, 0 is default value off, 1 is on
     KEY_STEP_DISPLAY_FRAME, //set/get step display frame,the value type is StepFrameInfo struct
     KEY_VIDEO_CROP, //set/get the video crop,value type is RenderWindowSize
+    KEY_SHOW_FRIST_FRAME_NOSYNC, //set/get show first frame asap,please set it if before invoking render_display_frame
     KEY_MEDIASYNC_INSTANCE_ID = 400, //set/get mediasync instance id, value type is int
     KEY_MEDIASYNC_PCR_PID, ///set/get mediasync pcr id ,value type is int
     KEY_MEDIASYNC_DEMUX_ID, //set/get mediasync demux id ,value type is int
@@ -249,6 +259,22 @@ typedef enum {
     VIDEO_FORMAT_VUYA,
     VIDEO_FORMAT_BGR10A2_LE,
 } RenderVideoFormat;
+
+/**
+ * set user log print function to render lib
+ * @param handle a handle of render lib that was opened
+ * @param callback log print callback function
+ * @return void
+*/
+void render_set_log_callback(void (*callback)(int,const char*, va_list));
+
+/**
+ * set render lib log level, default level is RLIB_LOG_LEVEL_INFO
+ * @param handle a handle of render lib that was opened
+ * @param level render lib log level
+ * @return void
+*/
+void render_set_log_level(int level);
 
 /**
  * open a render lib,render lib will open a compositer with the special
