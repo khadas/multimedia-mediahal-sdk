@@ -1,10 +1,156 @@
 =========RELEALSE NOTE=================
 
-Version: V3.9.19-g4f1a365
+Version: V3.9.26-g960ef6f
 
 ========================================
 
 Git commit:
+commit 960ef6f3a83e37c627665be23e54091e58e87750
+Author: zhipeng.he <zhipeng.he@amlogic.com>
+Date:   Tue Apr 25 13:46:01 2023 +0800
+
+    mediasync: CB2 playback has lag. [1/1]
+    
+    PD#SWPL-116211
+    
+    Problem:
+    audio commes too late, video start directly
+    
+    Solution:
+    enlarge waiting time
+    
+    Verify:
+    t5w
+    
+    Change-Id: Ica39e4156264f333a5885af223930c95c064a8cc
+    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
+
+commit 54c304046917f26ba3736b090e02ce17806d8f85
+Author: fei.deng <fei.deng@amlogic.com>
+Date:   Thu Apr 27 02:07:41 2023 +0000
+
+    videorenderer: CB2 fixed black picture [1/1]
+    
+    PD#SWPL-120581
+    
+    Problem:
+    first showing black picture than showing normal vide when
+    doing yts test on weston
+    
+    Solution:
+    change area surface to transparent
+    
+    Verify:
+    AH212
+    
+    Change-Id: Id6b8627a5adb58fdb29636f3079468b308027db5
+    Signed-off-by: fei.deng <fei.deng@amlogic.com>
+
+commit 080ff04abf4415bec3f2bd97330a82e5a30a0ecd
+Author: fei.deng <fei.deng@amlogic.com>
+Date:   Mon Apr 24 02:44:44 2023 +0000
+
+    videorenderer: CB2 changed AM_V4L2_CID_EXT_VDO_BASE value [1/1]
+    
+    PD#TV-78981
+    
+    Problem:
+    changed the value of AM_V4L2_CID_EXT_VDO_BASE from
+    AM_V4L2_CID_USER_EXT_VDEC_BASE + 500 to
+    AM_V4L2_CID_USER_EXT_VDEC_BASE + 0x500
+    
+    Solution:
+    changed the value of AM_V4L2_CID_EXT_VDO_BASE to
+    AM_V4L2_CID_USER_EXT_VDEC_BASE + 0x500
+    
+    Verify:
+    AR321
+    
+    Change-Id: Ia4105bff1bf6261343e57daace0036e5808d8fc8
+    Signed-off-by: fei.deng <fei.deng@amlogic.com>
+
+commit c0ae533f9441b8afe16318c3f3dcda136c39ea54
+Author: zhipeng.he <zhipeng.he@amlogic.com>
+Date:   Thu Apr 6 22:32:14 2023 +0800
+
+    mediasync: CB2 increase the start threshold with heaac format [1/1]
+    
+    PD#SWPL-117038
+    
+    Problem:
+    audio insufficient cache sometimes
+    
+    Solution:
+    increase the start threshold with heaac format
+    
+    Verify:
+    t5w
+    
+    Change-Id: Ibdddcb1f91835c8d3d30d98ee55ee782b29de957
+    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
+
+commit 4f132411221879872fdaeb66cf1457089bd5f664
+Author: fei.deng <fei.deng@amlogic.com>
+Date:   Fri Apr 21 08:51:45 2023 +0000
+
+    videorenderer: CB2 remove last frame freeze feature [1/1]
+    
+    PD#SWPL-120847
+    
+    Problem:
+    remove last frame freeze feature, because libdrm_meson don't
+    merge code to zapper
+    
+    Solution:
+    remove last frame freeze feature
+    
+    Verify:
+    AT301
+    
+    Change-Id: I40a587f6a00fb45f15e70e13ce87f72afac4f5f8
+    Signed-off-by: fei.deng <fei.deng@amlogic.com>
+
+commit c68d576c852364004b9576738bc27376c4c14f3b
+Author: fei.deng <fei.deng@amlogic.com>
+Date:   Thu Mar 23 12:31:54 2023 +0000
+
+    videorenderer: CB2 create wayland display [1/1]
+    
+    PD#TV-67290
+    
+    Problem:
+    wayland of render lib connect failed
+    
+    Solution:
+    invoking curl command to create wayland display
+    
+    Verify:
+    AM301
+    
+    Change-Id: I312fa5af7d33aee55af9028130570a08eb5dcdca
+    Signed-off-by: fei.deng <fei.deng@amlogic.com>
+
+commit e95112723a063273d3b03109d8df92cc54128db9
+Author: zhipeng.he <zhipeng.he@amlogic.com>
+Date:   Tue Apr 11 15:47:52 2023 +0800
+
+    mediahal: CB2 drmWaitVBlank fail sometimes [1/1]
+    
+    PD#SWPL-116037
+    
+    Problem:
+    drmWaitVBlank fail sometimes
+    
+    Solution:
+    drmWaitVBlank fail sometimes
+    need to retry.
+    
+    Verify:
+    t5w
+    
+    Change-Id: I76e6e88cf5e38d4a17bb9ad305b49e9b1a5c811e
+    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
+
 commit 4f1a365debce3ebcd7f204f73c0ceecfa66c703b
 Author: fei.deng <fei.deng@amlogic.com>
 Date:   Thu Apr 13 06:59:06 2023 +0000
@@ -71,157 +217,9 @@ Date:   Tue Mar 21 08:21:42 2023 +0000
     Change-Id: I8b1e2fc060970164eaf0046d7253e1e61c8cdced
     Signed-off-by: fei.deng <fei.deng@amlogic.com>
 
-commit 466eb9ea723fc3723cff4ec880c266832b188330
-Author: fei.deng <fei.deng@amlogic.com>
-Date:   Mon Apr 10 12:53:47 2023 +0000
-
-    videorenderer: CB2 show or hide video [1/1]
-    
-    PD#OTT-39179
-    
-    Problem:
-    can't show or hide video on drm plugin
-    
-    Solution:
-    show or hide video frame
-    
-    Verify:
-    AP23A9
-    
-    Change-Id: I2d11326cbcf997755f10a7bd48c46a3f30d30f82
-    Signed-off-by: fei.deng <fei.deng@amlogic.com>
-
-commit 2ea662a6d6a857255c9e7869884676dbb3da42ca
-Author: fei.deng <fei.deng@amlogic.com>
-Date:   Thu Mar 30 02:38:39 2023 +0000
-
-    mediasync: CB1 state change error when reset [1/1]
-    
-    PD#OTT-41137
-    
-    Problem:
-    state change error when video reset mediasync
-    state from running to init, it should be from
-    running to lost
-    
-    Solution:
-    don't reset hasAudio or hasVideo flag at beginning
-    of reset function
-    
-    Verify:
-    ah212
-    
-    Change-Id: Ia1210d703fbc7d8e192a502de2e382daa4bd83fa
-    Signed-off-by: fei.deng <fei.deng@amlogic.com>
-
-commit e39129d650adc817623bcba1a28408bb9d98784e
-Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Sat Mar 11 17:44:46 2023 +0800
-
-    media_hal: CF1 amvideo pipeline support mediasync. [1/1]
-    
-    PD#SWPL-109640
-    
-    Problem:
-    amvideo pipeline not support mediasync
-    
-    Solution:
-    amvideo pipeline support mediasync
-    
-    Verify:
-    AH212
-    
-    Change-Id: I462898d65a452f618649815eb714cf52a366bac5
-    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
-
-commit b720ebd25578de2ae6041542ee5ba9993f324628
-Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Thu Mar 16 17:09:46 2023 +0800
-
-    mediasync: CB2 increase the start threshold on case [1/1]
-    
-    PD#SWPL-99151
-    
-    Problem:
-    audio insufficient cache sometimes
-    
-    Solution:
-    1.increase the start threshold on case
-    2.update code from master(ab894a5188a7e8fad6ac65a1bbb50a9cf7eafabb)
-    
-    Verify:
-    AH212/t5w
-    
-    Change-Id: Iece34c7444bdfdc10a1f08218920fb2b5e533e97
-    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
-
-commit 55c4dc5e9c627f385246ead249a9773b15fa208c
-Author: hui.an <hui.an@amlogic.com>
-Date:   Mon Mar 6 13:18:09 2023 +0800
-
-    videorenderer: CB2 A black screen is displayed when switching channels [1/1]
-    
-    PD#TV-73729
-    
-    Problem:
-    Failed to send display frame via westeros client.
-    RenderCore::disconnect() is not called when stop playing,
-    now it is just workround.
-    
-    Solution:
-    1.close plugin module on release.
-    2.set fd to invalid value when fd closed
-    3.fix memory leak because not delete queue
-    
-    Verify:
-    t5w
-    
-    Change-Id: I6494ac0f8645e23c81ac1955dd2f8121d2c3b645
-    Signed-off-by: hui.an <hui.an@amlogic.com>
-
-commit 526d595f5e8ed4648d7d56ba63132e04620844c0
-Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Fri Mar 3 14:05:49 2023 +0800
-
-    mediasync: CB2 update mediasync code from android trunck [1/1]
-    
-    PD#TV-70898
-    
-    Problem:
-    after discontinue that av not sync
-    
-    Solution:
-    update mediasync code from android trunck
-    
-    Verify:
-    AH212
-    
-    Change-Id: Ic136241cfdc4a168b651decf66037c6ba276e3fc
-    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
-
-commit b8a4a45273c8f6ccf7638c02a42bc33e385bbf27
-Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Fri Sep 23 13:54:26 2022 +0800
-
-    tsplayer: CB2 Optimize demux size. [1/1]
-    
-    PD#SWPL-99883
-    
-    Problem:
-    demux size need to optimize
-    
-    Solution:
-    ptimize demux size
-    
-    Verify:
-    aq2432
-    
-    Change-Id: Ibbf524c9bd56b3a77334aa8448c5582df70b9d81
-    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
-
 ========================================
 
-Release time: 2023-04-14-12-20
+Release time: 2023-05-04-16-16
 
 ========================================
 
