@@ -1,225 +1,225 @@
 =========RELEALSE NOTE=================
 
-Version: V3.9.26-g960ef6f
+Version: V3.9.37-g9ec5917
 
 ========================================
 
 Git commit:
-commit 960ef6f3a83e37c627665be23e54091e58e87750
-Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Tue Apr 25 13:46:01 2023 +0800
-
-    mediasync: CB2 playback has lag. [1/1]
-    
-    PD#SWPL-116211
-    
-    Problem:
-    audio commes too late, video start directly
-    
-    Solution:
-    enlarge waiting time
-    
-    Verify:
-    t5w
-    
-    Change-Id: Ica39e4156264f333a5885af223930c95c064a8cc
-    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
-
-commit 54c304046917f26ba3736b090e02ce17806d8f85
+commit 9ec5917d346fb55b191a429faa356c97cf1e540b
 Author: fei.deng <fei.deng@amlogic.com>
-Date:   Thu Apr 27 02:07:41 2023 +0000
+Date:   Thu May 18 03:28:18 2023 +0000
 
-    videorenderer: CB2 fixed black picture [1/1]
+    videorenderer: CB2 fix capture memory lead on weston [1/1]
     
-    PD#SWPL-120581
+    PD#SWPL-123440
     
     Problem:
-    first showing black picture than showing normal vide when
-    doing yts test on weston
+    render lib don't release wayland buffers those obtained by weston
+    when playback end,this cause drm memory leak
     
     Solution:
-    change area surface to transparent
+    release wayland buffers after destroy wayland surface
     
     Verify:
     AH212
     
-    Change-Id: Id6b8627a5adb58fdb29636f3079468b308027db5
+    Change-Id: Id2ccbdb69709b6e0661ff3015c43dd9b0fb098ed
     Signed-off-by: fei.deng <fei.deng@amlogic.com>
 
-commit 080ff04abf4415bec3f2bd97330a82e5a30a0ecd
+commit b4a45d3d0a8cd332f8f5319f8c4f3e9dfc268a85
 Author: fei.deng <fei.deng@amlogic.com>
-Date:   Mon Apr 24 02:44:44 2023 +0000
+Date:   Thu May 18 03:21:56 2023 +0000
 
-    videorenderer: CB2 changed AM_V4L2_CID_EXT_VDO_BASE value [1/1]
+    videorenderer: CB2 force full screen [1/1]
     
-    PD#TV-78981
+    PD#TV-77238
     
     Problem:
-    changed the value of AM_V4L2_CID_EXT_VDO_BASE from
-    AM_V4L2_CID_USER_EXT_VDEC_BASE + 500 to
-    AM_V4L2_CID_USER_EXT_VDEC_BASE + 0x500
+    defined a environment parameter VIDEO_RENDER_FORCE_FULLSCREEN to control
+    video resolution aspect ratio.if set VIDEO_RENDER_FORCE_FULLSCREEN=1,render lib
+    will stretch video content to map display resolution size,if not set
+    VIDEO_RENDER_FORCE_FULLSCREEN or set its value to 0,
+    video content will keep its resolution
+    ratio.
     
     Solution:
-    changed the value of AM_V4L2_CID_EXT_VDO_BASE to
-    AM_V4L2_CID_USER_EXT_VDEC_BASE + 0x500
+    add VIDEO_RENDER_FORCE_FULLSCREEN environment parameter
     
     Verify:
-    AR321
+    AH212
     
-    Change-Id: Ia4105bff1bf6261343e57daace0036e5808d8fc8
+    Change-Id: I0d596586ad62cc10d071df998f422cdf8f471596
     Signed-off-by: fei.deng <fei.deng@amlogic.com>
 
-commit c0ae533f9441b8afe16318c3f3dcda136c39ea54
-Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Thu Apr 6 22:32:14 2023 +0800
+commit 39ee74a2841d526e588d04fa536d73328600aa99
+Author: fei.deng <fei.deng@amlogic.com>
+Date:   Mon May 15 07:34:48 2023 +0000
 
-    mediasync: CB2 increase the start threshold with heaac format [1/1]
+    videorenderer: CB2 create wayland display and move to back [1/1]
     
-    PD#SWPL-117038
+    PD#OTT-43404
     
     Problem:
-    audio insufficient cache sometimes
+    if only creating wayland display,it is front on other displays,
+    it causes subtitle display to fail to display
     
     Solution:
-    increase the start threshold with heaac format
+    render lib create wayland display when WAYLAND_DISPLAY not set.
+    moving wayland display created by render lib to back of other wayland displays
     
     Verify:
-    t5w
+    AQ222
     
-    Change-Id: Ibdddcb1f91835c8d3d30d98ee55ee782b29de957
+    Change-Id: Ieb4a2ce8c7bcae2babf144ccc3a9ba08c762d8fc
+    Signed-off-by: fei.deng <fei.deng@amlogic.com>
+
+commit 9c69a9d411dfb319547367cf301287cb2db5b671
+Author: fei.deng <fei.deng@amlogic.com>
+Date:   Fri May 5 06:53:21 2023 +0000
+
+    videorenderer: CB2 add macro to control drm freezen feature [1/1]
+    
+    PD#SWPL-122323
+    
+    Problem:
+    add macro to control drm freezen feature
+    
+    Solution:
+    add macro to control drm freezen feature
+    
+    Verify:
+    AH212
+    
+    Change-Id: Ia5a780bbf803126ea9f6d534cf5dc07e19a4c25f
+    Signed-off-by: fei.deng <fei.deng@amlogic.com>
+
+commit 5e514bb02d71d7ef59b6b2dc61812be8cee2b142
+Author: zhipeng.he <zhipeng.he@amlogic.com>
+Date:   Thu May 11 19:19:25 2023 +0800
+
+    tsplayer: CB2 t5d onlyaudio crash. [1/1]
+    
+    PD#SWPL-117723
+    
+    Problem:
+    t5d onlyaudio crash when no mVdNonTunnelMode.
+    
+    Solution:
+    t5d onlyaudio need create mVdNonTunnelMode firstly.
+    
+    Verify:
+    t5d
+    
+    Change-Id: I8670802c09552311492e4e8c2c2af7a51dc5e792
     Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
 
-commit 4f132411221879872fdaeb66cf1457089bd5f664
+commit 6a2e77283c27924361b1b3028ede95bd7f346eee
 Author: fei.deng <fei.deng@amlogic.com>
-Date:   Fri Apr 21 08:51:45 2023 +0000
+Date:   Tue May 9 09:24:17 2023 +0000
 
-    videorenderer: CB2 remove last frame freeze feature [1/1]
+    videorenderer: CB2 remove wl_seat [1/1]
     
-    PD#SWPL-120847
+    PD#SWPL-120447
     
     Problem:
-    remove last frame freeze feature, because libdrm_meson don't
-    merge code to zapper
+    don't focus on UI when after yts case test
     
     Solution:
-    remove last frame freeze feature
+    1.remove wl_seat on render lib
+    2.force to map ui window when set window size isn't full screen
     
     Verify:
-    AT301
+    AH212
     
-    Change-Id: I40a587f6a00fb45f15e70e13ce87f72afac4f5f8
+    Change-Id: I135c99b26cac36818ecf37240ab84277fcee2215
     Signed-off-by: fei.deng <fei.deng@amlogic.com>
 
-commit c68d576c852364004b9576738bc27376c4c14f3b
+commit e0e75f79de1951372471168ea468d0822849ab93
 Author: fei.deng <fei.deng@amlogic.com>
-Date:   Thu Mar 23 12:31:54 2023 +0000
+Date:   Sat May 6 02:23:53 2023 +0000
 
-    videorenderer: CB2 create wayland display [1/1]
+    videorenderer: CB2 scaling video to map window size [1/1]
     
-    PD#TV-67290
+    PD#TV-77238
     
     Problem:
-    wayland of render lib connect failed
+    if set window size smaller than full screen,render lib to ensure
+    the video aspect ratio,the left and right bar showed on video side
     
     Solution:
-    invoking curl command to create wayland display
+    1.force scaling video to map window size when not full screen
+    2.fix AmTsPlayer_setVideoCrop return value
     
     Verify:
-    AM301
+    AT30A5
     
-    Change-Id: I312fa5af7d33aee55af9028130570a08eb5dcdca
+    Change-Id: I981ca7ac4436e5f0f89857db98a63f7f20e8b9d9
     Signed-off-by: fei.deng <fei.deng@amlogic.com>
 
-commit e95112723a063273d3b03109d8df92cc54128db9
+commit 75c6d8ba64727dd430025c49f46fcba50696e253
+Author: fei.deng <fei.deng@amlogic.com>
+Date:   Fri Apr 21 09:04:04 2023 +0000
+
+    videorenderer: CB2 corrent crop rectangle params [1/1]
+    
+    PD#TV-78863
+    
+    Problem:
+    sometime user give wrong crop rectangle params,
+    this cause westeros no video output
+    
+    Solution:
+    correct crop rectangle params
+    
+    Verify:
+    AT30A5
+    
+    Change-Id: I822efeb41116d128ab2e2de721fd0f80a4d0003f
+    Signed-off-by: fei.deng <fei.deng@amlogic.com>
+
+commit bb03fc57242a2fe43689235f75e04a435a5505a0
+Author: fei.deng <fei.deng@amlogic.com>
+Date:   Fri Apr 14 08:07:34 2023 +0000
+
+    videorenderer: CB2 fix crash when alloc renderBuffer wrap [1/1]
+    
+    PD#TV-78216
+    
+    Problem:
+    std::map crash when doing renderBuffer manager
+    
+    Solution:
+    replace std:map with array
+    
+    Verify:
+    AT30A3
+    
+    Change-Id: I803085dc4e63cf13afe84a1ad242719b03c93e31
+    Signed-off-by: fei.deng <fei.deng@amlogic.com>
+
+commit a31088f11530e8d55d547572e414b563f4db8f2c
 Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Tue Apr 11 15:47:52 2023 +0800
+Date:   Tue May 9 11:22:36 2023 +0800
 
-    mediahal: CB2 drmWaitVBlank fail sometimes [1/1]
+    tsplayer: CB2 GetMediaTimeByType interface improvement [1/1]
     
-    PD#SWPL-116037
+    PD#SWPL-120429
     
     Problem:
-    drmWaitVBlank fail sometimes
+    GetMediaTimeByType can not get apts when onlyaudio
     
     Solution:
-    drmWaitVBlank fail sometimes
-    need to retry.
+    GetMediaTimeByType interface improvement
     
     Verify:
-    t5w
+    DVT1
     
-    Change-Id: I76e6e88cf5e38d4a17bb9ad305b49e9b1a5c811e
+    Change-Id: Iadcade5c7e0c2675606dfd031c7653f812cb8743
     Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
-
-commit 4f1a365debce3ebcd7f204f73c0ceecfa66c703b
-Author: fei.deng <fei.deng@amlogic.com>
-Date:   Thu Apr 13 06:59:06 2023 +0000
-
-    videorenderer: CB2 playing failed when changed from DTV to MM [1/1]
-    
-    PD#TV-77127
-    
-    Problem:
-    playing failed when changed from DTV to MM or
-    changed from MM to DTV
-    because videotunnal is busy when DTV is open
-    
-    Solution:
-    we should open videotunel when DTV begin playing
-    fix ion memory leak
-    
-    Verify:
-    AR321
-    
-    Change-Id: Ib82febed074eb8b62fd8e5a7529ff3420fb01152
-    Signed-off-by: fei.deng <fei.deng@amlogic.com>
-
-commit 079f9397c37ad2456ee7f26f657b69f6dce05624
-Author: fei.deng <fei.deng@amlogic.com>
-Date:   Thu Apr 13 03:03:58 2023 +0000
-
-    videorenderer: CF2 keep last frame on drm plugin [1/1]
-    
-    PD#OTT-39180
-    
-    Problem:
-    keep last frame on drm plugin
-    
-    Solution:
-    keep last frame on drm plugin
-    
-    Verify:
-    AP23A9
-    
-    Change-Id: Ib6c1dbb3b79ef6ab98fc770c448ef3b3a069965e
-    Signed-off-by: fei.deng <fei.deng@amlogic.com>
-
-commit 2dd83b7df88682e1643a592d22f2b15ef159f98d
-Author: fei.deng <fei.deng@amlogic.com>
-Date:   Tue Mar 21 08:21:42 2023 +0000
-
-    videorenderer: CB2 add logs callback and show first frame asap [1/1]
-    
-    PD#OTT-40594
-    
-    Problem:
-    1.render logs output to file or logcat, it is hard for debugging on webos
-    2.lge requests showing first frame asap
-    we redirect logs to gst with log callback function
-    
-    Solution:
-    1.we redirect logs to gst with log callback function
-    2.add showing first frame asap feature
-    
-    Verify:
-    ah212
-    
-    Change-Id: I8b1e2fc060970164eaf0046d7253e1e61c8cdced
-    Signed-off-by: fei.deng <fei.deng@amlogic.com>
 
 ========================================
 
-Release time: 2023-05-04-16-16
+Release time: 2023-05-23-14-15
 
 ========================================
 
