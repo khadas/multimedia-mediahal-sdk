@@ -388,6 +388,7 @@ int main(int argc, char **argv)
     am_tsplayer_input_buffer ibuf = {TS_INPUT_BUFFER_TYPE_NORMAL, (char*)buf, 0};
     long pos = 0;
     int ch = 0;
+    am_tsplayer_holdvideo_params holdVideoParams;
     if (tsType) {
         while (1) {
             if (file.eof()) {
@@ -432,6 +433,18 @@ int main(int argc, char **argv)
                        AmTsPlayer_setAudioParams(session, &aparm);
                        AmTsPlayer_startAudioDecoding(session);
                    }
+                   if (ch == 'h') {
+                        holdVideoParams.on = 1;
+                        holdVideoParams.value = -1;
+                        printf("----hold video \n");
+                        AmTsPlayer_holdVideo(session, &holdVideoParams);
+                   }
+                   if (ch == 'f') {
+                        holdVideoParams.on = 0;
+                        holdVideoParams.value = -1;
+                        printf("----show video \n");
+                        AmTsPlayer_holdVideo(session, &holdVideoParams);
+                   }
                }
                 res = AmTsPlayer_writeData(session, &ibuf, kRwTimeout);
                 //usleep(20000);
@@ -474,6 +487,18 @@ int main(int argc, char **argv)
                     aparm.pid = aPid;
                     AmTsPlayer_setAudioParams(session, &aparm);
                     AmTsPlayer_startAudioDecoding(session);
+                }
+                if (ch == 'h') {
+                     holdVideoParams.on = 1;
+                     holdVideoParams.value = -1;
+                     printf("----hold video \n");
+                     AmTsPlayer_holdVideo(session, &holdVideoParams);
+                }
+                if (ch == 'f') {
+                     holdVideoParams.on = 0;
+                     holdVideoParams.value = -1;
+                     printf("----show video \n");
+                     AmTsPlayer_holdVideo(session, &holdVideoParams);
                 }
             }
         }

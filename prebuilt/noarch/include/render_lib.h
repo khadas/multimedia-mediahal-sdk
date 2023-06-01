@@ -58,6 +58,11 @@ typedef struct _StepFrameInfo {
     int intervalMs; //step display frame interval, if this set to -1,only step one frame until next api invoked
 } StepFrameInfo;
 
+typedef struct _HoldVideoInfo {
+    int on;//if 1 means on, 0 means off
+    int64_t pts; //the video pts of hold video,if requesting hold video immediately, please set pts to -1
+} HoldVideoInfo;
+
 /*render key*/
 enum _RenderKey {
     KEY_WINDOW_SIZE = 300, //set/get the video window size,value type is RenderWindowSize
@@ -75,6 +80,7 @@ enum _RenderKey {
     KEY_STEP_DISPLAY_FRAME, //set/get step display frame,the value type is StepFrameInfo struct
     KEY_VIDEO_CROP, //set/get the video crop,value type is RenderWindowSize
     KEY_SHOW_FRIST_FRAME_NOSYNC, //set/get show first frame asap,please set it if before invoking render_display_frame
+    KEY_HOLD_VIDEO, //set/get hold video,but audio is running,value type is HoldVideoInfo,detail info see HoldVideoInfo defined
     KEY_MEDIASYNC_INSTANCE_ID = 400, //set/get mediasync instance id, value type is int
     KEY_MEDIASYNC_PCR_PID, ///set/get mediasync pcr id ,value type is int
     KEY_MEDIASYNC_DEMUX_ID, //set/get mediasync demux id ,value type is int

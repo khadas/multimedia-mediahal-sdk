@@ -1,10 +1,179 @@
 =========RELEALSE NOTE=================
 
-Version: V3.9.37-g9ec5917
+Version: vV3.9.45-g0d10a7c
 
 ========================================
 
 Git commit:
+commit 0d10a7c20c2dd314d115ce82db5318d7ad4003bc
+Author: zhipeng.he <zhipeng.he@amlogic.com>
+Date:   Tue May 16 15:46:05 2023 +0800
+
+    tsplayer: CF2 add hold video feature [1/1]
+    
+    PD#TV-78044
+    
+    Problem:
+    customer need api to hold video.
+    
+    Solution:
+    add hold video feature
+    
+    Verify:
+    AH212
+    
+    Change-Id: Ia6a52593e762775c12ed6e636d5515399d620746
+    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
+
+commit 0d5113a42308e1f8166e8c1e32b1666049f78d0b
+Author: fei.deng <fei.deng@amlogic.com>
+Date:   Thu May 11 05:55:30 2023 +0000
+
+    videorenderer: CF2 add hold video feature [1/1]
+    
+    PD#TV-78044
+    
+    Problem:
+    add hold video feature with pts,on this state, render lib
+    will drop and release video frames, but audio is running always
+    
+    Solution:
+    add hold video feature
+    set render lib  log level and log file with /run/rlib_level
+    and /run/rlib_file
+    
+    Verify:
+    AH212
+    
+    Change-Id: Ifd6beb09667f212c1e89e4e9f469c3adefe52e0d
+    Signed-off-by: fei.deng <fei.deng@amlogic.com>
+
+commit de603ead68274ea32411e202c34a775007885c78
+Author: fei.deng <fei.deng@amlogic.com>
+Date:   Wed May 31 02:53:31 2023 +0000
+
+    videorenderer: CB2 force output mode resolution [1/1]
+    
+    PD#RSP-5265
+    
+    Problem:
+    render lib received output mode resolution is 1280x720 with wayland, but
+    actual resolution should be 1920x1080. westeros use a fixed 1920x1080
+    resolution, this cause video window displays incorrectly.
+    
+    Solution:
+    force output mode resolution to 1920x1080
+    
+    Verify:
+    AQ2432
+    
+    Change-Id: I4bf8a59b8308349c4a0f1691a7ecd5d66c1c8f32
+    Signed-off-by: fei.deng <fei.deng@amlogic.com>
+
+commit d3bcebf3178800aaa973833d40478f017867e3f3
+Author: zhipeng.he <zhipeng.he@amlogic.com>
+Date:   Fri Mar 31 15:15:45 2023 +0800
+
+    tsplayer: CB2 video can not play when buffer is full [1/1]
+    
+    PD#TV-76995
+    
+    Problem:
+    decoder is stuck for some time
+    resulting in buffer explosion,
+    
+    Solution:
+    add reset mechanism
+    
+    Verify:
+    T5W
+    
+    Change-Id: Ia1612931cd1de3c40d916cb9dce11c51d7e56af7
+    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
+
+commit 7c93be6e6eb71d559883a684d7c448c2d85c8736
+Author: zhipeng.he <zhipeng.he@amlogic.com>
+Date:   Tue May 16 13:20:01 2023 +0800
+
+    mediasync: CB2 audio can not normal output after seek. [1/1]
+    
+    PD#OTT-43532
+    
+    Problem:
+    audio can not normal output after seek
+    
+    Solution:
+    when seek.audio set pause 1,
+    need to pause 0 when mediasync reset or destroy.
+    
+    Verify:
+    AP23A9
+    
+    Change-Id: I800ae127a072f06474a294dbe0855891ddcc4683
+    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
+
+commit 29bbb72ce414fb4173d81dcd88eaa71c5347759c
+Author: yunmin.chen <yunmin.chen@amlogic.com>
+Date:   Wed May 24 15:27:55 2023 +0800
+
+    videodec: CB1 Fixed the seek exception after PVR pause.  [1/1]
+    
+    PD#SWPL-123859
+    
+    Problem:
+    trick mode:PAUSE_NEXT and PAUSE
+    set i only mode to decoder.
+    
+    Solution:
+    trick mode :PAUSE_NEX and PAUSE do not need to
+    set i only to decoder.
+    
+    Verify:
+    SC2
+    
+    Change-Id: I20bbc167d6f75d915317651164fe77430b69a9f5
+    Signed-off-by: yunmin.chen <yunmin.chen@amlogic.com>
+
+commit 18fc889c3828d6bb001a23f5261ce5713d53dd1d
+Author: wenjie.li@amlogic.com <wenjie.li@amlogic.com>
+Date:   Tue Apr 18 15:05:09 2023 +0800
+
+    tsplayer: CB2 avoids duplicate calls to startVideoDecoding [1/1]
+    
+    PD#OTT-41512
+    
+    Problem:
+    The playback freezes due to duplicate calls to startVideoDecoding.
+    
+    Solution:
+    Add a protection check for duplicate calls.
+    
+    Verify:
+    AP232
+    
+    Change-Id: I88cec5175f7877a7da1775509c84472ae15c3504
+    Signed-off-by: wenjie.li@amlogic.com <wenjie.li@amlogic.com>
+
+commit 987bd8af037644e60976d273e59115229f0e1164
+Author: zhipeng.he <zhipeng.he@amlogic.com>
+Date:   Thu May 18 21:15:34 2023 +0800
+
+    videodec: CB2 vpts not discontinue. [1/1]
+    
+    PD#SWPL-119320
+    
+    Problem:
+    misjudgment into ionly mode
+    
+    Solution:
+    disable ionly mode
+    
+    Verify:
+    t5w
+    
+    Change-Id: If4be1415af3300009a53acf1f1b81d68d8e06650
+    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
+
 commit 9ec5917d346fb55b191a429faa356c97cf1e540b
 Author: fei.deng <fei.deng@amlogic.com>
 Date:   Thu May 18 03:28:18 2023 +0000
@@ -51,179 +220,13 @@ Date:   Thu May 18 03:21:56 2023 +0000
     Change-Id: I0d596586ad62cc10d071df998f422cdf8f471596
     Signed-off-by: fei.deng <fei.deng@amlogic.com>
 
-commit 39ee74a2841d526e588d04fa536d73328600aa99
-Author: fei.deng <fei.deng@amlogic.com>
-Date:   Mon May 15 07:34:48 2023 +0000
+========================================
 
-    videorenderer: CB2 create wayland display and move to back [1/1]
-    
-    PD#OTT-43404
-    
-    Problem:
-    if only creating wayland display,it is front on other displays,
-    it causes subtitle display to fail to display
-    
-    Solution:
-    render lib create wayland display when WAYLAND_DISPLAY not set.
-    moving wayland display created by render lib to back of other wayland displays
-    
-    Verify:
-    AQ222
-    
-    Change-Id: Ieb4a2ce8c7bcae2babf144ccc3a9ba08c762d8fc
-    Signed-off-by: fei.deng <fei.deng@amlogic.com>
-
-commit 9c69a9d411dfb319547367cf301287cb2db5b671
-Author: fei.deng <fei.deng@amlogic.com>
-Date:   Fri May 5 06:53:21 2023 +0000
-
-    videorenderer: CB2 add macro to control drm freezen feature [1/1]
-    
-    PD#SWPL-122323
-    
-    Problem:
-    add macro to control drm freezen feature
-    
-    Solution:
-    add macro to control drm freezen feature
-    
-    Verify:
-    AH212
-    
-    Change-Id: Ia5a780bbf803126ea9f6d534cf5dc07e19a4c25f
-    Signed-off-by: fei.deng <fei.deng@amlogic.com>
-
-commit 5e514bb02d71d7ef59b6b2dc61812be8cee2b142
-Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Thu May 11 19:19:25 2023 +0800
-
-    tsplayer: CB2 t5d onlyaudio crash. [1/1]
-    
-    PD#SWPL-117723
-    
-    Problem:
-    t5d onlyaudio crash when no mVdNonTunnelMode.
-    
-    Solution:
-    t5d onlyaudio need create mVdNonTunnelMode firstly.
-    
-    Verify:
-    t5d
-    
-    Change-Id: I8670802c09552311492e4e8c2c2af7a51dc5e792
-    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
-
-commit 6a2e77283c27924361b1b3028ede95bd7f346eee
-Author: fei.deng <fei.deng@amlogic.com>
-Date:   Tue May 9 09:24:17 2023 +0000
-
-    videorenderer: CB2 remove wl_seat [1/1]
-    
-    PD#SWPL-120447
-    
-    Problem:
-    don't focus on UI when after yts case test
-    
-    Solution:
-    1.remove wl_seat on render lib
-    2.force to map ui window when set window size isn't full screen
-    
-    Verify:
-    AH212
-    
-    Change-Id: I135c99b26cac36818ecf37240ab84277fcee2215
-    Signed-off-by: fei.deng <fei.deng@amlogic.com>
-
-commit e0e75f79de1951372471168ea468d0822849ab93
-Author: fei.deng <fei.deng@amlogic.com>
-Date:   Sat May 6 02:23:53 2023 +0000
-
-    videorenderer: CB2 scaling video to map window size [1/1]
-    
-    PD#TV-77238
-    
-    Problem:
-    if set window size smaller than full screen,render lib to ensure
-    the video aspect ratio,the left and right bar showed on video side
-    
-    Solution:
-    1.force scaling video to map window size when not full screen
-    2.fix AmTsPlayer_setVideoCrop return value
-    
-    Verify:
-    AT30A5
-    
-    Change-Id: I981ca7ac4436e5f0f89857db98a63f7f20e8b9d9
-    Signed-off-by: fei.deng <fei.deng@amlogic.com>
-
-commit 75c6d8ba64727dd430025c49f46fcba50696e253
-Author: fei.deng <fei.deng@amlogic.com>
-Date:   Fri Apr 21 09:04:04 2023 +0000
-
-    videorenderer: CB2 corrent crop rectangle params [1/1]
-    
-    PD#TV-78863
-    
-    Problem:
-    sometime user give wrong crop rectangle params,
-    this cause westeros no video output
-    
-    Solution:
-    correct crop rectangle params
-    
-    Verify:
-    AT30A5
-    
-    Change-Id: I822efeb41116d128ab2e2de721fd0f80a4d0003f
-    Signed-off-by: fei.deng <fei.deng@amlogic.com>
-
-commit bb03fc57242a2fe43689235f75e04a435a5505a0
-Author: fei.deng <fei.deng@amlogic.com>
-Date:   Fri Apr 14 08:07:34 2023 +0000
-
-    videorenderer: CB2 fix crash when alloc renderBuffer wrap [1/1]
-    
-    PD#TV-78216
-    
-    Problem:
-    std::map crash when doing renderBuffer manager
-    
-    Solution:
-    replace std:map with array
-    
-    Verify:
-    AT30A3
-    
-    Change-Id: I803085dc4e63cf13afe84a1ad242719b03c93e31
-    Signed-off-by: fei.deng <fei.deng@amlogic.com>
-
-commit a31088f11530e8d55d547572e414b563f4db8f2c
-Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Tue May 9 11:22:36 2023 +0800
-
-    tsplayer: CB2 GetMediaTimeByType interface improvement [1/1]
-    
-    PD#SWPL-120429
-    
-    Problem:
-    GetMediaTimeByType can not get apts when onlyaudio
-    
-    Solution:
-    GetMediaTimeByType interface improvement
-    
-    Verify:
-    DVT1
-    
-    Change-Id: Iadcade5c7e0c2675606dfd031c7653f812cb8743
-    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
+Release time: 2023-06-01-17-38
 
 ========================================
 
-Release time: 2023-05-23-14-15
-
-========================================
-
-Builder: drm.autobuild
+Builder: zhipeng.he
 
 ========================================
 Release file:
@@ -232,23 +235,29 @@ Header file:
 AmTsPlayer.h
 AmVideoDecBase.h
 MediaSyncInterface.h
+render_lib.h
 resourcemanage.h
 
-Library file:
+Library and Binary file:
+AmTsPlayerExample
+AmTsPlayerMultiExample
+EsVideoDecPlayer
 libmediahal_mediasync.so
 libmediahal_resman.so
 libmediahal_tsplayer.so
 libmediahal_videodec.so
 libmediahal_videorender.so
+videorender_server
+
 Example file:
 AmTsPlayerExample.cpp
 Makefile
+
 Multi_Example file:
 AmTsPlayerMultiExample.cpp
 Makefile
-
-Binary  file:
-AmTsPlayerExample
-AmTsPlayerMultiExample
+Esvideodecplayer file:
+EsVideoDecPlayer.cpp
+Makefile
 
 ========================================

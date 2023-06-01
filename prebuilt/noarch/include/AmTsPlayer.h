@@ -405,6 +405,12 @@ typedef struct {
     } event;
 }am_tsplayer_event;
 
+/*AmTsPlayer holdvideo init parameters*/
+typedef struct {
+    int on;//if 1 means on, 0 means off
+    int64_t value; //the reserved value may be passed to pts in the future. If it is invalid, please set -1
+} am_tsplayer_holdvideo_params;
+
 /*Event call back function ptr*/
 typedef void (*event_callback) (void *user_data, am_tsplayer_event *event);
 
@@ -931,6 +937,14 @@ am_tsplayer_result  AmTsPlayer_startSub(am_tsplayer_handle Hadl);
  *\return:       The AmTsPlayer result.
  */
 am_tsplayer_result  AmTsPlayer_stopSub(am_tsplayer_handle Hadl);
+
+/**
+ *\brief:        hold the video frame display for specified
+ *               AmTsPlayer instance.
+ *\inparam:      AmTsPlayer handle.
+ *\return:       The AmTsPlayer result.
+ */
+am_tsplayer_result  AmTsPlayer_holdVideo(am_tsplayer_handle Hadl, am_tsplayer_holdvideo_params *pParams);
 
 #ifdef __cplusplus
 }
