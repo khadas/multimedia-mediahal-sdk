@@ -1,10 +1,71 @@
 =========RELEALSE NOTE=================
 
-Version: vV3.9.45-g0d10a7c
+Version: V3.11.2-gc56d593
 
 ========================================
 
 Git commit:
+commit c56d593c712a4d1fd2bc86e0ec58fb3ee2d166dd
+Author: yunmin.chen <yunmin.chen@amlogic.com>
+Date:   Sat May 13 22:45:31 2023 +0800
+
+    media_hal: CF1 amvideo pipeline support mediasync. [2/2]
+    
+    PD#SWPL-122581
+    
+    Problem:
+    amvideo pipeline not support mediasync
+    
+    Solution:
+    amvideo pipeline support mediasync
+    
+    Verify:
+    zapper
+    
+    Change-Id: Idcfb169150464954668b0ec9e7f8b8a4c346d2d2
+    Signed-off-by: yunmin.chen <yunmin.chen@amlogic.com>
+
+commit 1fe7b0922d1a191d0914f8ad8c3f2272ab4254a8
+Author: zhipeng.he <zhipeng.he@amlogic.com>
+Date:   Wed Jun 7 20:05:32 2023 +0800
+
+    tsplayer: CB2 onlyaudio not set dmx source [1/1]
+    
+    PD#SWPL-127192
+    
+    Problem:
+    onlyaudio not set the dmx source,
+    onlyaudio can not play.
+    
+    Solution:
+    set the dmx source on AmDemuxWrapperOpen
+    
+    Verify:
+    t5w
+    
+    Change-Id: Ic7787fed85a09328efb37eee227eb6528a68d70e
+    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
+
+commit aa6f9df3ccfbfcbd021882090d257c5b480f3c2d
+Author: yunmin.chen <yunmin.chen@amlogic.com>
+Date:   Thu Jun 1 14:53:21 2023 +0800
+
+    mediahal: CF2 mediahal release [1/1]
+    
+    PD#SWPL-123243
+    
+    Problem:
+    mediahal release
+    
+    Solution:
+    release V3.9.45-g0d10a7c
+    
+    Verify:
+    SC2
+    
+    Change-Id: Ia21e1fef5506b9279122e59fa30bc09e743c29c4
+    Signed-off-by: yunmin.chen <yunmin.chen@amlogic.com>
+
 commit 0d10a7c20c2dd314d115ce82db5318d7ad4003bc
 Author: zhipeng.he <zhipeng.he@amlogic.com>
 Date:   Tue May 16 15:46:05 2023 +0800
@@ -154,79 +215,13 @@ Date:   Tue Apr 18 15:05:09 2023 +0800
     Change-Id: I88cec5175f7877a7da1775509c84472ae15c3504
     Signed-off-by: wenjie.li@amlogic.com <wenjie.li@amlogic.com>
 
-commit 987bd8af037644e60976d273e59115229f0e1164
-Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Thu May 18 21:15:34 2023 +0800
+========================================
 
-    videodec: CB2 vpts not discontinue. [1/1]
-    
-    PD#SWPL-119320
-    
-    Problem:
-    misjudgment into ionly mode
-    
-    Solution:
-    disable ionly mode
-    
-    Verify:
-    t5w
-    
-    Change-Id: If4be1415af3300009a53acf1f1b81d68d8e06650
-    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
-
-commit 9ec5917d346fb55b191a429faa356c97cf1e540b
-Author: fei.deng <fei.deng@amlogic.com>
-Date:   Thu May 18 03:28:18 2023 +0000
-
-    videorenderer: CB2 fix capture memory lead on weston [1/1]
-    
-    PD#SWPL-123440
-    
-    Problem:
-    render lib don't release wayland buffers those obtained by weston
-    when playback end,this cause drm memory leak
-    
-    Solution:
-    release wayland buffers after destroy wayland surface
-    
-    Verify:
-    AH212
-    
-    Change-Id: Id2ccbdb69709b6e0661ff3015c43dd9b0fb098ed
-    Signed-off-by: fei.deng <fei.deng@amlogic.com>
-
-commit b4a45d3d0a8cd332f8f5319f8c4f3e9dfc268a85
-Author: fei.deng <fei.deng@amlogic.com>
-Date:   Thu May 18 03:21:56 2023 +0000
-
-    videorenderer: CB2 force full screen [1/1]
-    
-    PD#TV-77238
-    
-    Problem:
-    defined a environment parameter VIDEO_RENDER_FORCE_FULLSCREEN to control
-    video resolution aspect ratio.if set VIDEO_RENDER_FORCE_FULLSCREEN=1,render lib
-    will stretch video content to map display resolution size,if not set
-    VIDEO_RENDER_FORCE_FULLSCREEN or set its value to 0,
-    video content will keep its resolution
-    ratio.
-    
-    Solution:
-    add VIDEO_RENDER_FORCE_FULLSCREEN environment parameter
-    
-    Verify:
-    AH212
-    
-    Change-Id: I0d596586ad62cc10d071df998f422cdf8f471596
-    Signed-off-by: fei.deng <fei.deng@amlogic.com>
+Release time: 2023-06-08-17-10
 
 ========================================
 
-Release time: 2023-06-01-17-38
-
-========================================
-
-Builder: zhipeng.he
+Builder: drm.autobuild
 
 ========================================
 Release file:
@@ -235,29 +230,23 @@ Header file:
 AmTsPlayer.h
 AmVideoDecBase.h
 MediaSyncInterface.h
-render_lib.h
 resourcemanage.h
 
-Library and Binary file:
-AmTsPlayerExample
-AmTsPlayerMultiExample
-EsVideoDecPlayer
+Library file:
 libmediahal_mediasync.so
 libmediahal_resman.so
 libmediahal_tsplayer.so
 libmediahal_videodec.so
 libmediahal_videorender.so
-videorender_server
-
 Example file:
 AmTsPlayerExample.cpp
 Makefile
-
 Multi_Example file:
 AmTsPlayerMultiExample.cpp
 Makefile
-Esvideodecplayer file:
-EsVideoDecPlayer.cpp
-Makefile
+
+Binary  file:
+AmTsPlayerExample
+AmTsPlayerMultiExample
 
 ========================================
