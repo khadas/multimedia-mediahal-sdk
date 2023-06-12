@@ -103,7 +103,7 @@ typedef enum {
 typedef enum {
     VIDEO_TRICK_MODE_NONE = 0,          // Disable trick mode
     VIDEO_TRICK_MODE_PAUSE = 1,         // Pause the video decoder
-    VIDEO_TRICK_MODE_PAUSE_NEXT = 2,    // Pause the video decoder when a new frame dispalyed
+    VIDEO_TRICK_MODE_PAUSE_NEXT = 2,    // Pause the video decoder when a new frame displayed
     VIDEO_TRICK_MODE_IONLY = 3          // Decoding and Out I frame only
 } mediasync_video_trick_mode;
 

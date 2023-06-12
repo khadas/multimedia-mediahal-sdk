@@ -1,10 +1,93 @@
 =========RELEALSE NOTE=================
 
-Version: V3.11.2-gc56d593
+Version: V3.11.6-ga0bdcbb
 
 ========================================
 
 Git commit:
+commit a0bdcbb2cebced5377a73aec0fff4790e939a447
+Author: zhipeng.he <zhipeng.he@amlogic.com>
+Date:   Mon May 15 20:11:34 2023 +0800
+
+    videodec: CF2 libchrame crop. [1/1]
+    
+    PD#SWPL-120325
+    
+    Problem:
+    videodec lib too large
+    
+    Solution:
+    crop the videodec lib
+    
+    Verify:
+    AH212
+    
+    Change-Id: I8a8f4daefb44b846f1df36eaf980eb352b4db770
+    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
+
+commit ea319186d2c380cfe242216a25deb1c057699df1
+Author: yunmin.chen <yunmin.chen@amlogic.com>
+Date:   Fri Jun 9 16:39:01 2023 +0800
+
+    mediahal: CB2  Fix typo. [1/1]
+    
+    PD#SWPL-127796
+    
+    Problem:
+    Fix typo.
+    
+    Solution:
+    Fix typo.
+    
+    Verify:
+    SC2
+    
+    Change-Id: I06d2ef6af11875d18de4560adbde8d7a6713eccc
+    Signed-off-by: yunmin.chen <yunmin.chen@amlogic.com>
+
+commit e911a12a1bd6a5695165f2ad9d8ae2e025dd7260
+Author: zhipeng.he <zhipeng.he@amlogic.com>
+Date:   Tue Jun 6 14:50:56 2023 +0800
+
+    tsplayer: CB2 set ad mix_enable need to add demux_id [1/1]
+    
+    PD#SWPL-119502
+    
+    Problem:
+    set ad mix_enable not add demux_id
+    
+    Solution:
+    set ad mix_enable need to add demux_id
+    
+    Verify:
+    AH212
+    
+    Change-Id: Ia88241d6253e8c96378e32c79caf081932435770
+    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
+
+commit 9cabc9d8cc65656d39ca616f198c7d721fc8c571
+Author: chen.chen1 <chen.chen1@amlogic.com>
+Date:   Thu May 25 14:56:23 2023 +0800
+
+    mediasync: CB2 video playback lags after multiple loops. [1/1]
+    
+    PD#SWPL-124745
+    
+    Problem:
+    DiscontinueProcess don't consider the gap between
+    audioframeInfo.frameSystemTime and curSystime..
+    Accumulation of the gap from every loop playback leads to lag.
+    
+    Solution:
+    1. consider the gap between audioframeInfo.frameSystemTime and curSystime.
+    2. enable framecontrol.
+    
+    Verify:
+    verified on S905Y4-AH222
+    
+    Change-Id: I694b5f5fe12c075c082e28f20e1a48925b70fa56
+    Signed-off-by: chen.chen1 <chen.chen1@amlogic.com>
+
 commit c56d593c712a4d1fd2bc86e0ec58fb3ee2d166dd
 Author: yunmin.chen <yunmin.chen@amlogic.com>
 Date:   Sat May 13 22:45:31 2023 +0800
@@ -131,93 +214,9 @@ Date:   Wed May 31 02:53:31 2023 +0000
     Change-Id: I4bf8a59b8308349c4a0f1691a7ecd5d66c1c8f32
     Signed-off-by: fei.deng <fei.deng@amlogic.com>
 
-commit d3bcebf3178800aaa973833d40478f017867e3f3
-Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Fri Mar 31 15:15:45 2023 +0800
-
-    tsplayer: CB2 video can not play when buffer is full [1/1]
-    
-    PD#TV-76995
-    
-    Problem:
-    decoder is stuck for some time
-    resulting in buffer explosion,
-    
-    Solution:
-    add reset mechanism
-    
-    Verify:
-    T5W
-    
-    Change-Id: Ia1612931cd1de3c40d916cb9dce11c51d7e56af7
-    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
-
-commit 7c93be6e6eb71d559883a684d7c448c2d85c8736
-Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Tue May 16 13:20:01 2023 +0800
-
-    mediasync: CB2 audio can not normal output after seek. [1/1]
-    
-    PD#OTT-43532
-    
-    Problem:
-    audio can not normal output after seek
-    
-    Solution:
-    when seek.audio set pause 1,
-    need to pause 0 when mediasync reset or destroy.
-    
-    Verify:
-    AP23A9
-    
-    Change-Id: I800ae127a072f06474a294dbe0855891ddcc4683
-    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
-
-commit 29bbb72ce414fb4173d81dcd88eaa71c5347759c
-Author: yunmin.chen <yunmin.chen@amlogic.com>
-Date:   Wed May 24 15:27:55 2023 +0800
-
-    videodec: CB1 Fixed the seek exception after PVR pause.  [1/1]
-    
-    PD#SWPL-123859
-    
-    Problem:
-    trick mode:PAUSE_NEXT and PAUSE
-    set i only mode to decoder.
-    
-    Solution:
-    trick mode :PAUSE_NEX and PAUSE do not need to
-    set i only to decoder.
-    
-    Verify:
-    SC2
-    
-    Change-Id: I20bbc167d6f75d915317651164fe77430b69a9f5
-    Signed-off-by: yunmin.chen <yunmin.chen@amlogic.com>
-
-commit 18fc889c3828d6bb001a23f5261ce5713d53dd1d
-Author: wenjie.li@amlogic.com <wenjie.li@amlogic.com>
-Date:   Tue Apr 18 15:05:09 2023 +0800
-
-    tsplayer: CB2 avoids duplicate calls to startVideoDecoding [1/1]
-    
-    PD#OTT-41512
-    
-    Problem:
-    The playback freezes due to duplicate calls to startVideoDecoding.
-    
-    Solution:
-    Add a protection check for duplicate calls.
-    
-    Verify:
-    AP232
-    
-    Change-Id: I88cec5175f7877a7da1775509c84472ae15c3504
-    Signed-off-by: wenjie.li@amlogic.com <wenjie.li@amlogic.com>
-
 ========================================
 
-Release time: 2023-06-08-17-10
+Release time: 2023-06-12-13-26
 
 ========================================
 

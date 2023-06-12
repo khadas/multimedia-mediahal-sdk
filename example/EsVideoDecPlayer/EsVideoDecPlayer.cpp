@@ -429,19 +429,19 @@ void VideoDecPlayerExample::outputBuffer(const char* oname, int num) {
     height = work->height;
 
     if (oname != NULL && moFp == NULL && mcFp == NULL) {
-        char newoname[128];
-        char newcname[128];
+        char newOName[128];
+        char newCName[128];
 
-        sprintf(newoname, "%s_%d_%d_%d.yuv", oname, num, width, height);
-        sprintf(newcname, "%s_%d_%d_%d.crc", oname, num, width, height);
-        moFp = fopen(newoname, "wb");
+        sprintf(newOName, "%s_%d_%d_%d.yuv", oname, num, width, height);
+        sprintf(newCName, "%s_%d_%d_%d.crc", oname, num, width, height);
+        moFp = fopen(newOName, "wb");
         if (!moFp) {
             printf("Unable to open output YUV file\n");
             return;
         }
         setbuf(moFp,NULL);
 
-        mcFp = fopen(newcname, "w");
+        mcFp = fopen(newCName, "w");
         if (!mcFp) {
             printf("Unable to open output crc file\n");
             return;

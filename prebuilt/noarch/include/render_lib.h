@@ -145,7 +145,7 @@ typedef enum _RenderMsgType {
 /**
  * video render send msg callback, user must regist this callback to receive msg from render
  *
- * @param userData the user data registed to video render lib
+ * @param userData the user data registered to video render lib
  * @param type  see enum _RenderMsgType
  * @param msg it is difference according to type value.
  *      when key is MSG_RELEASE_BUFFER, msg is defined by struct _RenderBuffer
@@ -313,7 +313,7 @@ void *render_open_with_tag(char *name, char *userTag);
  * these callbacks to send msg to user or get some value from user
  * @param handle a handle of render device that was opened
  * @param callback  callback function struct that render will use
- * @return 0 sucess,-1 fail
+ * @return 0 success,-1 fail
  */
 void render_set_callback(void *handle, RenderCallback *callback);
 
@@ -321,14 +321,14 @@ void render_set_callback(void *handle, RenderCallback *callback);
  * set user data to render lib
  * @param handle a handle of render lib that was opened
  * @param userdata the set userdata
- * @return 0 sucess,-1 fail
+ * @return 0 success,-1 fail
  */
 void render_set_user_data(void *handle, void *userdata);
 
 /**
  * connect to render device
  * @param handle a handle of render device that was opened
- * @return 0 sucess,-1 fail
+ * @return 0 success,-1 fail
  */
 int render_connect(void *handle);
 
@@ -339,7 +339,7 @@ int render_connect(void *handle);
  * until render lib release it, so please allcating buffer from memory heap
  * @param handle a handle of render device that was opened
  * @param buffer a video buffer will be displayed
- * @return 0 sucess,-1 fail
+ * @return 0 success,-1 fail
  */
 int render_display_frame(void *handle, RenderBuffer *buffer);
 
@@ -348,7 +348,7 @@ int render_display_frame(void *handle, RenderBuffer *buffer);
  * @param handle a handle of render device that was opened
  * @param key a key of render device
  * @param value the value of key
- * @return 0 sucess,-1 fail
+ * @return 0 success,-1 fail
  */
 int render_set(void *handle, int key, void *value);
 
@@ -357,21 +357,21 @@ int render_set(void *handle, int key, void *value);
  * @param handle a handle of render device that was opened
  * @param key a key of render device
  * @param value the value of key
- * @return 0 sucess,-1 fail
+ * @return 0 success,-1 fail
  */
 int render_get(void *handle, int key, void *value);
 
 /**
  * flush render lib buffer
  * @param handle a handle of render device that was opened
- * @return 0 sucess,-1 fail
+ * @return 0 success,-1 fail
  */
 int render_flush(void *handle);
 
 /**
  * pause display video frame
  * @param handle a handle of render device that was opened
- * @return 0 sucess,-1 fail
+ * @return 0 success,-1 fail
  */
 int render_pause(void *handle);
 
@@ -380,28 +380,28 @@ int render_pause(void *handle);
  *
  * @param handle a handle of render device that was opened
  * @param pts the will paused video frame pts, the pts unit is nano second
- * @return 0 sucess,-1 fail
+ * @return 0 success,-1 fail
  */
 int render_pause_pts(void *handle, int64_t pts);
 
 /**
  * resume display video frame
  * @param handle a handle of render device that was opened
- * @return 0 sucess,-1 fail
+ * @return 0 success,-1 fail
  */
 int render_resume(void *handle);
 
 /**
  * disconnect to render device
  * @param handle a handle of render device that was opened
- * @return 0 sucess,-1 fail
+ * @return 0 success,-1 fail
  */
 int render_disconnect(void *handle);
 
 /**
  * close render device
  * @param handle a handle of render device that was opened
- * @return 0 sucess,-1 fail
+ * @return 0 success,-1 fail
  */
 int render_close(void *handle);
 
@@ -424,7 +424,7 @@ RenderBuffer *render_allocate_render_buffer_wrap(void *handle, int flag, int raw
 void render_free_render_buffer_wrap(void *handle, RenderBuffer *buffer);
 
 /**
- * accquire dma buffer from render lib
+ * acquire dma buffer from render lib
  * @param handle a handle of render device that was opened
  * @param planecnt the dma buffer plane count
  * @param width video width
@@ -433,7 +433,7 @@ void render_free_render_buffer_wrap(void *handle, RenderBuffer *buffer);
  * @return 0 success, -1 if failed
  *
 */
-int render_accquire_dma_buffer(void *handle, int planecnt, int width, int height, RenderDmaBuffer *dmabuffer);
+int render_acquire_dma_buffer(void *handle, int planecnt, int width, int height, RenderDmaBuffer *dmabuffer);
 
 /**
  * release dma buffer that allocated from render lib
@@ -484,7 +484,7 @@ int render_mediasync_get_playback_rate(void *handle, float *scale);
  *
  * @param handle a handle of render device that was opened
  * @param ptsUs the pts that output from demux, the unit is Us
- * @param size the frame size or 0 if unknow
+ * @param size the frame size or 0 if unknown
  * @return int 0 success, -1 if failed
  */
 int render_mediasync_queue_demux_pts(void *handle, int64_t ptsUs, uint32_t size);

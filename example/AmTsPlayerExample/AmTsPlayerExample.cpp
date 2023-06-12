@@ -109,22 +109,20 @@ static int set_osd_blank(int blank)
     const char *path1 = "/sys/class/graphics/fb0/blank";
     const char *path3 = "/sys/class/graphics/fb0/osd_display_debug";
     int fd;
-	char cmd[128] = {0};
+    char cmd[128] = {0};
 
-	fd = open(path3,O_CREAT | O_RDWR | O_TRUNC, 0644);
-	if (fd >= 0)
-	{
-       sprintf(cmd,"%d",1);
-	   write (fd,cmd,strlen(cmd));
-	   close(fd);
-	}
-	fd = open(path1,O_CREAT | O_RDWR | O_TRUNC, 0644);
-	if (fd >= 0)
-	{
-       sprintf(cmd,"%d",blank);
-	   write (fd,cmd,strlen(cmd));
-	   close(fd);
-	}
+    fd = open(path3,O_CREAT | O_RDWR | O_TRUNC, 0644);
+    if (fd >= 0) {
+        sprintf(cmd,"%d",1);
+        write (fd,cmd,strlen(cmd));
+        close(fd);
+    }
+    fd = open(path1,O_CREAT | O_RDWR | O_TRUNC, 0644);
+    if (fd >= 0) {
+        sprintf(cmd,"%d",blank);
+        write (fd,cmd,strlen(cmd));
+        close(fd);
+    }
     return 0;
 }
 

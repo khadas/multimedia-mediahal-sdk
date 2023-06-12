@@ -188,7 +188,7 @@ typedef enum {
 typedef enum {
     AV_VIDEO_TRICK_MODE_NONE = 0,          // Disable trick mode
     AV_VIDEO_TRICK_MODE_PAUSE = 1,         // Pause the video decoder
-    AV_VIDEO_TRICK_MODE_PAUSE_NEXT = 2,    // Pause the video decoder when a new frame dispalyed
+    AV_VIDEO_TRICK_MODE_PAUSE_NEXT = 2,    // Pause the video decoder when a new frame displayed
     AV_VIDEO_TRICK_MODE_IONLY = 3          // Decoding and Out I frame only
 } am_tsplayer_video_trick_mode;
 
@@ -232,7 +232,7 @@ typedef enum {
 
 /*Audio decoder type*/
 typedef enum {
-    AV_AUDIO_CODEC_AUTO = 0,               // Unkown audio type (Unsupport)
+    AV_AUDIO_CODEC_AUTO = 0,               // Unknown audio type (Unsupport)
     AV_AUDIO_CODEC_MP2 = 1,                // MPEG audio
     AV_AUDIO_CODEC_MP3 = 2,                // MP3
     AV_AUDIO_CODEC_AC3 = 3,                // AC3
@@ -424,7 +424,7 @@ typedef void (*event_callback) (void *user_data, am_tsplayer_event *event);
  */
 am_tsplayer_result  AmTsPlayer_create(am_tsplayer_init_params Params, am_tsplayer_handle *pHadl);
 /**
- *\brief:        Get AmTsPlayer interface version inforamtion.
+ *\brief:        Get AmTsPlayer interface version information.
  *\outparam:     AmTsPlayer interface version.
  *\return:       The AmTsPlayer result.
  */

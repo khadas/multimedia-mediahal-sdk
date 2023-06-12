@@ -108,6 +108,6 @@ public:
 };
 
 extern "C" AmVideoDecBase* AmVideoDec_create(AmVideoDecCallback* callback);
-extern "C" uint32_t AmVideoDec_getVersion(uint32_t* versionM, uint32_t* verionL);
+extern "C" uint32_t AmVideoDec_getVersion(uint32_t* versionM, uint32_t* versionL);
 
 #endif  // AM_VIDEO_DEC_BASE_H
