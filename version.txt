@@ -1,10 +1,113 @@
 =========RELEALSE NOTE=================
 
-Version: V3.11.6-ga0bdcbb
+Version: V3.11.11-g13543de
 
 ========================================
 
 Git commit:
+commit 13543deb837091cf7bf6cfcfac071d59d6a1a1c3
+Author: fei.deng <fei.deng@amlogic.com>
+Date:   Thu Jun 1 02:48:17 2023 +0000
+
+    videorenderer: CB2 set video plane id when playing pip [1/1]
+    
+    PD#SWPL-125569
+    
+    Problem:
+    weston supports dual video,render lib should set video
+    plane id when playing pip video
+    
+    Solution:
+    set video plane id when playing pip video
+    
+    Verify:
+    AH212
+    
+    Change-Id: Ife4ee653b9aa51c255979d7a25c5f77c3f189fa3
+    Signed-off-by: fei.deng <fei.deng@amlogic.com>
+
+commit 692f163cbba033da2597db3a2d823698b7e17148
+Author: zhipeng.he <zhipeng.he@amlogic.com>
+Date:   Mon Jun 19 14:43:33 2023 +0800
+
+    tsplayer: CF2 send PresentationId to audio. [1/1]
+    
+    PD#SWPL-125402
+    
+    Problem:
+    no PresentationId to audio
+    
+    Solution:
+    send PresentationId to audio
+    
+    Verify:
+    AH212
+    
+    Change-Id: Ifde7623f0b797ec135916554ba794a179036954c
+    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
+
+commit dc8d6cd2ad3741841df1f1a8a05f9b99e6b084ff
+Author: zhenya.xie <zhenya.xie@amlogic.com>
+Date:   Mon Jun 5 20:14:18 2023 +0800
+
+    tsplayer: CF2 support AC4 [1/1]
+    
+    PD#OTT-44667
+    
+    Problem:
+    AC4 format not suppert
+    
+    Solution:
+    add ac4 format convert
+    
+    Verify:
+    yocto
+    
+    Change-Id: I70efe8265af1edb5314512570b81612109dbac9a
+    Signed-off-by: zhenya.xie <zhenya.xie@amlogic.com>
+
+commit 0b858414a4f06e37817a05cf07713c915d5edd1b
+Author: zhipeng.he <zhipeng.he@amlogic.com>
+Date:   Mon Jun 12 19:55:58 2023 +0800
+
+    tsplayer: CB1 1.5x ff can not work when use renderlib [1/1]
+    
+    PD#OTT-43949
+    
+    Problem:
+    1.5x ff can not work when use renderlib
+    
+    Solution:
+    set the scale into renderlib,
+    and record the scale on renderlib,
+    setplaybackrate to medaisync.
+    
+    Verify:
+    AH212
+    
+    Change-Id: I7ed6511a27c1b502095a7afbfd572447c621d091
+    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
+
+commit f1892997bbf0203890d87a0816a627ac10e4063e
+Author: zhipeng.he <zhipeng.he@amlogic.com>
+Date:   Thu May 11 14:51:06 2023 +0800
+
+    tsplayer: CF2 add adpcm_ima_wav audio type. [1/1]
+    
+    PD#OTT-42838
+    
+    Problem:
+    no adpcm_ima_wav this audio type
+    
+    Solution:
+    add adpcm_ima_wav audio type
+    
+    Verify:
+    AH212
+    
+    Change-Id: I9f2b8b621df683156d1a661c2ce35493549cfa63
+    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
+
 commit a0bdcbb2cebced5377a73aec0fff4790e939a447
 Author: zhipeng.he <zhipeng.he@amlogic.com>
 Date:   Mon May 15 20:11:34 2023 +0800
@@ -108,119 +211,13 @@ Date:   Sat May 13 22:45:31 2023 +0800
     Change-Id: Idcfb169150464954668b0ec9e7f8b8a4c346d2d2
     Signed-off-by: yunmin.chen <yunmin.chen@amlogic.com>
 
-commit 1fe7b0922d1a191d0914f8ad8c3f2272ab4254a8
-Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Wed Jun 7 20:05:32 2023 +0800
+========================================
 
-    tsplayer: CB2 onlyaudio not set dmx source [1/1]
-    
-    PD#SWPL-127192
-    
-    Problem:
-    onlyaudio not set the dmx source,
-    onlyaudio can not play.
-    
-    Solution:
-    set the dmx source on AmDemuxWrapperOpen
-    
-    Verify:
-    t5w
-    
-    Change-Id: Ic7787fed85a09328efb37eee227eb6528a68d70e
-    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
-
-commit aa6f9df3ccfbfcbd021882090d257c5b480f3c2d
-Author: yunmin.chen <yunmin.chen@amlogic.com>
-Date:   Thu Jun 1 14:53:21 2023 +0800
-
-    mediahal: CF2 mediahal release [1/1]
-    
-    PD#SWPL-123243
-    
-    Problem:
-    mediahal release
-    
-    Solution:
-    release V3.9.45-g0d10a7c
-    
-    Verify:
-    SC2
-    
-    Change-Id: Ia21e1fef5506b9279122e59fa30bc09e743c29c4
-    Signed-off-by: yunmin.chen <yunmin.chen@amlogic.com>
-
-commit 0d10a7c20c2dd314d115ce82db5318d7ad4003bc
-Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Tue May 16 15:46:05 2023 +0800
-
-    tsplayer: CF2 add hold video feature [1/1]
-    
-    PD#TV-78044
-    
-    Problem:
-    customer need api to hold video.
-    
-    Solution:
-    add hold video feature
-    
-    Verify:
-    AH212
-    
-    Change-Id: Ia6a52593e762775c12ed6e636d5515399d620746
-    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
-
-commit 0d5113a42308e1f8166e8c1e32b1666049f78d0b
-Author: fei.deng <fei.deng@amlogic.com>
-Date:   Thu May 11 05:55:30 2023 +0000
-
-    videorenderer: CF2 add hold video feature [1/1]
-    
-    PD#TV-78044
-    
-    Problem:
-    add hold video feature with pts,on this state, render lib
-    will drop and release video frames, but audio is running always
-    
-    Solution:
-    add hold video feature
-    set render lib  log level and log file with /run/rlib_level
-    and /run/rlib_file
-    
-    Verify:
-    AH212
-    
-    Change-Id: Ifd6beb09667f212c1e89e4e9f469c3adefe52e0d
-    Signed-off-by: fei.deng <fei.deng@amlogic.com>
-
-commit de603ead68274ea32411e202c34a775007885c78
-Author: fei.deng <fei.deng@amlogic.com>
-Date:   Wed May 31 02:53:31 2023 +0000
-
-    videorenderer: CB2 force output mode resolution [1/1]
-    
-    PD#RSP-5265
-    
-    Problem:
-    render lib received output mode resolution is 1280x720 with wayland, but
-    actual resolution should be 1920x1080. westeros use a fixed 1920x1080
-    resolution, this cause video window displays incorrectly.
-    
-    Solution:
-    force output mode resolution to 1920x1080
-    
-    Verify:
-    AQ2432
-    
-    Change-Id: I4bf8a59b8308349c4a0f1691a7ecd5d66c1c8f32
-    Signed-off-by: fei.deng <fei.deng@amlogic.com>
+Release time: 2023-06-25-14-58
 
 ========================================
 
-Release time: 2023-06-12-13-26
-
-========================================
-
-Builder: drm.autobuild
+Builder: zhipeng.he
 
 ========================================
 Release file:
@@ -229,23 +226,29 @@ Header file:
 AmTsPlayer.h
 AmVideoDecBase.h
 MediaSyncInterface.h
+render_lib.h
 resourcemanage.h
 
-Library file:
+Library and Binary file:
+AmTsPlayerExample
+AmTsPlayerMultiExample
+EsVideoDecPlayer
 libmediahal_mediasync.so
 libmediahal_resman.so
 libmediahal_tsplayer.so
 libmediahal_videodec.so
 libmediahal_videorender.so
+videorender_server
+
 Example file:
 AmTsPlayerExample.cpp
 Makefile
+
 Multi_Example file:
 AmTsPlayerMultiExample.cpp
 Makefile
-
-Binary  file:
-AmTsPlayerExample
-AmTsPlayerMultiExample
+Esvideodecplayer file:
+EsVideoDecPlayer.cpp
+Makefile
 
 ========================================

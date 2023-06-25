@@ -251,6 +251,8 @@ typedef enum {
     AV_AUDIO_CODEC_WMAPRO = 16,            // WMAV pro
     AV_AUDIO_CODEC_WMALOSSLESS = 17,       // WMAV loss less
     AV_AUDIO_CODEC_PCM_U8 = 18,            //PCM U8
+    AV_AUDIO_CODEC_AV3A = 19,              // AVS3-P3 3D Audio/Audio Vivid Audio Codec ID
+    AV_AUDIO_CODEC_PCM_ADPCM_IMA_WAV = 20, //ADPCM IMA WAV
     AV_AUDIO_CODEC_MAX = 1000,             // Out of range type (Unsupport)
 } am_tsplayer_audio_codec;
 

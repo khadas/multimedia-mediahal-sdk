@@ -443,6 +443,15 @@ int main(int argc, char **argv)
                         printf("----show video \n");
                         AmTsPlayer_holdVideo(session, &holdVideoParams);
                    }
+                   if (ch == 'e') {
+                        float scale = 2.0;
+                        printf("----start fast 2.0 \n");
+                        AmTsPlayer_startFast(session, scale);
+                   }
+                   if (ch == 'g') {
+                        printf("----stop fast\n");
+                        AmTsPlayer_stopFast(session);
+                   }
                }
                 res = AmTsPlayer_writeData(session, &ibuf, kRwTimeout);
                 //usleep(20000);
@@ -497,6 +506,15 @@ int main(int argc, char **argv)
                      holdVideoParams.value = -1;
                      printf("----show video \n");
                      AmTsPlayer_holdVideo(session, &holdVideoParams);
+                }
+                if (ch == 'e') {
+                     float scale = 2.0;
+                     printf("----start fast 2.0 \n");
+                     AmTsPlayer_startFast(session, scale);
+                }
+                if (ch == 'g') {
+                     printf("----stop fast\n");
+                     AmTsPlayer_stopFast(session);
                 }
             }
         }
