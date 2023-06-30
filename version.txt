@@ -1,10 +1,173 @@
 =========RELEALSE NOTE=================
 
-Version: V3.11.11-g13543de
+Version: V3.11.19-g37171c3
 
 ========================================
 
 Git commit:
+commit 37171c3123ad17c505dd0089f8bd5e53cca89917
+Author: zhipeng.he <zhipeng.he@amlogic.com>
+Date:   Tue Jun 27 16:53:14 2023 +0800
+
+    tsplayer: CF2 send asp_info to renderlib. [1/1]
+    
+    PD#SWPL-117731
+    
+    Problem:
+    renderlib need asp_info to calculate display size
+    
+    Solution:
+    send asp_info to renderlib
+    
+    Verify:
+    AH212
+    
+    Change-Id: Iac359c4914032883b5516a9263e28993facce421
+    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
+
+commit 590953242500a061fd6637336bf0eb85a376bbbc
+Author: fei.deng <fei.deng@amlogic.com>
+Date:   Tue Jun 13 07:29:22 2023 +0000
+
+    videorenderer: CB2 add property for set pixel aspect ratio [1/1]
+    
+    PD#SWPL-117731
+    
+    Problem:
+    If 704x576 resolution video needs to be displayed in 16:9 ratio,
+    render lib should add a api for it. pixel aspect ratio can be
+    parsed from es data
+    
+    Solution:
+    add property for set pixel aspect ratio
+    
+    Verify:
+    am301
+    
+    Change-Id: I44adde6b213b1854ec3035c7da7babd94a1871c8
+    Signed-off-by: fei.deng <fei.deng@amlogic.com>
+
+commit 08dec88b98641925d2e0fd3a33a39a89296792cf
+Author: zhipeng.he <zhipeng.he@amlogic.com>
+Date:   Mon Jun 26 17:43:16 2023 +0800
+
+    tsplayer: CB2 show video not effect before start video. [1/1]
+    
+    PD#TV-84629
+    
+    Problem:
+    show video not effect before start video
+    
+    Solution:
+    send video show flag to renderlib before start video
+    
+    Verify:
+    AH212
+    
+    Change-Id: Ib4bc28ee9e84cdc288d0f3087250bc6a43ec091d
+    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
+
+commit 33fd211390f1fa19e748da80278deb0c90e3c6e2
+Author: fei.deng <fei.deng@amlogic.com>
+Date:   Mon Jun 26 09:26:06 2023 +0000
+
+    videorenderer: CB2 fix drm plugin crash [1/1]
+    
+    PD#SWPL-129185
+    
+    Problem:
+    access null buffer after expiredFrameEntity released
+    
+    Solution:
+    if drm_post_buf failed, we should release drm post buffer
+    and try to do next post buffer.
+    
+    Verify:
+    t5w
+    
+    Change-Id: Ib01e79434948a709a72130ebb5a5908c55785e51
+    Signed-off-by: fei.deng <fei.deng@amlogic.com>
+
+commit 176856b852c36c89a1b6ee556343784bb661e8a7
+Author: chen.chen1 <chen.chen1@amlogic.com>
+Date:   Wed Jun 14 22:11:40 2023 +0800
+
+    mediasync: CB2 audio stuck. [1/1]
+    
+    PD#AUT-1969
+    
+    Problem:
+    wrong aligne flag leading to set wrong startpts.
+    
+    Solution:
+    set right align flag.
+    
+    Verify:
+    sc2
+    
+    Change-Id: I1b4ad72104b4c81fdfd1f87e80b6a30ee7b70759
+    Signed-off-by: chen.chen1 <chen.chen1@amlogic.com>
+
+commit 711ed823e91ddb7ae11477b3f020c998cbc55fd6
+Author: zhipeng.he <zhipeng.he@amlogic.com>
+Date:   Mon Jun 26 15:51:59 2023 +0800
+
+    tsplayer: CB2 add low_mem_platform to control pipeline. [1/1]
+    
+    PD#SWPL-127182
+    
+    Problem:
+    need to unify the name of low_mem_platform with audio
+    
+    Solution:
+    add low_mem_platform to control pipeline
+    
+    Verify:
+    AQ2432
+    
+    Change-Id: I56b222887f2fa57139882ab0ec6abd9882a4fd6e
+    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
+
+commit faf319fe785703431090c1f194e6c7db25529345
+Author: chen.chen1 <chen.chen1@amlogic.com>
+Date:   Tue Jun 20 21:15:50 2023 +0800
+
+    mediasync: CB2 av not sync after weak signal. [1/1]
+    
+    PD#SWPL-127042
+    
+    Problem:
+    not check vpts(-1) invalid leading to wrong set startpts in recontinue.
+    
+    Solution:
+    need optimize checkStreamPtsValid and should check the invalid pts when pts<0.
+    
+    Verify:
+    verified on S905X4-AH212
+    
+    Change-Id: I809ec05421df590103add02abf74dae55d940c6f
+    Signed-off-by: chen.chen1 <chen.chen1@amlogic.com>
+
+commit 8c3a4df4f465f073cb09fa30effb95aa2e5745dd
+Author: zhipeng.he <zhipeng.he@amlogic.com>
+Date:   Sun Jun 25 20:05:01 2023 +0800
+
+    tsplayer: CB2 input_done_event lost on framemode. [1/1]
+    
+    PD#OTT-44199
+    
+    Problem:
+    nput_done_event lost on framemode
+    
+    Solution:
+    adjusting code logic
+    
+    Verify:
+    AH212
+    
+    Change-Id: I52ca28a738a4974b7b1142cebbe5990a357ba573
+    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
+
 commit 13543deb837091cf7bf6cfcfac071d59d6a1a1c3
 Author: fei.deng <fei.deng@amlogic.com>
 Date:   Thu Jun 1 02:48:17 2023 +0000
@@ -46,178 +209,13 @@ Date:   Mon Jun 19 14:43:33 2023 +0800
     Change-Id: Ifde7623f0b797ec135916554ba794a179036954c
     Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
 
-commit dc8d6cd2ad3741841df1f1a8a05f9b99e6b084ff
-Author: zhenya.xie <zhenya.xie@amlogic.com>
-Date:   Mon Jun 5 20:14:18 2023 +0800
+========================================
 
-    tsplayer: CF2 support AC4 [1/1]
-    
-    PD#OTT-44667
-    
-    Problem:
-    AC4 format not suppert
-    
-    Solution:
-    add ac4 format convert
-    
-    Verify:
-    yocto
-    
-    Change-Id: I70efe8265af1edb5314512570b81612109dbac9a
-    Signed-off-by: zhenya.xie <zhenya.xie@amlogic.com>
-
-commit 0b858414a4f06e37817a05cf07713c915d5edd1b
-Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Mon Jun 12 19:55:58 2023 +0800
-
-    tsplayer: CB1 1.5x ff can not work when use renderlib [1/1]
-    
-    PD#OTT-43949
-    
-    Problem:
-    1.5x ff can not work when use renderlib
-    
-    Solution:
-    set the scale into renderlib,
-    and record the scale on renderlib,
-    setplaybackrate to medaisync.
-    
-    Verify:
-    AH212
-    
-    Change-Id: I7ed6511a27c1b502095a7afbfd572447c621d091
-    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
-
-commit f1892997bbf0203890d87a0816a627ac10e4063e
-Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Thu May 11 14:51:06 2023 +0800
-
-    tsplayer: CF2 add adpcm_ima_wav audio type. [1/1]
-    
-    PD#OTT-42838
-    
-    Problem:
-    no adpcm_ima_wav this audio type
-    
-    Solution:
-    add adpcm_ima_wav audio type
-    
-    Verify:
-    AH212
-    
-    Change-Id: I9f2b8b621df683156d1a661c2ce35493549cfa63
-    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
-
-commit a0bdcbb2cebced5377a73aec0fff4790e939a447
-Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Mon May 15 20:11:34 2023 +0800
-
-    videodec: CF2 libchrame crop. [1/1]
-    
-    PD#SWPL-120325
-    
-    Problem:
-    videodec lib too large
-    
-    Solution:
-    crop the videodec lib
-    
-    Verify:
-    AH212
-    
-    Change-Id: I8a8f4daefb44b846f1df36eaf980eb352b4db770
-    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
-
-commit ea319186d2c380cfe242216a25deb1c057699df1
-Author: yunmin.chen <yunmin.chen@amlogic.com>
-Date:   Fri Jun 9 16:39:01 2023 +0800
-
-    mediahal: CB2  Fix typo. [1/1]
-    
-    PD#SWPL-127796
-    
-    Problem:
-    Fix typo.
-    
-    Solution:
-    Fix typo.
-    
-    Verify:
-    SC2
-    
-    Change-Id: I06d2ef6af11875d18de4560adbde8d7a6713eccc
-    Signed-off-by: yunmin.chen <yunmin.chen@amlogic.com>
-
-commit e911a12a1bd6a5695165f2ad9d8ae2e025dd7260
-Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Tue Jun 6 14:50:56 2023 +0800
-
-    tsplayer: CB2 set ad mix_enable need to add demux_id [1/1]
-    
-    PD#SWPL-119502
-    
-    Problem:
-    set ad mix_enable not add demux_id
-    
-    Solution:
-    set ad mix_enable need to add demux_id
-    
-    Verify:
-    AH212
-    
-    Change-Id: Ia88241d6253e8c96378e32c79caf081932435770
-    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
-
-commit 9cabc9d8cc65656d39ca616f198c7d721fc8c571
-Author: chen.chen1 <chen.chen1@amlogic.com>
-Date:   Thu May 25 14:56:23 2023 +0800
-
-    mediasync: CB2 video playback lags after multiple loops. [1/1]
-    
-    PD#SWPL-124745
-    
-    Problem:
-    DiscontinueProcess don't consider the gap between
-    audioframeInfo.frameSystemTime and curSystime..
-    Accumulation of the gap from every loop playback leads to lag.
-    
-    Solution:
-    1. consider the gap between audioframeInfo.frameSystemTime and curSystime.
-    2. enable framecontrol.
-    
-    Verify:
-    verified on S905Y4-AH222
-    
-    Change-Id: I694b5f5fe12c075c082e28f20e1a48925b70fa56
-    Signed-off-by: chen.chen1 <chen.chen1@amlogic.com>
-
-commit c56d593c712a4d1fd2bc86e0ec58fb3ee2d166dd
-Author: yunmin.chen <yunmin.chen@amlogic.com>
-Date:   Sat May 13 22:45:31 2023 +0800
-
-    media_hal: CF1 amvideo pipeline support mediasync. [2/2]
-    
-    PD#SWPL-122581
-    
-    Problem:
-    amvideo pipeline not support mediasync
-    
-    Solution:
-    amvideo pipeline support mediasync
-    
-    Verify:
-    zapper
-    
-    Change-Id: Idcfb169150464954668b0ec9e7f8b8a4c346d2d2
-    Signed-off-by: yunmin.chen <yunmin.chen@amlogic.com>
+Release time: 2023-06-30-15-56
 
 ========================================
 
-Release time: 2023-06-25-14-58
-
-========================================
-
-Builder: zhipeng.he
+Builder: drm.autobuild
 
 ========================================
 Release file:
@@ -226,29 +224,23 @@ Header file:
 AmTsPlayer.h
 AmVideoDecBase.h
 MediaSyncInterface.h
-render_lib.h
 resourcemanage.h
 
-Library and Binary file:
-AmTsPlayerExample
-AmTsPlayerMultiExample
-EsVideoDecPlayer
+Library file:
 libmediahal_mediasync.so
 libmediahal_resman.so
 libmediahal_tsplayer.so
 libmediahal_videodec.so
 libmediahal_videorender.so
-videorender_server
-
 Example file:
 AmTsPlayerExample.cpp
 Makefile
-
 Multi_Example file:
 AmTsPlayerMultiExample.cpp
 Makefile
-Esvideodecplayer file:
-EsVideoDecPlayer.cpp
-Makefile
+
+Binary  file:
+AmTsPlayerExample
+AmTsPlayerMultiExample
 
 ========================================
