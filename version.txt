@@ -1,10 +1,30 @@
 =========RELEALSE NOTE=================
 
-Version: V3.11.19-g37171c3
+Version: V3.11.20-g0b5d69c
 
 ========================================
 
 Git commit:
+commit 0b5d69cf0ad870c45f28387a2b101f13d640c6f5
+Author: zhipeng.he <zhipeng.he@amlogic.com>
+Date:   Mon Jul 3 19:51:38 2023 +0800
+
+    tsplayer: CB2 improve keep frame function. [1/1]
+    
+    PD#SWPL-130216
+    
+    Problem:
+    switch channel always keep black frame.
+    
+    Solution:
+    improve keep frame function
+    
+    Verify:
+    AQ2432
+    
+    Change-Id: I6c21eb4b12eabe2dfb5cf4b1e8de2d482e437afd
+    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
+
 commit 37171c3123ad17c505dd0089f8bd5e53cca89917
 Author: zhipeng.he <zhipeng.he@amlogic.com>
 Date:   Tue Jun 27 16:53:14 2023 +0800
@@ -189,29 +209,9 @@ Date:   Thu Jun 1 02:48:17 2023 +0000
     Change-Id: Ife4ee653b9aa51c255979d7a25c5f77c3f189fa3
     Signed-off-by: fei.deng <fei.deng@amlogic.com>
 
-commit 692f163cbba033da2597db3a2d823698b7e17148
-Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Mon Jun 19 14:43:33 2023 +0800
-
-    tsplayer: CF2 send PresentationId to audio. [1/1]
-    
-    PD#SWPL-125402
-    
-    Problem:
-    no PresentationId to audio
-    
-    Solution:
-    send PresentationId to audio
-    
-    Verify:
-    AH212
-    
-    Change-Id: Ifde7623f0b797ec135916554ba794a179036954c
-    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
-
 ========================================
 
-Release time: 2023-06-30-15-56
+Release time: 2023-07-06-15-18
 
 ========================================
 
