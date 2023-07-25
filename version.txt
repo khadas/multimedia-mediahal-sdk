@@ -1,10 +1,133 @@
 =========RELEALSE NOTE=================
 
-Version: V3.11.20-g0b5d69c
+Version: V3.11.26-g951dd08
 
 ========================================
 
 Git commit:
+commit 951dd0850037bc8cd6cc8f462198284c3cfc7e25
+Author: zhipeng.he <zhipeng.he@amlogic.com>
+Date:   Wed Jul 12 16:27:10 2023 +0800
+
+    mediasync: CB2 can not show after pause and seek [1/1]
+    
+    PD#OTT-45650
+    
+    Problem:
+    can not show after pause and seek
+    
+    Solution:
+    when release mediasync,
+    need to pause false.
+    
+    Verify:
+    AH212
+    
+    Change-Id: I6292b443f3acceb3b952296b03c66c8397340bfb
+    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
+
+commit 4fe7edf84a90c49c660719fb0269642a1b301120
+Author: zhipeng.he <zhipeng.he@amlogic.com>
+Date:   Mon Jun 19 17:29:57 2023 +0800
+
+    tsplayer: CF2 support vc1 on esmode. [1/1]
+    
+    PD#OTT-44629
+    
+    Problem:
+    esmode not support vc1
+    
+    Solution:
+    support vc1 on esmode
+    
+    Verify:
+    AH212
+    
+    Change-Id: Ib2608211868e65c2fca0f2db17f0f92bcb79df74
+    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
+
+commit 82fbb18d181b5e00ab4c4b6780c38129aafdfede
+Author: zhipeng.he <zhipeng.he@amlogic.com>
+Date:   Thu Jul 13 20:49:20 2023 +0800
+
+    tsplayer: CB2 set video window size not success on lowmem. [1/1]
+    
+    PD#SWPL-131745
+    
+    Problem:
+    set video window size not success on lowmem
+    
+    Solution:
+    need set video window size to amvideo on lowmem
+    
+    Verify:
+    aq2432
+    
+    Change-Id: If8610a4027b4f76040b206e315a298535cf95891
+    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
+
+commit 982ee206caef300668f48a4e59c63ceee7dbe97c
+Author: zhipeng.he <zhipeng.he@amlogic.com>
+Date:   Tue Jul 11 13:40:14 2023 +0800
+
+    example: CB2 AmTsPlayerExample not need link wayland. [1/1]
+    
+    PD#SWPL-131289
+    
+    Problem:
+    AmTsPlayerExample link wayland
+    
+    Solution:
+    AmTsPlayerExample not need link wayland
+    
+    Verify:
+    AH212
+    
+    Change-Id: I9ae7d7b207b76747abb9cf92321f8e377798ecd8
+    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
+
+commit 30f16e1d9835b6c65efea601b3832ea612a4644e
+Author: chen.chen1 <chen.chen1@amlogic.com>
+Date:   Tue Jul 11 15:46:05 2023 +0800
+
+    mediasync: CB2 av is not sync in FCC situation. [1/1]
+    
+    PD#SWPL-130053
+    
+    Problem:
+    audio drop abnormal in non-working channel because of different unit
+    between audioDmxCache and DEFAULT_AUDIO_FCC_CACHE_MAX.
+    
+    Solution:
+    use the same unit for audioDmxCache and DEFAULT_AUDIO_FCC_CACHE_MAX.
+    
+    Verify:
+    verified on S905X4-AH212
+    
+    Change-Id: I01eaff96292bdab3bf395dc34106397d9d01531b
+    Signed-off-by: chen.chen1 <chen.chen1@amlogic.com>
+
+commit ec84cf188b06e89600dc63a2cca830e37683f1ab
+Author: zhipeng.he <zhipeng.he@amlogic.com>
+Date:   Wed Jun 28 14:43:42 2023 +0800
+
+    tsplayer: CB2 crop the audio_stream_buf and pcr_filter_size. [1/1]
+    
+    PD#SWPL-129851
+    
+    Problem:
+    need to crop the audio_stream_buf and pcr_filter_size
+    
+    Solution:
+    audio_stream_buf set to 0.75M,
+    pcr_filter_size set to 1.
+    
+    Verify:
+    AQ2432
+    
+    Change-Id: I6d96cf870c0bcd8faf85f6cce5cc453d21199ec6
+    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
+
 commit 0b5d69cf0ad870c45f28387a2b101f13d640c6f5
 Author: zhipeng.he <zhipeng.he@amlogic.com>
 Date:   Mon Jul 3 19:51:38 2023 +0800
@@ -87,131 +210,9 @@ Date:   Mon Jun 26 17:43:16 2023 +0800
     Change-Id: Ib4bc28ee9e84cdc288d0f3087250bc6a43ec091d
     Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
 
-commit 33fd211390f1fa19e748da80278deb0c90e3c6e2
-Author: fei.deng <fei.deng@amlogic.com>
-Date:   Mon Jun 26 09:26:06 2023 +0000
-
-    videorenderer: CB2 fix drm plugin crash [1/1]
-    
-    PD#SWPL-129185
-    
-    Problem:
-    access null buffer after expiredFrameEntity released
-    
-    Solution:
-    if drm_post_buf failed, we should release drm post buffer
-    and try to do next post buffer.
-    
-    Verify:
-    t5w
-    
-    Change-Id: Ib01e79434948a709a72130ebb5a5908c55785e51
-    Signed-off-by: fei.deng <fei.deng@amlogic.com>
-
-commit 176856b852c36c89a1b6ee556343784bb661e8a7
-Author: chen.chen1 <chen.chen1@amlogic.com>
-Date:   Wed Jun 14 22:11:40 2023 +0800
-
-    mediasync: CB2 audio stuck. [1/1]
-    
-    PD#AUT-1969
-    
-    Problem:
-    wrong aligne flag leading to set wrong startpts.
-    
-    Solution:
-    set right align flag.
-    
-    Verify:
-    sc2
-    
-    Change-Id: I1b4ad72104b4c81fdfd1f87e80b6a30ee7b70759
-    Signed-off-by: chen.chen1 <chen.chen1@amlogic.com>
-
-commit 711ed823e91ddb7ae11477b3f020c998cbc55fd6
-Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Mon Jun 26 15:51:59 2023 +0800
-
-    tsplayer: CB2 add low_mem_platform to control pipeline. [1/1]
-    
-    PD#SWPL-127182
-    
-    Problem:
-    need to unify the name of low_mem_platform with audio
-    
-    Solution:
-    add low_mem_platform to control pipeline
-    
-    Verify:
-    AQ2432
-    
-    Change-Id: I56b222887f2fa57139882ab0ec6abd9882a4fd6e
-    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
-
-commit faf319fe785703431090c1f194e6c7db25529345
-Author: chen.chen1 <chen.chen1@amlogic.com>
-Date:   Tue Jun 20 21:15:50 2023 +0800
-
-    mediasync: CB2 av not sync after weak signal. [1/1]
-    
-    PD#SWPL-127042
-    
-    Problem:
-    not check vpts(-1) invalid leading to wrong set startpts in recontinue.
-    
-    Solution:
-    need optimize checkStreamPtsValid and should check the invalid pts when pts<0.
-    
-    Verify:
-    verified on S905X4-AH212
-    
-    Change-Id: I809ec05421df590103add02abf74dae55d940c6f
-    Signed-off-by: chen.chen1 <chen.chen1@amlogic.com>
-
-commit 8c3a4df4f465f073cb09fa30effb95aa2e5745dd
-Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Sun Jun 25 20:05:01 2023 +0800
-
-    tsplayer: CB2 input_done_event lost on framemode. [1/1]
-    
-    PD#OTT-44199
-    
-    Problem:
-    nput_done_event lost on framemode
-    
-    Solution:
-    adjusting code logic
-    
-    Verify:
-    AH212
-    
-    Change-Id: I52ca28a738a4974b7b1142cebbe5990a357ba573
-    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
-
-commit 13543deb837091cf7bf6cfcfac071d59d6a1a1c3
-Author: fei.deng <fei.deng@amlogic.com>
-Date:   Thu Jun 1 02:48:17 2023 +0000
-
-    videorenderer: CB2 set video plane id when playing pip [1/1]
-    
-    PD#SWPL-125569
-    
-    Problem:
-    weston supports dual video,render lib should set video
-    plane id when playing pip video
-    
-    Solution:
-    set video plane id when playing pip video
-    
-    Verify:
-    AH212
-    
-    Change-Id: Ife4ee653b9aa51c255979d7a25c5f77c3f189fa3
-    Signed-off-by: fei.deng <fei.deng@amlogic.com>
-
 ========================================
 
-Release time: 2023-07-06-15-18
+Release time: 2023-07-25-14-21
 
 ========================================
 
