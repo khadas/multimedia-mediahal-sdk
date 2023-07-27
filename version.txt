@@ -1,10 +1,30 @@
 =========RELEALSE NOTE=================
 
-Version: V3.11.26-g951dd08
+Version: V3.11.27-g64360c4
 
 ========================================
 
 Git commit:
+commit 64360c4970080ce468a1bf0025ef53c0e3d91921
+Author: xuesong.jiang <xuesong.jiang@amlogic.com>
+Date:   Mon Jul 24 05:39:31 2023 +0000
+
+    dmabufmanage: CF1 Migrate from master branch to linux branch [1/1]
+    
+    PD#SWPL-121080
+    
+    Problem:
+    v4l2 stream mode needs to use dmabufmanage to manage dma es buffer
+    
+    Solution:
+    Migrate dmabufmanage from master branch to linux branch
+    
+    Verify:
+    (detail info)
+    
+    Change-Id: Ia1a07545db031e36dcf5c84ba1b911c800c2dddb
+    Signed-off-by: xuesong.jiang <xuesong.jiang@amlogic.com>
+
 commit 951dd0850037bc8cd6cc8f462198284c3cfc7e25
 Author: zhipeng.he <zhipeng.he@amlogic.com>
 Date:   Wed Jul 12 16:27:10 2023 +0800
@@ -190,29 +210,9 @@ Date:   Tue Jun 13 07:29:22 2023 +0000
     Change-Id: I44adde6b213b1854ec3035c7da7babd94a1871c8
     Signed-off-by: fei.deng <fei.deng@amlogic.com>
 
-commit 08dec88b98641925d2e0fd3a33a39a89296792cf
-Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Mon Jun 26 17:43:16 2023 +0800
-
-    tsplayer: CB2 show video not effect before start video. [1/1]
-    
-    PD#TV-84629
-    
-    Problem:
-    show video not effect before start video
-    
-    Solution:
-    send video show flag to renderlib before start video
-    
-    Verify:
-    AH212
-    
-    Change-Id: Ib4bc28ee9e84cdc288d0f3087250bc6a43ec091d
-    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
-
 ========================================
 
-Release time: 2023-07-25-14-21
+Release time: 2023-07-27-19-27
 
 ========================================
 
