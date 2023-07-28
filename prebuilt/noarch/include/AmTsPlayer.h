@@ -55,6 +55,10 @@ typedef enum {
     AM_TSPLAYER_KEY_SET_WMA_DESCR,
     AM_TSPLAYER_KEY_SET_ES_AUDIO_EXTRA_PARAM,
     AM_TSPLAYER_KEY_SET_STREAM_EOF,
+    AM_TSPLAYER_KEY_BOOTPLAY_MODE,
+    AM_TSPLAYER_KEY_ENABLE_VFRAME_COUNTER,
+    AM_TSPLAYER_KEY_SET_AUDIO_LANG,
+    AM_TSPLAYER_KEY_SET_MULTI_VIDEO_SYNC_MODE,
 } am_tsplayer_parameter;
 
 
@@ -373,6 +377,11 @@ typedef struct {
     uint32_t sample_rate;
     uint32_t channels;
 } am_tsplayer_audio_format_t;
+
+typedef struct {
+    int32_t first_lang;
+    int32_t second_lang;
+} am_tsplayer_audio_lang;
 
 typedef struct {
     am_tsplayer_stream_type stream_type;

@@ -1,10 +1,54 @@
 =========RELEALSE NOTE=================
 
-Version: V3.11.27-g64360c4
+Version: V3.11.29-g200833d
 
 ========================================
 
 Git commit:
+commit 200833df2534f82e0df7d7c5e409f31e01562d5b
+Author: zhipeng.he <zhipeng.he@amlogic.com>
+Date:   Tue Jul 25 16:36:17 2023 +0800
+
+    tsplayer: CF2 Added interface for audio language.  [1/3]
+    
+    PD#SWPL-132846
+    
+    Problem:
+    1.audiohal requires audio language information.
+    2.get ac4 active presentations id
+    3.audiohal change mDtvDemuxIdBase to 25
+    
+    Solution:
+    1.Added interface for setting audio language.
+    2.Added interface to get AC4 active presentations id
+    3.match audiohal change mDtvDemuxIdBase to 25
+    
+    Verify:
+    AH212
+    
+    Change-Id: I8e1b81312411b737ba166854e0872f26c2bd0d44
+    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
+
+commit 0f391877e5585e409509195151966c4ba7569a56
+Author: zhipeng.he <zhipeng.he@amlogic.com>
+Date:   Wed Jul 19 16:46:10 2023 +0800
+
+    videodec: CB2 Add length check for cc_scte length. [1/1]
+    
+    PD#OTT-46205
+    
+    Problem:
+    Process SCTE data to CC crash, out of array range.
+    
+    Solution:
+    Add array range check.
+    
+    Verify:
+    S905Y4
+    
+    Change-Id: I2dd99923d9569b99ec1f590037a3b81fca6c70ea
+    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
+
 commit 64360c4970080ce468a1bf0025ef53c0e3d91921
 Author: xuesong.jiang <xuesong.jiang@amlogic.com>
 Date:   Mon Jul 24 05:39:31 2023 +0000
@@ -168,51 +212,9 @@ Date:   Mon Jul 3 19:51:38 2023 +0800
     Change-Id: I6c21eb4b12eabe2dfb5cf4b1e8de2d482e437afd
     Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
 
-commit 37171c3123ad17c505dd0089f8bd5e53cca89917
-Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Tue Jun 27 16:53:14 2023 +0800
-
-    tsplayer: CF2 send asp_info to renderlib. [1/1]
-    
-    PD#SWPL-117731
-    
-    Problem:
-    renderlib need asp_info to calculate display size
-    
-    Solution:
-    send asp_info to renderlib
-    
-    Verify:
-    AH212
-    
-    Change-Id: Iac359c4914032883b5516a9263e28993facce421
-    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
-
-commit 590953242500a061fd6637336bf0eb85a376bbbc
-Author: fei.deng <fei.deng@amlogic.com>
-Date:   Tue Jun 13 07:29:22 2023 +0000
-
-    videorenderer: CB2 add property for set pixel aspect ratio [1/1]
-    
-    PD#SWPL-117731
-    
-    Problem:
-    If 704x576 resolution video needs to be displayed in 16:9 ratio,
-    render lib should add a api for it. pixel aspect ratio can be
-    parsed from es data
-    
-    Solution:
-    add property for set pixel aspect ratio
-    
-    Verify:
-    am301
-    
-    Change-Id: I44adde6b213b1854ec3035c7da7babd94a1871c8
-    Signed-off-by: fei.deng <fei.deng@amlogic.com>
-
 ========================================
 
-Release time: 2023-07-27-19-27
+Release time: 2023-07-28-10-22
 
 ========================================
 
