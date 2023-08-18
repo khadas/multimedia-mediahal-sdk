@@ -1,10 +1,139 @@
 =========RELEALSE NOTE=================
 
-Version: V3.11.29-g200833d
+Version: V3.11.35-g108ef7a
 
 ========================================
 
 Git commit:
+commit 108ef7a13b93b815c9db896bcb497021291bd1cb
+Author: zhipeng.he <zhipeng.he@amlogic.com>
+Date:   Fri Aug 18 16:11:54 2023 +0800
+
+    tsplayer: CF2 tsplayer add video latency. [1/1]
+    
+    PD#SWPL-130789
+    
+    Problem:
+    tsplayer not support video latency
+    
+    Solution:
+    tsplayer add video latency
+    
+    Verify:
+    t5w(trunck)
+    
+    Change-Id: I6cb8cc432e17b53f556af058307b1b78d8e2051a
+    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
+
+commit 8387af045b3affafbda8654c27bf18975fede1f8
+Author: zhipeng.he <zhipeng.he@amlogic.com>
+Date:   Thu Aug 10 15:35:24 2023 +0800
+
+    tsplayer: CB2 support set axis (0,0,0,0). [1/1]
+    
+    PD#SWPL-135648
+    
+    Problem:
+    not support set (0,0,0,0) when use amvideo
+    
+    Solution:
+    support set (0,0,0,0),
+    then set (0,0,,-1,-1) to amvideo
+    
+    Verify:
+    S1A
+    
+    Change-Id: I8bdd7b6593ba372259bca5eaa5c8092d4648a78b
+    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
+
+commit 7be1589398e03207eb024a5b00faca50fe1a8c90
+Author: zhipeng.he <zhipeng.he@amlogic.com>
+Date:   Thu Aug 3 21:05:23 2023 +0800
+
+    tsplayer: CB2 ff4 to ff1 can not play.  [1/1]
+    
+    PD#SWPL-132941
+    
+    Problem:
+    FF4 to FF1:->pause-->stop-->start,
+    can not play video
+    
+    Solution:
+    when start need to resume on VideodecAmlRenderWrapper.
+    
+    Verify:
+    AQ2432
+    
+    Change-Id: Idb69bd22f4e8669fa642d40c46d62f52261fd7dd
+    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
+
+commit 77d4b7b626c0f948a234281bbbb82aa2304ca559
+Author: zhipeng.he <zhipeng.he@amlogic.com>
+Date:   Wed Aug 2 20:45:13 2023 +0800
+
+    mediasync: CB2  Fixed leaking sound in trick mode. [1/1]
+    
+    PD#SWPL-132883
+    
+    Problem:
+    After setting trick mode (PAUSE_NEXT),
+    the pause() function slows down.
+    Causes sound leakage.
+    
+    Solution:
+    After trick mode (PAUSE_NEXT),
+    audio outputs the hold strategy.
+    renderlib set trick mode to mediasync.
+    
+    Verify:
+    AQ2432
+    
+    Change-Id: I9f9aa802daf9f5e47ecba733766d4adbb445bc69
+    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
+
+commit 6c5fe5ad021d3fb8e3a0c2d0f9a7cc868f37876c
+Author: zhipeng.he <zhipeng.he@amlogic.com>
+Date:   Thu Jul 13 19:37:10 2023 +0800
+
+    mediasync: CB2 audioUpdateRefClock need add timeout case [1/1]
+    
+    PD#OTT-44772
+    
+    Problem:
+    when pause resume,no video frame to process,
+    then audioUpdateRefClock will check all the time,
+    can not resume successfully.
+    
+    Solution:
+    audioUpdateRefClock need add timeout case
+    
+    Verify:
+    ap232
+    
+    Change-Id: Ibadfe1c8dc483b71e4fbbcc8f4cdb140b19227a4
+    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
+
+commit a8dc2e2f336e7c7b5461532f8f75fe32b819aedb
+Author: chen.chen1 <chen.chen1@amlogic.com>
+Date:   Mon Jul 31 21:32:04 2023 +0800
+
+    mediasync: CB2 discontinue always triggered. [1/1]
+    
+    PD#OTT-46700
+    
+    Problem:
+    discontinue always triggered
+    
+    Solution:
+    1. use refPcr instead of mCurPcr to compare with demux pts
+    2. av-diff should use queue in pts to calculate
+    
+    Verify:
+    sc2
+    
+    Change-Id: I5631becf42dc2f68a90ff69740e53d80c14769f3
+    Signed-off-by: chen.chen1 <chen.chen1@amlogic.com>
+
 commit 200833df2534f82e0df7d7c5e409f31e01562d5b
 Author: zhipeng.he <zhipeng.he@amlogic.com>
 Date:   Tue Jul 25 16:36:17 2023 +0800
@@ -90,131 +219,9 @@ Date:   Wed Jul 12 16:27:10 2023 +0800
     Change-Id: I6292b443f3acceb3b952296b03c66c8397340bfb
     Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
 
-commit 4fe7edf84a90c49c660719fb0269642a1b301120
-Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Mon Jun 19 17:29:57 2023 +0800
-
-    tsplayer: CF2 support vc1 on esmode. [1/1]
-    
-    PD#OTT-44629
-    
-    Problem:
-    esmode not support vc1
-    
-    Solution:
-    support vc1 on esmode
-    
-    Verify:
-    AH212
-    
-    Change-Id: Ib2608211868e65c2fca0f2db17f0f92bcb79df74
-    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
-
-commit 82fbb18d181b5e00ab4c4b6780c38129aafdfede
-Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Thu Jul 13 20:49:20 2023 +0800
-
-    tsplayer: CB2 set video window size not success on lowmem. [1/1]
-    
-    PD#SWPL-131745
-    
-    Problem:
-    set video window size not success on lowmem
-    
-    Solution:
-    need set video window size to amvideo on lowmem
-    
-    Verify:
-    aq2432
-    
-    Change-Id: If8610a4027b4f76040b206e315a298535cf95891
-    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
-
-commit 982ee206caef300668f48a4e59c63ceee7dbe97c
-Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Tue Jul 11 13:40:14 2023 +0800
-
-    example: CB2 AmTsPlayerExample not need link wayland. [1/1]
-    
-    PD#SWPL-131289
-    
-    Problem:
-    AmTsPlayerExample link wayland
-    
-    Solution:
-    AmTsPlayerExample not need link wayland
-    
-    Verify:
-    AH212
-    
-    Change-Id: I9ae7d7b207b76747abb9cf92321f8e377798ecd8
-    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
-
-commit 30f16e1d9835b6c65efea601b3832ea612a4644e
-Author: chen.chen1 <chen.chen1@amlogic.com>
-Date:   Tue Jul 11 15:46:05 2023 +0800
-
-    mediasync: CB2 av is not sync in FCC situation. [1/1]
-    
-    PD#SWPL-130053
-    
-    Problem:
-    audio drop abnormal in non-working channel because of different unit
-    between audioDmxCache and DEFAULT_AUDIO_FCC_CACHE_MAX.
-    
-    Solution:
-    use the same unit for audioDmxCache and DEFAULT_AUDIO_FCC_CACHE_MAX.
-    
-    Verify:
-    verified on S905X4-AH212
-    
-    Change-Id: I01eaff96292bdab3bf395dc34106397d9d01531b
-    Signed-off-by: chen.chen1 <chen.chen1@amlogic.com>
-
-commit ec84cf188b06e89600dc63a2cca830e37683f1ab
-Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Wed Jun 28 14:43:42 2023 +0800
-
-    tsplayer: CB2 crop the audio_stream_buf and pcr_filter_size. [1/1]
-    
-    PD#SWPL-129851
-    
-    Problem:
-    need to crop the audio_stream_buf and pcr_filter_size
-    
-    Solution:
-    audio_stream_buf set to 0.75M,
-    pcr_filter_size set to 1.
-    
-    Verify:
-    AQ2432
-    
-    Change-Id: I6d96cf870c0bcd8faf85f6cce5cc453d21199ec6
-    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
-
-commit 0b5d69cf0ad870c45f28387a2b101f13d640c6f5
-Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Mon Jul 3 19:51:38 2023 +0800
-
-    tsplayer: CB2 improve keep frame function. [1/1]
-    
-    PD#SWPL-130216
-    
-    Problem:
-    switch channel always keep black frame.
-    
-    Solution:
-    improve keep frame function
-    
-    Verify:
-    AQ2432
-    
-    Change-Id: I6c21eb4b12eabe2dfb5cf4b1e8de2d482e437afd
-    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
-
 ========================================
 
-Release time: 2023-07-28-10-22
+Release time: 2023-08-18-19-31
 
 ========================================
 

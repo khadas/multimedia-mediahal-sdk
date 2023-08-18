@@ -82,6 +82,7 @@ enum _RenderKey {
     KEY_SHOW_FRIST_FRAME_NOSYNC, //set/get show first frame asap,please set it if before invoking render_display_frame
     KEY_HOLD_VIDEO, //set/get hold video,but audio is running,value type is HoldVideoInfo,detail info see HoldVideoInfo defined
     KEY_PIXEL_ASPECT_RATIO, //set/get video frame pixel aspect ratio, value type is double
+    KEY_VIDEO_TRICK_MODE, //set/get video trick mode
     KEY_MEDIASYNC_INSTANCE_ID = 400, //set/get mediasync instance id, value type is int
     KEY_MEDIASYNC_PCR_PID, ///set/get mediasync pcr id ,value type is int
     KEY_MEDIASYNC_DEMUX_ID, //set/get mediasync demux id ,value type is int
