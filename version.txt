@@ -1,10 +1,98 @@
 =========RELEALSE NOTE=================
 
-Version: V3.11.35-g108ef7a
+Version: V3.11.39-gda5eae6
 
 ========================================
 
 Git commit:
+commit da5eae60602fdd06d98fa547d8deefcac8225aa9
+Author: fei.deng <fei.deng@amlogic.com>
+Date:   Fri Aug 25 07:03:02 2023 +0000
+
+    videorender: CB2 disable video plane [1/1]
+    
+    PD#OTT-47881
+    
+    Problem:
+    if set keep last frame,set disable video plane
+    
+    Solution:
+    set disable video plane in drm buffer
+    
+    Verify:
+    AP23A9
+    
+    Change-Id: Ia227cdf5e8b914f058cf7bc2c01392d5aff3bfaa
+    Signed-off-by: fei.deng <fei.deng@amlogic.com>
+
+commit 363fbfcc94245cd3daa849fef4a2cd98f10b05b1
+Author: fei.deng <fei.deng@amlogic.com>
+Date:   Mon Aug 28 09:32:19 2023 +0000
+
+    videorender: CB2 only enable av sync on render lib [1/1]
+    
+    PD#SWPL-131188
+    
+    Problem:
+    smart home project do not add weston drop patch
+    
+    Solution:
+    only enable av sync on render lib
+    
+    Verify:
+    ap222
+    
+    Change-Id: I932d755f7c74983b629cce38a2446d18f8c3f5a4
+    Signed-off-by: fei.deng <fei.deng@amlogic.com>
+
+commit 96fb3bc55a0e403812ebc86790063be4cd88b24f
+Author: fei.deng <fei.deng@amlogic.com>
+Date:   Wed Jul 12 05:38:23 2023 +0000
+
+    mediasync: CB2  correct output realtime [1/1]
+    
+    PD#SWPL-131184
+    
+    Problem:
+    mediasync output incorrect realtime,
+    it cause frame dropped
+    
+    Solution:
+    1.delay start play offset to 100ms
+    2.fix frame dropped when doing rate playback
+    
+    Verify:
+    ap212
+    
+    Change-Id: Ib98bc51a470873a4a70dbdb99b27456c8b81b21b
+    Signed-off-by: fei.deng <fei.deng@amlogic.com>
+
+commit 71f603f0f9479acae1bc76250c5ba9556dcf0c3d
+Author: fei.deng <fei.deng@amlogic.com>
+Date:   Mon Jul 3 06:17:31 2023 +0000
+
+    videorender: CF2 add buffer droped for weston [1/1]
+    
+    PD#SWPL-121671
+    
+    Problem:
+    frame dropped when doing yts test
+    
+    Solution:
+    1.add buffer droped feature for weston
+    2.add video sync feature on render lib side
+    3.reuse waylandbuffer when playing
+    4.prepare render buffer before pushing it to queue
+    5.remove some api from plugin interface
+    6.using dlopen to load liblog so file
+    7.force send displayed buffer msg when flush
+    
+    Verify:
+    ap222
+    
+    Change-Id: I6d55ec27de7449286b1372695a9c02022fbec827
+    Signed-off-by: fei.deng <fei.deng@amlogic.com>
+
 commit 108ef7a13b93b815c9db896bcb497021291bd1cb
 Author: zhipeng.he <zhipeng.he@amlogic.com>
 Date:   Fri Aug 18 16:11:54 2023 +0800
@@ -134,94 +222,9 @@ Date:   Mon Jul 31 21:32:04 2023 +0800
     Change-Id: I5631becf42dc2f68a90ff69740e53d80c14769f3
     Signed-off-by: chen.chen1 <chen.chen1@amlogic.com>
 
-commit 200833df2534f82e0df7d7c5e409f31e01562d5b
-Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Tue Jul 25 16:36:17 2023 +0800
-
-    tsplayer: CF2 Added interface for audio language.  [1/3]
-    
-    PD#SWPL-132846
-    
-    Problem:
-    1.audiohal requires audio language information.
-    2.get ac4 active presentations id
-    3.audiohal change mDtvDemuxIdBase to 25
-    
-    Solution:
-    1.Added interface for setting audio language.
-    2.Added interface to get AC4 active presentations id
-    3.match audiohal change mDtvDemuxIdBase to 25
-    
-    Verify:
-    AH212
-    
-    Change-Id: I8e1b81312411b737ba166854e0872f26c2bd0d44
-    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
-
-commit 0f391877e5585e409509195151966c4ba7569a56
-Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Wed Jul 19 16:46:10 2023 +0800
-
-    videodec: CB2 Add length check for cc_scte length. [1/1]
-    
-    PD#OTT-46205
-    
-    Problem:
-    Process SCTE data to CC crash, out of array range.
-    
-    Solution:
-    Add array range check.
-    
-    Verify:
-    S905Y4
-    
-    Change-Id: I2dd99923d9569b99ec1f590037a3b81fca6c70ea
-    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
-
-commit 64360c4970080ce468a1bf0025ef53c0e3d91921
-Author: xuesong.jiang <xuesong.jiang@amlogic.com>
-Date:   Mon Jul 24 05:39:31 2023 +0000
-
-    dmabufmanage: CF1 Migrate from master branch to linux branch [1/1]
-    
-    PD#SWPL-121080
-    
-    Problem:
-    v4l2 stream mode needs to use dmabufmanage to manage dma es buffer
-    
-    Solution:
-    Migrate dmabufmanage from master branch to linux branch
-    
-    Verify:
-    (detail info)
-    
-    Change-Id: Ia1a07545db031e36dcf5c84ba1b911c800c2dddb
-    Signed-off-by: xuesong.jiang <xuesong.jiang@amlogic.com>
-
-commit 951dd0850037bc8cd6cc8f462198284c3cfc7e25
-Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Wed Jul 12 16:27:10 2023 +0800
-
-    mediasync: CB2 can not show after pause and seek [1/1]
-    
-    PD#OTT-45650
-    
-    Problem:
-    can not show after pause and seek
-    
-    Solution:
-    when release mediasync,
-    need to pause false.
-    
-    Verify:
-    AH212
-    
-    Change-Id: I6292b443f3acceb3b952296b03c66c8397340bfb
-    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
-
 ========================================
 
-Release time: 2023-08-18-19-31
+Release time: 2023-08-31-19-57
 
 ========================================
 

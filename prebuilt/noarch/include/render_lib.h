@@ -19,21 +19,23 @@ extern "C" {
 #define RENDER_MAX_PLANES 3
 
 /*allocate render buffer flag */
-enum _BufferFlag {
+typedef enum _BufferFlag {
     BUFFER_FLAG_NONE       = 0,
     BUFFER_FLAG_ALLOCATE_DMA_BUFFER = 1 << 1,
     BUFFER_FLAG_ALLOCATE_RAW_BUFFER = 1 << 2,
     BUFFER_FLAG_EXTER_DMA_BUFFER    = 1 << 3,
-};
+} RenderBufferFlag;
 
+/*raw render buffer info*/
 typedef struct _RenderRawBuffer {
     void *dataPtr;
     int size;
 } RenderRawBuffer;
 
+/*dma render buffer info*/
 typedef struct _RenderDmaBuffer {
-    int width;
-    int height;
+    int width; //the width of decoded video frame
+    int height; //the height of decoded video frame
     int planeCnt;
     uint32_t handle[RENDER_MAX_PLANES];
     uint32_t stride[RENDER_MAX_PLANES];
@@ -42,30 +44,34 @@ typedef struct _RenderDmaBuffer {
     int fd[RENDER_MAX_PLANES];
 } RenderDmaBuffer;
 
+/*video frame buffer info that will be displayed*/
 typedef struct _RenderBuffer {
     int id; //buffer id
-    int flag; /*render buffer flag, see  enum _BufferFlag*/
+    int flag; /*render buffer flag, refer to RenderBufferFlag*/
     RenderDmaBuffer dma;
     RenderRawBuffer raw;
     int64_t pts; //time is nano second
     void *priv; //user data passed to render lib
-    int eos; //indicate the last frame of stream if needed, set 1 to indicate this frame is last frame,default is 0
+    int eos; //indicating the last frame of stream if needed, set 1 to indicate this frame is last frame,default is 0
+    int64_t displayTime; //displaying buffer time
     int reserved[4]; //reserved for extend
 } RenderBuffer;
 
+/*interval displaying video frame*/
 typedef struct _StepFrameInfo {
     int on; //if 1 means on, 0 means off
     int intervalMs; //step display frame interval, if this set to -1,only step one frame until next api invoked
 } StepFrameInfo;
 
+/*only hold video,audio output normal*/
 typedef struct _HoldVideoInfo {
     int on;//if 1 means on, 0 means off
     int64_t pts; //the video pts of hold video,if requesting hold video immediately, please set pts to -1
 } HoldVideoInfo;
 
 /*render key*/
-enum _RenderKey {
-    KEY_WINDOW_SIZE = 300, //set/get the video window size,value type is RenderWindowSize
+typedef enum _RenderKey {
+    KEY_WINDOW_SIZE = 300, //set/get the video window size,value type is RenderRect
     KEY_FRAME_SIZE, //set/get frame size,value type is RenderFrameSize
     KEY_VIDEO_FORMAT, //set/get video pixel format, value type is int,detail see RenderVideoFormat enum
     KEY_VIDEO_FPS, //set/get video framerate, value type is int64_t, hight 32bit is numerator,low 32bit is denominator
@@ -106,7 +112,7 @@ enum _RenderKey {
       render core will close plugin. render core will do nothing if plugin is opened and set to 1.
       get render plugin state, 1:connected,0:disconnected*/
     KEY_PLUGIN_STATE = 600, //set render plugin connect to compositor,if plugin had connected,render plugin will do nothing,value type is NULL
-};
+} RenderKey;
 
 /*video display window size
  if will be used by PROP_WINDOW_SIZE prop */
@@ -145,13 +151,11 @@ typedef enum _RenderMsgType {
 } RenderMsgType;
 
 /**
- * video render send msg callback, user must regist this callback to receive msg from render
+ * video render msg callback, user must register this callback to receive msg from video render
  *
  * @param userData the user data registered to video render lib
- * @param type  see enum _RenderMsgType
- * @param msg it is difference according to type value.
- *      when key is MSG_RELEASE_BUFFER, msg is defined by struct _RenderBuffer
- *      when key is MSG_CONNECTED_FAIL or MSG_DISCONNECTED_FAIL, msg is a char string.
+ * @param type  see enum RenderMsgType
+ * @param msg it is difference according to type value. refer to RenderMsgType
  *
  */
 typedef void (*onRenderMsgSend)(void *userData , RenderMsgType type, void *msg);
@@ -160,7 +164,7 @@ typedef void (*onRenderMsgSend)(void *userData , RenderMsgType type, void *msg);
  * @param key the value key,see enum _RenderKey
  * @param value the value return from user
  *
- * @return 0 success, -1 failed
+ * @return 0 success,-1 failure
  *
  */
 typedef int (*onRenderGet)(void *userData, int key, void *value);
@@ -270,7 +274,6 @@ typedef enum {
 
 /**
  * set user log print function to render lib
- * @param handle a handle of render lib that was opened
  * @param callback log print callback function
  * @return void
 */
@@ -278,7 +281,6 @@ void render_set_log_callback(void (*callback)(int,const char*, va_list));
 
 /**
  * set render lib log level, default level is RLIB_LOG_LEVEL_INFO
- * @param handle a handle of render lib that was opened
  * @param level render lib log level
  * @return void
 */
@@ -288,49 +290,47 @@ void render_set_log_level(int level);
  * open a render lib,render lib will open a compositer with the special
  * render name
  * @param name the render device name
- *   the name value list is:
+ *   the name value list is:weston,westeros,videotunnel,drmmeson
  *   wayland will open wayland render
  *   videotunnel will open tunnel render
  *
- * @return a handle of render lib , return null if failed
+ * @return a handle of render lib, null if failure
  */
 void *render_open(char *name);
 
 /**
  * @brief open a render lib,render lib will open a compositer with the special
- * render name and with a caller tag,this tag can set to NULL,it will equal
+ * render name and a caller tag,this tag can be set to NULL,it equal
  * render_open
  *
  * @param name the render device name
- * the name value list is:
- * wayland will open wayland render
- * videotunnel will open tunnel render
- * @param userTag a tag print by user defined
- * @return void* a handle of render lib , return null if failed
+ * the name value list is:weston,westeros,videotunnel,drmmeson
+ * @param userTag a tag string defined by user
+ * @return a handle of render lib, null if failure
  */
 void *render_open_with_tag(char *name, char *userTag);
 
 /**
- * registe callback to render lib, render device will call
+ * registe callback to render lib, render lib will call
  * these callbacks to send msg to user or get some value from user
- * @param handle a handle of render device that was opened
- * @param callback  callback function struct that render will use
- * @return 0 success,-1 fail
+ * @param handle a handle of render lib that was opened before
+ * @param callback  callback function
+ * @return 0 success,-1 failure
  */
 void render_set_callback(void *handle, RenderCallback *callback);
 
 /**
  * set user data to render lib
  * @param handle a handle of render lib that was opened
- * @param userdata the set userdata
- * @return 0 success,-1 fail
+ * @param userdata userdata
+ * @return 0 success,-1 failure
  */
 void render_set_user_data(void *handle, void *userdata);
 
 /**
- * connect to render device
- * @param handle a handle of render device that was opened
- * @return 0 success,-1 fail
+ * connect compositor client to compositor server
+ * @param handle a handle of render lib that was opened before
+ * @return 0 success,-1 failure
  */
 int render_connect(void *handle);
 
@@ -339,191 +339,193 @@ int render_connect(void *handle);
 /**
  * display a video frame, the buffer will be obtained by render lib
  * until render lib release it, so please allcating buffer from memory heap
- * @param handle a handle of render device that was opened
+ * @param handle a handle of render lib that was opened before
  * @param buffer a video buffer will be displayed
- * @return 0 success,-1 fail
+ * @return 0 success,-1 failure
  */
 int render_display_frame(void *handle, RenderBuffer *buffer);
 
 /**
- * set value to render device
- * @param handle a handle of render device that was opened
- * @param key a key of render device
+ * set value to render lib
+ * @param handle a handle of render lib that was opened before
+ * @param key a key type,refer to RenderKey
  * @param value the value of key
- * @return 0 success,-1 fail
+ * @return 0 success,-1 failure
  */
 int render_set(void *handle, int key, void *value);
 
 /**
- * get value from render device
- * @param handle a handle of render device that was opened
- * @param key a key of render device
+ * get value from render lib
+ * @param handle a handle of render lib that was opened before
+ * @param key a key type,refer to RenderKey
  * @param value the value of key
- * @return 0 success,-1 fail
+ * @return 0 success,-1 failure
  */
 int render_get(void *handle, int key, void *value);
 
 /**
- * flush render lib buffer
- * @param handle a handle of render device that was opened
- * @return 0 success,-1 fail
+ * flush render lib buffers
+ * @param handle a handle of render lib that was opened before
+ * @return 0 success,-1 failure
  */
 int render_flush(void *handle);
 
 /**
- * pause display video frame
- * @param handle a handle of render device that was opened
- * @return 0 success,-1 fail
+ * pause render lib, render lib will pause displaying video frames
+ * @param handle a handle of render lib that was opened before
+ * @return 0 success,-1 failure
  */
 int render_pause(void *handle);
 
 /**
- * @brief pause display,when display frame reached to the special pts video
+ * pause render lib until video frame's pts reached to the special pts
  *
- * @param handle a handle of render device that was opened
- * @param pts the will paused video frame pts, the pts unit is nano second
- * @return 0 success,-1 fail
+ * @param handle a handle of render lib that was opened
+ * @param pts video frame pts, the pts unit is nano second
+ * @return 0 success,-1 failure
  */
 int render_pause_pts(void *handle, int64_t pts);
 
 /**
- * resume display video frame
- * @param handle a handle of render device that was opened
- * @return 0 success,-1 fail
+ * resume render lib,render lib will resume displaying video frame
+ * @param handle a handle of render lib that was opened before
+ * @return 0 success,-1 failure
  */
 int render_resume(void *handle);
 
 /**
- * disconnect to render device
- * @param handle a handle of render device that was opened
- * @return 0 success,-1 fail
+ * disconnect compositor client from compositor server
+ * @param handle a handle of render lib that was opened before
+ * @return 0 success,-1 failure
  */
 int render_disconnect(void *handle);
 
 /**
- * close render device
- * @param handle a handle of render device that was opened
- * @return 0 success,-1 fail
+ * close render lib
+ * @param handle a handle of render lib that was opened before
+ * @return 0 success,-1 failure
  */
 int render_close(void *handle);
 
 
 /**********************tools func for render devices***************************/
 /**
- * only alloc a RenderBuffer wrapper from render lib,
- * @param handle a handle of render device that was opened
- * @param flag buffer flag value, defined allocate buffer action, the value see _BufferFlag defined
- * @param rawBufferSize allocated raw buffer size, if only allocate render buffer wrap, the bufferSize can 0
- * @return buffer handler or null if failed
+ * only allocating a RenderBuffer wrapper from render lib
+ * @param handle a handle of render lib that was opened before
+ * @param flag request allocating buffer flag, refer to RenderBufferFlag
+ * @param rawBufferSize request allocating raw buffer size, if only allocate render buffer wrap, the bufferSize can 0
+ * @return buffer handler or null if failure
  */
 RenderBuffer *render_allocate_render_buffer_wrap(void *handle, int flag, int rawBufferSize);
 
 /**
  * free render buffer that allocated from render lib
- * @param handle a handle of render device that was opened
- * @return
+ * @param handle a handle of render lib that was opened before
+ * @return void
  */
 void render_free_render_buffer_wrap(void *handle, RenderBuffer *buffer);
 
 /**
- * acquire dma buffer from render lib
- * @param handle a handle of render device that was opened
+ * acquire dma buffer from render lib, not enable now
+ * @param handle a handle of render lib that was opened before
  * @param planecnt the dma buffer plane count
  * @param width video width
  * @param height video height
  * @param dmabuffer  output parma,dmabuffer
- * @return 0 success, -1 if failed
+ * @return 0 success, -1 if failure
  *
 */
 int render_acquire_dma_buffer(void *handle, int planecnt, int width, int height, RenderDmaBuffer *dmabuffer);
 
 /**
- * release dma buffer that allocated from render lib
+ * release dma buffer that allocated from render lib, not enable now
+ * @param handle a handle of render lib that was opened before
+ * @param buffer dma buffer info that allocating from render lib
 */
 void render_release_dma_buffer(void *handle, RenderDmaBuffer *buffer);
 
 
 /**
- * @brief get first audio pts from mediasync
+ * get first audio pts from mediasync
  *
- * @param handle a handle of render device that was opened
+ * @param handle a handle of render lib that was opened before
  * @param pts the first rendered audio pts
- * @return int 0 success, -1 if failed
+ * @return int 0 success, -1 if failure
  */
 int render_mediasync_get_first_audio_pts(void *handle, int64_t *pts);
 
 /**
- * @brief get current rendering audio pts from mediasync
+ * get current rendering audio pts from mediasync
  *
- *@param handle a handle of render device that was opened
+ * @param handle a handle of render lib that was opened before
  * @param pts the current rendering audio pts
- * @return int 0 success, -1 if failed
+ * @return int 0 success, -1 if failure
  */
 int render_mediasync_get_current_audio_pts(void *handle, int64_t *pts);
 
 /**
- * @brief get current media time
+ * get current media time
  *
- * @param handle a handle of render device that was opened
+ * @param handle a handle of render lib that was opened before
  * @param mediaTimeType type of media
  * @param tunit type of time
  * @param mediaTime the current time
- * @return int 0 success, -1 if failed
+ * @return int 0 success, -1 if failure
  */
 int render_mediasync_get_media_time_by_type(void *handle, int mediaTimeType, int tunit, int64_t *mediaTime);
 
 /**
- * @brief get playback rate from mediasync
+ * get playback rate from mediasync
  *
- * @param handle a handle of render device that was opened
+ * @param handle a handle of render lib that was opened before
  * @param scale the playback rate(output param)
- * @return int 0 success, -1 if failed
+ * @return int 0 success, -1 if failure
  */
 int render_mediasync_get_playback_rate(void *handle, float *scale);
 
 /**
- * @brief queue pts that output from demux to mediasync for a/v sync
+ * queue pts that output from demux to mediasync for a/v sync
  *
- * @param handle a handle of render device that was opened
+ * @param handle a handle of render lib that was opened before
  * @param ptsUs the pts that output from demux, the unit is Us
  * @param size the frame size or 0 if unknown
- * @return int 0 success, -1 if failed
+ * @return int 0 success, -1 if failure
  */
 int render_mediasync_queue_demux_pts(void *handle, int64_t ptsUs, uint32_t size);
 
 /**
- * @brief get first queuevideo pts from mediasync
+ * get first queuevideo pts from mediasync
  *
- *@param handle a handle of render device that was opened
+ * @param handle a handle of render lib that was opened before
  * @param pts the first queuevideo pts
- * @return int 0 success, -1 if failed
+ * @return int 0 success, -1 if failure
  */
 int render_mediasync_get_first_queuevideo_pts(void *handle, int64_t *pts);
 
 /**
- * @brief get queuevideo pts from mediasync
+ * get queuevideo pts from mediasync
  *
- *@param handle a handle of render device that was opened
+ * @param handle a handle of render lib that was opened before
  * @param pts the queuevideo pts
- * @return int 0 success, -1 if failed
+ * @return int 0 success, -1 if failure
  */
 int render_mediasync_get_queuevideo_pts(void *handle, int64_t *pts);
 
 /**
- * @brief get first queueaudio pts from mediasync
+ * get first queueaudio pts from mediasync
  *
- *@param handle a handle of render device that was opened
+ * @param handle a handle of render lib that was opened before
  * @param pts the first queueaudio pts
- * @return int 0 success, -1 if failed
+ * @return int 0 success, -1 if failure
  */
 int render_mediasync_get_first_queueaudio_pts(void *handle, int64_t *pts);
 
 /**
- * @brief get queueaudio pts from mediasync
+ * get queueaudio pts from mediasync
  *
- *@param handle a handle of render device that was opened
+ * @param handle a handle of render lib that was opened before
  * @param pts the queueaudio pts
- * @return int 0 success, -1 if failed
+ * @return int 0 success, -1 if failure
  */
 int render_mediasync_get_queueaudio_pts(void *handle, int64_t *pts);
 
