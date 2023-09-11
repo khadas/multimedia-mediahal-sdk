@@ -1,10 +1,52 @@
 =========RELEALSE NOTE=================
 
-Version: V3.11.39-gda5eae6
+Version: V3.11.41-g4d5ee5e
 
 ========================================
 
 Git commit:
+commit 4d5ee5e927f4dca893cf6362593858cd0e8b66b8
+Author: yunmin.chen <yunmin.chen@amlogic.com>
+Date:   Wed Aug 30 22:03:08 2023 +0800
+
+    tsplayer: CB2 Fix the audio ad exception.  [1/1]
+    
+    PD#TV-88424
+    
+    Problem:
+    Set invalid audio pid to tsplayer.
+    
+    Solution:
+    Invalid audio pid cannot start audio.
+    
+    Verify:
+    SC2
+    
+    Change-Id: I8c6e3372f13708557d3b6b30fa8427c0bba9459d
+    Signed-off-by: yunmin.chen <yunmin.chen@amlogic.com>
+
+commit 7851dbe3b9911f291cc98db764b88e6cd13ad120
+Author: zhipeng.he <zhipeng.he@amlogic.com>
+Date:   Fri Aug 18 17:04:23 2023 +0800
+
+    tsplayer: CB2 improve the volume setting method [1/2]
+    
+    PD#OTT-48208
+    
+    Problem:
+    1.stb platform,set volume fail by tsplayer
+    2.set audio output mode fail
+    
+    Solution:
+    1.send new character string to set volume
+    2.send new character string to set audio mode
+    
+    Verify:
+    S1A
+    
+    Change-Id: Id45e3c2677f657349adef49417e0b9211a719507
+    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
+
 commit da5eae60602fdd06d98fa547d8deefcac8225aa9
 Author: fei.deng <fei.deng@amlogic.com>
 Date:   Fri Aug 25 07:03:02 2023 +0000
@@ -179,52 +221,9 @@ Date:   Wed Aug 2 20:45:13 2023 +0800
     Change-Id: I9f9aa802daf9f5e47ecba733766d4adbb445bc69
     Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
 
-commit 6c5fe5ad021d3fb8e3a0c2d0f9a7cc868f37876c
-Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Thu Jul 13 19:37:10 2023 +0800
-
-    mediasync: CB2 audioUpdateRefClock need add timeout case [1/1]
-    
-    PD#OTT-44772
-    
-    Problem:
-    when pause resume,no video frame to process,
-    then audioUpdateRefClock will check all the time,
-    can not resume successfully.
-    
-    Solution:
-    audioUpdateRefClock need add timeout case
-    
-    Verify:
-    ap232
-    
-    Change-Id: Ibadfe1c8dc483b71e4fbbcc8f4cdb140b19227a4
-    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
-
-commit a8dc2e2f336e7c7b5461532f8f75fe32b819aedb
-Author: chen.chen1 <chen.chen1@amlogic.com>
-Date:   Mon Jul 31 21:32:04 2023 +0800
-
-    mediasync: CB2 discontinue always triggered. [1/1]
-    
-    PD#OTT-46700
-    
-    Problem:
-    discontinue always triggered
-    
-    Solution:
-    1. use refPcr instead of mCurPcr to compare with demux pts
-    2. av-diff should use queue in pts to calculate
-    
-    Verify:
-    sc2
-    
-    Change-Id: I5631becf42dc2f68a90ff69740e53d80c14769f3
-    Signed-off-by: chen.chen1 <chen.chen1@amlogic.com>
-
 ========================================
 
-Release time: 2023-08-31-19-57
+Release time: 2023-09-11-17-51
 
 ========================================
 
