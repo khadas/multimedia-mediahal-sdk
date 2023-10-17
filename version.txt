@@ -1,10 +1,137 @@
 =========RELEALSE NOTE=================
 
-Version: V3.11.41-g4d5ee5e
+Version: V3.11.47-gd909289
 
 ========================================
 
 Git commit:
+commit d9092898c1ca0c229b18bba1d2754198a6a2e27d
+Author: yunmin.chen <yunmin.chen@amlogic.com>
+Date:   Tue Oct 17 19:18:57 2023 +0800
+
+    mediahal: CF2 mediahal release V3.11 [1/1]
+    
+    PD#SWPL-142654
+    
+    Problem:
+    mediahal release
+    
+    Solution:
+    release V3.11
+    
+    Verify:
+    SC2
+    
+    Change-Id: Iadec5905ce66025a7f31309e95326eece092e013
+    Signed-off-by: yunmin.chen <yunmin.chen@amlogic.com>
+
+commit 4925644a0ce00ba86ca5a94650f4875c74f4f3b5
+Author: zhipeng.he <zhipeng.he@amlogic.com>
+Date:   Thu Aug 17 16:28:04 2023 +0800
+
+    tsplayer: CB2 add decoder checkout pts on zapper  [1/2]
+    
+    PD#SWPL-136372
+    
+    Problem:
+    1.Video has invalid PTS.
+    2.zapper use old ptsserver.
+    
+    Solution:
+    1.Invalid PTS is calculated with duration.
+    2.zapper use new ptserver.
+    
+    Verify:
+    S1A
+    
+    Change-Id: Ib41938eff9e5441e49315e98294a1a8da8a3f888
+    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
+
+commit 3d3955c22a99589c4a22d8b641e90de549d7a780
+Author: zhipeng.he <zhipeng.he@amlogic.com>
+Date:   Thu Sep 14 14:24:09 2023 +0800
+
+    tsplayer: CB2 timeshift no audio sometimes. [1/1]
+    
+    PD#SWPL-138865
+    
+    Problem:
+    zapper not need multi audio
+    
+    Solution:
+    zapper remove multi audio,
+    to control start audio when mute.
+    
+    Verify:
+    AH212
+    
+    Change-Id: Ie457a55ca80bfe6bd6672c980ed5ef1529c73794
+    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
+
+commit 5579402e5a6e5e0f4c91a61b62e86182b3605f71
+Author: zhipeng.he <zhipeng.he@amlogic.com>
+Date:   Thu Sep 7 16:08:54 2023 +0800
+
+    tsplayer: CB2 esmode set nontunnel mode default [1/1]
+    
+    PD#SWPL-139070
+    
+    Problem:
+    esmode use tunnelmode,
+    map is amvideo+tsync
+    
+    Solution:
+    esmode set nontunnel mode default
+    map use amvideo+mediasync
+    
+    Verify:
+    S1A
+    
+    Change-Id: Iee72ab3ecd8ea7c6be475bafc20932b9c4d9e753
+    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
+
+commit 60df732baa66e0ee785e7c61c202604449b7086b
+Author: yunmin.chen <yunmin.chen@amlogic.com>
+Date:   Thu Aug 24 00:24:32 2023 +0800
+
+    mediasync: CB1 Optimize slow synchronization. [1/1]
+    
+    PD#SWPL-137409
+    
+    Problem:
+    Optimize slow synchronization.
+    
+    Solution:
+    Optimize slow synchronization.
+    
+    Verify:
+    S1A
+    
+    Change-Id: I3384c222e98acbaa1c48919f3a53dad9a3c8611e
+    Signed-off-by: yunmin.chen <yunmin.chen@amlogic.com>
+
+commit 19ea14e4df75042c54ce8542eceff5ed2088c507
+Author: yunmin.chen <yunmin.chen@amlogic.com>
+Date:   Fri Sep 8 19:51:54 2023 +0800
+
+    tsplayer: CB2 Fix out of sync issue.  [1/1]
+    
+    PD#OTT-49061
+    
+    Problem:
+    amvideo shows that it does not pass Demux PTS to MediaSync.
+    Causes a calculation cache exception.
+    
+    Solution:
+    The amvideo+mediasync path passes
+    the demux pts to the mediasync compute cache.
+    
+    Verify:
+    SC2
+    
+    Change-Id: I49e0e3a1e057fbb694cb17fce42be3dfe0ac93df
+    Signed-off-by: yunmin.chen <yunmin.chen@amlogic.com>
+
 commit 4d5ee5e927f4dca893cf6362593858cd0e8b66b8
 Author: yunmin.chen <yunmin.chen@amlogic.com>
 Date:   Wed Aug 30 22:03:08 2023 +0800
@@ -87,143 +214,9 @@ Date:   Mon Aug 28 09:32:19 2023 +0000
     Change-Id: I932d755f7c74983b629cce38a2446d18f8c3f5a4
     Signed-off-by: fei.deng <fei.deng@amlogic.com>
 
-commit 96fb3bc55a0e403812ebc86790063be4cd88b24f
-Author: fei.deng <fei.deng@amlogic.com>
-Date:   Wed Jul 12 05:38:23 2023 +0000
-
-    mediasync: CB2  correct output realtime [1/1]
-    
-    PD#SWPL-131184
-    
-    Problem:
-    mediasync output incorrect realtime,
-    it cause frame dropped
-    
-    Solution:
-    1.delay start play offset to 100ms
-    2.fix frame dropped when doing rate playback
-    
-    Verify:
-    ap212
-    
-    Change-Id: Ib98bc51a470873a4a70dbdb99b27456c8b81b21b
-    Signed-off-by: fei.deng <fei.deng@amlogic.com>
-
-commit 71f603f0f9479acae1bc76250c5ba9556dcf0c3d
-Author: fei.deng <fei.deng@amlogic.com>
-Date:   Mon Jul 3 06:17:31 2023 +0000
-
-    videorender: CF2 add buffer droped for weston [1/1]
-    
-    PD#SWPL-121671
-    
-    Problem:
-    frame dropped when doing yts test
-    
-    Solution:
-    1.add buffer droped feature for weston
-    2.add video sync feature on render lib side
-    3.reuse waylandbuffer when playing
-    4.prepare render buffer before pushing it to queue
-    5.remove some api from plugin interface
-    6.using dlopen to load liblog so file
-    7.force send displayed buffer msg when flush
-    
-    Verify:
-    ap222
-    
-    Change-Id: I6d55ec27de7449286b1372695a9c02022fbec827
-    Signed-off-by: fei.deng <fei.deng@amlogic.com>
-
-commit 108ef7a13b93b815c9db896bcb497021291bd1cb
-Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Fri Aug 18 16:11:54 2023 +0800
-
-    tsplayer: CF2 tsplayer add video latency. [1/1]
-    
-    PD#SWPL-130789
-    
-    Problem:
-    tsplayer not support video latency
-    
-    Solution:
-    tsplayer add video latency
-    
-    Verify:
-    t5w(trunck)
-    
-    Change-Id: I6cb8cc432e17b53f556af058307b1b78d8e2051a
-    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
-
-commit 8387af045b3affafbda8654c27bf18975fede1f8
-Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Thu Aug 10 15:35:24 2023 +0800
-
-    tsplayer: CB2 support set axis (0,0,0,0). [1/1]
-    
-    PD#SWPL-135648
-    
-    Problem:
-    not support set (0,0,0,0) when use amvideo
-    
-    Solution:
-    support set (0,0,0,0),
-    then set (0,0,,-1,-1) to amvideo
-    
-    Verify:
-    S1A
-    
-    Change-Id: I8bdd7b6593ba372259bca5eaa5c8092d4648a78b
-    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
-
-commit 7be1589398e03207eb024a5b00faca50fe1a8c90
-Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Thu Aug 3 21:05:23 2023 +0800
-
-    tsplayer: CB2 ff4 to ff1 can not play.  [1/1]
-    
-    PD#SWPL-132941
-    
-    Problem:
-    FF4 to FF1:->pause-->stop-->start,
-    can not play video
-    
-    Solution:
-    when start need to resume on VideodecAmlRenderWrapper.
-    
-    Verify:
-    AQ2432
-    
-    Change-Id: Idb69bd22f4e8669fa642d40c46d62f52261fd7dd
-    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
-
-commit 77d4b7b626c0f948a234281bbbb82aa2304ca559
-Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Wed Aug 2 20:45:13 2023 +0800
-
-    mediasync: CB2  Fixed leaking sound in trick mode. [1/1]
-    
-    PD#SWPL-132883
-    
-    Problem:
-    After setting trick mode (PAUSE_NEXT),
-    the pause() function slows down.
-    Causes sound leakage.
-    
-    Solution:
-    After trick mode (PAUSE_NEXT),
-    audio outputs the hold strategy.
-    renderlib set trick mode to mediasync.
-    
-    Verify:
-    AQ2432
-    
-    Change-Id: I9f9aa802daf9f5e47ecba733766d4adbb445bc69
-    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
-
 ========================================
 
-Release time: 2023-09-11-17-51
+Release time: 2023-10-17-20-34
 
 ========================================
 
