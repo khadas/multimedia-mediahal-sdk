@@ -4,6 +4,8 @@
 #include <stdlib.h>
 #include <stdarg.h>
 
+#include "render_common.h"
+
 #ifdef  __cplusplus
 extern "C" {
 #endif
@@ -16,61 +18,20 @@ extern "C" {
 #define RLIB_LOG_LEVEL_TRACE2  5
 #define RLIB_LOG_LEVEL_TRACE3  6
 
-#define RENDER_MAX_PLANES 3
-
-/*allocate render buffer flag */
-typedef enum _BufferFlag {
-    BUFFER_FLAG_NONE       = 0,
-    BUFFER_FLAG_ALLOCATE_DMA_BUFFER = 1 << 1,
-    BUFFER_FLAG_ALLOCATE_RAW_BUFFER = 1 << 2,
-    BUFFER_FLAG_EXTER_DMA_BUFFER    = 1 << 3,
-} RenderBufferFlag;
-
-/*raw render buffer info*/
-typedef struct _RenderRawBuffer {
-    void *dataPtr;
-    int size;
-} RenderRawBuffer;
-
-/*dma render buffer info*/
-typedef struct _RenderDmaBuffer {
-    int width; //the width of decoded video frame
-    int height; //the height of decoded video frame
-    int planeCnt;
-    uint32_t handle[RENDER_MAX_PLANES];
-    uint32_t stride[RENDER_MAX_PLANES];
-    uint32_t offset[RENDER_MAX_PLANES];
-    uint32_t size[RENDER_MAX_PLANES];
-    int fd[RENDER_MAX_PLANES];
-} RenderDmaBuffer;
-
-/*video frame buffer info that will be displayed*/
-typedef struct _RenderBuffer {
-    int id; //buffer id
-    int flag; /*render buffer flag, refer to RenderBufferFlag*/
-    RenderDmaBuffer dma;
-    RenderRawBuffer raw;
-    int64_t pts; //time is nano second
-    void *priv; //user data passed to render lib
-    int eos; //indicating the last frame of stream if needed, set 1 to indicate this frame is last frame,default is 0
-    int64_t displayTime; //displaying buffer time
-    int reserved[4]; //reserved for extend
-} RenderBuffer;
-
 /*interval displaying video frame*/
-typedef struct _StepFrameInfo {
+typedef struct {
     int on; //if 1 means on, 0 means off
     int intervalMs; //step display frame interval, if this set to -1,only step one frame until next api invoked
 } StepFrameInfo;
 
 /*only hold video,audio output normal*/
-typedef struct _HoldVideoInfo {
+typedef struct {
     int on;//if 1 means on, 0 means off
     int64_t pts; //the video pts of hold video,if requesting hold video immediately, please set pts to -1
 } HoldVideoInfo;
 
 /*render key*/
-typedef enum _RenderKey {
+typedef enum {
     KEY_WINDOW_SIZE = 300, //set/get the video window size,value type is RenderRect
     KEY_FRAME_SIZE, //set/get frame size,value type is RenderFrameSize
     KEY_VIDEO_FORMAT, //set/get video pixel format, value type is int,detail see RenderVideoFormat enum
@@ -89,6 +50,7 @@ typedef enum _RenderKey {
     KEY_HOLD_VIDEO, //set/get hold video,but audio is running,value type is HoldVideoInfo,detail info see HoldVideoInfo defined
     KEY_PIXEL_ASPECT_RATIO, //set/get video frame pixel aspect ratio, value type is double
     KEY_VIDEO_TRICK_MODE, //set/get video trick mode
+    KEY_FRAME_BY_PASS_PLUGIN, //set/get video frame do not send to render plugin,frames will callback to user after got displaying monotime
     KEY_MEDIASYNC_INSTANCE_ID = 400, //set/get mediasync instance id, value type is int
     KEY_MEDIASYNC_PCR_PID, ///set/get mediasync pcr id ,value type is int
     KEY_MEDIASYNC_DEMUX_ID, //set/get mediasync demux id ,value type is int
@@ -104,7 +66,7 @@ typedef enum _RenderKey {
     KEY_MEDIASYNC_PLAYER_INSTANCE_ID,
     KEY_MEDIASYNC_PLAYBACK_RATE, //set/get playback rate,value type is float,0.5 is 0.5 rate, 1.0 is normal, 2.0 is 2x rate
     KEY_MEDIASYNC_VIDEO_SYNC_THRESHOLD, //set/get video free run threshold,value type is int,time is us
-    KEY_MEDIASYNC_VIDEO_FREERUN, //set/get video freerun when video is displayed
+    KEY_MEDIASYNC_VIDEO_FREERUN, //set/get video freerun playback
     //set/get video tunnel instance id when videotunnel plugin be selected,value type is int,this key must set before render_connect
     KEY_VIDEOTUNNEL_ID = 450,
     /*set render plugin to connect to compositor or disconnect from compositor, if set to 1
@@ -112,43 +74,8 @@ typedef enum _RenderKey {
       render core will close plugin. render core will do nothing if plugin is opened and set to 1.
       get render plugin state, 1:connected,0:disconnected*/
     KEY_PLUGIN_STATE = 600, //set render plugin connect to compositor,if plugin had connected,render plugin will do nothing,value type is NULL
+    KEY_SET_USER_ID = 650, //set a special id to video render lib to identify user id,value type is int
 } RenderKey;
-
-/*video display window size
- if will be used by PROP_WINDOW_SIZE prop */
-typedef struct _RenderWindowSize {
-    int x;
-    int y;
-    int w;
-    int h;
-} RenderWindowSize;
-
-/*frame size info
- it will be used by PROP_UPDATE_FRAME_SIZE prop*/
-typedef struct _RenderFrameSize {
-    int frameWidth;
-    int frameHeight;
-} RenderFrameSize;
-
-typedef enum _RenderMsgType {
-    //frame buffer is released
-    MSG_RELEASE_BUFFER            = 100, //the msg value type is RenderBuffer
-    //frame buffer is displayed
-    MSG_DISPLAYED_BUFFER          = 101, //the msg value type is RenderBuffer
-    //the frame buffer is droped
-    MSG_DROPED_BUFFER             = 102,//the msg value type is RenderBuffer
-    //first frame displayed msg
-    MSG_FIRST_FRAME               = 103, //the msg value type is frame pts
-    //under flow msg
-    MSG_UNDER_FLOW                = 104, //the msg value type is null
-    //pause with special pts
-    MSG_PAUSED_PTS                = 105, //the msg value type is RenderBuffer
-
-    //render lib connected failed
-    MSG_CONNECTED_FAIL            = 200, //the msg value type is string
-    //render lib disconnected failed
-    MSG_DISCONNECTED_FAIL         = 201, //the msg value type is string
-} RenderMsgType;
 
 /**
  * video render msg callback, user must register this callback to receive msg from video render
@@ -177,100 +104,10 @@ typedef int (*onRenderGet)(void *userData, int key, void *value);
  * @param msg the message of sending
  * @return
  */
-typedef struct _RenderCallback {
+typedef struct {
     onRenderMsgSend doMsgSend;
     onRenderGet doGetValue;
 } RenderCallback;
-
-/**video format*/
-typedef enum {
-    VIDEO_FORMAT_UNKNOWN,
-    VIDEO_FORMAT_ENCODED,
-    VIDEO_FORMAT_I420,
-    VIDEO_FORMAT_YV12,
-    VIDEO_FORMAT_YUY2,
-    VIDEO_FORMAT_UYVY,
-    VIDEO_FORMAT_AYUV,
-    VIDEO_FORMAT_RGBx,
-    VIDEO_FORMAT_BGRx,
-    VIDEO_FORMAT_xRGB,
-    VIDEO_FORMAT_xBGR,
-    VIDEO_FORMAT_RGBA,
-    VIDEO_FORMAT_BGRA,
-    VIDEO_FORMAT_ARGB,
-    VIDEO_FORMAT_ABGR,
-    VIDEO_FORMAT_RGB,
-    VIDEO_FORMAT_BGR,
-    VIDEO_FORMAT_Y41B,
-    VIDEO_FORMAT_Y42B,
-    VIDEO_FORMAT_YVYU,
-    VIDEO_FORMAT_Y444,
-    VIDEO_FORMAT_v210,
-    VIDEO_FORMAT_v216,
-    VIDEO_FORMAT_NV12,
-    VIDEO_FORMAT_NV21,
-    VIDEO_FORMAT_GRAY8,
-    VIDEO_FORMAT_GRAY16_BE,
-    VIDEO_FORMAT_GRAY16_LE,
-    VIDEO_FORMAT_v308,
-    VIDEO_FORMAT_RGB16,
-    VIDEO_FORMAT_BGR16,
-    VIDEO_FORMAT_RGB15,
-    VIDEO_FORMAT_BGR15,
-    VIDEO_FORMAT_UYVP,
-    VIDEO_FORMAT_A420,
-    VIDEO_FORMAT_RGB8P,
-    VIDEO_FORMAT_YUV9,
-    VIDEO_FORMAT_YVU9,
-    VIDEO_FORMAT_IYU1,
-    VIDEO_FORMAT_ARGB64,
-    VIDEO_FORMAT_AYUV64,
-    VIDEO_FORMAT_r210,
-    VIDEO_FORMAT_I420_10BE,
-    VIDEO_FORMAT_I420_10LE,
-    VIDEO_FORMAT_I422_10BE,
-    VIDEO_FORMAT_I422_10LE,
-    VIDEO_FORMAT_Y444_10BE,
-    VIDEO_FORMAT_Y444_10LE,
-    VIDEO_FORMAT_GBR,
-    VIDEO_FORMAT_GBR_10BE,
-    VIDEO_FORMAT_GBR_10LE,
-    VIDEO_FORMAT_NV16,
-    VIDEO_FORMAT_NV24,
-    VIDEO_FORMAT_NV12_64Z32,
-    VIDEO_FORMAT_A420_10BE,
-    VIDEO_FORMAT_A420_10LE,
-    VIDEO_FORMAT_A422_10BE,
-    VIDEO_FORMAT_A422_10LE,
-    VIDEO_FORMAT_A444_10BE,
-    VIDEO_FORMAT_A444_10LE,
-    VIDEO_FORMAT_NV61,
-    VIDEO_FORMAT_P010_10BE,
-    VIDEO_FORMAT_P010_10LE,
-    VIDEO_FORMAT_IYU2,
-    VIDEO_FORMAT_VYUY,
-    VIDEO_FORMAT_GBRA,
-    VIDEO_FORMAT_GBRA_10BE,
-    VIDEO_FORMAT_GBRA_10LE,
-    VIDEO_FORMAT_GBR_12BE,
-    VIDEO_FORMAT_GBR_12LE,
-    VIDEO_FORMAT_GBRA_12BE,
-    VIDEO_FORMAT_GBRA_12LE,
-    VIDEO_FORMAT_I420_12BE,
-    VIDEO_FORMAT_I420_12LE,
-    VIDEO_FORMAT_I422_12BE,
-    VIDEO_FORMAT_I422_12LE,
-    VIDEO_FORMAT_Y444_12BE,
-    VIDEO_FORMAT_Y444_12LE,
-    VIDEO_FORMAT_GRAY10_LE32,
-    VIDEO_FORMAT_NV12_10LE32,
-    VIDEO_FORMAT_NV16_10LE32,
-    VIDEO_FORMAT_NV12_10LE40,
-    VIDEO_FORMAT_Y210,
-    VIDEO_FORMAT_Y410,
-    VIDEO_FORMAT_VUYA,
-    VIDEO_FORMAT_BGR10A2_LE,
-} RenderVideoFormat;
 
 /**
  * set user log print function to render lib
@@ -287,28 +124,11 @@ void render_set_log_callback(void (*callback)(int,const char*, va_list));
 void render_set_log_level(int level);
 
 /**
- * open a render lib,render lib will open a compositer with the special
- * render name
- * @param name the render device name
- *   the name value list is:weston,westeros,videotunnel,drmmeson
- *   wayland will open wayland render
- *   videotunnel will open tunnel render
+ * open a render lib,render lib will open a compositer  client
  *
  * @return a handle of render lib, null if failure
  */
-void *render_open(char *name);
-
-/**
- * @brief open a render lib,render lib will open a compositer with the special
- * render name and a caller tag,this tag can be set to NULL,it equal
- * render_open
- *
- * @param name the render device name
- * the name value list is:weston,westeros,videotunnel,drmmeson
- * @param userTag a tag string defined by user
- * @return a handle of render lib, null if failure
- */
-void *render_open_with_tag(char *name, char *userTag);
+void *render_open();
 
 /**
  * registe callback to render lib, render lib will call
@@ -317,15 +137,7 @@ void *render_open_with_tag(char *name, char *userTag);
  * @param callback  callback function
  * @return 0 success,-1 failure
  */
-void render_set_callback(void *handle, RenderCallback *callback);
-
-/**
- * set user data to render lib
- * @param handle a handle of render lib that was opened
- * @param userdata userdata
- * @return 0 success,-1 failure
- */
-void render_set_user_data(void *handle, void *userdata);
+void render_set_callback(void *handle, void *userData, RenderCallback *callback);
 
 /**
  * connect compositor client to compositor server
@@ -352,7 +164,7 @@ int render_display_frame(void *handle, RenderBuffer *buffer);
  * @param value the value of key
  * @return 0 success,-1 failure
  */
-int render_set(void *handle, int key, void *value);
+int render_set_value(void *handle, RenderKey key, void *value);
 
 /**
  * get value from render lib
@@ -361,7 +173,7 @@ int render_set(void *handle, int key, void *value);
  * @param value the value of key
  * @return 0 success,-1 failure
  */
-int render_get(void *handle, int key, void *value);
+int render_get_value(void *handle, RenderKey key, void *value);
 
 /**
  * flush render lib buffers
@@ -384,7 +196,7 @@ int render_pause(void *handle);
  * @param pts video frame pts, the pts unit is nano second
  * @return 0 success,-1 failure
  */
-int render_pause_pts(void *handle, int64_t pts);
+int render_pause_with_pts(void *handle, int64_t pts);
 
 /**
  * resume render lib,render lib will resume displaying video frame
@@ -416,7 +228,7 @@ int render_close(void *handle);
  * @param rawBufferSize request allocating raw buffer size, if only allocate render buffer wrap, the bufferSize can 0
  * @return buffer handler or null if failure
  */
-RenderBuffer *render_allocate_render_buffer_wrap(void *handle, int flag, int rawBufferSize);
+RenderBuffer *render_allocate_render_buffer_wrap(void *handle, int flag);
 
 /**
  * free render buffer that allocated from render lib
@@ -424,26 +236,6 @@ RenderBuffer *render_allocate_render_buffer_wrap(void *handle, int flag, int raw
  * @return void
  */
 void render_free_render_buffer_wrap(void *handle, RenderBuffer *buffer);
-
-/**
- * acquire dma buffer from render lib, not enable now
- * @param handle a handle of render lib that was opened before
- * @param planecnt the dma buffer plane count
- * @param width video width
- * @param height video height
- * @param dmabuffer  output parma,dmabuffer
- * @return 0 success, -1 if failure
- *
-*/
-int render_acquire_dma_buffer(void *handle, int planecnt, int width, int height, RenderDmaBuffer *dmabuffer);
-
-/**
- * release dma buffer that allocated from render lib, not enable now
- * @param handle a handle of render lib that was opened before
- * @param buffer dma buffer info that allocating from render lib
-*/
-void render_release_dma_buffer(void *handle, RenderDmaBuffer *buffer);
-
 
 /**
  * get first audio pts from mediasync

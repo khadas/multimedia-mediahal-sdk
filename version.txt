@@ -1,10 +1,53 @@
 =========RELEALSE NOTE=================
 
-Version: V3.11.47-gd909289
+Version: V3.13.1-gef8ebdd
 
 ========================================
 
 Git commit:
+commit ef8ebdd5310fcc05427973df8998698d62fdc17c
+Author: fei.deng <fei.deng@amlogic.com>
+Date:   Fri Oct 13 01:50:42 2023 +0000
+
+    videorender: CB2 refine render lib api [1/1]
+    
+    PD#SWPL-140292
+    
+    Problem:
+    1.refine render lib api
+    2.split render lib to render core and plugins
+    
+    Solution:
+    1.refine render lib api
+    2.split render lib to render core and plugins
+    3.don't wait when hold time less than 2 ms
+    
+    Verify:
+    ap222
+    
+    Change-Id: I3cb3ecbbf6153f3b468f848ec0e614f770432891
+    Signed-off-by: fei.deng <fei.deng@amlogic.com>
+
+commit a11135331ae9bdf1b29cc11fcbee14e9123b4d21
+Author: yunmin.chen <yunmin.chen@amlogic.com>
+Date:   Tue Oct 17 20:34:02 2023 +0800
+
+    mediahal: CF2 mediahal update version [1/1]
+    
+    PD#SWPL-142654
+    
+    Problem:
+    mediahal update version
+    
+    Solution:
+    update V3.13
+    
+    Verify:
+    SC2
+    
+    Change-Id: I5a3eebff4400b1f6d92dfd5e69dc3a436b1d9692
+    Signed-off-by: yunmin.chen <yunmin.chen@amlogic.com>
+
 commit d9092898c1ca0c229b18bba1d2754198a6a2e27d
 Author: yunmin.chen <yunmin.chen@amlogic.com>
 Date:   Tue Oct 17 19:18:57 2023 +0800
@@ -174,49 +217,9 @@ Date:   Fri Aug 18 17:04:23 2023 +0800
     Change-Id: Id45e3c2677f657349adef49417e0b9211a719507
     Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
 
-commit da5eae60602fdd06d98fa547d8deefcac8225aa9
-Author: fei.deng <fei.deng@amlogic.com>
-Date:   Fri Aug 25 07:03:02 2023 +0000
-
-    videorender: CB2 disable video plane [1/1]
-    
-    PD#OTT-47881
-    
-    Problem:
-    if set keep last frame,set disable video plane
-    
-    Solution:
-    set disable video plane in drm buffer
-    
-    Verify:
-    AP23A9
-    
-    Change-Id: Ia227cdf5e8b914f058cf7bc2c01392d5aff3bfaa
-    Signed-off-by: fei.deng <fei.deng@amlogic.com>
-
-commit 363fbfcc94245cd3daa849fef4a2cd98f10b05b1
-Author: fei.deng <fei.deng@amlogic.com>
-Date:   Mon Aug 28 09:32:19 2023 +0000
-
-    videorender: CB2 only enable av sync on render lib [1/1]
-    
-    PD#SWPL-131188
-    
-    Problem:
-    smart home project do not add weston drop patch
-    
-    Solution:
-    only enable av sync on render lib
-    
-    Verify:
-    ap222
-    
-    Change-Id: I932d755f7c74983b629cce38a2446d18f8c3f5a4
-    Signed-off-by: fei.deng <fei.deng@amlogic.com>
-
 ========================================
 
-Release time: 2023-10-17-20-34
+Release time: 2023-10-20-10-26
 
 ========================================
 
