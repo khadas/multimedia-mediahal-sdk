@@ -1,10 +1,133 @@
 =========RELEALSE NOTE=================
 
-Version: V3.13.1-gef8ebdd
+Version: V3.13.7-g4b7af21
 
 ========================================
 
 Git commit:
+commit 4b7af2176abc2c8f4437b7a3ceaa0363d6495a58
+Author: fei.deng <fei.deng@amlogic.com>
+Date:   Thu Nov 9 11:15:35 2023 +0000
+
+    videorender: CB2 error keep last frame [1/1]
+    
+    PD#SWPL-145445
+    
+    Problem:
+    when doing YTS dual video test case,setting pip case keep last
+    frame
+    
+    Solution:
+    add break
+    
+    Verify:
+    ap222
+    
+    Change-Id: I6ecb9d5a9a31d08cf8190dcfb8e10a8cd88ad0b8
+    Signed-off-by: fei.deng <fei.deng@amlogic.com>
+
+commit 43c82d61f3f39dab95f17529ab686ba01495e64c
+Author: zhipeng.he <zhipeng.he@amlogic.com>
+Date:   Mon Nov 6 19:29:31 2023 +0800
+
+    tsplayer: CB2 fix the memory leak. [1/1]
+    
+    PD#SWPL-141763
+    
+    Problem:
+    memory leak when switch channel sometimes.
+    
+    Solution:
+    release all dmabuf when release.
+    
+    Verify:
+    DVT1
+    
+    Change-Id: I19ad09661388a313b6fe0628d2d2a72f099ebfd4
+    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
+
+commit ea95d4f3522c2c50e9a35f7308d13c9a195e5f44
+Author: zhipeng.he <zhipeng.he@amlogic.com>
+Date:   Tue Nov 7 13:53:26 2023 +0800
+
+    tsplayer: CB2 add set ad volume. [1/1]
+    
+    PD#OTT-51115
+    
+    Problem:
+    set ad volume not call audio
+    
+    Solution:
+    set ad volume,then send to audio
+    
+    Verify:
+    SC2
+    
+    Change-Id: Idf33e854e6d4e86206679c1c2f17cfe8f4c25186
+    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
+
+commit a9e5602368ed6b514561238c8b9367f3944a06a9
+Author: zhipeng.he <zhipeng.he@amlogic.com>
+Date:   Wed Oct 18 19:49:41 2023 +0800
+
+    mediasync: CB2 fixed avsync fail special ts. [1/1]
+    
+    PD#SWPL-140707
+    
+    Problem:
+    MS12 AVsync case test fail,
+    I frame duration is more than 4s.
+    
+    Solution:
+    Increase the timeout time for av alignment
+    Improve the issue of tsplayer discarding es
+    
+    Verify:
+    AH212
+    
+    Change-Id: Id7e78b5025a5edefd97add891b45849a3d668972
+    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
+
+commit 25b395e1a2fabcd16e8dedd1c396463b81d14656
+Author: zhipeng.he <zhipeng.he@amlogic.com>
+Date:   Sun Oct 8 15:05:51 2023 +0800
+
+    tsplayer: CF2 Supports overflow and underflow events in multidemux [1/1]
+    
+    PD#OTT-46872
+    
+    Problem:
+    Nontunnel mode does not yet support overflow and underflow events.
+    
+    Solution:
+    Added overflow and underflow event reporting in nontunnel mode
+    
+    Verify:
+    S905Y4
+    
+    Change-Id: Id1bce692e336397ebb13f4acfcd2197f3fd8b56b
+    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
+
+commit e01963dc16b0bba84f22fabe70f7b8d558b83c62
+Author: zhipeng.he <zhipeng.he@amlogic.com>
+Date:   Tue Oct 31 21:02:30 2023 +0800
+
+    mediasync: CF2 Optimize the second frame plot time. [1/1]
+    
+    PD#TV-94481
+    
+    Problem:
+    the second frame is slowly than roxton.
+    
+    Solution:
+    Calculate offset based on the PCR and demux apts.
+    
+    Verify:
+    DVT1
+    
+    Change-Id: I9347ac12ce7d9625568e13c5d2559187e104a0a6
+    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
+
 commit ef8ebdd5310fcc05427973df8998698d62fdc17c
 Author: fei.deng <fei.deng@amlogic.com>
 Date:   Fri Oct 13 01:50:42 2023 +0000
@@ -90,136 +213,9 @@ Date:   Thu Aug 17 16:28:04 2023 +0800
     Change-Id: Ib41938eff9e5441e49315e98294a1a8da8a3f888
     Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
 
-commit 3d3955c22a99589c4a22d8b641e90de549d7a780
-Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Thu Sep 14 14:24:09 2023 +0800
-
-    tsplayer: CB2 timeshift no audio sometimes. [1/1]
-    
-    PD#SWPL-138865
-    
-    Problem:
-    zapper not need multi audio
-    
-    Solution:
-    zapper remove multi audio,
-    to control start audio when mute.
-    
-    Verify:
-    AH212
-    
-    Change-Id: Ie457a55ca80bfe6bd6672c980ed5ef1529c73794
-    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
-
-commit 5579402e5a6e5e0f4c91a61b62e86182b3605f71
-Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Thu Sep 7 16:08:54 2023 +0800
-
-    tsplayer: CB2 esmode set nontunnel mode default [1/1]
-    
-    PD#SWPL-139070
-    
-    Problem:
-    esmode use tunnelmode,
-    map is amvideo+tsync
-    
-    Solution:
-    esmode set nontunnel mode default
-    map use amvideo+mediasync
-    
-    Verify:
-    S1A
-    
-    Change-Id: Iee72ab3ecd8ea7c6be475bafc20932b9c4d9e753
-    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
-
-commit 60df732baa66e0ee785e7c61c202604449b7086b
-Author: yunmin.chen <yunmin.chen@amlogic.com>
-Date:   Thu Aug 24 00:24:32 2023 +0800
-
-    mediasync: CB1 Optimize slow synchronization. [1/1]
-    
-    PD#SWPL-137409
-    
-    Problem:
-    Optimize slow synchronization.
-    
-    Solution:
-    Optimize slow synchronization.
-    
-    Verify:
-    S1A
-    
-    Change-Id: I3384c222e98acbaa1c48919f3a53dad9a3c8611e
-    Signed-off-by: yunmin.chen <yunmin.chen@amlogic.com>
-
-commit 19ea14e4df75042c54ce8542eceff5ed2088c507
-Author: yunmin.chen <yunmin.chen@amlogic.com>
-Date:   Fri Sep 8 19:51:54 2023 +0800
-
-    tsplayer: CB2 Fix out of sync issue.  [1/1]
-    
-    PD#OTT-49061
-    
-    Problem:
-    amvideo shows that it does not pass Demux PTS to MediaSync.
-    Causes a calculation cache exception.
-    
-    Solution:
-    The amvideo+mediasync path passes
-    the demux pts to the mediasync compute cache.
-    
-    Verify:
-    SC2
-    
-    Change-Id: I49e0e3a1e057fbb694cb17fce42be3dfe0ac93df
-    Signed-off-by: yunmin.chen <yunmin.chen@amlogic.com>
-
-commit 4d5ee5e927f4dca893cf6362593858cd0e8b66b8
-Author: yunmin.chen <yunmin.chen@amlogic.com>
-Date:   Wed Aug 30 22:03:08 2023 +0800
-
-    tsplayer: CB2 Fix the audio ad exception.  [1/1]
-    
-    PD#TV-88424
-    
-    Problem:
-    Set invalid audio pid to tsplayer.
-    
-    Solution:
-    Invalid audio pid cannot start audio.
-    
-    Verify:
-    SC2
-    
-    Change-Id: I8c6e3372f13708557d3b6b30fa8427c0bba9459d
-    Signed-off-by: yunmin.chen <yunmin.chen@amlogic.com>
-
-commit 7851dbe3b9911f291cc98db764b88e6cd13ad120
-Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Fri Aug 18 17:04:23 2023 +0800
-
-    tsplayer: CB2 improve the volume setting method [1/2]
-    
-    PD#OTT-48208
-    
-    Problem:
-    1.stb platform,set volume fail by tsplayer
-    2.set audio output mode fail
-    
-    Solution:
-    1.send new character string to set volume
-    2.send new character string to set audio mode
-    
-    Verify:
-    S1A
-    
-    Change-Id: Id45e3c2677f657349adef49417e0b9211a719507
-    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
-
 ========================================
 
-Release time: 2023-10-20-10-26
+Release time: 2023-12-11-14-58
 
 ========================================
 

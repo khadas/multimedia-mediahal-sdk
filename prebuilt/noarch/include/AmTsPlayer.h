@@ -39,7 +39,18 @@ typedef enum {
     AM_TSPLAYER_EVENT_TYPE_DECODE_FIRST_FRAME_AUDIO, //The audio decoder outputs the first frame.
     AM_TSPLAYER_EVENT_TYPE_AV_SYNC_DONE, //av sync done
     AM_TSPLAYER_EVENT_TYPE_INPUT_VIDEO_BUFFER_DONE,  // input video buffer done
-    AM_TSPLAYER_EVENT_TYPE_INPUT_AUDIO_BUFFER_DONE  // input audio buffer done
+    AM_TSPLAYER_EVENT_TYPE_INPUT_AUDIO_BUFFER_DONE,  // input audio buffer done
+    AM_TSPLAYER_EVENT_TYPE_DECODE_FRAME_ERROR_COUNT,  // The video decoder frame error count
+    AM_TSPLAYER_EVENT_TYPE_VIDEO_OVERFLOW, //Video amstream buffer overflow
+    AM_TSPLAYER_EVENT_TYPE_VIDEO_UNDERFLOW, //Video amstream buffer underflow
+    AM_TSPLAYER_EVENT_TYPE_AUDIO_OVERFLOW, //Audio amstream buffer overflow
+    AM_TSPLAYER_EVENT_TYPE_AUDIO_UNDERFLOW, //Audio amstream buffer underflow
+    AM_TSPLAYER_EVENT_TYPE_VIDEO_INVALID_TIMESTAMP, //Video invalid timestamp
+    AM_TSPLAYER_EVENT_TYPE_VIDEO_INVALID_DATA, //Video invalid data
+    AM_TSPLAYER_EVENT_TYPE_AUDIO_INVALID_TIMESTAMP, //Audio invalid timestamp
+    AM_TSPLAYER_EVENT_TYPE_AUDIO_INVALID_DATA, //Audio invalid data
+    AM_TSPLAYER_EVENT_TYPE_DECODE_VIDEO_UNSUPPORT, // Video is not supported
+    AM_TSPLAYER_EVENT_TYPE_PREEMPTED  // Instance was preempted, apk need release this instance
 } am_tsplayer_event_type;
 
 
@@ -400,6 +411,13 @@ typedef struct {
     bool_t  scramling;
 } scamling_t;
 
+typedef struct {
+    uint32_t video_overflow_num;                        // Video overflow num
+    uint32_t video_underflow_num;                       // Video underflow num
+    uint32_t audio_overflow_num;                        // Audio overflow num
+    uint32_t audio_underflow_num;                       // Audio underflow num
+} av_flow_t;
+
 /*AmTsPlayer call back event*/
 typedef struct {
     am_tsplayer_event_type type;           // Call back event type
@@ -416,6 +434,7 @@ typedef struct {
         scamling_t scramling;
         /*callback audio/video input buffer ptr*/
         void* bufptr;
+        av_flow_t av_flow_cnt;
     } event;
 }am_tsplayer_event;
 
