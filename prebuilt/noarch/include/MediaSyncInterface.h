@@ -68,6 +68,7 @@ typedef enum {
     MEDIASYNC_KEY_AUDIO_SYNC_THRESHOLD,  //us
     MEDIASYNC_KEY_VIDEO_DURING_SLOW_SYNC,
     MEDIASYNC_KEY_VIDEO_FRAME_ADVANCE,
+    MEDIASYNC_KEY_AUDIO_EQUIPMENT,
     MEDIASYNC_KEY_VIDEO_DRIVER_LAYER_SYNC,
     MEDIASYNC_KEY_MAX = 255,
 } mediasync_parameter;
@@ -198,7 +199,9 @@ extern mediasync_result MediaSync_GetFirstQueueVideoInfo(void* handle, mediasync
 extern mediasync_result MediaSync_GetQueueVideoInfo(void* handle, mediasync_frameinfo *info);
 extern mediasync_result MediaSync_GetFirstQueueAudioInfo(void* handle, mediasync_frameinfo *info);
 extern mediasync_result MediaSync_GetQueueAudioInfo(void* handle, mediasync_frameinfo *info);
+extern mediasync_result MediaSync_RegisterCb(void* handle,int type,void* pfunc,void *cbHandle);
 extern mediasync_result MediaSync_reset(void* handle);
 extern void MediaSync_destroy(void* handle);
+
 
 #endif  // MEDIA_CLOCK_H_

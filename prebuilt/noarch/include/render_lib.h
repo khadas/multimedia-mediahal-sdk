@@ -51,6 +51,7 @@ typedef enum {
     KEY_PIXEL_ASPECT_RATIO, //set/get video frame pixel aspect ratio, value type is double
     KEY_VIDEO_TRICK_MODE, //set/get video trick mode
     KEY_FRAME_BY_PASS_PLUGIN, //set/get video frame do not send to render plugin,frames will callback to user after got displaying monotime
+    KEY_VIDEO_FRAME_RATE, //set video frame rate,value type is RenderFraction
     KEY_MEDIASYNC_INSTANCE_ID = 400, //set/get mediasync instance id, value type is int
     KEY_MEDIASYNC_PCR_PID, ///set/get mediasync pcr id ,value type is int
     KEY_MEDIASYNC_DEMUX_ID, //set/get mediasync demux id ,value type is int

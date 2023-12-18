@@ -1,10 +1,100 @@
 =========RELEALSE NOTE=================
 
-Version: V3.13.7-g4b7af21
+Version: V3.13.11-g53d1ef58
 
 ========================================
 
 Git commit:
+commit 53d1ef580b1b3a4c62b7977956f972951a786dab
+Author: fei.deng <fei.deng@amlogic.com>
+Date:   Wed Sep 27 08:35:38 2023 +0000
+
+    mediasync: CB1 fix yts frame dropped [1/1]
+    
+    PD#SWPL-140292
+    
+    Problem:
+    1.frames dropped happen when playback rate changed
+    2.don't reset playback rate value when reset invoked
+    it cause playback rate value incorrect
+    
+    Solution:
+    1.reduce hold time if playback rate changed during
+    holding time
+    2.let audio resume playing after playback rate
+    changed on amaster mode
+    3.keep start threshold from paused to resume
+    4.using minimum pts of audio/video to init ref clock
+    
+    Verify:
+    ah212
+    
+    Change-Id: Ibf6cf7361cd209f19a9718007a5a7b9a7f00e59b
+    Signed-off-by: fei.deng <fei.deng@amlogic.com>
+
+commit 25fd1c963239a6ff562caf4a08e8b2586d50400c
+Author: zhipeng.he <zhipeng.he@amlogic.com>
+Date:   Wed Sep 20 20:33:43 2023 +0800
+
+    videodec: CB2 Recalculate euAspectRatio when invalid. [1/1]
+    
+    PD#TV-88115
+    
+    Problem:
+    decoder post the invalid euAspectRatio sometimes
+    
+    Solution:
+    Recalculate euAspectRatio base on sar and dar
+    
+    Verify:
+    AH212
+    
+    Change-Id: I99387e8def132a7afa7fe93bf7d3e8d1eddb7a7b
+    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
+
+commit 40bf04157ddabc58232c161b97999db127c3928c
+Author: fei.deng <fei.deng@amlogic.com>
+Date:   Wed Dec 6 06:16:24 2023 +0000
+
+    videorender: CB2 get vblank from libdrm_meson [1/1]
+    
+    PD#SWPL-144424
+    
+    Problem:
+    1.mediasync add a callback to get vblank from render lib
+    2.render lib load libdrm_meson lib to get vblank
+    
+    Solution:
+    above
+    
+    Verify:
+    ap222
+    
+    Change-Id: I3afd7ce9af9777f898e87c2f8eb402e1a64661d7
+    Signed-off-by: fei.deng <fei.deng@amlogic.com>
+
+commit 9bb134601c496983fa62f1e962cace0ed0b77a20
+Author: yunmin.chen <yunmin.chen@amlogic.com>
+Date:   Wed Nov 29 20:45:45 2023 +0800
+
+    mediasync: CB1 Adjust the method of getting DisplayVsync and Period. [1/1]
+    
+    PD#SWPL-146866
+    
+    Problem:
+    Get DisplayVsync and Period from videotunnel instead.
+    
+    Solution:
+    MediaSync adds a callback interface.
+    videotunnel obtains DisplayVsync and Period letters to
+    register for mediasync.
+    
+    Verify:
+    SC2
+    
+    Change-Id: I57058784e8146a566bffb5345474bd748d4f13e9
+    Signed-off-by: yunmin.chen <yunmin.chen@amlogic.com>
+
 commit 4b7af2176abc2c8f4437b7a3ceaa0363d6495a58
 Author: fei.deng <fei.deng@amlogic.com>
 Date:   Thu Nov 9 11:15:35 2023 +0000
@@ -128,94 +218,9 @@ Date:   Tue Oct 31 21:02:30 2023 +0800
     Change-Id: I9347ac12ce7d9625568e13c5d2559187e104a0a6
     Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
 
-commit ef8ebdd5310fcc05427973df8998698d62fdc17c
-Author: fei.deng <fei.deng@amlogic.com>
-Date:   Fri Oct 13 01:50:42 2023 +0000
-
-    videorender: CB2 refine render lib api [1/1]
-    
-    PD#SWPL-140292
-    
-    Problem:
-    1.refine render lib api
-    2.split render lib to render core and plugins
-    
-    Solution:
-    1.refine render lib api
-    2.split render lib to render core and plugins
-    3.don't wait when hold time less than 2 ms
-    
-    Verify:
-    ap222
-    
-    Change-Id: I3cb3ecbbf6153f3b468f848ec0e614f770432891
-    Signed-off-by: fei.deng <fei.deng@amlogic.com>
-
-commit a11135331ae9bdf1b29cc11fcbee14e9123b4d21
-Author: yunmin.chen <yunmin.chen@amlogic.com>
-Date:   Tue Oct 17 20:34:02 2023 +0800
-
-    mediahal: CF2 mediahal update version [1/1]
-    
-    PD#SWPL-142654
-    
-    Problem:
-    mediahal update version
-    
-    Solution:
-    update V3.13
-    
-    Verify:
-    SC2
-    
-    Change-Id: I5a3eebff4400b1f6d92dfd5e69dc3a436b1d9692
-    Signed-off-by: yunmin.chen <yunmin.chen@amlogic.com>
-
-commit d9092898c1ca0c229b18bba1d2754198a6a2e27d
-Author: yunmin.chen <yunmin.chen@amlogic.com>
-Date:   Tue Oct 17 19:18:57 2023 +0800
-
-    mediahal: CF2 mediahal release V3.11 [1/1]
-    
-    PD#SWPL-142654
-    
-    Problem:
-    mediahal release
-    
-    Solution:
-    release V3.11
-    
-    Verify:
-    SC2
-    
-    Change-Id: Iadec5905ce66025a7f31309e95326eece092e013
-    Signed-off-by: yunmin.chen <yunmin.chen@amlogic.com>
-
-commit 4925644a0ce00ba86ca5a94650f4875c74f4f3b5
-Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Thu Aug 17 16:28:04 2023 +0800
-
-    tsplayer: CB2 add decoder checkout pts on zapper  [1/2]
-    
-    PD#SWPL-136372
-    
-    Problem:
-    1.Video has invalid PTS.
-    2.zapper use old ptsserver.
-    
-    Solution:
-    1.Invalid PTS is calculated with duration.
-    2.zapper use new ptserver.
-    
-    Verify:
-    S1A
-    
-    Change-Id: Ib41938eff9e5441e49315e98294a1a8da8a3f888
-    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
-
 ========================================
 
-Release time: 2023-12-11-14-58
+Release time: 2023-12-18-20-01
 
 ========================================
 

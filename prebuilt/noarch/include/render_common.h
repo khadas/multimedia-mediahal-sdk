@@ -1,3 +1,18 @@
+/*
+ * Copyright (C) 2021 Amlogic Corporation.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 #ifndef __RENDER_COMMON_H__
 #define __RENDER_COMMON_H__
 #include <stdint.h>
@@ -11,18 +26,18 @@ extern "C" {
 #define RENDER_MAX_PLANES 3
 
 /*allocate render buffer flag */
-typedef enum {
+typedef enum _BufferFlag {
     BUFFER_FLAG_NONE       = 0,
     BUFFER_FLAG_DMA_BUFFER = 1 << 1,
     BUFFER_FLAG_RAW_BUFFER = 1 << 2,
 } RenderBufferFlag;
 
-typedef struct {
+typedef struct _RenderRawBuffer {
     void *dataPtr; //video render buffer pointer
     int size; //video render buffer size
 } RenderRawBuffer;
 
-typedef struct {
+typedef struct _RenderDmaBuffer {
     int width;
     int height;
     int planeCnt;
@@ -33,7 +48,7 @@ typedef struct {
     int fd[RENDER_MAX_PLANES];
 } RenderDmaBuffer;
 
-typedef struct {
+typedef struct _RenderBuffer {
     int id; //buffer id,set by video render
     int flag; /*render buffer flag, refer to RenderBufferFlag*/
     RenderDmaBuffer dma;
@@ -45,7 +60,7 @@ typedef struct {
 } RenderBuffer;
 
 /*video render rectangle*/
-typedef struct {
+typedef struct _RenderRect{
     int x;
     int y;
     int w;
@@ -53,12 +68,17 @@ typedef struct {
 } RenderRect;
 
 /*video frame size*/
-typedef struct {
+typedef struct _RenderFrameSize {
     int width;
     int height;
 } RenderFrameSize;
 
-typedef enum {
+typedef struct {
+   int num; //numerator
+   int denom; //denominator
+} RenderFraction;
+
+typedef enum _RenderMsgType {
     //notify a msg
     MSG_NOTIFY                    = 0,
     //frame buffer is released
