@@ -1,10 +1,30 @@
 =========RELEALSE NOTE=================
 
-Version: V3.13.11-g53d1ef58
+Version: V3.13.12-g56f15277
 
 ========================================
 
 Git commit:
+commit 56f1527758757df5709af3585d3883e19e8a4c4b
+Author: dehong.chen <dehong.chen@amlogic.com>
+Date:   Fri Nov 17 06:19:14 2023 +0000
+
+    tsplayer: CF2 single demux support new ptsserv [1/1]
+    
+    PD#SWPL-146236
+    
+    Problem:
+    single demux not support new ptsserv
+    
+    Solution:
+    single demux support new ptsserv
+    
+    Verify:
+    T5D
+    
+    Change-Id: I8cf8f5d01322cb5433d375ddd87ef3ec558e5995
+    Signed-off-by: dehong.chen <dehong.chen@amlogic.com>
+
 commit 53d1ef580b1b3a4c62b7977956f972951a786dab
 Author: fei.deng <fei.deng@amlogic.com>
 Date:   Wed Sep 27 08:35:38 2023 +0000
@@ -198,29 +218,9 @@ Date:   Sun Oct 8 15:05:51 2023 +0800
     Change-Id: Id1bce692e336397ebb13f4acfcd2197f3fd8b56b
     Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
 
-commit e01963dc16b0bba84f22fabe70f7b8d558b83c62
-Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Tue Oct 31 21:02:30 2023 +0800
-
-    mediasync: CF2 Optimize the second frame plot time. [1/1]
-    
-    PD#TV-94481
-    
-    Problem:
-    the second frame is slowly than roxton.
-    
-    Solution:
-    Calculate offset based on the PCR and demux apts.
-    
-    Verify:
-    DVT1
-    
-    Change-Id: I9347ac12ce7d9625568e13c5d2559187e104a0a6
-    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
-
 ========================================
 
-Release time: 2023-12-18-20-01
+Release time: 2023-12-25-10-42
 
 ========================================
 

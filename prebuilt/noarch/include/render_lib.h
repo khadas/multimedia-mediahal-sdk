@@ -68,6 +68,7 @@ typedef enum {
     KEY_MEDIASYNC_PLAYBACK_RATE, //set/get playback rate,value type is float,0.5 is 0.5 rate, 1.0 is normal, 2.0 is 2x rate
     KEY_MEDIASYNC_VIDEO_SYNC_THRESHOLD, //set/get video free run threshold,value type is int,time is us
     KEY_MEDIASYNC_VIDEO_FREERUN, //set/get video freerun playback
+    KEY_MEDIASYNC_SINGLE_DMX_NONTUNNELMODE, //set single dmx nontunnel mode
     //set/get video tunnel instance id when videotunnel plugin be selected,value type is int,this key must set before render_connect
     KEY_VIDEOTUNNEL_ID = 450,
     /*set render plugin to connect to compositor or disconnect from compositor, if set to 1
