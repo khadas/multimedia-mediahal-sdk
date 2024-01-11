@@ -1,10 +1,71 @@
 =========RELEALSE NOTE=================
 
-Version: V3.13.12-g56f15277
+Version: V3.13.15-gda99b512
 
 ========================================
 
 Git commit:
+commit da99b512098058e79ff222ece7808022e3d0d505
+Author: dehong.chen <dehong.chen@amlogic.com>
+Date:   Fri Dec 29 08:47:27 2023 +0000
+
+    mediasync: CB2 calculation of delayms is incorrect. [1/1]
+    
+    PD#SWPL-147777
+    
+    Problem:
+    no reset firstQueueInfo when reset mediasync.
+    
+    Solution:
+    reset firstQueueInfo when reset mediasync.
+    
+    Verify:
+    T5D
+    
+    Change-Id: I04caae504429b2f2ae577ae49854079d5127cf76
+    Signed-off-by: dehong.chen <dehong.chen@amlogic.com>
+
+commit c9231fffed3655ae10acc378d99384a1754d9e0d
+Author: zhipeng.he <zhipeng.he@amlogic.com>
+Date:   Mon Dec 11 20:43:41 2023 +0800
+
+    tsplayer: CB2 fix can not get audio server when enable binder. [1/1]
+    
+    PD#SWPL-140520
+    
+    Problem:
+    tsplayer cannot get audio server when enable binder,
+    tsp has the same function on binder lib.
+    
+    Solution:
+    rm tsplayer unused func which use unicode.
+    
+    Verify:
+    SC2
+    
+    Change-Id: I9feec65bb94104b0f595e1c6390140fa5b43df32
+    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
+
+commit 617f84b817562cea9b3e792af8eaeef6423b5588
+Author: zhipeng.he <zhipeng.he@amlogic.com>
+Date:   Fri Jan 5 23:17:46 2024 +0800
+
+    tsplayer: CB1 fix zapper playback stuck [1/1]
+    
+    PD#SWPL-152838
+    
+    Problem:
+    zapper playback stuck
+    
+    Solution:
+    fix zapper playback stuck
+    
+    Verify:
+    bg201
+    
+    Change-Id: Id20d85b672f1e4c73b205a0c8d6359a0c68f73ad
+    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
+
 commit 56f1527758757df5709af3585d3883e19e8a4c4b
 Author: dehong.chen <dehong.chen@amlogic.com>
 Date:   Fri Nov 17 06:19:14 2023 +0000
@@ -156,71 +217,9 @@ Date:   Mon Nov 6 19:29:31 2023 +0800
     Change-Id: I19ad09661388a313b6fe0628d2d2a72f099ebfd4
     Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
 
-commit ea95d4f3522c2c50e9a35f7308d13c9a195e5f44
-Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Tue Nov 7 13:53:26 2023 +0800
-
-    tsplayer: CB2 add set ad volume. [1/1]
-    
-    PD#OTT-51115
-    
-    Problem:
-    set ad volume not call audio
-    
-    Solution:
-    set ad volume,then send to audio
-    
-    Verify:
-    SC2
-    
-    Change-Id: Idf33e854e6d4e86206679c1c2f17cfe8f4c25186
-    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
-
-commit a9e5602368ed6b514561238c8b9367f3944a06a9
-Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Wed Oct 18 19:49:41 2023 +0800
-
-    mediasync: CB2 fixed avsync fail special ts. [1/1]
-    
-    PD#SWPL-140707
-    
-    Problem:
-    MS12 AVsync case test fail,
-    I frame duration is more than 4s.
-    
-    Solution:
-    Increase the timeout time for av alignment
-    Improve the issue of tsplayer discarding es
-    
-    Verify:
-    AH212
-    
-    Change-Id: Id7e78b5025a5edefd97add891b45849a3d668972
-    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
-
-commit 25b395e1a2fabcd16e8dedd1c396463b81d14656
-Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Sun Oct 8 15:05:51 2023 +0800
-
-    tsplayer: CF2 Supports overflow and underflow events in multidemux [1/1]
-    
-    PD#OTT-46872
-    
-    Problem:
-    Nontunnel mode does not yet support overflow and underflow events.
-    
-    Solution:
-    Added overflow and underflow event reporting in nontunnel mode
-    
-    Verify:
-    S905Y4
-    
-    Change-Id: Id1bce692e336397ebb13f4acfcd2197f3fd8b56b
-    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
-
 ========================================
 
-Release time: 2023-12-25-10-42
+Release time: 2024-01-11-10-43
 
 ========================================
 
