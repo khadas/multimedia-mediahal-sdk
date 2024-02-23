@@ -1,15 +1,56 @@
 =========RELEALSE NOTE=================
 
-Version: V3.13.19-ga7eb9f6
+Version: V3.13.21-gf9d746f
 
 ========================================
 
 Git commit:
+commit f9d746f380b200f5ef735b6e4df2780d347b51aa
+Author: dehong.chen <dehong.chen@amlogic.com>
+Date:   Tue Jan 30 09:32:28 2024 +0000
+
+    tsplayer: CF2 add api to get scramble status [1/1]
+    
+    PD#TV-110128
+    
+    Problem:
+    need to implement get
+    scramble status from audiohal
+    
+    Solution:
+    add api to get scramble status
+    
+    Verify:
+    t5w
+    
+    Change-Id: I34599f42b087a6ce6d938e2c1e091cc0b51db8ad
+    Signed-off-by: dehong.chen <dehong.chen@amlogic.com>
+
+commit aff655b0ea931b208b02c761b6ce9b7d7ae90590
+Author: dehong.chen <dehong.chen@amlogic.com>
+Date:   Tue Dec 26 02:59:23 2023 +0000
+
+    tsplayer: CB2 support different events between no data and scramble. [1/1]
+    
+    PD#TV-104514
+    
+    Problem:
+    can not distinguish the events between no data and scramble.
+    
+    Solution:
+    support different events.
+    
+    Verify:
+    t5w
+    
+    Change-Id: I59ac30125bb4ea985b8c2e74c7d379962b9ddf3d
+    Signed-off-by: dehong.chen <dehong.chen@amlogic.com>
+
 commit a7eb9f6eca5c51de97618beb2d852cdc0c3bf42e
 Author: sheng.liu <sheng.liu@amlogic.com>
 Date:   Thu Jan 25 09:44:26 2024 +0000
 
-    videorender: CB1 break case when set framerate [1/1]
+    media_hal: CB1 break case when set framerate [1/1]
     
     PD#SWPL-155424
     
@@ -167,56 +208,9 @@ Date:   Fri Nov 17 06:19:14 2023 +0000
     Change-Id: I8cf8f5d01322cb5433d375ddd87ef3ec558e5995
     Signed-off-by: dehong.chen <dehong.chen@amlogic.com>
 
-commit 53d1ef580b1b3a4c62b7977956f972951a786dab
-Author: fei.deng <fei.deng@amlogic.com>
-Date:   Wed Sep 27 08:35:38 2023 +0000
-
-    mediasync: CB1 fix yts frame dropped [1/1]
-    
-    PD#SWPL-140292
-    
-    Problem:
-    1.frames dropped happen when playback rate changed
-    2.don't reset playback rate value when reset invoked
-    it cause playback rate value incorrect
-    
-    Solution:
-    1.reduce hold time if playback rate changed during
-    holding time
-    2.let audio resume playing after playback rate
-    changed on amaster mode
-    3.keep start threshold from paused to resume
-    4.using minimum pts of audio/video to init ref clock
-    
-    Verify:
-    ah212
-    
-    Change-Id: Ibf6cf7361cd209f19a9718007a5a7b9a7f00e59b
-    Signed-off-by: fei.deng <fei.deng@amlogic.com>
-
-commit 25fd1c963239a6ff562caf4a08e8b2586d50400c
-Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Wed Sep 20 20:33:43 2023 +0800
-
-    videodec: CB2 Recalculate euAspectRatio when invalid. [1/1]
-    
-    PD#TV-88115
-    
-    Problem:
-    decoder post the invalid euAspectRatio sometimes
-    
-    Solution:
-    Recalculate euAspectRatio base on sar and dar
-    
-    Verify:
-    AH212
-    
-    Change-Id: I99387e8def132a7afa7fe93bf7d3e8d1eddb7a7b
-    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
-
 ========================================
 
-Release time: 2024-01-31-14-51
+Release time: 2024-02-23-14-46
 
 ========================================
 

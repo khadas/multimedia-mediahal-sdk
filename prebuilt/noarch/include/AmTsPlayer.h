@@ -30,8 +30,8 @@ typedef enum {
     AM_TSPLAYER_EVENT_TYPE_USERDATA_CC,    // user data (cc)
     AM_TSPLAYER_EVENT_TYPE_VIDEO_CHANGED,  // video format changed
     AM_TSPLAYER_EVENT_TYPE_AUDIO_CHANGED,  // audio format changed
-    AM_TSPLAYER_EVENT_TYPE_DATA_LOSS,      // demod data loss
-    AM_TSPLAYER_EVENT_TYPE_DATA_RESUME,    // demod data resume
+    AM_TSPLAYER_EVENT_TYPE_DATA_LOSS,    // demux data loss
+    AM_TSPLAYER_EVENT_TYPE_DATA_RESUME,  // demux data resume
     AM_TSPLAYER_EVENT_TYPE_SCRAMBLING,     // scrambling status changed
     AM_TSPLAYER_EVENT_TYPE_FIRST_FRAME,     // first video frame showed
     AM_TSPLAYER_EVENT_TYPE_STREAM_MODE_EOF, //endof stream mode
@@ -50,7 +50,9 @@ typedef enum {
     AM_TSPLAYER_EVENT_TYPE_AUDIO_INVALID_TIMESTAMP, //Audio invalid timestamp
     AM_TSPLAYER_EVENT_TYPE_AUDIO_INVALID_DATA, //Audio invalid data
     AM_TSPLAYER_EVENT_TYPE_DECODE_VIDEO_UNSUPPORT, // Video is not supported
-    AM_TSPLAYER_EVENT_TYPE_PREEMPTED  // Instance was preempted, apk need release this instance
+    AM_TSPLAYER_EVENT_TYPE_PREEMPTED,  // Instance was preempted, apk need release this instance
+    AM_TSPLAYER_EVENT_TYPE_DECODER_DATA_LOSS,    //Decoder data loss
+    AM_TSPLAYER_EVENT_TYPE_DECODER_DATA_RESUME,  //Decoder data resume
 } am_tsplayer_event_type;
 
 
@@ -72,6 +74,11 @@ typedef enum {
     AM_TSPLAYER_KEY_SET_MULTI_VIDEO_SYNC_MODE,
     AM_TSPLAYER_KEY_SET_UNSTABLE_PTS,
     AM_TSPLAYER_KEY_SET_VIDEO_LATENCY,
+    AM_TSPLAYER_KEY_SET_MEDIASYNC_CACHE,
+    AM_TSPLAYER_KEY_SET_AUDIO_EXTRADATA,
+    AM_TSPLAYER_KEY_SET_VIDEO_DECODER_INFO, //iptv: set before startDecoding
+    AM_TSPLAYER_KEY_SET_AUDIO_FORMAT,
+    AM_TSPLAYER_KEY_GET_DMX_ES_OUTPUT_STATUS, //dmx es output status info
 } am_tsplayer_parameter;
 
 
@@ -417,6 +424,11 @@ typedef struct {
     uint32_t audio_overflow_num;                        // Audio overflow num
     uint32_t audio_underflow_num;                       // Audio underflow num
 } av_flow_t;
+
+typedef struct {
+    int video_es_stat;   //0x2(pts is valid), 0x4(Descrambling failed), 0x8(no unscrambled)
+    int audio_es_stat;   //audio es status, as same video
+} dmx_es_output_stat;
 
 /*AmTsPlayer call back event*/
 typedef struct {
