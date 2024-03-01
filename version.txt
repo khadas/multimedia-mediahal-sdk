@@ -1,10 +1,72 @@
 =========RELEALSE NOTE=================
 
-Version: V3.13.21-gf9d746f
+Version: V3.13.24-ga0bf6ac
 
 ========================================
 
 Git commit:
+commit a0bf6ac3cb863956927de58ad069801502cbb09a
+Author: fei.deng <fei.deng@amlogic.com>
+Date:   Mon Feb 26 08:29:19 2024 +0000
+
+    videorender: CB1 fix logcat fd leak [1/1]
+    
+    PD#SWPL-152967
+    
+    Problem:
+    dlopen liblog will causes fd leak.
+    
+    Solution:
+    using link liblog when compiling
+    
+    Verify:
+    AH212
+    
+    Change-Id: I18191b1914772c9942baadd8e26dca550ef4416d
+    Signed-off-by: fei.deng <fei.deng@amlogic.com>
+
+commit 0eec3fb27a59043bb2f57484f8f7f8a42a20a240
+Author: le.han <le.han@amlogic.com>
+Date:   Wed Feb 28 04:25:48 2024 +0000
+
+    media_hal: CB1 keep last frame on flush [3/3]
+    
+    PD#SWPL-158207
+    
+    Problem:
+    add property to set keep last frame when flush.
+    default is keep last frame,if set to 0,westeros will
+    clean last frame when flush
+    
+    Solution:
+    add property for keep last frame on flush
+    
+    Verify:
+    AH212
+    
+    Change-Id: I02b4dfefc766a4edc1f0eda0c4947f7f0e572e59
+    Signed-off-by: le.han <le.han@amlogic.com>
+
+commit 7491f5a68d0949727c731212d942ea67e06c0c9a
+Author: zhipeng.he <zhipeng.he@amlogic.com>
+Date:   Wed Jul 19 15:31:15 2023 +0800
+
+    tsplayer: CF2 post VIDEO_UNSUPPORT when decoder not support. [1/1]
+    
+    PD#SWPL-131140
+    
+    Problem:
+    not post VIDEO_UNSUPPORT
+    
+    Solution:
+    post VIDEO_UNSUPPORT when decoder not support
+    
+    Verify:
+    aq2432
+    
+    Change-Id: I6549a7106ad68fa5964858cb531135d42dca0f03
+    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
+
 commit f9d746f380b200f5ef735b6e4df2780d347b51aa
 Author: dehong.chen <dehong.chen@amlogic.com>
 Date:   Tue Jan 30 09:32:28 2024 +0000
@@ -147,70 +209,9 @@ Date:   Fri Dec 29 08:47:27 2023 +0000
     Change-Id: I04caae504429b2f2ae577ae49854079d5127cf76
     Signed-off-by: dehong.chen <dehong.chen@amlogic.com>
 
-commit c9231fffed3655ae10acc378d99384a1754d9e0d
-Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Mon Dec 11 20:43:41 2023 +0800
-
-    tsplayer: CB2 fix can not get audio server when enable binder. [1/1]
-    
-    PD#SWPL-140520
-    
-    Problem:
-    tsplayer cannot get audio server when enable binder,
-    tsp has the same function on binder lib.
-    
-    Solution:
-    rm tsplayer unused func which use unicode.
-    
-    Verify:
-    SC2
-    
-    Change-Id: I9feec65bb94104b0f595e1c6390140fa5b43df32
-    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
-
-commit 617f84b817562cea9b3e792af8eaeef6423b5588
-Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Fri Jan 5 23:17:46 2024 +0800
-
-    tsplayer: CB1 fix zapper playback stuck [1/1]
-    
-    PD#SWPL-152838
-    
-    Problem:
-    zapper playback stuck
-    
-    Solution:
-    fix zapper playback stuck
-    
-    Verify:
-    bg201
-    
-    Change-Id: Id20d85b672f1e4c73b205a0c8d6359a0c68f73ad
-    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
-
-commit 56f1527758757df5709af3585d3883e19e8a4c4b
-Author: dehong.chen <dehong.chen@amlogic.com>
-Date:   Fri Nov 17 06:19:14 2023 +0000
-
-    tsplayer: CF2 single demux support new ptsserv [1/1]
-    
-    PD#SWPL-146236
-    
-    Problem:
-    single demux not support new ptsserv
-    
-    Solution:
-    single demux support new ptsserv
-    
-    Verify:
-    T5D
-    
-    Change-Id: I8cf8f5d01322cb5433d375ddd87ef3ec558e5995
-    Signed-off-by: dehong.chen <dehong.chen@amlogic.com>
-
 ========================================
 
-Release time: 2024-02-23-14-46
+Release time: 2024-03-01-16-40
 
 ========================================
 
