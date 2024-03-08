@@ -207,6 +207,7 @@ extern mediasync_result MediaSync_GetQueueAudioInfo(void* handle, mediasync_fram
 extern mediasync_result MediaSync_RegisterCb(void* handle,int type,void* pfunc,void *cbHandle);
 extern mediasync_result MediaSync_setPcrAndDmxId(void* handle, int32_t DemuxId, int32_t PcrPid);
 extern mediasync_result MediaSync_reset(void* handle);
+extern mediasync_result MediaSync_audioSwitch(void* handle, bool start, int64_t pts);
 extern void MediaSync_destroy(void* handle);
 
 

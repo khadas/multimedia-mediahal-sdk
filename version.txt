@@ -1,11 +1,39 @@
 =========RELEALSE NOTE=================
 
-Version: V3.13.24-ga0bf6ac
+Version: V3.13.25-gaeb7d7f
 
 ========================================
 
 Git commit:
-commit a0bf6ac3cb863956927de58ad069801502cbb09a
+commit aeb7d7f0009b670bbed41a8d4e853ad3e49d51ba
+Author: fei.deng <fei.deng@amlogic.com>
+Date:   Fri Dec 29 02:52:31 2023 +0000
+
+    mediasync: CF2 add audio codec switch api [2/2]
+    
+    PD#SWPL-151010
+    
+    Problem:
+    1.audio codec switch will pause and destroy mediasync. it causes
+    mediasync can't resume playing after audio codec switch done.
+    2.FRAC calculates realtime error, it causes frame
+    dropped
+    3.av delta too large causes NTS case of audio track
+    switch failed
+    
+    Solution:
+    1.add a audio codec switch api
+    2.reset FRAC if mediasync reset ref clock
+    3.drop audio data those audio pts less than PCR
+    when doing audio track switch
+    
+    Verify:
+    ah212
+    
+    Change-Id: I14619518b89b3009ddfd44211d640df7b690ee0e
+    Signed-off-by: fei.deng <fei.deng@amlogic.com>
+
+commit fff6abb0b50bf8b50e174ccf6cfab3d040d3b253
 Author: fei.deng <fei.deng@amlogic.com>
 Date:   Mon Feb 26 08:29:19 2024 +0000
 
@@ -25,7 +53,7 @@ Date:   Mon Feb 26 08:29:19 2024 +0000
     Change-Id: I18191b1914772c9942baadd8e26dca550ef4416d
     Signed-off-by: fei.deng <fei.deng@amlogic.com>
 
-commit 0eec3fb27a59043bb2f57484f8f7f8a42a20a240
+commit 89d036ec30d7fac3302fead40633485170543b46
 Author: le.han <le.han@amlogic.com>
 Date:   Wed Feb 28 04:25:48 2024 +0000
 
@@ -189,29 +217,9 @@ Date:   Tue Dec 5 16:51:44 2023 +0800
     Change-Id: I3514c4df6cdbf3e63adfe6be9ec596d66f88318d
     Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
 
-commit da99b512098058e79ff222ece7808022e3d0d505
-Author: dehong.chen <dehong.chen@amlogic.com>
-Date:   Fri Dec 29 08:47:27 2023 +0000
-
-    mediasync: CB2 calculation of delayms is incorrect. [1/1]
-    
-    PD#SWPL-147777
-    
-    Problem:
-    no reset firstQueueInfo when reset mediasync.
-    
-    Solution:
-    reset firstQueueInfo when reset mediasync.
-    
-    Verify:
-    T5D
-    
-    Change-Id: I04caae504429b2f2ae577ae49854079d5127cf76
-    Signed-off-by: dehong.chen <dehong.chen@amlogic.com>
-
 ========================================
 
-Release time: 2024-03-01-16-40
+Release time: 2024-03-08-18-50
 
 ========================================
 
