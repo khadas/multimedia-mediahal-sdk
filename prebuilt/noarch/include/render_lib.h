@@ -71,6 +71,8 @@ typedef enum {
     KEY_MEDIASYNC_VIDEO_FREERUN, //set/get video freerun playback
     KEY_MEDIASYNC_SINGLE_DMX_NONTUNNELMODE, //set single dmx nontunnel mode
     //set/get video tunnel instance id when videotunnel plugin be selected,value type is int,this key must set before render_connect
+    KEY_MEDIASYNC_MULTI_STREAM_MODE,
+    KEY_MEDIASYNC_MULTI_STREAM_SYNC_ID,
     KEY_VIDEOTUNNEL_ID = 450,
     /*set render plugin to connect to compositor or disconnect from compositor, if set to 1
       and plugin is closed,render core will open plugin again,if set to 0 and plugin is opened,

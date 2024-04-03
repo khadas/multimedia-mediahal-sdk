@@ -1,10 +1,143 @@
 =========RELEALSE NOTE=================
 
-Version: V3.13.25-gaeb7d7f
+Version: V3.13.31-g77372c4
 
 ========================================
 
 Git commit:
+commit 77372c44d62319cf5c3f451b6b671156dcaa642b
+Author: joy.rao <joy.rao@amlogic.com>
+Date:   Tue Apr 2 13:37:45 2024 +0800
+
+    resman: CB2 merge from Android for lock and other issue [1/1]
+    
+    PD#TV-114433
+    
+    Problem:
+    Thers is a risk of resman_start_thread bring in lock or bug
+    
+    Solution:
+    1.change pthread_cond_wait to pthread_cond_timedwait
+    2.Set -1 for fd array initial value
+    3.fix resman_start_thread finishing before resman_thread
+    commit 6269f5a5ca985cd9a8deed178bbe02d9a985cf2f
+    resman: CB2 fix invalid parameter for resman   [1/1]
+    PD#SH-13367
+    commit 6f01071e04d20d98575a6649e6a6e4851bdcf2f5
+    resman: CB2 set a reasonable initial value for fd [1/1]
+    PD#OTT-39086
+    commit 55729a03e0e74b25060655e16a24f184d47df915
+    resman: CB2 change pthread_cond_wait to  pthread_cond_timedwait [1/1]
+    PD#TV-54816
+    
+    Verify:
+    SC2
+    
+    Change-Id: I23ea3e6ecdd75486cbcd7479945578e44b5f07a4
+    Signed-off-by: joy.rao <joy.rao@amlogic.com>
+
+commit 4ec20310ab9fe774725dcc74d27f4a7c129f55b9
+Author: yunmin.chen <yunmin.chen@amlogic.com>
+Date:   Thu Dec 28 15:36:09 2023 +0800
+
+    tsplayer: CF2 add first demux pts event [1/1]
+    
+    PD#OTT-54300
+    
+    Problem:
+    add first demux pts event
+    
+    Solution:
+    add first demux pts event
+    
+    Verify:
+    SC2
+    
+    Change-Id: I903ef545f477a69333547b6e2d2e0c6a88bfcf6f
+    Signed-off-by: yunmin.chen <yunmin.chen@amlogic.com>
+
+commit 9e98a5a563f486bad37ef909d563f2a78b7274f2
+Author: dehong.chen <dehong.chen@amlogic.com>
+Date:   Wed Mar 27 07:22:05 2024 +0000
+
+    tsplayer: CB2 init demux wrapper error. [1/1]
+    
+    PD#SWPL-162629
+    
+    Problem:
+    not deliver pipline mode.
+    
+    Solution:
+    deliver pipline mode.
+    
+    Verify:
+    t5w
+    
+    Change-Id: I564826ff51abd6b45d580e0d14c9106c0148b976
+    Signed-off-by: dehong.chen <dehong.chen@amlogic.com>
+
+commit 328ebebc26dd922ec62cdfd5603b9ada5a1be773
+Author: joy.rao <joy.rao@amlogic.com>
+Date:   Sun Mar 3 17:30:38 2024 +0800
+
+    tsplayer: CB2 use partner demux id for multistream ts playback [1/1]
+    
+    PD#OTT-54809
+    
+    Problem:
+    crash when multistream ts playback exit
+    
+    Solution:
+    use partner demux id instead of dvr wrapper handle for multistream ts playback
+    
+    Verify:
+    S905X4
+    
+    Change-Id: I0285b73db3c9b7906339c387023993d5447bed45
+    Signed-off-by: joy.rao <joy.rao@amlogic.com>
+
+commit 63b7e0af6af34ec8b445c0dc0861a477e33d6747
+Author: joy.rao <joy.rao@amlogic.com>
+Date:   Sun Mar 3 17:13:45 2024 +0800
+
+    tsplayer: CB2 nontunnel mode enable essos resman only one tsplayer. [1/1]
+    
+    PD#OTT-52712
+    
+    Problem:
+    nontunnel mode not enable essos resman.
+    
+    Solution:
+    nontunnel mode enable essos resman only one tsplayer
+    
+    Verify:
+    SC2
+    
+    Change-Id: I3ae8ff308ef967295daf7417fd1e34b9ac913fd4
+    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
+    Signed-off-by: joy.rao <joy.rao@amlogic.com>
+
+commit fe79c6c457ea0bb4b68ee242f0323ba3b44f53ee
+Author: joy.rao <joy.rao@amlogic.com>
+Date:   Sun Mar 3 16:52:42 2024 +0800
+
+    tsplayer: CF1 multistream mode for hlsv4 [1/1]
+    
+    PD#OTT-39352
+    PD#OTT-53608
+    
+    Problem:
+    need add multistream mode playback
+    
+    Solution:
+    multistream mode for hlsv4
+    
+    Verify:
+    S905X4
+    
+    Change-Id: I99cc0f13c519542b200ac122a7574b45c9981beb
+    Signed-off-by: joy.rao <joy.rao@amlogic.com>
+
 commit aeb7d7f0009b670bbed41a8d4e853ad3e49d51ba
 Author: fei.deng <fei.deng@amlogic.com>
 Date:   Fri Dec 29 02:52:31 2023 +0000
@@ -95,131 +228,9 @@ Date:   Wed Jul 19 15:31:15 2023 +0800
     Change-Id: I6549a7106ad68fa5964858cb531135d42dca0f03
     Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
 
-commit f9d746f380b200f5ef735b6e4df2780d347b51aa
-Author: dehong.chen <dehong.chen@amlogic.com>
-Date:   Tue Jan 30 09:32:28 2024 +0000
-
-    tsplayer: CF2 add api to get scramble status [1/1]
-    
-    PD#TV-110128
-    
-    Problem:
-    need to implement get
-    scramble status from audiohal
-    
-    Solution:
-    add api to get scramble status
-    
-    Verify:
-    t5w
-    
-    Change-Id: I34599f42b087a6ce6d938e2c1e091cc0b51db8ad
-    Signed-off-by: dehong.chen <dehong.chen@amlogic.com>
-
-commit aff655b0ea931b208b02c761b6ce9b7d7ae90590
-Author: dehong.chen <dehong.chen@amlogic.com>
-Date:   Tue Dec 26 02:59:23 2023 +0000
-
-    tsplayer: CB2 support different events between no data and scramble. [1/1]
-    
-    PD#TV-104514
-    
-    Problem:
-    can not distinguish the events between no data and scramble.
-    
-    Solution:
-    support different events.
-    
-    Verify:
-    t5w
-    
-    Change-Id: I59ac30125bb4ea985b8c2e74c7d379962b9ddf3d
-    Signed-off-by: dehong.chen <dehong.chen@amlogic.com>
-
-commit a7eb9f6eca5c51de97618beb2d852cdc0c3bf42e
-Author: sheng.liu <sheng.liu@amlogic.com>
-Date:   Thu Jan 25 09:44:26 2024 +0000
-
-    media_hal: CB1 break case when set framerate [1/1]
-    
-    PD#SWPL-155424
-    
-    Problem:
-    When set framerate, will make video can not be playback
-    
-    Solution:
-    break case when set framerate
-    
-    Verify:
-    AH212
-    
-    Change-Id: I9ee238e5750428664fdad2c4ff9306eb3603c7b3
-    Signed-off-by: sheng.liu <sheng.liu@amlogic.com>
-
-commit 41f19434eb691316d434062947fb3f3aff92c1c1
-Author: dehong.chen <dehong.chen@amlogic.com>
-Date:   Wed Dec 27 07:12:37 2023 +0000
-
-    tsplyer: CB2 add spdif protection mode [1/1]
-    
-    PD#TV-105134
-    
-    Problem:
-    add spdif protection mode flow.
-    
-    Solution:
-    add spdif protection mode flow.
-    
-    Verify:
-    yocto t5w.
-    
-    Change-Id: I9a23f23d92f83f13c10b41c04565d32e4b7cf6d3
-    Signed-off-by: dehong.chen <dehong.chen@amlogic.com>
-
-commit 4930ece9eb7af49b52f3f5b85414c75ec1143c96
-Author: dehong.chen <dehong.chen@amlogic.com>
-Date:   Tue Dec 19 09:37:09 2023 +0000
-
-    tsplayer: CF1 add es splice feature. [1/1]
-    
-    PD#OTT-51710
-    PD#SWPL-94559
-    
-    Problem:
-    in splice es buffer mode,playback will not sync.
-    
-    Solution:
-    send all es buffer to decoder.
-    
-    Verify:
-    S1A
-    
-    Change-Id: Ia2102fb0e92a3d5af244176aff35699211297368
-    Signed-off-by: dehong.chen <dehong.chen@amlogic.com>
-
-commit b37727b3d8e4d1b76d7b967d6d6942d41f85301b
-Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Tue Dec 5 16:51:44 2023 +0800
-
-    tsplayer: CF2 add hold video feature on zapper pipeline [1/1]
-    
-    PD#OTT-46868
-    
-    Problem:
-    hold video feature can not work on zapper pipeline
-    
-    Solution:
-    add hold video feature on zapper pipeline
-    
-    Verify:
-    s1a
-    
-    Change-Id: I3514c4df6cdbf3e63adfe6be9ec596d66f88318d
-    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
-
 ========================================
 
-Release time: 2024-03-08-18-50
+Release time: 2024-04-03-16-10
 
 ========================================
 

@@ -53,6 +53,8 @@ typedef enum {
     AM_TSPLAYER_EVENT_TYPE_PREEMPTED,  // Instance was preempted, apk need release this instance
     AM_TSPLAYER_EVENT_TYPE_DECODER_DATA_LOSS,    //Decoder data loss
     AM_TSPLAYER_EVENT_TYPE_DECODER_DATA_RESUME,  //Decoder data resume
+    AM_TSPLAYER_EVENT_TYPE_DECODER_INIT_COMPLETED, //Decoder init completed
+    AM_TSPLAYER_EVENT_TYPE_DEMUX_FIRST_PTS //demux first pts
 } am_tsplayer_event_type;
 
 
@@ -79,6 +81,11 @@ typedef enum {
     AM_TSPLAYER_KEY_SET_VIDEO_DECODER_INFO, //iptv: set before startDecoding
     AM_TSPLAYER_KEY_SET_AUDIO_FORMAT,
     AM_TSPLAYER_KEY_GET_DMX_ES_OUTPUT_STATUS, //dmx es output status info
+    AM_TSPLAYER_KEY_SET_VIDEO_EXTRADATA,
+    AM_TSPLAYER_KEY_SET_MULTI_STREAM_MODE,    //video stream and audio stream are separated using multi-instance mode
+    AM_TSPLAYER_KEY_SET_MULTI_STREAM_SYNC_ID, //mediasync id for multi-instance mode
+    AM_TSPLAYER_KEY_SET_MULTI_STREAM_PARTNERDMXHANDLE, //for multi-instance mode
+    AM_TSPLAYER_KEY_GET_MULTI_STREAM_PARTNERDMXHANDLE, //for multi-instance mode
 } am_tsplayer_parameter;
 
 
@@ -104,6 +111,10 @@ typedef struct {
 #define AM_TSPLAYER_EVENT_TYPE_DATA_RESUME_MASK    (1 << AM_TSPLAYER_EVENT_TYPE_DATA_RESUME)
 #define AM_TSPLAYER_EVENT_TYPE_SCRAMBLING_MASK     (1 << AM_TSPLAYER_EVENT_TYPE_SCRAMBLING)
 #define AM_TSPLAYER_EVENT_TYPE_FIRST_FRAME_MASK    (1 << AM_TSPLAYER_EVENT_TYPE_FIRST_FRAME)
+
+
+/*extend mask*/
+#define AM_TSPLAYER_STREAM_ONLY_VIDEO_MASK         (1<<0)
 
 /*Secure level which should be consistent with definition of dmx.h*/
 #define AM_TSPLAYER_DMX_FILTER_SEC_LEVEL1   (1 << 10)
