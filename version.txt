@@ -1,10 +1,114 @@
 =========RELEALSE NOTE=================
 
-Version: V3.13.31-g77372c4
+Version: V3.13.36-g0efbfc2
 
 ========================================
 
 Git commit:
+commit 0efbfc2525fc708f09a7bc90fd0adc00eaf70791
+Author: fei.deng <fei.deng@amlogic.com>
+Date:   Thu May 9 06:12:20 2024 +0000
+
+    videorender: CB1 do not release buffer when pts equal [1/1]
+    
+    PD#SWPL-164097
+    
+    Problem:
+    render lib release buffer when buffer pts equal last buffer,
+    
+    Solution:
+    now render lib do not release buffer that pts equal
+    last buffer pts
+    
+    Verify:
+    AH212
+    
+    Change-Id: I377a9d8dee9d4f9d2bec313e664eeac217b7f27c
+    Signed-off-by: fei.deng <fei.deng@amlogic.com>
+
+commit 5ee9500ab544fc7c0b53b0ea8482657694b88fcd
+Author: yunmin.chen <yunmin.chen@amlogic.com>
+Date:   Wed Apr 17 11:18:10 2024 +0800
+
+    tsplayer: CF2 Optimize print information [1/1]
+    
+    PD#SWPL-165753
+    
+    Problem:
+    Optimize print information
+    
+    Solution:
+    Optimize print information
+    
+    Verify:
+    BG201
+    
+    Change-Id: I6681f3d59359ed4113e4e8f7ef0a300dd6758a5f
+    Signed-off-by: yunmin.chen <yunmin.chen@amlogic.com>
+
+commit b1874af2b102d6dfb08d0908eacc39327c71cda7
+Author: zhipeng.he <zhipeng.he@amlogic.com>
+Date:   Mon Apr 8 20:36:27 2024 +0800
+
+    tsplayer: CB2 not need restore disable_video when keep frame [1/1]
+    
+    PD#SWPL-144913
+    
+    Problem:
+    restore disable_video to 0 when release tsplayer
+    
+    Solution:
+    not need restore disable_video when keep frame
+    
+    Verify:
+    S1A
+    
+    Change-Id: Ia118f81ce00a5e90aa45c5872793409ad167fd3d
+    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
+
+commit 8bd59d589196fc9f9b97f6c0f6e52e64bcb7bd79
+Author: zhipeng.he <zhipeng.he@amlogic.com>
+Date:   Wed Apr 10 16:53:10 2024 +0800
+
+    tsplayer: CB2 send pause when start audio if need. [1/1]
+    
+    PD#SWPL-154138
+    
+    Problem:
+    TsPlayer send pause before call start, will lead audio
+    pause not work.
+    
+    Solution:
+    record pause status when not start audio,
+    then send the pause command when start audio
+    
+    Verify:
+    AH212
+    
+    Change-Id: I7f6de429bb8ad6125f18686683e0fb8188c81551
+    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
+
+commit f7d4945ec009c500700a731167cdba77aa37b657
+Author: fei.deng <fei.deng@amlogic.com>
+Date:   Wed Mar 20 02:09:18 2024 +0000
+
+    videorender: CB1 crash when out of buffer manager [1/1]
+    
+    PD#TV-111554
+    
+    Problem:
+    if buffer count more than 64,maybe crash happen out of array
+    
+    Solution:
+    check buffer index
+    for trunck
+    
+    Verify:
+    AH212
+    
+    Change-Id: I6657bc7d99b5d564d043887b4a3c1ceb1f073b18
+    Signed-off-by: fei.deng <fei.deng@amlogic.com>
+
 commit 77372c44d62319cf5c3f451b6b671156dcaa642b
 Author: joy.rao <joy.rao@amlogic.com>
 Date:   Tue Apr 2 13:37:45 2024 +0800
@@ -117,120 +221,9 @@ Date:   Sun Mar 3 17:13:45 2024 +0800
     Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
     Signed-off-by: joy.rao <joy.rao@amlogic.com>
 
-commit fe79c6c457ea0bb4b68ee242f0323ba3b44f53ee
-Author: joy.rao <joy.rao@amlogic.com>
-Date:   Sun Mar 3 16:52:42 2024 +0800
-
-    tsplayer: CF1 multistream mode for hlsv4 [1/1]
-    
-    PD#OTT-39352
-    PD#OTT-53608
-    
-    Problem:
-    need add multistream mode playback
-    
-    Solution:
-    multistream mode for hlsv4
-    
-    Verify:
-    S905X4
-    
-    Change-Id: I99cc0f13c519542b200ac122a7574b45c9981beb
-    Signed-off-by: joy.rao <joy.rao@amlogic.com>
-
-commit aeb7d7f0009b670bbed41a8d4e853ad3e49d51ba
-Author: fei.deng <fei.deng@amlogic.com>
-Date:   Fri Dec 29 02:52:31 2023 +0000
-
-    mediasync: CF2 add audio codec switch api [2/2]
-    
-    PD#SWPL-151010
-    
-    Problem:
-    1.audio codec switch will pause and destroy mediasync. it causes
-    mediasync can't resume playing after audio codec switch done.
-    2.FRAC calculates realtime error, it causes frame
-    dropped
-    3.av delta too large causes NTS case of audio track
-    switch failed
-    
-    Solution:
-    1.add a audio codec switch api
-    2.reset FRAC if mediasync reset ref clock
-    3.drop audio data those audio pts less than PCR
-    when doing audio track switch
-    
-    Verify:
-    ah212
-    
-    Change-Id: I14619518b89b3009ddfd44211d640df7b690ee0e
-    Signed-off-by: fei.deng <fei.deng@amlogic.com>
-
-commit fff6abb0b50bf8b50e174ccf6cfab3d040d3b253
-Author: fei.deng <fei.deng@amlogic.com>
-Date:   Mon Feb 26 08:29:19 2024 +0000
-
-    videorender: CB1 fix logcat fd leak [1/1]
-    
-    PD#SWPL-152967
-    
-    Problem:
-    dlopen liblog will causes fd leak.
-    
-    Solution:
-    using link liblog when compiling
-    
-    Verify:
-    AH212
-    
-    Change-Id: I18191b1914772c9942baadd8e26dca550ef4416d
-    Signed-off-by: fei.deng <fei.deng@amlogic.com>
-
-commit 89d036ec30d7fac3302fead40633485170543b46
-Author: le.han <le.han@amlogic.com>
-Date:   Wed Feb 28 04:25:48 2024 +0000
-
-    media_hal: CB1 keep last frame on flush [3/3]
-    
-    PD#SWPL-158207
-    
-    Problem:
-    add property to set keep last frame when flush.
-    default is keep last frame,if set to 0,westeros will
-    clean last frame when flush
-    
-    Solution:
-    add property for keep last frame on flush
-    
-    Verify:
-    AH212
-    
-    Change-Id: I02b4dfefc766a4edc1f0eda0c4947f7f0e572e59
-    Signed-off-by: le.han <le.han@amlogic.com>
-
-commit 7491f5a68d0949727c731212d942ea67e06c0c9a
-Author: zhipeng.he <zhipeng.he@amlogic.com>
-Date:   Wed Jul 19 15:31:15 2023 +0800
-
-    tsplayer: CF2 post VIDEO_UNSUPPORT when decoder not support. [1/1]
-    
-    PD#SWPL-131140
-    
-    Problem:
-    not post VIDEO_UNSUPPORT
-    
-    Solution:
-    post VIDEO_UNSUPPORT when decoder not support
-    
-    Verify:
-    aq2432
-    
-    Change-Id: I6549a7106ad68fa5964858cb531135d42dca0f03
-    Signed-off-by: zhipeng.he <zhipeng.he@amlogic.com>
-
 ========================================
 
-Release time: 2024-04-03-16-10
+Release time: 2024-05-11-10-54
 
 ========================================
 
